@@ -14,7 +14,7 @@ class ItemModel():
 
     @staticmethod
     def get_all_items():
-        with open('/home/hachiko/Documents/Project5-6/untitled/products.json') as json_data:
+        with open('products.json') as json_data:
             shit = json.load(json_data)
             ItemModel.itemlst = []
             for i in shit:
