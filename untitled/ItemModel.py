@@ -22,17 +22,17 @@ class ItemModel():
             return shit
 
     @staticmethod
-    def filter_item_name(name):
+    def filter_item_name(name, list):
         output = [item for item in ItemModel.itemlst if item.name == name]
         return json.loads(json.dumps([o.__dict__ for o in output]))
     
     @staticmethod
-    def filter_item_price(min, max):
-        output = [item for item in ItemModel.itemlst if (min <= float(item.price) <= max) ]
+    def filter_item_price(min, max, list):
+        output = [item for item in ItemModel.itemlst if (min <= float(item.price) <= max)]
         return json.loads(json.dumps([o.__dict__ for o in output]))
 
     @staticmethod
-    def filter_item_classifiction(classification):
+    def filter_item_classifiction(classification, list):
         output = [item for item in ItemModel.itemlst if item.classification == classification]
         return json.loads(json.dumps([o.__dict__ for o in output]))
 """
