@@ -1,0 +1,17 @@
+[
+  {
+    "name":"doge",
+    "description":"A Japanese dog",
+    "price": 900
+  },
+  {
+    "name":"cate",
+    "description":"An evil cate",
+    "price": 10
+  },
+  {
+    "name":"pepe",
+    "description":"A sad frog",
+    "price": 40
+  }
+]
