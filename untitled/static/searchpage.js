@@ -17,17 +17,23 @@ function pagechangetest(){
 }
 
 function SearchItems(){
+    $.ajaxSetup({async:false});
     var searchbarvalue = $("#search_input").val();
     var properties = ["haha", "lol", "drie", "vier"];
     var minprice = 0;
     var maxprice = 10000;
 
-    var address =ReadyItemArguments(searchbarvalue, properties, minprice, maxprice);
+    var address = ReadyItemArguments(searchbarvalue, properties, minprice, maxprice);
     var valuestemp = "";
+
     $.getJSON(address, function(data){
         data = [].concat( data );
+        console.log("read json");
         data.forEach(function(value, index, array){
-            valuestemp += value.name;}
+            console.log("One value read");
+            valuestemp += value.name;
+            console.log(valuestemp);
+            }
             );
         })  
         .done(function() {
@@ -39,6 +45,8 @@ function SearchItems(){
         .always(function() {
             console.log( "complete" );
         });
+    $.ajaxSetup({async:true});
+    console.log(valuestemp);
     valuestemp += " Afsluitende string"
     PageHTML = valuestemp;
     $("#ChangeablePage").html(PageHTML);
