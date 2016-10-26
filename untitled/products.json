@@ -1,0 +1,38 @@
+[
+  {
+    "name":"Shiba",
+    "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
+    "price": 900,
+    "class":"Mammel"
+  },
+  {
+    "name":"Akita",
+    "description":"The Akita is a large breed of dog originating from the mountainous northern regions of Japan.",
+    "price": 1200,
+    "class":"Mammal"
+  },
+  {
+    "name":"Shrew",
+    "description":"A shrew or shrew mouse is a small mole-like mammal classified in the order Eulipotyphla.",
+    "price": 40,
+    "class":"Mammal"
+  },
+  {
+    "name":"Chameleon",
+    "description":"Chameleons are a distinctive and highly specialized clade of Old World lizards.",
+    "price": 200,
+    "class": "Reptile"
+  },
+  {
+    "name":"Turtle",
+    "description":"Turtles are reptiles of the order Testudines characterised by a special bony or cartilaginous shell developed from their ribs and acting as a shield.",
+    "price": 200,
+    "class": "Reptile"
+  },
+  {
+    "name":"Cane Toad",
+    "description":"The cane toad is very large.",
+    "price": 80,
+    "class": "Amphibian"
+  }
+]
