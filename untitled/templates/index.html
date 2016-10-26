@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/test.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
     <style>
         /* Remove the navbar's default rounded borders and increase the bottom margin */
         .navbar {
@@ -25,6 +27,10 @@
             padding: 25px;
         }
     </style>
+
+        <script id="entry-template" type="text/x-handlebars-template" src="/templates/ProductPanel.html">
+
+        </script>
 </head>
 <body>
 
@@ -61,15 +67,11 @@
         </div>
     </nav>
 
-    <div class="container">
+
+
+
+    <div class="container test">
         <div class="row">
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                    <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                    <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                </div>
-            </div>
             <div class="col-sm-4">
                 <div class="panel panel-danger">
                     <div class="panel-heading">BLACK FRIDAY DEAL</div>
@@ -118,7 +120,7 @@
         <form class="form-inline">
             Get deals:
             <input type="email" class="form-control" size="50" placeholder="Email Address">
-            <button type="button" class="btn btn-danger">Sign Up</button>
+            <button type="button" id="shit" class="btn btn-danger">Sign Up</button>
         </form>
     </footer>
 
