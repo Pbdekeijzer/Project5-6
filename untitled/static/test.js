@@ -15,7 +15,7 @@ $(document).ready(function(){
                     container.append(row)
                 }
                 var template = Handlebars.compile(data);
-                var context = {title: json[i].name, body: json[i].description};
+                var context = {title: json[i].name, body: json[i].description, image: json[i].image};
                 var html    = template(context);
                 row.append(html);
             }
