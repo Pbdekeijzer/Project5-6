@@ -7,6 +7,7 @@ class ItemModel():
     itemlst = []
 
     def __init__(self, id, name, description, price, classification, image):
+        self.id = id
         self.name = name
         self.description = description
         self.price = price
@@ -26,6 +27,18 @@ class ItemModel():
     def filter_item_name(name, list):
         output = [item for item in ItemModel.itemlst if item.name == name]
         return json.loads(json.dumps([o.__dict__ for o in output]))
+    
+    @staticmethod
+    def filter_item_id(id, list):
+        output = [item for item in ItemModel.itemlst if item.id == id]
+        return json.loads(json.dumps([o.__dict__ for o in output]))
+
+    """
+    @staticmethod
+    def filter_item_continent(continent, list):
+        output = [item for item in ItemModel.itemlst if item.continent == continent]
+        return json.loads(json.dumps([o.__dict__ for o in output]))
+    """    
     
     @staticmethod
     def filter_item_price(min, max, list):
