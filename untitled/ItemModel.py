@@ -6,7 +6,7 @@ class ItemModel():
 
     itemlst = []
 
-    def __init__(self, name, description, price, classification, image):
+    def __init__(self, id, name, description, price, classification, image):
         self.name = name
         self.description = description
         self.price = price
@@ -19,7 +19,7 @@ class ItemModel():
             shit = json.load(json_data)
             ItemModel.itemlst = []
             for i in shit:
-                ItemModel.itemlst.append(ItemModel(i["name"], i["description"], i["price"], i["class"], i["image"]))
+                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["class"], i["image"]))
             return shit
 
     @staticmethod

@@ -10,6 +10,11 @@ CORS(app)
 def index():
     return render_template('index.html')
 
+@app.route('/products/<id>')
+
+def productsdetail(id):
+    return render_template('products.html')
+
 @app.route('/items')
 
 def items():
