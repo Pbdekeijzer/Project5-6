@@ -5,6 +5,13 @@ $("#search").on("click", function(event){
     SearchItems();
 });
 
+$("#search_input").keypress(function(event){
+    if(event.which == 13){
+        event.preventDefault();
+        SearchItems();
+    }
+})
+
 var PageHTML = "dummy";
 function pagechangetest(){
     
@@ -19,11 +26,12 @@ function pagechangetest(){
 function SearchItems(){
     $.ajaxSetup({async:false});
     var searchbarvalue = $("#search_input").val();
-    var properties = ["haha", "lol", "drie", "vier"];
+    var classification = "Mammal";
+    var continent = "Africa";
     var minprice = 0;
     var maxprice = 10000;
 
-    var address = ReadyItemArguments(searchbarvalue, properties, minprice, maxprice);
+    var address = ReadyItemArguments(searchbarvalue, classification, continent, minprice, maxprice);
     var valuestemp = "";
 
     $.getJSON(address, function(data){
@@ -63,9 +71,7 @@ function ReadyItemArguments(name, classification, continent, minprice, maxprice)
     }
 
     if(continent != null){
-        if( typeof continent === 'string' ) {
-            continent = [ continent ];
-        }
+        continent = [].concat(continent);
         address += "&werelddeel="
         continent.forEach(function(value, index, array){
             address+= value;
@@ -81,6 +87,7 @@ function ReadyItemArguments(name, classification, continent, minprice, maxprice)
     if(minprice != null){
         address+= "&minprice=" + minprice;
     }
+    address.replace(" ", "%20");
     return address;
 }
 
