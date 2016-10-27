@@ -52,18 +52,22 @@ function SearchItems(){
     $("#ChangeablePage").html(PageHTML);
 }
 
-function ReadyItemArguments(name, properties, minprice, maxprice){
+function ReadyItemArguments(name, classification, continent, minprice, maxprice){
     var address = "items?"
     if(name != null){
         address += "name=" + name;
     }
 
-    if(properties != null){
-        if( typeof properties === 'string' ) {
-            properties = [ properties ];
+    if(classification != null){
+        address+= "&class=" + classification;
+    }
+
+    if(continent != null){
+        if( typeof continent === 'string' ) {
+            continent = [ continent ];
         }
-        address += "&property="
-        properties.forEach(function(value, index, array){
+        address += "&werelddeel="
+        continent.forEach(function(value, index, array){
             address+= value;
             if(index != (array.length-1)){
                 address+= "+";
