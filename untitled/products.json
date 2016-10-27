@@ -5,7 +5,8 @@
     "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
     "price": 900,
     "image": "http://127.0.0.1:5000/static/images/Shiba.jpg",
-    "continent":"foo",
+    "continent":"Asia",
+    "in stock": 6,
     "class":"Mammel"
   },
   {
@@ -14,7 +15,8 @@
     "description":"The Akita is a large breed of dog originating from the mountainous northern regions of Japan.",
     "price": 1200,
     "image": "http://127.0.0.1:5000/static/images/Akita.PNG",
-    "continent":"foo",
+    "continent":"Asia",
+    "in stock": 8,
     "class":"Mammal"
   },
   {
@@ -23,7 +25,8 @@
     "description":"A shrew or shrew mouse is a small mole-like mammal classified in the order Eulipotyphla.",
     "price": 40,
     "image": "http://127.0.0.1:5000/static/images/Shiba.jpg",
-    "continent":"foo",
+    "continent":"Africa",
+    "in stock": 20,
     "class":"Mammal"
   },
   {
@@ -32,25 +35,179 @@
     "description":"Chameleons are a distinctive and highly specialized clade of Old World lizards.",
     "price": 200,
     "image": "http://127.0.0.1:5000/static/images/Shiba.jpg",
-    "continent":"foo",
+    "continent":"Asia",
+    "in stock": 1,
     "class": "Reptile"
   },
   {
     "id":"5",
-    "name":"Turtle",
+    "name":"Galapagos",
     "description":"Turtles are reptiles of the order Testudines characterised by a special bony or cartilaginous shell developed from their ribs and acting as a shield.",
     "price": 200,
     "image": "http://127.0.0.1:5000/static/images/Shiba.jpg",
-    "continent":"foo",
+    "continent":"South America",
+    "in stock": 40,
     "class": "Reptile"
   },
   {
     "id":"6",
     "name":"Cane Toad",
-    "description":"The cane toad is very large.",
+    "description":"The cane toad is very large, and toxic.",
     "price": 80,
     "image": "http://127.0.0.1:5000/static/images/Shiba.jpg",
-    "continent":"foo",
+    "continent":"Austalia",
+    "in stock": 6000,
     "class": "Amphibian"
+  },
+  {
+    "id":"7",
+    "name":"Lynx",
+    "description":"A lynx is any of the four species within the Lynx genus of medium-sized wild cats, which includes the bobcat. The name lynx originated in Middle English, derived from the Indo-European root leuk- (light, brightness in reference to the luminescence of its reflective eyes.",
+    "price": 550,
+    "image": "http://127.0.0.1:5000/static/images/220px-Lynx_lynx_poing.jpg",
+    "continent":"Europe",
+    "in stock": 400,
+    "class": "Mammal"
+  },
+  {
+    "id":"8",
+    "name":"Heron",
+    "description":"The herons are the long-legged freshwater and coastal birds in the family Ardeidae, with 64 recognised species, some of which are referred to as egrets or bitterns rather than herons.",
+    "price": 50,
+    "image": "http://127.0.0.1:5000/static/images/heron.jpg",
+    "continent":"Europe",
+    "in stock": 16,
+    "class": "Bird"
+  },
+  {
+    "id":"9",
+    "name":"Stork",
+    "description":"Storks are large, long-legged, long-necked wading birds with long, stout bills. They belong to the family Ciconiidae. They are the only family in the order Ciconiiformes, which was once much larger and held a number of families.",
+    "price": 80,
+    "image": "http://127.0.0.1:5000/static/images/250px-Saddle-Billed_Stork.jpg",
+    "continent":"Europe",
+    "in stock": 28,
+    "class": "Bird"
+  },
+  {
+    "id":"10",
+    "name":"African elephant",
+    "description":"Elephants are large mammals of the family Elephantidae and the order Proboscidea. Two species are traditionally recognised, the African elephant and the Asian elephant, although some evidence suggests that African bush elephants and African forest elephants are separate species.",
+    "price": 3000,
+    "image": "http://127.0.0.1:5000/static/images/Elephant.jpg",
+    "continent":"Africa",
+    "in stock": 240,
+    "class": "Mammal"
+  },
+  {
+    "id":"11",
+    "name":"Fire ant",
+    "description":"Fire ant is the common name for several species of ants in the genus Solenopsis. They are, however, only a minority in the genus, which includes over 200 species of Solenopsis worldwide.",
+    "price": 2,
+    "image": "http://127.0.0.1:5000/static/images/fireant",
+    "continent":"North America",
+    "in stock": 620,
+    "class": "Insect"
+  },
+  {
+    "id":"12",
+    "name":"Bengai tiger",
+    "description":"The tiger is the largest cat species, most recognisable for their pattern of dark vertical stripes on reddish-orange fur with a lighter underside. The largest wild tiger ever reported had a total body length of 3.38 m over curves and weighed 388.7 kg.",
+    "price": 450,
+    "image": "http://127.0.0.1:5000/static/images/220px-Panthera_tigris_tigris.jpg",
+    "continent":"Asia",
+    "in stock": 750,
+    "class": "Mammal"
+  },
+  {
+    "id":"13",
+    "name":"European Robin",
+    "description":"The European robin, known simply as the robin or robin redbreast in the British Isles and Ireland is a small insectivorous passerine bird, specifically a chat, that was formerly classed as a member of the thrush family, but is now considered to be an Old World flycatcher.",
+    "price": 12,
+    "image": "http://127.0.0.1:5000/static/images/Erithacus_rubecula_with_cocked_head.jpg",
+    "continent":"Europe",
+    "in stock": 14,
+    "class": "Bird"
+  },
+  {
+    "id":"14",
+    "name":"Great White Shark",
+    "description":"The great white shark, also known as the great white, white pointer, white shark, or white death, is a species of large lamniform shark which can be found in the coastal surface waters of all the major oceans.",
+    "price": 1200,
+    "image": "http://127.0.0.1:5000/static/images/White_shark.jpg",
+    "continent":"Australia",
+    "in stock": 3,
+    "class": "Fish"
+  },
+  {
+    "id":"15",
+    "name":"Elephant Shrew",
+    "description":"Elephant shrews are not classified with the superficially similar true shrews, but are ironically more closely related to elephants and their kin within the newly recognized Afrotheria.",
+    "price": 180000,
+    "image": "http://127.0.0.1:5000/static/images/200px-Rhynchocyon_petersi_from_side.jpg",
+    "continent":"Africa",
+    "in stock": 0,
+    "class": "Mammal"
+  },
+  {
+    "id":"16",
+    "name":"Macaw",
+    "description":"The blue-and-yellow macaw (Ara ararauna), also known as the blue-and-gold macaw, is a large South American parrot with blue top parts and yellow under parts. It is a member of the large group of neotropical parrots known as macaws.",
+    "price": 286,
+    "image": "http://127.0.0.1:5000/static/images/220px-Blue-and-Yellow-Macaw.jpg",
+    "continent":"South America",
+    "in stock": 6,
+    "class": "Bird"
+  },
+  {
+    "id":"17",
+    "name":"Giraffe",
+    "description":"The giraffe (Giraffa) is a genus of African even-toed ungulate mammals, the tallest living terrestrial animals and the largest ruminants. The genus consists of eleven species including Giraffa camelopardalis, the type species.",
+    "price": 180,
+    "image": "http://127.0.0.1:5000/static/images/230px-Giraffe_Mikumi_National_Park.jpg",
+    "continent":"Africa",
+    "in stock": 26,
+    "class": "Mammal"
+  },
+  {
+    "id":"18",
+    "name":"Scottish fold",
+    "description":"The Scottish Fold is a breed of domestic cat with a natural dominant-gene mutation that affects cartilage throughout the body, causing the ears to fold, which gives the cat what is often described as an owl-like appearance.",
+    "price": 490,
+    "image": "http://127.0.0.1:5000/static/images/220px-Adult_Scottish_Fold.jpg",
+    "continent":"Europe",
+    "in stock": 80,
+    "class": "Mammal"
+  },
+  {
+    "id":"19",
+    "name":"British Shorthair",
+    "description":"The British Shorthair is the pedigreed version of the traditional British domestic cat, with a distinctively chunky body, dense coat and broad face.",
+    "price": 245,
+    "image": "http://127.0.0.1:5000/static/images/220px-Britishblue.jpg",
+    "continent":"Europe",
+    "in stock": 180,
+    "class": "Mammal"
+  },
+  {
+    "id":"20",
+    "name":"Formula 1 car",
+    "description":"A Formula One car is a single-seat, open cockpit, open-wheel racing car with substantial front and rear wings, and an engine positioned behind the driver, intended to be used in competition at Formula One racing events.",
+    "price": 2000000,
+    "image": "http://127.0.0.1:5000/static/images/formula1car.jpg",
+    "continent":"Europe",
+    "in stock": 1,
+    "class": "Easter egg"
+  },
+  {
+    "id":"21",
+    "name":"Kirk Dik-Dik",
+    "description":"Kirk's dik-dik is a small antelope native to Eastern Africa and one of four species of dik-dik antelope. Dik-diks are herbivores, typically of a fawn color that aids in camouflaging themselves in savannah habitats.",
+    "price": 800,
+    "image": "http://127.0.0.1:5000/static/images/220px-Damara_Dik-Dik.JPG",
+    "continent":"Africa",
+    "in stock": 90,
+    "class": "Mammal"
   }
+
 ]
