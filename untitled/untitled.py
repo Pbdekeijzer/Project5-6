@@ -1,27 +1,40 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS, cross_origin
 from ItemModel import *
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 
 def index():
-    
     return render_template('index.html')
+
+@app.route('/products/<id>')
+
+def productsdetail(id):
+    return render_template('products.html')
 
 @app.route('/items')
 
 def items():
-
+    id = request.args.get("id")
     name = request.args.get("name")
     min = request.args.get("min")
     max = request.args.get("max")
+    #continent = request.args.get("continent")
     classification = request.args.get("class")
 
     items = ItemModel.get_all_items()
 
     if classification != None:
         items = ItemModel.filter_item_classifiction(str(classification), items)
+
+    if id != None:
+        items = ItemModel.filter_item_id(str(id), items)
+     
+    #if continent != None:
+    #    items = ItemModel.filter_item_continent(str(continent), items)
 
     if name != None:
         items = ItemModel.filter_item_name(str(name), items)
@@ -32,4 +45,4 @@ def items():
     return jsonify(items)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(threaded=True)
