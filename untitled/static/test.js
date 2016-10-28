@@ -15,7 +15,7 @@ $(document).ready(function(){
                     container.append(row)
                 }
                 var template = Handlebars.compile(data);
-                var context = {title: json[i].name, body: json[i].description, image: json[i].image};
+                var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id};
                 var html    = template(context);
                 row.append(html);
             }
@@ -50,7 +50,6 @@ $(document).ready(function(){
                 }
             });
         }
-
         if(maxprice != null){
             address+= "&maxprice=" + maxprice;
         }
