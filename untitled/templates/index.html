@@ -11,6 +11,7 @@
     <script type="text/javascript" src="static/searchpage.js"></script>
     <script type="text/javascript" src="static/handlebars-v4.0.5.js"></script>
     <script type="text/javascript" src="static/test.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
     
     <style>
         /* Remove the navbar's default rounded borders and increase the bottom margin */
@@ -68,8 +69,27 @@
     <div class="SearchBar text-center">        
         <form class="form-inline">
             Zoek producten:
+
             <input type="text" id="search_input" class="form-control" size="50" placeholder="Naam product">
-            <button type="button" id="search" class="btn btn-danger">Zoek</button>
+
+            <select id="selectMenu">
+                <option value="1">All</option>
+                <option value="2">Mammal</option>  
+                <option value="3">Fish</option>  
+                <option value="4">Amphibian</option>  
+                <option value="5">Reptile</option>  
+                <option value="6">Bird</option>  
+            </select> 
+            
+            <button type="button" id="search" class="btn btn-danger">Zoek</button><br>
+            <input type="checkbox" id="checkboxNA" name="cbNA" value="NA">North America</input><br>
+            <input type="checkbox" id="checkboxSA" name="cbSA" value="SA">South America</input><br>
+            <input type="checkbox" id="checkboxAUS" name="cbAUS" value="AU">Australia</input><br>
+            <input type="checkbox" id="checkboxEU" name="cbEU" value="EU">Europe</input><br>
+            <input type="checkbox" id="checkboxASIA" name="cbASIA" value="AS">Asia</input><br>
+            <input type="checkbox" id="checkboxAFR" name="cbAFR" value="AF">Africa</input><br>
+            <input type="checkbox" id="checkboxANTA" name="cbANTA" value="AN">Antarctica</input>
+            
         </form>
     </div>
     <div id="ChangeablePage">
