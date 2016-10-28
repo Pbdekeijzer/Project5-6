@@ -6,13 +6,14 @@ class ItemModel():
 
     itemlst = []
 
-    def __init__(self, id, name, description, price, classification, image):
+    def __init__(self, id, name, description, price, classification, image, continent):
         self.id = id
         self.name = name
         self.description = description
         self.price = price
         self.classification = classification
         self.image = image
+        self.continent = continent
 
     @staticmethod
     def get_all_items():
@@ -20,7 +21,7 @@ class ItemModel():
             shit = json.load(json_data)
             ItemModel.itemlst = []
             for i in shit:
-                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["class"], i["image"]))
+                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["class"], i["image"], i["continent"]))
             return ItemModel.itemlst
     
     def hasName(self, string):
@@ -35,6 +36,9 @@ class ItemModel():
     def inPriceRange(self, min, max):
         return min <= float(self.price) <= max
 
+    def hasContinent(self, string):
+        return string in self.continent
+
     def toDict(self):
         return {
             "id":self.id,
@@ -42,11 +46,8 @@ class ItemModel():
             "description":self.description,
             "price":self.price,
             "image":self.image,
-            "class":self.classification
+            "class":self.classification,
+            "continent":self.continent
         }
     
-    @staticmethod
-    def filter_item_price(min, max, list):
-        output = [item for item in ItemModel.itemlst if (min <= float(item.price) <= max)]
-        return json.loads(json.dumps([o.__dict__ for o in output]))
 
