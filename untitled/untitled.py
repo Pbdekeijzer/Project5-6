@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS, cross_origin
 from ItemModel import *
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 
 def index():
-    
     return render_template('index.html')
 
 @app.route('/items')
@@ -32,4 +33,4 @@ def items():
     return jsonify(items)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(threaded=True)
