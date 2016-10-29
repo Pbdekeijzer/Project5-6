@@ -1,19 +1,27 @@
 $(document).ready(function(){
    var pathname = $(location).attr('pathname');
    var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
-   console.log(suburl);
+
+   function InsertHTML(json, data){
+        var container = $("#product");
+        var template = Handlebars.compile(data);
+        var context = {title: json[0].name, body: json[0].description, image: json[0].image, id: json[0].id};
+        var html    = template(context);
+        container.append(html);
+    };
 
    $.ajax({       
         url: "http://localhost:5000/items?id=" + suburl
-    }).done(function(data){
-        InsertHTML(data);
+    }).done(function(json){
+        GetTemplate(json);
     });
 
-    function InsertHTML(json){
-        var container = $("#product");
-        var template = Handlebars.compile(json);
-        var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id};
-        var html    = template(context);
-        container.append(html);
-    }
+    function GetTemplate(json){
+        $.ajax({
+            url: "http://localhost:5000/static/ProductDetail.html"
+        }).done(function(data){
+            InsertHTML(json, data);
+        });
+    };
+
 });

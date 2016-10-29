@@ -6,13 +6,14 @@ class ItemModel():
 
     itemlst = []
 
-    def __init__(self, id, name, description, price, classification, image):
+    def __init__(self, id, name, description, price, classification, image, continent):
         self.id = id
         self.name = name
         self.description = description
         self.price = price
         self.classification = classification
         self.image = image
+        self.continent = continent
 
     @staticmethod
     def get_all_items():
@@ -20,40 +21,33 @@ class ItemModel():
             shit = json.load(json_data)
             ItemModel.itemlst = []
             for i in shit:
-                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["class"], i["image"]))
-            return shit
-
-    @staticmethod
-    def filter_item_name(name, list):
-        output = [item for item in ItemModel.itemlst if item.name == name]
-        return json.loads(json.dumps([o.__dict__ for o in output]))
+                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["class"], i["image"], i["continent"]))
+            return ItemModel.itemlst
     
-    @staticmethod
-    def filter_item_id(id, list):
-        output = [item for item in ItemModel.itemlst if item.id == id]
-        return json.loads(json.dumps([o.__dict__ for o in output]))
-
-    """
-    @staticmethod
-    def filter_item_continent(continent, list):
-        output = [item for item in ItemModel.itemlst if item.continent == continent]
-        return json.loads(json.dumps([o.__dict__ for o in output]))
-    """    
+    def hasName(self, string):
+        return string in self.name
     
-    @staticmethod
-    def filter_item_price(min, max, list):
-        output = [item for item in ItemModel.itemlst if (min <= float(item.price) <= max)]
-        return json.loads(json.dumps([o.__dict__ for o in output]))
+    def hasId(self, string):
+        return string in self.id
 
-    @staticmethod
-    def filter_item_classifiction(classification, list):
-        output = [item for item in ItemModel.itemlst if item.classification == classification]
-        return json.loads(json.dumps([o.__dict__ for o in output]))
-"""
-$.ajax({
-    type: "GET",
-    url: "http://localhost:8080/products?name=shit",
-    success: function(json) {
+    def hasClassification(self, string):
+        return string in self.classification
 
-    }
-}"""
+    def inPriceRange(self, min, max):
+        return min <= float(self.price) <= max
+
+    def hasContinent(self, string):
+        return string in self.continent
+
+    def toDict(self):
+        return {
+            "id":self.id,
+            "name":self.name,
+            "description":self.description,
+            "price":self.price,
+            "image":self.image,
+            "class":self.classification,
+            "continent":self.continent
+        }
+    
+

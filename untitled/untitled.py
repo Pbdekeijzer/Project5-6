@@ -22,27 +22,28 @@ def items():
     name = request.args.get("name")
     min = request.args.get("min")
     max = request.args.get("max")
-    #continent = request.args.get("continent")
+    continent = request.args.get("continent")
     classification = request.args.get("class")
 
     items = ItemModel.get_all_items()
 
     if classification != None:
-        items = ItemModel.filter_item_classifiction(str(classification), items)
+        items = filter(lambda x: x.hasClassification(classification), items)
 
     if id != None:
-        items = ItemModel.filter_item_id(str(id), items)
+        items = filter(lambda x: x.hasId(id), items)
      
-    #if continent != None:
-    #    items = ItemModel.filter_item_continent(str(continent), items)
+    if continent != None:
+        items = filter(lambda x: x.hasContinent(continent), items)
 
     if name != None:
-        items = ItemModel.filter_item_name(str(name), items)
+        items = filter(lambda x: x.hasName(name), items)
 
     if min != None and max != None:
-        items = ItemModel.filter_item_price(float(min),float(max), items)
+        items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
 
+    items = map(lambda x: x.toDict(), items)
     return jsonify(items)
 
 if __name__ == '__main__':
-    app.run(threaded=True)
+    app.run(debug=True)
