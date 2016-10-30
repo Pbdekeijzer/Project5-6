@@ -36,8 +36,8 @@ class ItemModel():
     def inPriceRange(self, min, max):
         return min <= float(self.price) <= max
 
-    def hasContinent(self, string):
-        return string in self.continent
+    def hasContinent(self, array):
+        return self.continent in array
 
     def toDict(self):
         return {

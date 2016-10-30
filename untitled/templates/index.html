@@ -1,75 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!--<script src="static/jquery-3.1.1.js"></script>-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="static/handlebars-v4.0.5.js"></script>
-    <script type="text/javascript" src="static/test.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
     
-    <style>
-        /* Remove the navbar's default rounded borders and increase the bottom margin */
-        .navbar {
-            margin-bottom: 50px;
-            border-radius: 0;
-        }
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:5000/static/test.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:5000/static/handlebars-v4.0.5.js"></script>
 
-        /* Remove the jumbotron's default bottom margin */
-        .jumbotron {
-            margin-bottom: 0;
-        }
-
-        /* Add a gray background color and some padding to the footer */
-        footer {
-            background-color: #f2f2f2;
-            padding: 25px;
-        }
-    </style>
 </head>
-<body>
-
-    <div class="jumbotron">
-        <div class="container text-center">
-            <h1>Online Store</h1>
-            <p>Mission, Vission & Values</p>
-        </div>
-    </div>
-
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Logo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="http://www.ebay.com">Product</a></li>
-                    <li><a href="https://www.thebestdeals.nl">Deals</a></li>
-                    <li><a href="#">Stores</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                </ul>
-            </div>
-        </div>
+<body style="margin: 0;">
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Cart</a></li>
+            <li><a href="#">Login</a></li>
+        </ul>
     </nav>
-    <div class="SearchBar text-center">        
-        <form class="form-inline">
-            Zoek producten:
+  <div class="flex-container">
 
-            <input type="text" id="search_input" class="form-control" size="50" placeholder="Naam product">
+    <div class="sidenav">
+        <div class="SearchBar text-center">        
+        <form class="form-inline">
+            <br>
+            <input type="text" id="search_input" class="form-control" size="25" placeholder="Naam product">
 
             <select id="selectMenu">
                 <option value="1">All</option>
@@ -78,32 +31,26 @@
                 <option value="4">Amphibian</option>  
                 <option value="5">Reptile</option>  
                 <option value="6">Bird</option>  
-            </select> 
-            
-            <button type="button" id="search" class="btn btn-danger">Zoek</button><br>
-            
-            <input type="checkbox" id="checkboxNA" name="cbNA" value="NA">North America</input><br>
-            <input type="checkbox" id="checkboxSA" name="cbSA" value="SA">South America</input><br>
-            <input type="checkbox" id="checkboxAUS" name="cbAUS" value="AU">Australia</input><br>
-            <input type="checkbox" id="checkboxEU" name="cbEU" value="EU">Europe</input><br>
-            <input type="checkbox" id="checkboxASIA" name="cbASIA" value="AS">Asia</input><br>
-            <input type="checkbox" id="checkboxAFR" name="cbAFR" value="AF">Africa</input><br>
-            <input type="checkbox" id="checkboxANTA" name="cbANTA" value="AN">Antarctica</input>
+            </select> <br>
+
+
+            <input type="checkbox" id="checkboxNA" name="cb" value="NA" checked>North America</input><br>
+            <input type="checkbox" id="checkboxSA" name="cb" value="SA" checked>South America</input><br>
+            <input type="checkbox" id="checkboxAUS" name="cb" value="AU" checked>Australia</input><br>
+            <input type="checkbox" id="checkboxEU" name="cb" value="EU" checked>Europe</input><br>
+            <input type="checkbox" id="checkboxASIA" name="cb" value="Asia" checked>Asia</input><br>
+            <input type="checkbox" id="checkboxAFR" name="cb" value="Africa" checked>Africa</input><br>
+            <input type="checkbox" id="checkboxANTA" name="cb" value="AN" checked>Antarctica</input>
             
         </form>
     </div>
-    <div id="ChangeablePage">
-        test
     </div>
 
-    <div id="test" class="container">
+    <div id="product" class="container">
+    
+    </div>
 
-    </div><br>
+  </div>
 
-    <br><br>
-
-    <footer class="container-fluid text-center">
-        <p>Online Store Copyright</p>
-    </footer>
-</body>
+  </body>
 </html>

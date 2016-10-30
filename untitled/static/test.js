@@ -6,18 +6,12 @@ $(document).ready(function(){
         $.ajax({       
             url: "http://localhost:5000/static/ProductPanel.html"
         }).done(function(data){
-            var container = $("#test");
-            var row = $("<div class='row'></div>");
-            container.append(row);
-            for(var i = 0; i < json.length; i++){
-                if(i % 3 == 0){
-                    row = row = $("<div class='row'></div>");
-                    container.append(row)
-                }
-                var template = Handlebars.compile(data);
-                var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id};
-                var html    = template(context);
-                row.append(html);
+            var container = $("#product");
+            var template = Handlebars.compile(data);
+            for(var i in json){
+            var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id};
+            var html    = template(context);
+            container.append(html);
             }
         });
     };
@@ -36,15 +30,11 @@ $(document).ready(function(){
         });     
     };
 
-    function checkedList(){
+function checkedList(){
     var continentList = [];
-    if($("#checkboxNA").is(":checked")){ continentList.push("North_America"); }
-    if($("#checkboxSA").is(":checked")){ continentList.push("South_America"); }
-    if($("#checkboxAUS").is(":checked")){ continentList.push("Australia"); }
-    if($("#checkboxANTA").is(":checked")){ continentList.push("Antarctica"); }
-    if($("#checkboxAFR").is(":checked")){ continentList.push("Africa"); }
-    if($("#checkboxASIA").is(":checked")){ continentList.push("Asia"); }
-    if($("#checkboxEU").is(":checked")){ continentList.push("Europe"); }
+    $("input:checkbox[name=cb]:checked").each(function(){
+        continentList.push($(this).val());
+    })
     return continentList;
 }
 
@@ -56,21 +46,15 @@ function checkClass(){
     return classification;
 }
 
-$("#search").on("click", function(event){
+function filterItems(){
     var conList = checkedList();
     var classification = checkClass();
-    event.preventDefault();
     SearchItems(conList, classification);
-});
+}
 
-$("#search_input").keypress(function(event){
-    if(event.which == 13){
-        var continents = checkedList();  
-        var classification = checkClass();     
-        event.preventDefault();
-        SearchItems(continents, classification);
-    }
-})
+$("#search_input").on("input", filterItems);
+$("#selectMenu").change(filterItems);
+$("input:checkbox").change(filterItems);
 
 function SearchItems(continents, classification){
     $.ajaxSetup({async:false});
