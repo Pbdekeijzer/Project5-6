@@ -1,8 +1,19 @@
-p{
-  color: red;
-}
 
-#selectMenu
-{
-  height : 33px;
+
+#header {
+    background-color:gray;
+    color:green;
+}
+#header li{
+  float:left;
+}
+#header li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+#header a:hover {
+    background-color: #111;
 }

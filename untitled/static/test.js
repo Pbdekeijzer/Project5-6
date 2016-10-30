@@ -22,41 +22,93 @@ $(document).ready(function(){
         });
     };
 
+    function RemoveHTMLPanels(){
+        $(".container").empty();
+    }
     // GET JSON from URL, call insert product.
     // param = string
     function GetJSONFromUrl(param){
         $.ajax({       
             url: "http://localhost:5000/" + param,   
         }).done(function(json){
-             InsertProduct(json);
+            RemoveHTMLPanels();
+            InsertProduct(json);
         });     
     };
 
-    function ReadyItemArguments(name, properties, minprice, maxprice){
-        var address = "items?"
-        if(name != null){
-            address += "name=" + name;
-        }
+    function checkedList(){
+    var continentList = [];
+    if($("#checkboxNA").is(":checked")){ continentList.push("North_America"); }
+    if($("#checkboxSA").is(":checked")){ continentList.push("South_America"); }
+    if($("#checkboxAUS").is(":checked")){ continentList.push("Australia"); }
+    if($("#checkboxANTA").is(":checked")){ continentList.push("Antarctica"); }
+    if($("#checkboxAFR").is(":checked")){ continentList.push("Africa"); }
+    if($("#checkboxASIA").is(":checked")){ continentList.push("Asia"); }
+    if($("#checkboxEU").is(":checked")){ continentList.push("Europe"); }
+    return continentList;
+}
 
-        if(properties != null){
-            if( typeof properties === 'string' ) {
-                properties = [ properties ];
-            }
-            address += "&property="
-            properties.forEach(function(value, index, array){
-                address+= value;
-                if(index != (array.length-1)){
-                    address+= "+";
-                }
-            });
-        }
-        if(maxprice != null){
-            address+= "&maxprice=" + maxprice;
-        }
-        if(minprice != null){
-            address+= "&minprice=" + minprice;
-        }
-        GetJSONFromUrl(address);
+function checkClass(){
+    var classification = "";
+    if ($("#selectMenu option:selected").text() != "All"){
+        classification = $("#selectMenu option:selected").text();
     }
-    ReadyItemArguments(null, null, null, null);
+    return classification;
+}
+
+$("#search").on("click", function(event){
+    var conList = checkedList();
+    var classification = checkClass();
+    event.preventDefault();
+    SearchItems(conList, classification);
+});
+
+$("#search_input").keypress(function(event){
+    if(event.which == 13){
+        var continents = checkedList();  
+        var classification = checkClass();     
+        event.preventDefault();
+        SearchItems(continents, classification);
+    }
+})
+
+function SearchItems(continents, classification){
+    $.ajaxSetup({async:false});
+
+    var searchbarvalue = $("#search_input").val();
+    var minprice = 0;
+    var maxprice = 10000;
+    var address = ReadyItemArguments(searchbarvalue, classification, continents, minprice, maxprice);
+}
+
+function ReadyItemArguments(name, classification, continents, minprice, maxprice){
+    var address = "items?"
+
+    if(name != null){
+        address += "name=" + name;
+    }
+
+    if(classification != null){
+        address+= "&class=" + classification;
+    }
+
+    if(continents != null){
+        address += "&continent="
+        continents.forEach(function(value, index, array){
+            address+= value;
+            if(index != (array.length-1)){
+                address+= "+";
+            }
+        });
+    }
+    if(maxprice != null){
+        address+= "&maxprice=" + maxprice;
+    }
+    if(minprice != null){
+        address+= "&minprice=" + minprice;
+    }
+    address.replace(" ", "%20");
+    GetJSONFromUrl(address);
+}
+     ReadyItemArguments(null, null, null, null);
 });

@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://127.0.0.1:5000/static/products.js"></script>
     <script type="text/javascript" src="http://127.0.0.1:5000/static/handlebars-v4.0.5.js"></script>
 
 </head>
-<body>
-    <div id="product" class="container">
+<body style="margin: 0;">
+    <div id="header" style="position:fixed; top:0px; left:0px; padding:0; right:0px;overflow:hidden;"> 
+        <ul style="list-style-type: none; padding: 0; margin: 0;">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Documents</a></li>
+        </ul>
+    </div> 
+    <div id="content" style="position:absolute; top:100px; bottom:0px; left:0px; right:0px; overflow:hidden;"> 
+        <div id="product" class="container">
         
-    </div><br>
-</body>
+        </div>
+    </div> 
+  </body>
 </html>
