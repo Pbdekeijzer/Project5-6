@@ -1,27 +1,56 @@
 $(document).ready(function(){
 
-    function isValidUsername(username){
-
+    function isValidUsername()
+    {
+        var username = $("#username").val()
+        var nameRegex = new RegExp(/^[A-Za-z0-9_-]{3,10}$/);
+        if (username.match(nameRegex))
+        {
+            console.log("Passed");
+        }else
+        {
+            console.log("Deine Mutti");
+        }
     }
 
-    function isValidPassword(password){
-
+    function isValidPassword(password)
+    {
+        var password = $("#password").val();
+        var passwordRegex = new RegExp(/^[\@\#\$\%\^\&\*\(\)\_\+\!\A-Za-z0-9_-]{6,18}$/);
+        if (password.match(passwordRegex))
+        {
+            console.log("Passed");
+        }else
+        {
+            console.log("Deine Mutti");
+        }
     }
 
-    function isValidEmail(email){
-
+    function isValidEmail(email)
+    {
+        var eMail = $("#email").val();
+        var eMailRegex = new RegExp('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$');
+        if (eMail.match(eMailRegex))
+        {
+            console.log("Passed");
+        }else
+        {
+            console.log("Deine Mutti");
+        }
     }
 
-    function isUsernameTaken(username){
-
+    function isUsernameTaken(username)
+    {
+        return false;
     }
 
-    function isEmailTaken(email){
-
+    function isEmailTaken(email)
+    {
+        return false;
     }
 
-    $("#username").on("input", );
-    $("#password").on("input", )
-    $("#email").on("input", )
+    $("#username").on("input", isValidUsername);
+    $("#password").on("input", isValidPassword);
+    $("#email").on("input", isValidEmail);
 
 });
