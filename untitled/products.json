@@ -6,7 +6,7 @@
     "price": 900,
     "image": "http://127.0.0.1:5000/static/images/Shiba.jpg",
     "continent":"Asia",
-    "in stock": 6,
+    "in_stock": 6,
     "class":"Mammal"
   },
   {
@@ -16,7 +16,7 @@
     "price": 1200,
     "image": "http://127.0.0.1:5000/static/images/Akita.PNG",
     "continent":"Asia",
-    "in stock": 8,
+    "in_stock": 8,
     "class":"Mammal"
   },
   {
@@ -26,7 +26,7 @@
     "price": 40,
     "image": "http://127.0.0.1:5000/static/images/normal_shrew.jpg",
     "continent":"Africa",
-    "in stock": 20,
+    "in_stock": 20,
     "class":"Mammal"
   },
   {
@@ -36,7 +36,7 @@
     "price": 200,
     "image": "http://127.0.0.1:5000/static/images/Chameleon-14.jpg",
     "continent":"Asia",
-    "in stock": 1,
+    "in_stock": 1,
     "class": "Reptile"
   },
   {
@@ -46,7 +46,7 @@
     "price": 200,
     "image": "http://127.0.0.1:5000/static/images/Galapagos_Turtle.jpg",
     "continent":"South America",
-    "in stock": 40,
+    "in_stock": 40,
     "class": "Reptile"
   },
   {
@@ -55,8 +55,8 @@
     "description":"The cane toad is very large, and toxic.",
     "price": 80,
     "image": "http://127.0.0.1:5000/static/images/toadzilla1.jpg",
-    "continent":"Austalia",
-    "in stock": 6000,
+    "continent":"Australia",
+    "in_stock": 6000,
     "class": "Amphibian"
   },
   {
@@ -66,7 +66,7 @@
     "price": 550,
     "image": "http://127.0.0.1:5000/static/images/220px-Lynx_lynx_poing.jpg",
     "continent":"Europe",
-    "in stock": 400,
+    "in_stock": 400,
     "class": "Mammal"
   },
   {
@@ -76,7 +76,7 @@
     "price": 50,
     "image": "http://127.0.0.1:5000/static/images/heron.jpg",
     "continent":"Europe",
-    "in stock": 16,
+    "in_stock": 16,
     "class": "Bird"
   },
   {
@@ -86,7 +86,7 @@
     "price": 80,
     "image": "http://127.0.0.1:5000/static/images/250px-Saddle-Billed_Stork.jpg",
     "continent":"Europe",
-    "in stock": 28,
+    "in_stock": 28,
     "class": "Bird"
   },
   {
@@ -96,7 +96,7 @@
     "price": 3000,
     "image": "http://127.0.0.1:5000/static/images/Elephant.jpg",
     "continent":"Africa",
-    "in stock": 240,
+    "in_stock": 240,
     "class": "Mammal"
   },
   {
@@ -106,7 +106,7 @@
     "price": 2,
     "image": "http://127.0.0.1:5000/static/images/fireant.jpg",
     "continent":"North America",
-    "in stock": 620,
+    "in_stock": 620,
     "class": "Insect"
   },
   {
@@ -116,7 +116,7 @@
     "price": 450,
     "image": "http://127.0.0.1:5000/static/images/220px-Panthera_tigris_tigris.jpg",
     "continent":"Asia",
-    "in stock": 750,
+    "in_stock": 750,
     "class": "Mammal"
   },
   {
@@ -126,7 +126,7 @@
     "price": 12,
     "image": "http://127.0.0.1:5000/static/images/Erithacus_rubecula_with_cocked_head.jpg",
     "continent":"Europe",
-    "in stock": 14,
+    "in_stock": 14,
     "class": "Bird"
   },
   {
@@ -136,7 +136,7 @@
     "price": 1200,
     "image": "http://127.0.0.1:5000/static/images/White_shark.jpg",
     "continent":"Australia",
-    "in stock": 3,
+    "in_stock": 3,
     "class": "Fish"
   },
   {
@@ -146,7 +146,7 @@
     "price": 180000,
     "image": "http://127.0.0.1:5000/static/images/200px-Rhynchocyon_petersi_from_side.jpg",
     "continent":"Africa",
-    "in stock": 0,
+    "in_stock": 0,
     "class": "Mammal"
   },
   {
@@ -156,7 +156,7 @@
     "price": 286,
     "image": "http://127.0.0.1:5000/static/images/220px-Blue-and-Yellow-Macaw.jpg",
     "continent":"South America",
-    "in stock": 6,
+    "in_stock": 6,
     "class": "Bird"
   },
   {
@@ -166,7 +166,7 @@
     "price": 180,
     "image": "http://127.0.0.1:5000/static/images/230px-Giraffe_Mikumi_National_Park.jpg",
     "continent":"Africa",
-    "in stock": 26,
+    "in_stock": 26,
     "class": "Mammal"
   },
   {
@@ -176,7 +176,7 @@
     "price": 490,
     "image": "http://127.0.0.1:5000/static/images/220px-Adult_Scottish_Fold.jpg",
     "continent":"Europe",
-    "in stock": 80,
+    "in_stock": 80,
     "class": "Mammal"
   },
   {
@@ -186,7 +186,7 @@
     "price": 245,
     "image": "http://127.0.0.1:5000/static/images/220px-Britishblue.jpg",
     "continent":"Europe",
-    "in stock": 180,
+    "in_stock": 180,
     "class": "Mammal"
   },
   {
@@ -196,7 +196,7 @@
     "price": 2000000,
     "image": "http://127.0.0.1:5000/static/images/formula1car.jpg",
     "continent":"Europe",
-    "in stock": 1,
+    "in_stock": 1,
     "class": "Easter egg"
   },
   {
@@ -206,7 +206,7 @@
     "price": 800,
     "image": "http://127.0.0.1:5000/static/images/220px-Damara_Dik-Dik.JPG",
     "continent":"Africa",
-    "in stock": 90,
+    "in_stock": 90,
     "class": "Mammal"
   }
 

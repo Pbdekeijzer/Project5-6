@@ -22,7 +22,7 @@ class ItemModel():
             shit = json.load(json_data)
             ItemModel.itemlst = []
             for i in shit:
-                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["image"], i["continent"], i["in stock"], i["class"]))
+                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["image"], i["continent"], i["in_stock"], i["class"]))
             return ItemModel.itemlst
     
     def hasId(self, string):
@@ -41,9 +41,9 @@ class ItemModel():
         return self.continent in array
     
     def inStock(self, mustbeinstockbool):
-        if mustbeinstock == True
+        if mustbeinstock == True:
             return self.in_stock > 0
-        else
+        else:
             return True
 
     def hasClassification(self, string):
@@ -58,8 +58,8 @@ class ItemModel():
             "description":self.description,
             "price":self.price,
             "image":self.image,
-            "class":self.classification,
-            "continent":self.continent
+            "continent":self.continent,
+            "in_stock":self.in_stock,
+            "class":self.class_
         }
     
-
