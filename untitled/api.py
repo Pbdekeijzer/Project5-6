@@ -15,6 +15,19 @@ def index():
 def productsdetail(id):
     return render_template('products.html')
 
+@app.route('/register')
+
+def register():
+    return render_template('register.html')
+
+@app.route('/accounts')
+
+def accounts():
+    username = request.args.get('username')
+    password = request.args.get('password')
+    email = request.args.get('email')
+    
+
 @app.route('/items')
 
 def items():
