@@ -104,7 +104,7 @@
     "name":"Fire ant",
     "description":"Fire ant is the common name for several species of ants in the genus Solenopsis. They are, however, only a minority in the genus, which includes over 200 species of Solenopsis worldwide.",
     "price": 2,
-    "image": "http://127.0.0.1:5000/static/images/fireant",
+    "image": "http://127.0.0.1:5000/static/images/fireant.jpg",
     "continent":"North America",
     "in stock": 620,
     "class": "Insect"
