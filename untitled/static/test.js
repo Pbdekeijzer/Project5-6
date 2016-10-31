@@ -18,16 +18,12 @@ $(document).ready(function(){
             var template = Handlebars.compile(data);
             for(var i in json){
             var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id};
-            var html    = template(context);
+            var html = template(context);
             container.append(html);
             }
         });
     };
 	
-	//Givefunction?
-	function checkStock(){
-		
-	}
 	
 	//Empty all
     function RemoveHTMLPanels(){

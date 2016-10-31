@@ -41,7 +41,7 @@
   },
   {
     "id":"5",
-    "name":"Galapagos",
+    "name":"Galapagos Turtle",
     "description":"Turtles are reptiles of the order Testudines characterised by a special bony or cartilaginous shell developed from their ribs and acting as a shield.",
     "price": 200,
     "image": "http://127.0.0.1:5000/static/images/Galapagos_Turtle.jpg",
@@ -64,7 +64,7 @@
     "name":"Lynx",
     "description":"A lynx is any of the four species within the Lynx genus of medium-sized wild cats, which includes the bobcat. The name lynx originated in Middle English, derived from the Indo-European root leuk- (light, brightness in reference to the luminescence of its reflective eyes.",
     "price": 550,
-    "image": "http://127.0.0.1:5000/static/images/220px-Lynx_lynx_poing.jpg",
+    "image": "http://127.0.0.1:5000/static/images/lynx.jpg",
     "continent":"Europe",
     "in_stock": 400,
     "class": "Mammal"
@@ -81,10 +81,10 @@
   },
   {
     "id":"9",
-    "name":"Stork",
+    "name":"White Stork",
     "description":"Storks are large, long-legged, long-necked wading birds with long, stout bills. They belong to the family Ciconiidae. They are the only family in the order Ciconiiformes, which was once much larger and held a number of families.",
     "price": 80,
-    "image": "http://127.0.0.1:5000/static/images/250px-Saddle-Billed_Stork.jpg",
+    "image": "http://127.0.0.1:5000/static/images/whitestork.jpg",
     "continent":"Europe",
     "in_stock": 28,
     "class": "Bird"
@@ -94,7 +94,7 @@
     "name":"African elephant",
     "description":"Elephants are large mammals of the family Elephantidae and the order Proboscidea. Two species are traditionally recognised, the African elephant and the Asian elephant, although some evidence suggests that African bush elephants and African forest elephants are separate species.",
     "price": 3000,
-    "image": "http://127.0.0.1:5000/static/images/Elephant.jpg",
+    "image": "http://127.0.0.1:5000/static/images/africanelephant.jpg",
     "continent":"Africa",
     "in_stock": 240,
     "class": "Mammal"
@@ -154,7 +154,7 @@
     "name":"Macaw",
     "description":"The blue-and-yellow macaw (Ara ararauna), also known as the blue-and-gold macaw, is a large South American parrot with blue top parts and yellow under parts. It is a member of the large group of neotropical parrots known as macaws.",
     "price": 286,
-    "image": "http://127.0.0.1:5000/static/images/220px-Blue-and-Yellow-Macaw.jpg",
+    "image": "http://127.0.0.1:5000/static/images/macaw.jpg",
     "continent":"South America",
     "in_stock": 6,
     "class": "Bird"
@@ -164,7 +164,7 @@
     "name":"Giraffe",
     "description":"The giraffe (Giraffa) is a genus of African even-toed ungulate mammals, the tallest living terrestrial animals and the largest ruminants. The genus consists of eleven species including Giraffa camelopardalis, the type species.",
     "price": 180,
-    "image": "http://127.0.0.1:5000/static/images/230px-Giraffe_Mikumi_National_Park.jpg",
+    "image": "http://127.0.0.1:5000/static/images/giraffe.jpg",
     "continent":"Africa",
     "in_stock": 26,
     "class": "Mammal"
@@ -184,7 +184,7 @@
     "name":"British Shorthair",
     "description":"The British Shorthair is the pedigreed version of the traditional British domestic cat, with a distinctively chunky body, dense coat and broad face.",
     "price": 245,
-    "image": "http://127.0.0.1:5000/static/images/220px-Britishblue.jpg",
+    "image": "http://127.0.0.1:5000/static/images/britishshorthair.jpg",
     "continent":"Europe",
     "in_stock": 180,
     "class": "Mammal"
@@ -248,5 +248,35 @@
     "continent":"Africa",
     "in_stock": 146,
     "class": "Reptile"
+  },
+  {
+    "id":"26",
+    "name":"Emperor Penguin",
+    "description":"The emperor penguin (Aptenodytes forsteri) is the tallest and heaviest of all living penguin species and is endemic to Antarctica.",
+    "price": 7499,
+    "image": "http://127.0.0.1:5000/static/images/emperorpenguin.jpg",
+    "continent":"Antarctica",
+    "in_stock": 32,
+    "class": "Bird"
+  },
+  {
+    "id":"27",
+    "name":"Blue Whale",
+    "description":"The blue whale is a marine mammal belonging to the baleen whales. At up to 30 metres in length and with a maximum recorded weight of 173 tonnes and probably reaching over 181 tonnes, it is the largest animal ever known to have existed.",
+    "price": 179999,
+    "image": "http://127.0.0.1:5000/static/images/bluewhale.jpg",
+    "continent":"Antarctica",
+    "in_stock": 14,
+    "class": "Mammal"
+  },
+  {
+    "id":"28",
+    "name":"Chinese Giant Salamander",
+    "description":"The Chinese giant salamander is the largest salamander and largest amphibian in the world, reaching a length of 180 cm, although it rarely reaches that size today.",
+	"price": 1399
+    "image": "http://127.0.0.1:5000/static/images/chinesegiantsalamander.jpg",
+    "continent":"Asia",
+    "in_stock": 18,
+    "class": "Amphibian"
   }
 ]
