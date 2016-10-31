@@ -27,20 +27,22 @@ def items():
 
     items = ItemModel.get_all_items()
 
-    if classification != None:
-        items = filter(lambda x: x.hasClassification(classification), items)
-
     if id != None:
         items = filter(lambda x: x.hasId(id), items)
-     
-    if continent != None:
-        items = filter(lambda x: x.hasContinent(continent), items)
 
     if name != None:
         items = filter(lambda x: x.hasName(name), items)
 
+    #hasDescription as filter to be added?
+
     if min != None and max != None:
         items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
+
+    if classification != None:
+        items = filter(lambda x: x.hasClassification(classification), items)
+     
+    if continent != None:
+        items = filter(lambda x: x.hasContinent(continent), items)
 
     items = map(lambda x: x.toDict(), items)
     items = list(items)
