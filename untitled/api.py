@@ -43,6 +43,7 @@ def items():
         items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
 
     items = map(lambda x: x.toDict(), items)
+    items = list(items)
     return jsonify(items)
 
 if __name__ == '__main__':
