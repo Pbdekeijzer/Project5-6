@@ -72,7 +72,8 @@ $(document).ready(function(){
 		if ($("#selectPrice option:selected").text() != "Any Price"){
 			var prices = $("#selectPrice option:selected").text();
 			if (prices == "10000+") { 
-				returnPrices[0] ="10000"; }
+				returnPrices[0] = "10000";
+				returnPrices[1]	= "9999999999999";	}
 				
 			else{
 				var priceArray = prices.split("-"); 
@@ -91,9 +92,9 @@ $(document).ready(function(){
 	}
 
 	// $("#search_input").on("input", filterItems);
-	// $("#selectMenu").change(filterItems);
-	// $("#selectPrice").change(filterItems);
-	// $("input:checkbox").change(filterItems);
+	$("#selectMenu").change(filterItems);
+	$("#selectPrice").change(filterItems);
+	$("input:checkbox").change(filterItems);
 
 	// Function to be called to search products.
 	function SearchItems(continents, classification, prices){
