@@ -6,6 +6,7 @@ $(document).ready(function(){
         var nameRegex = new RegExp(/^[A-Za-z0-9_-]{3,10}$/);
         if (username.match(nameRegex))
         {
+            isUsernameTaken(username);
             console.log("Passed");
         }else
         {
@@ -32,6 +33,7 @@ $(document).ready(function(){
         var eMailRegex = new RegExp('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$');
         if (eMail.match(eMailRegex))
         {
+            isEmailTaken(eMail);
             console.log("Passed");
         }else
         {
@@ -41,7 +43,11 @@ $(document).ready(function(){
 
     function isUsernameTaken(username)
     {
-        return false;
+        $.ajax({
+            url: "127.0.0.1:5000/accounts?name=" + username
+        }).done(function(json){
+            console.log(json);
+        });
     }
 
     function isEmailTaken(email)
