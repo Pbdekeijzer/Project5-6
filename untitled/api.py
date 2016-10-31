@@ -24,7 +24,7 @@ def items():
     max = request.args.get("max")
     continent = request.args.get("continent")
     classification = request.args.get("class")
-    #mustbeinstockbool = request.args.get("instock")
+    onlyinstock = request.args.get("in_stock")
 
     items = ItemModel.get_all_items()
 
@@ -42,7 +42,8 @@ def items():
     if continent != None:
         items = filter(lambda x: x.hasContinent(continent), items)
 
-    #items = filter(lambda x: x.inStock(mustbeinstockbool), items)
+    if onlyinstock != None:
+        items = filter(lambda x: x.inStock(onlyinstock), items)
 
     if classification != None:
         items = filter(lambda x: x.hasClassification(classification), items)

@@ -40,11 +40,8 @@ class ItemModel():
     def hasContinent(self, array):
         return self.continent in array
     
-    def inStock(self, mustbeinstockbool):
-        if mustbeinstock == True:
-            return self.in_stock > 0
-        else:
-            return True
+    def inStock(self, in_stock):
+        return self.in_stock > 0
 
     def hasClassification(self, string):
         return string in self.class_
