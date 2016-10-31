@@ -1,17 +1,10 @@
 $(document).ready(function(){
 
-	//Catches a click on the search button and calls the search function
-	$("#search").on("click", function(event){
-		
-		event.preventDefault();
-		SearchItems();
-	});
-
 	//Catches a keypress of enter at the search box and calls the search function
 	$("#search_input").keypress(function(event){
 		if(event.which == 13){
 			event.preventDefault();
-			SearchItems();
+			filterItems();
 		}
 	});
 
@@ -31,6 +24,7 @@ $(document).ready(function(){
         });
     };
 	
+	//Givefunction?
 	function checkStock(){
 		
 	}
