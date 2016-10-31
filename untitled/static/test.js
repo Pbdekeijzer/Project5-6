@@ -6,9 +6,9 @@ $(document).ready(function(){
         $.ajax({       
             url: "http://localhost:5000/static/ProductPanel.html"
         }).done(function(data){
-            var container = $("#product");
-            var template = Handlebars.compile(data);
-            for(var i in json){
+        var container = $("#product");
+        var template = Handlebars.compile(data);
+        for(var i in json){
             var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id};
             var html    = template(context);
             container.append(html);
