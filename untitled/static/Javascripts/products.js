@@ -5,7 +5,7 @@ $(document).ready(function(){
    function InsertHTML(json, data){
         var container = $("#product");
         var template = Handlebars.compile(data);
-        var context = {title: json[0].name, body: json[0].description /*+ "\n In stock: " + json[0].in_stock*/, image: json[0].image, id: json[0].id};
+        var context = {title: json[0].name, body: json[0].description, stock: json[0].in_stock, image: json[0].image, id: json[0].id};
         in_stock = json[0].in_stock
         var html    = template(context);
         container.append(html);
@@ -56,10 +56,10 @@ $(document).ready(function(){
 
 
 
-    // Does something after 0.4 second, sets string for div with id=amountinstock
+    // Does something after 0.5 second, sets string for div with id=amountinstock
     setTimeout( function(){ 
         $('#AmountInStock').text('Amount in stock: '+ in_stock); 
-    }  , 400 );
+    }  , 500 );
 
     //On click is going to do something
     $("#AddToWishlist").click(function(){
