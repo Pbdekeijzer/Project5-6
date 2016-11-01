@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-    $("#checkboxOnlyStock").prop('checked', false);
-
 	//Catches a keypress of enter at the search box and calls the search function
 	$("#search_input").keypress(function(event){
 		if(event.which == 13){
@@ -9,6 +7,14 @@ $(document).ready(function(){
 			filterItems();
 		}
 	});
+
+$("#FindTheAnimals").click(function(){
+        filterItems();
+    });
+
+
+
+
 
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json

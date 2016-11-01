@@ -29,7 +29,7 @@ class ItemModel():
         return string in self.id
 
     def hasName(self, string):
-        return string in self.name
+        return string.lower() in self.name.lower()
     
     def hasDescription(self, string):
         return string in self.description
