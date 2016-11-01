@@ -5,7 +5,7 @@ $(document).ready(function(){
    function InsertHTML(json, data){
         var container = $("#product");
         var template = Handlebars.compile(data);
-        var context = {title: json[0].name, body: json[0].description, stock: json[0].in_stock, image: json[0].image, id: json[0].id};
+        var context = {title: json[0].name, body: json[0].description, stock: json[0].in_stock, image: json[0].image, id: json[0].id, continent: json[0].continent, classification: json[0].class, price: json[0].price};
         in_stock = json[0].in_stock
         var html    = template(context);
         container.append(html);
