@@ -27,7 +27,7 @@ $(document).ready(function(){
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);
-        });     
+        });
     };
 
 function checkedList(){
