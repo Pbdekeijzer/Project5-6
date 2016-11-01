@@ -34,7 +34,7 @@ $("#FindTheAnimals").click(function(){
 		
 	//Empty all
     function RemoveHTMLPanels(){
-        $(".container").empty();
+        $(".container1").empty();
     }
 	
     // GET JSON from URL, call insert product.

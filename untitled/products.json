@@ -174,7 +174,7 @@
     "name":"Scottish fold",
     "description":"The Scottish Fold is a breed of domestic cat with a natural dominant-gene mutation that affects cartilage throughout the body, causing the ears to fold, which gives the cat what is often described as an owl-like appearance.",
     "price": 490,
-    "image": "http://127.0.0.1:5000/static/images/220px-Adult_Scottish_Fold.jpg",
+    "image": "http://127.0.0.1:5000/static/images/scottishfold.jpg",
     "continent":"Europe",
     "in_stock": 80,
     "class": "Mammal"
