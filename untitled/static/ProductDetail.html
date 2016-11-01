@@ -1,5 +1,44 @@
-<article>
-  <h2>{{title}}</h2><br>
-  <p>{{body}}</p><br>
-  <img src={{image}} class="img" style="width:100%" alt="Image" align="middle">
-</article>
+<!--Product page-->
+
+<style>
+.partshit {
+   float: left;
+   margin: 15px;
+   padding: 20px;
+}
+
+
+
+#outline{
+  width:95%;
+  height:50%;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+</style>
+
+<h1 align="center">{{title}}</h1>
+<br><br>
+
+<div class="partshit" id="outline">
+
+
+  <div class="partshit" style="width:45%">
+    <img src={{image}} class="img" style="width:100%" alt="Image" align="left"> 
+  </div>
+
+  <div>
+    <br><br>
+    <p> {{body}} </p>
+    <br><br>
+    <p align="bottom"><b> In stock: {{stock}} </b></p> 
+
+
+  </div>
+  
+</div>
+
+
+
+
+

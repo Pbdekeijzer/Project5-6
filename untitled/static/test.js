@@ -8,13 +8,9 @@ $(document).ready(function(){
 		}
 	});
 
-$("#FindTheAnimals").click(function(){
+	$("#FindTheAnimals").click(function(){
         filterItems();
     });
-
-
-
-
 
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
@@ -34,7 +30,7 @@ $("#FindTheAnimals").click(function(){
 		
 	//Empty all
     function RemoveHTMLPanels(){
-        $(".container").empty();
+        $(".container1").empty();
     }
 	
     // GET JSON from URL, call insert product.
