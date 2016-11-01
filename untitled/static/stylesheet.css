@@ -88,6 +88,7 @@ article h2{
 }
 
 .container1{
+  margin:15px;
   display: flex;
   flex-wrap: wrap;
   flex-direction:row;
@@ -108,4 +109,9 @@ article{
 
 .content{
   width:100%;
+}
+
+#footer{
+  text-align:center;
+  
 }
