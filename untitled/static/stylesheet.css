@@ -20,6 +20,13 @@ nav a{
   padding: 10px;
 }
 
+#checkboxMustbeinstockbool{
+  float: right;
+  text-align: right;
+  
+}
+/*TODO: the box doesnt align yet*/
+
 nav a:hover{
   background-color: lightgray;
 }

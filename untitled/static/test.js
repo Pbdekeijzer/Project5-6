@@ -8,6 +8,14 @@ $(document).ready(function(){
 		}
 	});
 
+$("#FindTheAnimals").click(function(){
+        filterItems();
+    });
+
+
+
+
+
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
     function InsertProduct(json){
@@ -23,8 +31,7 @@ $(document).ready(function(){
             }
         });
     };
-	
-	
+		
 	//Empty all
     function RemoveHTMLPanels(){
         $(".container").empty();
@@ -80,29 +87,51 @@ $(document).ready(function(){
 		return returnPrices;
 	}
 
+    function checkStock(){
+        var only_instock = "";
+
+        if ($("#checkboxOnlyStock").is(':checked')){
+            var only_instock = "true";
+        }
+        return only_instock;
+    }
+
+
+    function Check_all_boxes()
+    {
+        $("input:checkbox[name=cb]").each(function(){
+			this.checked = true;
+		});
+    };
+
+    $("#CHECKthemALL").click(function(){
+        Check_all_boxes();
+    });
+
+
+
+
 	function filterItems(){
 		var conList = checkContinent();
 		var classification = checkClass();
 		var prices = checkPrice();
-		SearchItems(conList, classification, prices);
+        var instock = checkStock();
+		var searchbarvalue = $("#search_input").val();
+
+        $.ajaxSetup({async:false});
+
+		var address = ReadyItemArguments(searchbarvalue, classification, conList, prices[0], prices[1], instock)
 	}
 
 	// $("#search_input").on("input", filterItems);
 	$("#selectMenu").change(filterItems);
 	$("#selectPrice").change(filterItems);
 	$("input:checkbox").change(filterItems);
-
-	// Function to be called to search products.
-	function SearchItems(continents, classification, prices){
-		$.ajaxSetup({async:false});
-
-		var searchbarvalue = $("#search_input").val();
-		var address = ReadyItemArguments(searchbarvalue, classification, continents, prices[0], prices[1]);
-	}
+    
 
 	//Prepares an item search string which links to a json file that containts the results
 	//Parameters: name: name of the product, classification: classification of the product, continents: array of continents where the the product originates, minprice: the minimum price of the product, maxprice: the maximum price of the product
-	function ReadyItemArguments(name, classification, continents, minprice, maxprice){
+	function ReadyItemArguments(name, classification, continents, minprice, maxprice, stock){
 		var address = "items?"
 
 		if(name != ""){
@@ -131,6 +160,11 @@ $(document).ready(function(){
 		if(minprice != ""){
 			address+= "&min=" + minprice;
 		}
+
+        if(stock != ""){
+            address+= "&in_stock=" + stock;
+        }
+
 		address.replace(" ", "%20");
 		GetJSONFromUrl(address);
 	}

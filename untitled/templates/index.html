@@ -33,7 +33,8 @@
                 <option value="3">Fish</option>  
                 <option value="4">Amphibian</option>  
                 <option value="5">Reptile</option>  
-                <option value="6">Bird</option>  
+                <option value="6">Bird</option>
+                <option value="7">Insect</option>  
             </select> <br>
 			
 			<select id="selectPrice" class="SearchDropDown">
@@ -46,14 +47,19 @@
             </select> <br>
 
 
-            <input type="checkbox" id="checkboxNA" name="cb" value="North America" checked>North America</input> <input type="checkbox" id="checkboxInStock" name="cbStock" value="In Stock" checked>In Stock</input><br>
+            <input type="checkbox" id="checkboxNA" name="cb" value="North America" checked>North America</input>
+            <!-- align right doesnt work in mustbeinstockbool, also tried it in css -->
+            <input type="checkbox" id="checkboxOnlyStock" name="cbtest" value="In stock" align="right">Only show in stock</input>
+            <br>
             <input type="checkbox" id="checkboxSA" name="cb" value="South America" checked>South America</input><br>
             <input type="checkbox" id="checkboxAUS" name="cb" value="Australia" checked>Australia</input><br>
             <input type="checkbox" id="checkboxEU" name="cb" value="Europe" checked>Europe</input><br>
             <input type="checkbox" id="checkboxASIA" name="cb" value="Asia" checked>Asia</input><br>
             <input type="checkbox" id="checkboxAFR" name="cb" value="Africa" checked>Africa</input><br>
-            <input type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked>Antarctica</input><br>
-            								
+            <input type="checkbox" id="checkboxANTA" name="cb" value="Antartica" checked>Antarctica</input><br><br>
+            <button type="button" id="CHECKthemALL">Check all boxes</button>
+            <button type="button" id="FindTheAnimals">Find the animals</button>
+            
         </form>
     </div>
     </div>
