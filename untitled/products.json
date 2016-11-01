@@ -273,7 +273,7 @@
     "id":"28",
     "name":"Chinese Giant Salamander",
     "description":"The Chinese giant salamander is the largest salamander and largest amphibian in the world, reaching a length of 180 cm, although it rarely reaches that size today.",
-	"price": 1399
+	  "price": 1399,
     "image": "http://127.0.0.1:5000/static/images/chinesegiantsalamander.jpg",
     "continent":"Asia",
     "in_stock": 18,
