@@ -1,13 +1,6 @@
 import json
 from flask import jsonify
 import os
-import mysql.connector
-
-DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b',
-                              host='mysql762.cp.hostnet.nl',
-                              database='db230389_Project5_6')
-
-
 
 class ItemModel():
 
