@@ -33,8 +33,9 @@ class AccountModel():
             "email" : self.email
         }     
 
+    @staticmethod
     def insertAccount(AccountModel):
-        with open('users.json') as users:
-            write = json.load(users)
-            write.append(AccountModel.toDict())
+        data = AccountModel.toDict()
+        with open('users.json', "w") as outfile:
+            json.dump(data, outfile, indent=4, sort_keys=True, separators=(',', ':'))
             

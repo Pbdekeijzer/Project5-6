@@ -16,11 +16,18 @@ def index():
 def productsdetail(id):
     return render_template('products.html')
 
-@app.route('/register')
-
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    print('shit: ' + request.method)
+    if request.method == 'POST':
+        username = request.form['username'] 
+        password = request.form['password']
+        email = request.form['email']
+        account = AccountModel(username, password, email)
+        AccountModel.insertAccount(account)
+        return "yay" 
+        
     return render_template('register.html')
-
 @app.route('/accounts')
 
 def accounts():
@@ -28,10 +35,10 @@ def accounts():
     password = request.args.get('password')
     email = request.args.get('email')
 
-    shit = AccountModel.getAllUsers()
-    shit = map(lambda x: x.toDict(), shit)
-    shit = list(shit)
-    return jsonify(shit)
+    accounts = AccountModel.getAllUsers()
+    accounts = map(lambda x: x.toDict(), accounts)
+    accounts = list(accounts)
+    return jsonify(accounts)
 
 @app.route('/items')
 
@@ -71,4 +78,4 @@ def items():
     return jsonify(items)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(threaded=True)

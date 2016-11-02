@@ -6,7 +6,6 @@ $(document).ready(function(){
         var nameRegex = new RegExp(/^[A-Za-z0-9_-]{3,10}$/);
         if (username.match(nameRegex))
         {
-            isUsernameTaken(username);
             console.log("Passed");
         }else
         {
@@ -59,4 +58,18 @@ $(document).ready(function(){
     $("#password").on("input", isValidPassword);
     $("#email").on("input", isValidEmail);
 
+    $('button').click(function(e){
+        var name = $('#username').val();
+        var pass = $('#password').val();
+        var email = $('#email').val();
+        $.ajax({
+            url : "http://localhost:5000/register",
+            data: $('form').serialize(),
+            type : 'POST',
+            success: function(response) {
+                console.log(response);
+            }
+        });
+    });
+    return false;
 });
