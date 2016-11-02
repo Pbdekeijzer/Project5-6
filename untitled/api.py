@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 from ItemModel import *
+from AccountModel import *
 
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +15,23 @@ def index():
 
 def productsdetail(id):
     return render_template('products.html')
+
+@app.route('/register')
+
+def register():
+    return render_template('register.html')
+
+@app.route('/accounts')
+
+def accounts():
+    username = request.args.get('username')
+    password = request.args.get('password')
+    email = request.args.get('email')
+
+    shit = AccountModel.getAllUsers()
+    shit = map(lambda x: x.toDict(), shit)
+    shit = list(shit)
+    return jsonify(shit)
 
 @app.route('/items')
 
@@ -53,4 +71,4 @@ def items():
     return jsonify(items)
 
 if __name__ == '__main__':
-    app.run(threaded=True)
+    app.run(debug=True)
