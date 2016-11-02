@@ -59,9 +59,9 @@ $(document).ready(function(){
     $("#email").on("input", isValidEmail);
 
     $('button').click(function(e){
-        var name = $('#username').val();
-        var pass = $('#password').val();
-        var email = $('#email').val();
+        // var name = $('#username').val();
+        // var pass = $('#password').val();
+        // var email = $('#email').val();
         $.ajax({
             url : "http://localhost:5000/register",
             data: $('form').serialize(),
