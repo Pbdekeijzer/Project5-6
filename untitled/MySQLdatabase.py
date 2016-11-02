@@ -46,7 +46,23 @@ class MySQLdatabase:
 
     @staticmethod
     def SelectQuery(SELECT, FROM, WHERE):
-            
+        MySQLdatabase.DatabaseConnection._open_connection()
+        cursor = MySQLdatabase.DatabaseConnection.cursor()
+
+        cursor.execute(("SELECT "+SELECT+"FROM "+FROM+"WHERE "+WHERE))
+            """
+            for (first_name, last_name, hire_date) in cursor:
+                print("{}, {} was hired on {:%d %b %Y}".format(
+                last_name, first_name, hire_date))            
+            """
+        MySQLdatabase.DatabaseConnection.commit()
+        MySQLdatabase.DatabaseConnection.close()
+        cursor.close()
+
+
+
+
+
 
 
 """
