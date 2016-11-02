@@ -7,38 +7,46 @@ import mysql.connector
 class MySQLdatabase:
 
     DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
-    
     DatabaseConnection.close()
-    
-    
 
     @staticmethod
     def InsertQuery(INSERT_INTO, VALUES):
-        DatabaseConnection._open_connection()
-        cursor = DatabaseConnection.cursor()
+        MySQLdatabase.DatabaseConnection._open_connection()
+        cursor = MySQLdatabase.DatabaseConnection.cursor()
 
-        cursor.execute(("INSERT INTO "+INSERT_INTO+"VALUES"+VALUES))
-        #emp_no = cursor.lastrowid      NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
-        DatabaseConnection.commit()
-        DatabaseConnection.close()
+        cursor.execute(("INSERT INTO "+INSERT_INTO+"VALUES "+VALUES))
+        #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
+        MySQLdatabase.DatabaseConnection.commit()
+        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
 
 
-
-
-a = MySQLdatabase()
-
-        
-"""
     @staticmethod
-    def DeleteQuery():
+    def DeleteQuery(DELETE_FROM, WHERE):
+        MySQLdatabase.DatabaseConnection._open_connection()
+        cursor = MySQLdatabase.DatabaseConnection.cursor()
+
+        cursor.execute(("DELETE FROM "+DELETE_FROM+"WHERE "+WHERE))
+        #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
+        MySQLdatabase.DatabaseConnection.commit()
+        MySQLdatabase.DatabaseConnection.close()
+        cursor.close()
+
 
     @staticmethod
-    def UpdateQuery():
+    def UpdateQuery(UPDATE, SET, WHERE):
+        MySQLdatabase.DatabaseConnection._open_connection()
+        cursor = MySQLdatabase.DatabaseConnection.cursor()
+
+        cursor.execute(("UPDATE "+UPDATE+"SET "+SET+"WHERE "+WHERE))
+        #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
+        MySQLdatabase.DatabaseConnection.commit()
+        MySQLdatabase.DatabaseConnection.close()
+        cursor.close()
 
     @staticmethod
-    def SelectQuery():
-"""
+    def SelectQuery(SELECT, FROM, WHERE):
+            
 
 
 """
@@ -66,3 +74,5 @@ cursor.close()
 cnx.close()
 
 """
+
+a = MySQLdatabase()
