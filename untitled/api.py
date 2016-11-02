@@ -28,6 +28,17 @@ def register():
         return "yay" 
         
     return render_template('register.html')
+# @app.route('/login', methods = ['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         password = request.form['password']
+#         # user = db.find_user(username, password)
+#         # if not user -> raise error
+#         response = redirect(url_for("userpage"))
+#         response.set_cookie("shit", user.id)
+#         return response
+
 @app.route('/accounts')
 
 def accounts():
