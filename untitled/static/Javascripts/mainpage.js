@@ -12,10 +12,6 @@ $("#FindTheAnimals").click(function(){
         filterItems();
     });
 
-
-
-
-
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
     function InsertProduct(json){
