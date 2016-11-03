@@ -36,8 +36,18 @@ class AccountModel():
 
     @staticmethod
     def insertAccount(AccountModel):
-            query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address) VALUES (True, False, '{0}', '{1}', '{2}');".format(str(AccountModel.username), str(AccountModel.password), str(AccountModel.email))
-            print(query)
-            MySQLdatabase.ExecuteInsertQuery(query)
+            username = AccountModel.username
+            password = AccountModel.password
+            eMail = AccountModel.email
+
+            hasResult = MySQLdatabase.SelectQuery("User_Name", "User_", "'"+username"' = User_Name")
+            print(hasResult)
+
+            if not hasResult:
+                query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address) VALUES (True, False, '"+username+"', '"+password+"', '"+email+"');"
+                print(query)
+                MySQLdatabase.ExecuteInsertQuery(query)
+            else: 
+                print ("Deine Mutti")
             
             
