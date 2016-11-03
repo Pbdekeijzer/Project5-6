@@ -1,4 +1,5 @@
 <!--Product page-->
+<script type="text/javascript" src="http://127.0.0.1:5000/static/Javascripts/products.js"></script>
 
 <style>
 .partshit {
@@ -7,6 +8,27 @@
    padding: 20px;
 }
 
+#wishlistButton{
+  /*border-radius: 8px;*/
+  background-color: solid #555555;*/
+  font-size: 30px;
+  padding: 8px 16px;
+  -webkit-transition-duration: 0.01s;
+  transition-duration: 0.01s;
+
+}
+
+#wishlistButton:hover {
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: solid #555555; 
+    color: solid #555555;
+}
+
+#wishlistButton:active {
+  transform: translateY(2px);
+}
+
+
 #outline{
   width:95%;
   height:50%;
@@ -14,6 +36,7 @@
   border-radius: 10px;
 }
 </style>
+
 <br>
 <h1 align="center">{{title}}</h1>
 <br>
@@ -34,7 +57,10 @@
     <p><b> Class: {{classification}} </b></p><br>
     <p><b> Price: €{{price}},- </b></p><br>
 
-    <p align="bottom"><b> In stock: {{stock}} </b></p> 
+    <p align="bottom"><b> In stock: {{stock}} </b></p><br>
+    <button type="button" id="wishlistButton">Add to wishlist</button>
+
+
 
   </div>
   

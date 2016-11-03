@@ -54,7 +54,7 @@ class MySQLdatabase:
         MySQLdatabase.DatabaseConnection.commit()
         MySQLdatabase.DatabaseConnection.close()
         cursor.close()
-
+        
         return resultquery
 
     @staticmethod
