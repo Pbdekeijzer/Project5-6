@@ -29,7 +29,7 @@ class ItemModel():
         return ItemModel.itemlst
     
     def hasId(self, string):
-        return string in self.id
+        return string == str(self.id)
 
     def hasName(self, string):
         return string.lower() in self.name.lower()
