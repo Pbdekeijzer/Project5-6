@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, session, redirect, url_for
 from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
 
+
 app = Flask(__name__)
+app.secret_key = 'coconuts'
 CORS(app)
 
 @app.route('/')
@@ -14,7 +16,11 @@ def index():
 @app.route('/products/<id>')
 
 def productsdetail(id):
-    return render_template('products.html')
+    print(session)
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            return render_template('products.html')
+    return "404", 404
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -38,12 +44,12 @@ def login():
         password = request.form['password']
         result = AccountModel.checkAccount(username, password)
         if result:
-            
-        # user = db.find_user(username, password)
-        # if not user -> raise error
-        # response = redirect(url_for("userpage"))
-        # response.set_cookie("shit", user.id)
-        return False
+            session["username"] = username
+            session.permanent = True
+            print(session)
+            print("hoi ")
+            return redirect(url_for('index'))
+        return "401", 401 
     return render_template('login.html')
     
 @app.route('/accounts')
@@ -96,4 +102,4 @@ def items():
     return jsonify(items)
 
 if __name__ == '__main__':
-    app.run(threaded=True)
+    app.run(threaded=True, host="localhost")

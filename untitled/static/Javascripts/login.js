@@ -25,15 +25,16 @@ $(document).ready(function()
 
     $("button").click(function(e)
     {
-        $.ajax(
-            {
-                url : "http://localhost:5000/login",
-                data: $('form').serialize(),
-                type : 'POST',
-                success: function(response) 
-                         {
-                            console.log(response);
-                         }
-            });
+        $.ajax({
+            xhrFields : {
+                withCredentials: true
+            },
+            url : "http://localhost:5000/login",
+            data: $('form').serialize(),
+            type : 'POST',
+            success: function(response) {
+            console.log(response);
+            }
+        });
     });
 });
