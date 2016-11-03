@@ -1,5 +1,6 @@
 import json
 from flask import jsonify
+from MySQLdatabase import *
 import os
 
 class AccountModel():
@@ -35,7 +36,5 @@ class AccountModel():
 
     @staticmethod
     def insertAccount(AccountModel):
-        data = AccountModel.toDict()
-        with open('users.json', "w") as outfile:
-            json.dump(data, outfile, indent=4, sort_keys=True, separators=(',', ':'))
+        MySQLdatabase.InsertQuery("User_"," 1, 0, '" +AccountModel.username+ "', '" +AccountModel.password+"', '" +AccountModel.email+"';" )
             
