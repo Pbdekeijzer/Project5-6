@@ -24,8 +24,10 @@ def register():
         password = request.form['password']
         email = request.form['email']
         account = AccountModel(username, password, email)
-        AccountModel.insertAccount(account)
-        return "fliker"
+        result = AccountModel.insertAccount(account)
+        if result:
+            return "Succes"
+        return "Failed"
     return render_template('register.html')
 
 @app.route('/login', methods = ['GET', 'POST'])
@@ -34,11 +36,14 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        result = AccountModel.checkAccount(username, password)
+        if result:
+            
         # user = db.find_user(username, password)
         # if not user -> raise error
         # response = redirect(url_for("userpage"))
         # response.set_cookie("shit", user.id)
-        return "Huzzaah"
+        return False
     return render_template('login.html')
     
 @app.route('/accounts')

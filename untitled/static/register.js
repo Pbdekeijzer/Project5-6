@@ -40,20 +40,6 @@ $(document).ready(function(){
         }
     }
 
-    function isUsernameTaken(username)
-    {
-        $.ajax({
-            url: "127.0.0.1:5000/accounts?name=" + username
-        }).done(function(json){
-            console.log(json);
-        });
-    }
-
-    function isEmailTaken(email)
-    {
-        return false;
-    }
-
     $("#username").on("input", isValidUsername);
     $("#password").on("input", isValidPassword);
     $("#email").on("input", isValidEmail);
@@ -68,6 +54,8 @@ $(document).ready(function(){
             type : 'POST',
             success: function(response) {
                 console.log(response);
+                // Reponse is True --> show succes message
+                // Response is False --> show fail message 
             }
         });
     });

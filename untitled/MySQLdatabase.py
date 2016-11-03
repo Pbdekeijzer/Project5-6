@@ -67,6 +67,17 @@ class MySQLdatabase:
         cursor.close()
 
     @staticmethod
+    def ExecuteQuery(query):
+        MySQLdatabase.DatabaseConnection._open_connection()
+        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor.execute((query))
+        resultquery = cursor.fetchall()  
+        MySQLdatabase.DatabaseConnection.commit()
+        MySQLdatabase.DatabaseConnection.close()
+        cursor.close()
+        return resultquery
+
+    @staticmethod
     def SelectAllQuery(SELECT, FROM):
         MySQLdatabase.DatabaseConnection._open_connection()
         cursor = MySQLdatabase.DatabaseConnection.cursor()
