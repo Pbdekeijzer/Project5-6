@@ -49,8 +49,6 @@ class ItemModel():
     def hasClassification(self, string):
         return string in self.class_
 
-
-
     def toDict(self):
         return {
             "id":self.id,
