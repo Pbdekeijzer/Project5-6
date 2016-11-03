@@ -32,7 +32,6 @@ class MySQLdatabase:
         MySQLdatabase.DatabaseConnection.close()
         cursor.close()
 
-
     @staticmethod
     def UpdateQuery(UPDATE, SET, WHERE):
         MySQLdatabase.DatabaseConnection._open_connection()
@@ -50,18 +49,29 @@ class MySQLdatabase:
         cursor = MySQLdatabase.DatabaseConnection.cursor()
 
         cursor.execute(("SELECT "+SELECT+"FROM "+FROM+"WHERE "+WHERE))
-            """
-            for (first_name, last_name, hire_date) in cursor:
-                print("{}, {} was hired on {:%d %b %Y}".format(
-                last_name, first_name, hire_date))            
-            """
+        resultquery = cursor.fetchall()  
+
         MySQLdatabase.DatabaseConnection.commit()
         MySQLdatabase.DatabaseConnection.close()
         cursor.close()
 
+        return resultquery
 
+    @staticmethod
+    def SelectAllQuery(SELECT, FROM):
+        MySQLdatabase.DatabaseConnection._open_connection()
+        cursor = MySQLdatabase.DatabaseConnection.cursor()
 
+        cursor.execute(("SELECT "+SELECT+"FROM "+FROM))
+        resultquery = cursor.fetchall()  
 
+        MySQLdatabase.DatabaseConnection.commit()
+        MySQLdatabase.DatabaseConnection.close()
+        cursor.close()
+
+        return resultquery
+
+    
 
 
 
