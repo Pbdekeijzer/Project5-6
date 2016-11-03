@@ -25,8 +25,7 @@ def register():
         email = request.form['email']
         account = AccountModel(username, password, email)
         AccountModel.insertAccount(account)
-        return "yay" 
-        
+        return "fliker"
     return render_template('register.html')
 
 @app.route('/login', methods = ['GET', 'POST'])

@@ -36,5 +36,8 @@ class AccountModel():
 
     @staticmethod
     def insertAccount(AccountModel):
-        MySQLdatabase.InsertQuery("User_"," 1, 0, '" +AccountModel.username+ "', '" +AccountModel.password+"', '" +AccountModel.email+"';" )
+            query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address) VALUES (True, False, '{0}', '{1}', '{2}');".format(str(AccountModel.username), str(AccountModel.password), str(AccountModel.email))
+            print(query)
+            MySQLdatabase.ExecuteInsertQuery(query)
+            
             
