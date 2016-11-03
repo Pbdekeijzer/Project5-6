@@ -23,9 +23,8 @@ class ItemModel():
     def get_all_items():
         result = MySQLdatabase.SelectAllQuery("*", "Buyable_item_")
         for i in result:
-            ItemModel.itemlst.append(ItemModel(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
-            for x in i:
-                print(x)    
+            ItemModel.itemlst.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
+
         return ItemModel.itemlst
     
     def hasId(self, string):

@@ -52,7 +52,7 @@
   {
     "id":"6",
     "name":"Cane Toad",
-    "description":"The cane toad is very large, and toxic.",
+    "description":"The cane toad, also known as the giant neotropical toad or marine toad, is a large, terrestrial true toad which is native to South and mainland Middle America.",
     "price": 80,
     "image": "http://127.0.0.1:5000/static/images/toadzilla1.jpg",
     "continent":"Australia",
@@ -101,13 +101,13 @@
   },
   {
     "id":"11",
-    "name":"Fire ant",
-    "description":"Fire ant is the common name for several species of ants in the genus Solenopsis. They are, however, only a minority in the genus, which includes over 200 species of Solenopsis worldwide.",
-    "price": 2,
-    "image": "http://127.0.0.1:5000/static/images/fireant.jpg",
-    "continent":"North America",
-    "in_stock": 620,
-    "class": "Insect"
+    "name":"Swordfish",
+    "description":"Swordfish sword, also known as broadbills in some countries, are large, highly migratory, predatory fish characterized by a long, flat bill. Swordfish are elongated, round-bodied, and lose all teeth and scales by adulthood.",
+    "price": 8949,
+    "image": "http://127.0.0.1:5000/static/images/swordfish.jpg",
+    "continent":"Asia",
+    "in_stock": 232,
+    "class": "Fish"
   },
   {
     "id":"12",
@@ -139,6 +139,8 @@
     "in_stock": 3,
     "class": "Fish"
   },
+
+  // 1-2-3-5-8-6-4-7
   {
     "id":"15",
     "name":"Elephant Shrew",
