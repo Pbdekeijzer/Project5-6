@@ -1,14 +1,6 @@
 $(document).ready(function(){
 
-
-
-
-
-
-
-
-
-var IsInWishlist;
+    var IsInWishlist;
     
 
     setTimeout(function(){
@@ -22,9 +14,6 @@ var IsInWishlist;
             $('#wishlistButton').text("Add to wishlist");
         }
     }, 1000);
-
-
-
 
     $('#wishlistButton').click(function(){
         if (IsInWishlist == true){
