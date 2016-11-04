@@ -1,10 +1,18 @@
+<style>
+#imageee{
+    border: 1px solid black;
+}
+
+</style>
+
+
 <article id="test"> 
   <h2>{{title}}</h2><br>
   <p>{{body}}</p><br>
     <a href="/products/{{id}}">
-        <img src={{image}} class="img" style="width:100%" alt="Image" align="middle">
+        <img id="imageee" src={{image}} class="img" style="width:100%" alt="Image" align="middle">
     </a>
 
-    <p align="right"><b> <font size="2">Price: €{{price}},-</font></b></p>
+    <p align="right"><b><u> <font size="2">Price: €{{price}},-</font></b></u></p>
 
 </article>

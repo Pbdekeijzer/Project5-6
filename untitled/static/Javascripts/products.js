@@ -31,6 +31,7 @@ $(document).ready(function(){
     });*/
 
 
+
     //On click event
     $("#AddToCart").click(function(){
            
@@ -48,13 +49,11 @@ $(document).ready(function(){
         else if(isNaN(UserWantsToBuy) == true){
         $('#Notification').text('Your input was not a whole number');
         }
-        
-        
-
     });
 
 
 var IsInWishlist;
+    $("#wishlistButton").click(function(){
 
     setTimeout(function(){
         //TODO: Check if user id logged in, hide button if not
