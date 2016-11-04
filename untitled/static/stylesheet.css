@@ -79,6 +79,8 @@ article{
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid grey;
+  flex-basis: 30%;
+
 }
 
 article h2{
@@ -97,14 +99,9 @@ article h2{
 
 .container2{
   width:100%;
-
   flex-wrap: wrap;
   flex-direction:row;
   justify-content: space-around;
-}
-
-article{
-  flex-basis: 30%;
 }
 
 .content{

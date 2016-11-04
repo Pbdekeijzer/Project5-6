@@ -1,11 +1,14 @@
 import json
 from flask import jsonify
 import os
+from MySQLdatabase import *
+
+
 
 class ItemModel():
 
     itemlst = []
-
+    
     def __init__(self, id, name, description, price, image, continent, in_stock, class_):
         self.id = id
         self.name = name
@@ -18,15 +21,15 @@ class ItemModel():
 
     @staticmethod
     def get_all_items():
-        with open('products.json') as json_data:
-            shit = json.load(json_data)
-            ItemModel.itemlst = []
-            for i in shit:
-                ItemModel.itemlst.append(ItemModel(i["id"], i["name"], i["description"], i["price"], i["image"], i["continent"], i["in_stock"], i["class"]))
-            return ItemModel.itemlst
+        result = MySQLdatabase.SelectAllQuery("*", "Buyable_item_")
+        ItemModel.itemlst = []
+        for i in result:
+            ItemModel.itemlst.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
+
+        return ItemModel.itemlst
     
     def hasId(self, string):
-        return string in self.id
+        return string == str(self.id)
 
     def hasName(self, string):
         return string.lower() in self.name.lower()
@@ -45,8 +48,6 @@ class ItemModel():
 
     def hasClassification(self, string):
         return string in self.class_
-
-
 
     def toDict(self):
         return {

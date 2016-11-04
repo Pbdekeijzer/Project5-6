@@ -31,6 +31,7 @@ $(document).ready(function(){
     });*/
 
 
+
     //On click event
     $("#AddToCart").click(function(){
            
@@ -48,9 +49,6 @@ $(document).ready(function(){
         else if(isNaN(UserWantsToBuy) == true){
         $('#Notification').text('Your input was not a whole number');
         }
-        
-        
-
     });
 
 
@@ -59,12 +57,7 @@ $(document).ready(function(){
     // Does something after 0.5 second, sets string for div with id=amountinstock
     setTimeout( function(){ 
         $('#AmountInStock').text('Amount in stock: '+ in_stock); 
-    }  , 500 );
-
-    //On click is going to do something
-    $("#AddToWishlist").click(function(){
-        //Do something, yet to come
-    });
+    }  , 1000 );
 
 
 });
