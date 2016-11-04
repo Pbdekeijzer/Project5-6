@@ -4,7 +4,7 @@
     
     <link rel="stylesheet" type="text/css" href="http://localhost:5000/static/stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript" src="http://localhost:5000/static/Javascripts/products.js"></script>
+    <script type="text/javascript" src="http://localhost:5000/static/Javascripts/login.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Workframes/handlebars-v4.0.5.js"></script>
 
 </head>
@@ -13,26 +13,21 @@
         <ul>
             <li><a href="http://localhost:5000">Home</a></li>
             <li><a href="#">Cart</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a><li>
         </ul>
     </nav>
   <div class="flex-container">
 
-    <div class="sidenav">
-            <br><div id="AmountInStock"></div><br>
-            
-            <input type="text" id="AmountOfAnimalsToBuy" class="form-control" size="25" placeholder="Amount of products">
-            <button type="button" id="AddToCart">Add to cart</button><br><br><br><br>
-            <div id="Notification"></div><br>
-   
-    </div>
+    <div class="sidenav">Aside 1</div>
 
     <div id="content" class="content"> 
-        <div id="product" class="container2">   
-        </div>
+        <form>
+        <input type="text" id="username" name="username" class="form-control" size="25" placeholder="Username"><br><br>
+        <input type="text" id="password" name="password" class="form-control" size="25" placeholder="Password"><br><br>
+        <button type="button" class="button">Log In</button>
+        </form>
     </div> 
   </div>
-
   </body>
 </html>

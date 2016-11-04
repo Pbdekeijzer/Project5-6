@@ -40,34 +40,22 @@ $(document).ready(function(){
         }
     }
 
-    function isUsernameTaken(username)
-    {
-        $.ajax({
-            url: "127.0.0.1:5000/accounts?name=" + username
-        }).done(function(json){
-            console.log(json);
-        });
-    }
-
-    function isEmailTaken(email)
-    {
-        return false;
-    }
-
     $("#username").on("input", isValidUsername);
     $("#password").on("input", isValidPassword);
     $("#email").on("input", isValidEmail);
 
     $('button').click(function(e){
-        var name = $('#username').val();
-        var pass = $('#password').val();
-        var email = $('#email').val();
+        // var name = $('#username').val();
+        // var pass = $('#password').val();
+        // var email = $('#email').val();
         $.ajax({
             url : "http://localhost:5000/register",
             data: $('form').serialize(),
             type : 'POST',
             success: function(response) {
                 console.log(response);
+                // Reponse is True --> show succes message
+                // Response is False --> show fail message 
             }
         });
     });

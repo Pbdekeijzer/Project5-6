@@ -1,7 +1,9 @@
 $(document).ready(function(){
+    
    var pathname = $(location).attr('pathname');
    var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
    var in_stock = null;
+
    function InsertHTML(json, data){
         var container = $("#product");
         var template = Handlebars.compile(data);
@@ -11,7 +13,10 @@ $(document).ready(function(){
         container.append(html);
     };
 
-   $.ajax({       
+   $.ajax({
+        xhrFields : {
+                withCredentials: true
+        },       
         url: "http://localhost:5000/items?id=" + suburl
     }).done(function(json){
         GetTemplate(json);
