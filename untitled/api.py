@@ -13,14 +13,23 @@ CORS(app)
 def index():
     return render_template('index.html')
 
+@app.route('/wishlist', methods=['GET', 'POST'])
+
+def wishlist():
+    print(session)
+    if request.method == 'POST:'
+        # database insert met form
+
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            return render_template('wishlist.html')
+    return "404", 404
+
 @app.route('/products/<id>')
 
 def productsdetail(id):
-    print(session)
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            return render_template('products.html')
-    return "404", 404
+    return render_template('products.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -82,8 +91,6 @@ def items():
 
     if name != None:
         items = filter(lambda x: x.hasName(name), items)
-
-    #hasDescription as filter to be added?
 
     if min != None and max != None:
         items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
