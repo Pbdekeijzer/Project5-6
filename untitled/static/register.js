@@ -32,7 +32,6 @@ $(document).ready(function(){
         var eMailRegex = new RegExp('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$');
         if (eMail.match(eMailRegex))
         {
-            isEmailTaken(eMail);
             console.log("Passed");
         }else
         {
