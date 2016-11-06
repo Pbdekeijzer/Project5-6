@@ -39,9 +39,37 @@ $(document).ready(function(){
         }
     }
 
+    function isValidPostal(email)
+    {
+        var postal_code = $("#postal_code").val();
+        var postalRegex = new RegExp('^[a-zA-Z0-9]{1,6}$');
+        if (postal_code.match(postalRegex))
+        {
+            console.log("Passed");
+        }else
+        {
+            console.log("Deine Mutti");
+        }
+    }
+
+    function isValidHouseNumber(email)
+    {
+        var house_number = $("#house_number").val();
+        var house_numberRegex = new RegExp('^[0-9]{1,5}$');
+        if (house_number.match(house_numberRegex))
+        {
+            console.log("Passed");
+        }else
+        {
+            console.log("Deine Mutti");
+        }
+    }  
+
     $("#username").on("input", isValidUsername);
     $("#password").on("input", isValidPassword);
     $("#email").on("input", isValidEmail);
+    $("#postal_code").on("input", isValidPostal);
+    $("#house_number").on("input", isValidHouseNumber);
 
     $('button').click(function(e){
         // var name = $('#username').val();

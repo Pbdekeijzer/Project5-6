@@ -38,7 +38,9 @@ def register():
         username = request.form['username'] 
         password = request.form['password']
         email = request.form['email']
-        account = AccountModel(username, password, email)
+        postal_code = request.form['postal_code']
+        house_number = request.form['house_number']
+        account = AccountModel(username, password, email, postal_code, house_number)
         result = AccountModel.insertAccount(account)
         if result:
             return "Succes"
