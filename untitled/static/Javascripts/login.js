@@ -32,6 +32,7 @@ $(document).ready(function()
             data: $('form').serialize(),
             type : 'POST',
             success: function(response) {
+            window.location.href = "/";
             console.log(response);
             }
         });
