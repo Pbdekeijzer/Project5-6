@@ -25,6 +25,7 @@ class WishlistModel():
 	@staticmethod
 	def getUID(username):
 		query = "SELECT User_ID FROM User_ WHERE User_Name = '{0}'".format(str(username))
+		print("in uid")
 		result =  MySQLdatabase.ExecuteQuery(query)
 		userid = result[0]
 		userid = userid[0]
@@ -47,6 +48,7 @@ class WishlistModel():
 	def getWishListProductIDs(user_id):
 		query = "SELECT Product_ID FROM User_Wishlist_ WHERE User_ID = '{0}'".format(int(user_id))
 		result = MySQLdatabase.ExecuteQuery(query)
+		print("in getwish")
 		WishlistModel.wishlistpids = []
 		for i in result:
 			WishlistModel.wishlistpids.append(i[0])

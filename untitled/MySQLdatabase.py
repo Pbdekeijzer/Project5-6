@@ -69,7 +69,7 @@ class MySQLdatabase:
     def ExecuteQuery(query):
         MySQLdatabase.DatabaseConnection._open_connection()
         cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
-        cursor.execute((query))
+        cursor.execute(query)
         resultquery = cursor.fetchall()  
         MySQLdatabase.DatabaseConnection.commit()
         cursor.close()

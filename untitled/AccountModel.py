@@ -21,7 +21,7 @@ class AccountModel():
 
     @staticmethod
     def checkifExists(username):
-        query = "SELECT * FROM User_ WHERE '{0}' = User_Name".format(str(username))
+        query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(username))
         result = MySQLdatabase.ExecuteQuery(query)
         if result:
             return True
