@@ -17,9 +17,10 @@ def index():
 
 def wishlist():
     print(session)
-    if request.method == 'POST:'
-        # database insert met form
-
+    if request.method == 'POST':
+        print("shit")
+        print(request.get_json())
+        return "Succes", 200
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
