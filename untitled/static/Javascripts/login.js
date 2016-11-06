@@ -19,7 +19,6 @@ $(document).ready(function()
         console.log(password);
     }
 
-
     $("#username").on("input", checkUserName);
     $("#password").on("input", checkPassword);
 

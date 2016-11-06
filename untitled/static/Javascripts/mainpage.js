@@ -8,7 +8,7 @@ $(document).ready(function(){
 		}
 	});
 
-$("#FindTheAnimals").click(function(){
+	$("#FindTheAnimals").click(function(){
         filterItems();
     });
 
@@ -21,9 +21,9 @@ $("#FindTheAnimals").click(function(){
             var container = $("#product");
             var template = Handlebars.compile(data);
             for(var i in json){
-            var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price};
-            var html = template(context);
-            container.append(html);
+				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price};
+				var html = template(context);
+				container.append(html);
             }
         });
     };

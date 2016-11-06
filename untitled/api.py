@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template, session, redirect, u
 from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
+from WishlistModel import *
 
 
 app = Flask(__name__)
@@ -14,19 +15,19 @@ def index():
     return render_template('index.html')
 
 @app.route('/wishlist', methods=['GET', 'POST'])
-
 def wishlist():
     print(session)
-    if request.method == 'POST:'
-        # database insert met form
-
+    # database insert met form
+    # if request.method == 'POST:'
+    #     product_id = request.form['product_id']
+    #     user_id = request.form['user_id']
+        
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
     return "404", 404
 
 @app.route('/products/<id>')
-
 def productsdetail(id):
     return render_template('products.html')
 
@@ -48,6 +49,7 @@ def register():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     print(request.method)
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -76,33 +78,35 @@ def accounts():
 @app.route('/items')
 
 def items():
-    id = request.args.get("id")
-    name = request.args.get("name")
-    min = request.args.get("min")
-    max = request.args.get("max")
-    continent = request.args.get("continent")
-    classification = request.args.get("class")
-    onlyinstock = request.args.get("in_stock")
 
-    items = ItemModel.get_all_items()
+    # items = ItemModel.get_all_items()
+    items = WishlistModel.get_allWishlistItems()
 
-    if id != None:
-        items = filter(lambda x: x.hasId(id), items)
+    # id = request.args.get("id")
+    # name = request.args.get("name")
+    # min = request.args.get("min")
+    # max = request.args.get("max")
+    # continent = request.args.get("continent")
+    # classification = request.args.get("class")
+    # onlyinstock = request.args.get("in_stock")
 
-    if name != None:
-        items = filter(lambda x: x.hasName(name), items)
+    # if id != None:
+    #     items = filter(lambda x: x.hasId(id), items)
 
-    if min != None and max != None:
-        items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
+    # if name != None:
+    #     items = filter(lambda x: x.hasName(name), items)
+
+    # if min != None and max != None:
+    #     items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
      
-    if continent != None:
-        items = filter(lambda x: x.hasContinent(continent), items)
+    # if continent != None:
+    #     items = filter(lambda x: x.hasContinent(continent), items)
 
-    if onlyinstock != None:
-        items = filter(lambda x: x.inStock(onlyinstock), items)
+    # if onlyinstock != None:
+    #     items = filter(lambda x: x.inStock(onlyinstock), items)
 
-    if classification != None:
-        items = filter(lambda x: x.hasClassification(classification), items)
+    # if classification != None:
+    #     items = filter(lambda x: x.hasClassification(classification), items)
 
     items = map(lambda x: x.toDict(), items)
     items = list(items)
