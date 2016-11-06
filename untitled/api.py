@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
 from WishlistModel import *
+import json
 
 
 app = Flask(__name__)
@@ -18,13 +19,29 @@ def index():
 def wishlist():
     print(session)
     if request.method == 'POST':
-        print("shit")
-        print(request.get_json())
+        username = session["username"]
+        userid = WishlistModel.getUID(username)
+        itemid = request.get_json()['id']
+        data = WishlistModel(userid, itemid)
+        data.insertintoWistlist()
         return "Succes", 200
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
     return "404", 404
+
+@app.route('/account/wishlist')
+def getaccountwishlist():
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            uid = WishlistModel.getUID(session["username"])
+            items = WishlistModel.getWishListProductIDs(uid)
+            data = ItemModel.get_all_items()
+            data = filter(lambda x: x.id in items, data)
+            data = map(lambda x: x.toDict(), data)
+            data = list(data)
+            return jsonify(data)
+    return [], 400
 
 @app.route('/products/<id>')
 def productsdetail(id):
@@ -62,6 +79,7 @@ def login():
         return "401", 401 
     return render_template('login.html')
     
+# junk
 @app.route('/accounts')
 
 def accounts():
@@ -73,39 +91,40 @@ def accounts():
     accounts = map(lambda x: x.toDict(), accounts)
     accounts = list(accounts)
     return jsonify(accounts)
+# end junk
 
 @app.route('/items')
 
 def items():
 
-    # items = ItemModel.get_all_items()
-    items = WishlistModel.get_allWishlistItems()
+    items = ItemModel.get_all_items()
+    # items = WishlistModel.get_allWishlistItems()
 
-    # id = request.args.get("id")
-    # name = request.args.get("name")
-    # min = request.args.get("min")
-    # max = request.args.get("max")
-    # continent = request.args.get("continent")
-    # classification = request.args.get("class")
-    # onlyinstock = request.args.get("in_stock")
+    id = request.args.get("id")
+    name = request.args.get("name")
+    min = request.args.get("min")
+    max = request.args.get("max")
+    continent = request.args.get("continent")
+    classification = request.args.get("class")
+    onlyinstock = request.args.get("in_stock")
 
-    # if id != None:
-    #     items = filter(lambda x: x.hasId(id), items)
+    if id != None:
+        items = filter(lambda x: x.hasId(id), items)
 
-    # if name != None:
-    #     items = filter(lambda x: x.hasName(name), items)
+    if name != None:
+        items = filter(lambda x: x.hasName(name), items)
 
-    # if min != None and max != None:
-    #     items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
+    if min != None and max != None:
+        items = filter(lambda x: x.inPriceRange(float(min),float(max)), items)
      
-    # if continent != None:
-    #     items = filter(lambda x: x.hasContinent(continent), items)
+    if continent != None:
+        items = filter(lambda x: x.hasContinent(continent), items)
 
-    # if onlyinstock != None:
-    #     items = filter(lambda x: x.inStock(onlyinstock), items)
+    if onlyinstock != None:
+        items = filter(lambda x: x.inStock(onlyinstock), items)
 
-    # if classification != None:
-    #     items = filter(lambda x: x.hasClassification(classification), items)
+    if classification != None:
+        items = filter(lambda x: x.hasClassification(classification), items)
 
     items = map(lambda x: x.toDict(), items)
     items = list(items)

@@ -1,5 +1,6 @@
 $(document).ready(function(){
  
+    GetJSONFromUrl();
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
     function InsertProduct(json){
@@ -22,10 +23,9 @@ $(document).ready(function(){
     }
 	
     // GET JSON from URL, call insert product.
-    // param = string
-    function GetJSONFromUrl(param){
+    function GetJSONFromUrl(){
         $.ajax({       
-            url: "http://localhost:5000/" + param,   
+            url: "http://localhost:5000/account/wishlist"   
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);

@@ -12,82 +12,81 @@ class MySQLdatabase:
     @staticmethod
     def InsertQuery(INSERT_INTO, VALUES):
         MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
         cursor.execute(("INSERT INTO "+INSERT_INTO+"VALUES "+VALUES))
         #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
         MySQLdatabase.DatabaseConnection.commit()
-        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
-
+        MySQLdatabase.DatabaseConnection.close()
 
     @staticmethod
-    def DeleteQuery(DELETE_FROM, WHERE):
+    def DeleteQuery(query):
         MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("DELETE FROM "+DELETE_FROM+"WHERE "+WHERE))
+        cursor.execute(query)
         #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
         MySQLdatabase.DatabaseConnection.commit()
-        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
+        MySQLdatabase.DatabaseConnection.close()
 
     @staticmethod
     def UpdateQuery(UPDATE, SET, WHERE):
         MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
         cursor.execute(("UPDATE "+UPDATE+"SET "+SET+"WHERE "+WHERE))
         #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
         MySQLdatabase.DatabaseConnection.commit()
-        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
+        MySQLdatabase.DatabaseConnection.close()
 
     @staticmethod
     def SelectQuery(SELECT, FROM, WHERE):
         MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
         cursor.execute(("SELECT "+SELECT+"FROM "+FROM+"WHERE "+WHERE))
         resultquery = cursor.fetchall()  
 
         MySQLdatabase.DatabaseConnection.commit()
-        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
+        MySQLdatabase.DatabaseConnection.close()
         
         return resultquery
 
     @staticmethod
     def ExecuteInsertQuery(query):
         MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
         cursor.execute(query)
         MySQLdatabase.DatabaseConnection.commit()
-        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
+        MySQLdatabase.DatabaseConnection.close()
 
     @staticmethod
     def ExecuteQuery(query):
         MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
         cursor.execute((query))
         resultquery = cursor.fetchall()  
         MySQLdatabase.DatabaseConnection.commit()
-        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
+        MySQLdatabase.DatabaseConnection.close()
         return resultquery
 
     @staticmethod
     def SelectAllQuery(SELECT, FROM):
         MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor()
+        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
         cursor.execute(("SELECT "+SELECT+"FROM "+FROM))
         resultquery = cursor.fetchall()  
 
         MySQLdatabase.DatabaseConnection.commit()
-        MySQLdatabase.DatabaseConnection.close()
         cursor.close()
+        MySQLdatabase.DatabaseConnection.close()
 
         return resultquery
 
