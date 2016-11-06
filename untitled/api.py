@@ -33,6 +33,7 @@ def productsdetail(id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    return render_template('register.html')
     print('shit: ' + request.method)
     if request.method == 'POST':
         username = request.form['username'] 
@@ -44,8 +45,9 @@ def register():
         result = AccountModel.insertAccount(account)
         if result:
             return "Succes"
+
         return "Failed"
-    return render_template('register.html')
+
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
