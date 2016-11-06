@@ -17,11 +17,10 @@ def index():
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
     print(session)
-    # database insert met form
-    # if request.method == 'POST:'
-    #     product_id = request.form['product_id']
-    #     user_id = request.form['user_id']
-        
+    if request.method == 'POST':
+        print("shit")
+        print(request.get_json())
+        return "Succes", 200
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
