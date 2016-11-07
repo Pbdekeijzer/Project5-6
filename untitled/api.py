@@ -19,11 +19,16 @@ def index():
 def wishlist():
     print(session)
     if request.method == 'POST':
+<<<<<<< Updated upstream
         username = session["username"]
         userid = WishlistModel.getUID(username)
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
         data.insertintoWistlist()
+=======
+        print("shit")
+        print(request.get_json())
+>>>>>>> Stashed changes
         return "Succes", 200
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
