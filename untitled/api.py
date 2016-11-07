@@ -62,7 +62,6 @@ def register():
         result = AccountModel.insertAccount(account)
         if result:
             return "Succes"
-
         return "Failed"
     return render_template('register.html')
 
@@ -105,7 +104,10 @@ def accounts():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    redirect_to_index = redirect(url_for('index'))
+    response = app.make_response(redirect_to_index)
+    response.set_cookie('user', '', expires=0)
+    return response
 
 @app.route('/items')
 
