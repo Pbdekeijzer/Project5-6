@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     var pathname = $(location).attr('pathname');
     var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
-    var inWishlist = false; //remove the false when done
+    var inWishlist = false; 
     var jsonjs;
     var wishlistitems = [];
     $('#wishlistButton').hide();
