@@ -28,7 +28,7 @@ def wishlist():
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
-    return "404", 404
+    return render_template('index.html')
 
 @app.route('/account/wishlist')
 def getaccountwishlist():
