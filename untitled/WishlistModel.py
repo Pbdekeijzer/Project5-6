@@ -54,10 +54,9 @@ class WishlistModel():
 			WishlistModel.wishlistpids.append(i[0])
 		return WishlistModel.wishlistpids
 		
-	
 	@staticmethod
-	def get_allWishlistItems():
-		pid_list = WishlistModel.getWishListProductIDs()
+	def get_allWishlistItems(user_id):
+		pid_list = WishlistModel.getWishListProductIDs(user_id)
 		WishlistModel.wishlistitems = []
 		for pid in pid_list:
 			query = "SELECT Buyable_item_.* FROM Buyable_item_ WHERE Buyable_item_.Product_ID = '{0}'".format(int(pid))
