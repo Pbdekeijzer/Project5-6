@@ -37,32 +37,32 @@ $(document).ready(function(){
 
 
 
-    //On click event
-    $("#AddToCart").click(function(){
+    // //On click event
+    // $("#AddToCart").click(function(){
            
-        var UserWantsToBuy = parseInt($('#AmountOfAnimalsToBuy').val());
-        if (in_stock - UserWantsToBuy >= 0){                                //check if in stock > want to buy
-            in_stock = in_stock - $('#AmountOfAnimalsToBuy').val()          //Changes the in stock value 
-            $('#AmountInStock').text('Amount in stock: '+ in_stock);        //changes the displayed value
-            $('#Notification').text('Animal is succesfully added to cart'); //Notified it worked
-        }
-        else if(isNaN(UserWantsToBuy) == false){
-            $('#Notification').text('You tried to buy more animals than we have');
-        }
+    //     var UserWantsToBuy = parseInt($('#AmountOfAnimalsToBuy').val());
+    //     if (in_stock - UserWantsToBuy >= 0){                                //check if in stock > want to buy
+    //         in_stock = in_stock - $('#AmountOfAnimalsToBuy').val()          //Changes the in stock value 
+    //         $('#AmountInStock').text('Amount in stock: '+ in_stock);        //changes the displayed value
+    //         $('#Notification').text('Animal is succesfully added to cart'); //Notified it worked
+    //     }
+    //     else if(isNaN(UserWantsToBuy) == false){
+    //         $('#Notification').text('You tried to buy more animals than we have');
+    //     }
         
-        //when input is not an integer
-        else if(isNaN(UserWantsToBuy) == true){
-        $('#Notification').text('Your input was not a whole number');
-        }
-    });
+    //     //when input is not an integer
+    //     else if(isNaN(UserWantsToBuy) == true){
+    //     $('#Notification').text('Your input was not a whole number');
+    //     }
+    // });
 
 
 
 
-    // Does something after 0.5 second, sets string for div with id=amountinstock
-    setTimeout( function(){ 
-        $('#AmountInStock').text('Amount in stock: '+ in_stock); 
-    }  , 1000 );
+    // // Does something after 0.5 second, sets string for div with id=amountinstock
+    // setTimeout( function(){ 
+    //     $('#AmountInStock').text('Amount in stock: '+ in_stock); 
+    // }  , 1000 );
 
 
 });

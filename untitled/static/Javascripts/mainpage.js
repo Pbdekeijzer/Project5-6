@@ -8,7 +8,7 @@ $(document).ready(function(){
 		}
 	});
 
-$("#FindTheAnimals").click(function(){
+	$("#FindTheAnimals").click(function(){
         filterItems();
     });
 
@@ -21,9 +21,9 @@ $("#FindTheAnimals").click(function(){
             var container = $("#product");
             var template = Handlebars.compile(data);
             for(var i in json){
-            var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price};
-            var html = template(context);
-            container.append(html);
+				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price};
+				var html = template(context);
+				container.append(html);
             }
         });
     };
@@ -87,7 +87,7 @@ $("#FindTheAnimals").click(function(){
         var only_instock = "";
 
         if ($("#checkboxOnlyStock").is(':checked')){
-            var only_instock = "true";
+            only_instock = "true";
         }
         return only_instock;
     }
@@ -164,7 +164,7 @@ $("#FindTheAnimals").click(function(){
 		address.replace(" ", "%20");
 		GetJSONFromUrl(address);
 	}
-		ReadyItemArguments("", "", [], "", "");
+		ReadyItemArguments("", "", [], "", "", "");
 		
 
 	});

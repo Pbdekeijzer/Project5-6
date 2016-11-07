@@ -6,15 +6,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Javascripts/products.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Workframes/handlebars-v4.0.5.js"></script>
+    <script type="text/javascript" src="http://localhost:5000/static/Javascripts/productdetail.js"></script>
+    <script type="text/javascript" src="http://localhost:5000/static/Workframes/jquery.cookie.js"></script>
+
+
 
 </head>
 <body style="margin: 0;">
     <nav>
         <ul>
             <li><a href="http://localhost:5000">Home</a></li>
-            <li><a href="#">Cart</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="/register">Register</a><li>
+            <li><a href="/wishlist">Wishlist</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href= "http://localhost:5000/logout">Log Out</a></li>
         </ul>
     </nav>
   <div class="flex-container">
@@ -22,8 +27,8 @@
     <div class="sidenav">
             <br><div id="AmountInStock"></div><br>
             
-            <input type="text" id="AmountOfAnimalsToBuy" class="form-control" size="25" placeholder="Amount of products">
-            <button type="button" id="AddToCart">Add to cart</button><br><br><br><br>
+            <!-- <input type="text" id="AmountOfAnimalsToBuy" class="form-control" size="25" placeholder="Amount of products">
+            <button type="button" id="AddToCart">Add to cart</button><br><br><br><br> -->
             <div id="Notification"></div><br>
    
     </div>
