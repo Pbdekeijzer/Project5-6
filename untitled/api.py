@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, session, redirect, url_for
+from flask import Flask, request, make_response, jsonify, render_template, session, redirect, url_for
 from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
@@ -76,10 +76,15 @@ def login():
         result = AccountModel.checkAccount(username, password)
         if result:
             session["username"] = username
+
             session.permanent = True
             print(session)
             print("hoi ")
-            return redirect(url_for('index'))
+            #return redirect(url_for('index'))
+            redirect_to_index = redirect(url_for('index'))
+            response = app.make_response(redirect_to_index)
+            response.set_cookie('user', username)
+            return response
         return "401", 401 
     return render_template('login.html')
     

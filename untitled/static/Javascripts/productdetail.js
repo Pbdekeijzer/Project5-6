@@ -4,6 +4,13 @@ $(document).ready(function(){
     var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
     var inWishlist = false;
 
+    if(window.document.cookie){
+        $('#wishlistButton').show();
+    } else{
+        $('#wishlistButton').hide();
+    }
+    
+
     $('#wishlistButton').click(function(){
         GetItemJson();
     });
