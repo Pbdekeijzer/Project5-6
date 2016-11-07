@@ -37,4 +37,16 @@ $(document).ready(function()
             }
         });
     });
+
+    function logOut()
+    {
+        $.ajax(
+            {
+                url : "http://localhost:5000/logout"
+            }
+        )
+    }
+
+    $("logOutButton").click(logOut);
+
 });

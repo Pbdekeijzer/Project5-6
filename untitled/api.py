@@ -97,6 +97,11 @@ def accounts():
     return jsonify(accounts)
 # end junk
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
 @app.route('/items')
 
 def items():
