@@ -87,7 +87,7 @@ $(document).ready(function(){
         var only_instock = "";
 
         if ($("#checkboxOnlyStock").is(':checked')){
-            var only_instock = "true";
+            only_instock = "true";
         }
         return only_instock;
     }
@@ -164,7 +164,7 @@ $(document).ready(function(){
 		address.replace(" ", "%20");
 		GetJSONFromUrl(address);
 	}
-		ReadyItemArguments("", "", [], "", "");
+		ReadyItemArguments("", "", [], "", "", "");
 		
 
 	});
