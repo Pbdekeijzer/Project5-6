@@ -126,5 +126,21 @@ article h2{
 
 #footer{
   text-align:center;
-  
+}
+
+#loginstuff{
+  margin:auto; 
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+#loginusername{
+  width: 25%;
+  height: 20px;
+}
+
+#loginpassword{
+  width: 25%;
+  height: 20px;
 }
