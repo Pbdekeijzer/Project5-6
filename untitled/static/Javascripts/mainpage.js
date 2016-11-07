@@ -27,7 +27,7 @@ $(document).ready(function(){
             }
         });
     };
-		
+
 	//Empty all
     function RemoveHTMLPanels(){
         $(".container1").empty();
@@ -164,7 +164,16 @@ $(document).ready(function(){
 		address.replace(" ", "%20");
 		GetJSONFromUrl(address);
 	}
+		
+		
 		ReadyItemArguments("", "", [], "", "", "");
 		
+		
+		//reads cookie and shows if user is logged in or not
+		if (window.document.cookie){
+			$("#UserLoggedInNotification").text(window.document.cookie.toString());
+		}
+		else{$("#UserLoggedInNotification").text("You are not logged in")}
+
 
 	});
