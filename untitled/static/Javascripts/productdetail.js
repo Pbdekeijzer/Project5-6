@@ -8,6 +8,13 @@ $(document).ready(function(){
     //CheckIfProductInWishlist();
 
 
+    if(window.document.cookie){
+        $('#wishlistButton').show();
+    } else{
+        $('#wishlistButton').hide();
+    }
+    
+
     $('#wishlistButton').click(function(){
         if (inWishlist == true){
             RemoveFromWishlist(jsonjs);
