@@ -7,21 +7,25 @@ class AccountModel():
 
     accountlst = []
 
-    def __init__(self, username, password, email):
+    def __init__(self, username, password, email, postal_code, house_number):
         self.username = username
         self.password = password
         self.email = email
+        self.postal_code = postal_code
+        self.house_number = house_number
 
     def toDict(self):
         return {
             "username" : self.username,
             "password" : self.password,
-            "email" : self.email
+            "email" : self.email,
+            "postal_code" : self.postal_code,
+            "house_number" : self.house_number
         }     
 
     @staticmethod
     def checkifExists(username):
-        query = "SELECT * FROM User_ WHERE '{0}' = User_Name".format(str(username))
+        query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(username))
         result = MySQLdatabase.ExecuteQuery(query)
         if result:
             return True
@@ -40,13 +44,15 @@ class AccountModel():
             username = AccountModel.username
             password = AccountModel.password
             email = AccountModel.email
+            postal_code = AccountModel.postal_code
+            house_number = AccountModel.house_number
 
             query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(username))
             hasResult = MySQLdatabase.ExecuteQuery(query)
             print(hasResult)
 
             if not hasResult:
-                query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address) VALUES (True, False, '"+username+"', '"+password+"', '"+email+"');"
+                query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address, Postal_code, House_number) VALUES (True, False, '"+username+"', '"+password+"', '"+email+"', '"+postal_code+"','"+house_number+"');"
                 print(query)
                 MySQLdatabase.ExecuteInsertQuery(query)
                 return True

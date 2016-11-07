@@ -19,7 +19,6 @@ $(document).ready(function()
         console.log(password);
     }
 
-
     $("#username").on("input", checkUserName);
     $("#password").on("input", checkPassword);
 
@@ -33,6 +32,7 @@ $(document).ready(function()
             data: $('form').serialize(),
             type : 'POST',
             success: function(response) {
+            window.location.href = "/";
             console.log(response);
             }
         });
