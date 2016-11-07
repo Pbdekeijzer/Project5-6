@@ -58,35 +58,38 @@ class MySQLdatabase:
 
     @staticmethod
     def ExecuteInsertQuery(query):
-        MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
+        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
+        DatabaseConnection._open_connection()
+        cursor = DatabaseConnection.cursor(buffered=True)
         cursor.execute(query)
-        MySQLdatabase.DatabaseConnection.commit()
+        DatabaseConnection.commit()
         cursor.close()
-        MySQLdatabase.DatabaseConnection.close()
+        DatabaseConnection.close()
 
     @staticmethod
     def ExecuteQuery(query):
-        MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
+        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
+        DatabaseConnection._open_connection()
+        cursor = DatabaseConnection.cursor(buffered=True)
         cursor.execute(query)
         resultquery = cursor.fetchall()  
-        MySQLdatabase.DatabaseConnection.commit()
+        DatabaseConnection.commit()
         cursor.close()
-        MySQLdatabase.DatabaseConnection.close()
+        DatabaseConnection.close()
         return resultquery
 
     @staticmethod
     def SelectAllQuery(SELECT, FROM):
-        MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
+        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
+        DatabaseConnection._open_connection()
+        cursor = DatabaseConnection.cursor(buffered=True)
 
         cursor.execute(("SELECT "+SELECT+"FROM "+FROM))
         resultquery = cursor.fetchall()  
 
-        MySQLdatabase.DatabaseConnection.commit()
+        DatabaseConnection.commit()
         cursor.close()
-        MySQLdatabase.DatabaseConnection.close()
+        DatabaseConnection.close()
 
         return resultquery
 
