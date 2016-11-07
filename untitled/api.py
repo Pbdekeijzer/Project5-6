@@ -50,7 +50,7 @@ def productsdetail(id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    
     print('shit: ' + request.method)
     if request.method == 'POST':
         username = request.form['username'] 
@@ -64,7 +64,7 @@ def register():
             return "Succes"
 
         return "Failed"
-
+    return render_template('register.html')
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -101,6 +101,11 @@ def accounts():
     accounts = list(accounts)
     return jsonify(accounts)
 # end junk
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/items')
 
