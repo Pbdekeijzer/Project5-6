@@ -2,13 +2,11 @@ $(document).ready(function(){
 
     var pathname = $(location).attr('pathname');
     var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
-    var inWishlist = false; //remove the false when done
+    var inWishlist = false; 
     var jsonjs;
     var wishlistitems = [];
     getWishlistIDs();
     GetItemJson();
-    //CheckIfProductInWishlist();
-
 
 
 
@@ -24,11 +22,6 @@ $(document).ready(function(){
                 url: "http://localhost:5000/account/wishlist"
             }).done(function(json){
                 json = JSON.stringify(json);
-                // for (var i in json){
-                //     var test = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price};
-
-                //     console.log(test[0]); 
-                // }
                 $.each(JSON.parse(json), function(idx, obj) {
                     wishlistitems.push(obj.id); });
                     
