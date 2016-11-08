@@ -1,31 +1,36 @@
 $(document).ready(function(){
-
     var pathname = $(location).attr('pathname');
     var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
     var inWishlist = false; 
     var jsonjs;
     var wishlistitems = [];
-    $('#wishlistButton').hide();
     getWishlistIDs();
     GetItemJson();
-    //CheckIfProductInWishlist();
-    $('#wishlistButton').show();
-
 
 
     if(window.document.cookie){
         $('#wishlistButton').show();
+        $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
     } else{
         $('#wishlistButton').hide();
+        $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
     }
     
+    $('#wishlistButton').click(function(){
+        if (inWishlist == true){
+            RemoveFromWishlist(jsonjs);
+        }
+        else if (inWishlist == false){
+            AddToWishlist(jsonjs);
+    }});
 
+    //Uses this function twice at start for some reason
     function getWishlistIDs(){
         $.ajax({
                 url: "http://localhost:5000/account/wishlist"
             }).done(function(json){
                 json = JSON.stringify(json);
-
+                console.log("lol");
                 $.each(JSON.parse(json), function(idx, obj) {
                     wishlistitems.push(obj.id); });
                     
@@ -37,16 +42,6 @@ $(document).ready(function(){
                 });        
             }); 
     }
-   
-    $('#wishlistButton').click(function(){
-        if (inWishlist == true){
-            RemoveFromWishlist(jsonjs);
-        }
-        else if (inWishlist == false){
-            AddToWishlist(jsonjs);
-        }
-    });
-
 
     function GetItemJson(){
         $.ajax({
@@ -64,10 +59,8 @@ $(document).ready(function(){
             data: json,
             contentType: "application/json"
         }).done(function(){
-            inWishlist = false;
             $('#wishlistButton').text("Add to wishlist");
-            $('#Notification').text('Succesfully removed from wishlist');
-
+            inWishlist = false; 
         });
     };
 
@@ -78,10 +71,8 @@ $(document).ready(function(){
             data: json,
             contentType: "application/json"
         }).done(function(){
-            inWishlist = true;
             $('#wishlistButton').text("Remove from wishlist");
-            $('#Notification').text('Succesfully added to wishlist');
-
+            inWishlist = true;
         });
     };
 });

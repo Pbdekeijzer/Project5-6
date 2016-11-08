@@ -10,16 +10,16 @@
 </head>
 <body style="margin: 0;">
     <nav>
-        <ul>
+        <ul id="NavbarAtTop">
             <li><a href="http://localhost:5000">Home</a></li>
             <li><a href="/wishlist">Wishlist</a></li>
-            <li><a href="/login">Login</a></li>
+            
             <li><a href="/register">Register</a></li>
-            <li><a href= "http://localhost:5000/logout">Log Out</a></li>
+            
         </ul>
     </nav>
 
-  <div class="flex-container">
+  <div class="flex-container" id="main-container">
 
     <div class="sidenav">
         <div class="SearchBar text-center">        
@@ -57,20 +57,21 @@
             <input type="checkbox" id="checkboxAFR" name="cb" value="Africa" checked>Africa</input><br>
             <input type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked>Antarctica</input><br><br>
             <button type="button" id="CHECKthemALL">Check all boxes</button>
-            <button type="button" id="FindTheAnimals">Find the animals</button>
+            <button type="button" id="FindTheAnimals">Find the animals</button><br><br><br><br><br><br><br><br><br><br>
+            <div id="UserLoggedInNotification"></div>
             
         </form>
     </div>
     </div>
 
-    <div id="product" class="container1">
+    <div id="product" class="container1 offset-left-330">
     
     </div>
 
 
   </div>
     <br>
-    <footer id="footer"><b>        Copyright © GroupX</b></footer>
+    <footer id="footer"><b>        Copyright © Group 2</b></footer>
     <br>
   </body>
 </html>

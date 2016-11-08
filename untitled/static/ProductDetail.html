@@ -3,6 +3,7 @@
 <script type="text/javascript" src="http://localhost:5000/static/Workframes/jquery.cookie.js"></script>
 
 
+
 <style>
 .partshit {
    float: left;
@@ -15,15 +16,17 @@
   background-color: solid #555555;
   font-size: 20px;
   padding: 8px 16px;
-  -webkit-transition-duration: 0.01s;
   transition-duration: 0.01s;
-
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  box-shadow: 0px 0px 0px rgba(0,0,0,0.24);
 }
 
 #wishlistButton:hover {
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    cursor:pointer;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.24);
     background-color: solid #555555; 
     color: solid #555555;
+    transform: scale(1.1,1.1);
 }
 
 #wishlistButton:active {
@@ -61,6 +64,7 @@
 
     <p align="bottom"><b> In stock: {{stock}} </b></p><br>
     <button type="button" id="wishlistButton">Add to wishlist</button>
+    <p style="font-size:12px" id="wishlisttext"> </p>
 
 
 

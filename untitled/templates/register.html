@@ -10,28 +10,33 @@
 </head>
 <body style="margin: 0;">
     <nav>
-        <ul>
+        <ul id="NavbarAtTop">
             <li><a href="http://localhost:5000">Home</a></li>
             <li><a href="/wishlist">Wishlist</a></li>
-            <li><a href="/login">Login</a></li>
+            
             <li><a href="/register">Register</a></li>
-            <li><a href= "http://localhost:5000/logout">Log Out</a></li>
+            
         </ul>
     </nav>
-  <div class="flex-container">
-
-    <div class="sidenav">Aside 1</div>
-
+  <div class="flex-container" id="main-container">
     <div id="content" class="content"> 
         <form>
-        <input type="text" id="username" name="username" class="form-control" size="25" placeholder="Username"><p id=usertext style="font-size:12px"> </p><br><br>
-        <input type="text" id="password" name="password" class="form-control" size="25" placeholder="Password"><p id=passtext style="font-size:12px"> </p><br><br>
-        <input type="text" id="email" name="email" class="form-control" size="25" placeholder="Email"><p id=emailtext style="font-size:12px">   </p><br><br>
-        <input type="text" id="postal_code" name="postal_code" class="form-control" size="25" placeholder="Postal code"><p id=postaltext style="font-size:12px"> </p><br><br>
-        <input type="text" id="house_number" name="house_number" class="form-control" size="25" placeholder="House number"><p id=numbertext style="font-size:12px"> </p><br><br>
-        <button type="button" class="button">Submit</button> <b> <p id=submittext style="font-size:13x"> </p></b>
+            <fieldset id="regfieldset">
+                <legend>Personal information </legend>
+                <p> <br> </p>
+                <input type="text" id="username" name="username" class="form-control" size="25" placeholder="Username"><p id=usertext style="font-size:12px"> </p><br><br>
+                <input type="text" id="password" name="password" class="form-control" size="25" placeholder="Password"><p id=passtext style="font-size:12px"> </p><br><br>
+                <input type="text" id="confirmpassword" name="confirmpassword" class="form-control" size="25" placeholder="Confirm password"><p id=confirmpasstext style="font-size:12px"> </p><br><br>
+                <input type="text" id="email" name="email" class="form-control" size="25" placeholder="Email"><p id=emailtext style="font-size:12px">   </p><br><br>
+                <input type="text" id="postal_code" name="postal_code" class="form-control" size="25" placeholder="Postal code"><p id=postaltext style="font-size:12px"> </p><br><br>
+                <input type="text" id="house_number" name="house_number" class="form-control" size="25" placeholder="House number"><p id=numbertext style="font-size:12px"> </p><br><br>
+                <button type="button" class="button">Submit</button> <b> <p id=submittext style="font-size:13x"> </p></b>
+            </fieldset>
         </form>
     </div> 
   </div>
+    <br>
+    <footer id="footer"><b>        Copyright © Group 2</b></footer>
+    <br>
   </body>
 </html>
