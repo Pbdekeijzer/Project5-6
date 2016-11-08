@@ -2,8 +2,9 @@ $(document).ready(function(){
 
     var conpasstest;
 
-    function isValidUsername()
+    function isValidUsername(border)
     {
+
         var username = $("#username").val()
         var nameRegex = new RegExp(/^[A-Za-z0-9_-]{3,10}$/);
         result = false;
@@ -13,12 +14,18 @@ $(document).ready(function(){
             result = true;
         }else
         {
-            $("#usertext").text("Make sure to use the correct format.");            
+            $("#usertext").text("Make sure to use the correct format."); 
+            if (border == true){
+                $('#usertext').css('color', 'red');
+            }    
+            else{
+                $('#usertext').css('color', 'black');
+            }                         
         }
         return result;
     }
 
-    function isValidPassword(password)
+    function isValidPassword(border)
     {
         var password = $("#password").val();
         var passwordRegex = new RegExp(/^[\@\#\$\%\^\&\*\(\)\_\+\!\A-Za-z0-9_-]{6,18}$/);
@@ -29,12 +36,18 @@ $(document).ready(function(){
             result = true;
         }else
         {
-            $("#passtext").text("Make sure to use the correct format.");            
+            $("#passtext").text("Make sure to use the correct format."); 
+            if (border == true){
+                $('#passtext').css('color', 'red');
+            }    
+            else{
+                $('#passtext').css('color', 'black');
+            }                         
         }
         return result;
     }
 
-    function isValidConfirmPassword(confirmpassword)
+    function isValidConfirmPassword(border)
     {
         var password = $("#confirmpassword").val();
         var passwordRegex = new RegExp(/^[\@\#\$\%\^\&\*\(\)\_\+\!\A-Za-z0-9_-]{6,18}$/);
@@ -45,13 +58,19 @@ $(document).ready(function(){
             result = true;
         }else
         {
-            $("#confirmpasstext").text("Make sure to use the correct format.");            
+            $("#confirmpasstext").text("Make sure to use the correct format."); 
+            if (border == true){
+                $('#confirmpasstext').css('color', 'red');
+            }    
+            else{
+                $('#confirmpasstext').css('color', 'black');
+            }                         
         }
         return result;
     }
 
 
-    function isValidEmail(email)
+    function isValidEmail(border)
     {
         var eMail = $("#email").val();
         var eMailRegex = new RegExp('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$');
@@ -62,12 +81,18 @@ $(document).ready(function(){
             result = true;
         }else
         {
-            $("#emailtext").text("Make sure to use the correct format.");            
+            $("#emailtext").text("Make sure to use the correct format."); 
+            if (border == true){
+                $('#emailtext').css('color', 'red');
+            }    
+            else{
+                $('#emailtext').css('color', 'black');
+            }                         
         }
         return result;
     }
 
-    function isValidPostal(postal_code)
+    function isValidPostal(border)
     {
         var postal_code = $("#postal_code").val();
         var postalRegex = new RegExp('^[a-zA-Z0-9]{6}$');
@@ -78,12 +103,18 @@ $(document).ready(function(){
             result = true;
         }else
         {
-            $("#postaltext").text("Make sure to use the correct format.");            
+            $("#postaltext").text("Make sure to use the correct format.");
+            if (border == true){
+                $('#postaltext').css('color', 'red');
+            }    
+            else{
+                $('#postaltext').css('color', 'black');
+            }            
         }
         return result;
     }
 
-    function isValidHouseNumber(house_number)
+    function isValidHouseNumber(border)
     {
         var house_number = $("#house_number").val();
         var house_numberRegex = new RegExp('^[0-9]{1,5}$');
@@ -94,7 +125,13 @@ $(document).ready(function(){
             result = true;
         }else
         {
-            $("#numbertext").text("Make sure to use the correct format.");            
+            $("#numbertext").text("Make sure to use the correct format.");  
+            if (border == true){
+                $('#numbertext').css('color', 'red');
+            }     
+            else{
+                $('#numbertext').css('color', 'black');
+            }     
         }
         return result;
     }  
@@ -106,17 +143,22 @@ $(document).ready(function(){
     $("#house_number").on("input", isValidHouseNumber);
     $("#confirmpassword").on("input", isValidConfirmPassword);
 
-    $('button').click(function(e){
 
+    function registerButton(){      
+        var succes = false;
         var pass = $("#password").val();
         var confirmpass = $("#confirmpassword").val();
-
-        // var confirmpass = ("#confirmpasstext").text();
-        // var name = $('#username').val();
-        // var pass = $('#password').val();
-        // var email = $('#email').val();
-        var emailcheck = isValidEmail(); var usernamecheck = isValidUsername(); var passwordcheck = isValidPassword(); var postalcheck = isValidPostal(); var numbercheck = isValidHouseNumber(); var confirmpasswordcheck = isValidConfirmPassword();
+        var emailcheck = isValidEmail(true); var usernamecheck = isValidUsername(true); var passwordcheck = isValidPassword(true); var postalcheck = isValidPostal(true); var numbercheck = isValidHouseNumber(true); var confirmpasswordcheck = isValidConfirmPassword(true);
         if (emailcheck && usernamecheck && passwordcheck && postalcheck && numbercheck && confirmpasswordcheck && (pass == confirmpass)){
+            succes = true;
+        }
+        return succes;
+    }
+
+    $('button').click(function(e){
+        var succes = registerButton();
+
+        if (succes){
             $("#submittext").text("Your account has been created!");
             $.ajax({
                 url : "http://localhost:5000/register",
