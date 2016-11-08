@@ -52,11 +52,6 @@ $(document).ready(function(){
 
 	// $('#value').val("1000").trigger("keyup");
 
-
-
-
-
-
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
     function InsertProduct(json){
@@ -223,6 +218,7 @@ $(document).ready(function(){
 		else{
 			$("#UserLoggedInNotification").text("You are not logged in");
 			$('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
+    	    $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');			
 		}
 
 

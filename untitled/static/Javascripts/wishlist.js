@@ -37,6 +37,7 @@ $(document).ready(function(){
     }
     else{
         $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
+        $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');       
     }
 
 

@@ -24,6 +24,14 @@ class AccountModel():
         }     
 
     @staticmethod
+    def getAllUsers():
+        query = "SELECT * FROM User_"
+        result = MySQLdatabase.ExecuteQuery(query)
+        for i in result:
+            AccountModel.accountlst.append(AccountModel(i[0], i[1], i[2], i[3], i[4]))
+        return AccountModel.accountlst
+
+    @staticmethod
     def checkifExists(username):
         query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(username))
         result = MySQLdatabase.ExecuteQuery(query)

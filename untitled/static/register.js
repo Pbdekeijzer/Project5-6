@@ -70,7 +70,6 @@ $(document).ready(function(){
         return result;
     }
 
-
     function isValidEmail(border)
     {
         var eMail = $("#email").val();
@@ -150,6 +149,7 @@ $(document).ready(function(){
     }
     else{
         $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
+        $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');        
     }
 
 

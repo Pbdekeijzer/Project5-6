@@ -74,9 +74,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
         result = AccountModel.checkAccount(username, password)
-        if result:
+        if result:          
             session["username"] = username
-
             session.permanent = True
             print(session)
             print("hoi ")
@@ -90,7 +89,6 @@ def login():
     
 # junk
 @app.route('/accounts')
-
 def accounts():
     username = request.args.get('username')
     password = request.args.get('password')

@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     var username;
     var password;
-
+    
     function checkUserName()
     {
         username = $("#username").val();
@@ -24,6 +24,7 @@ $(document).ready(function()
 
     $("button").click(function(e)
     {
+        
         $.ajax({
             xhrFields : {
                 withCredentials: true
@@ -54,6 +55,7 @@ $(document).ready(function()
     }
     else{
         $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
+        $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');
     }
 
 
