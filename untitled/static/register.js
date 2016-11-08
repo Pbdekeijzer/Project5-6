@@ -54,7 +54,8 @@ $(document).ready(function(){
         result = false;
         if (password.match(passwordRegex))
         {
-            $("#confirmpasstext").text("This password is allowed.");   
+            $("#confirmpasstext").text("This password is allowed."); 
+            $('#confirmpasstext').css('color', 'black');  
             result = true;
         }else
         {
@@ -152,13 +153,29 @@ $(document).ready(function(){
     }
 
 
+    function passwordCheck(){
+        var pass = $("#password").val();
+        var confirmpass = $("#confirmpassword").val();
+        result = false;
+        if (pass == confirmpass){
+            result = true;
+            $('#confirmpasstext').css('color', 'black');
+            $('#passtext').css('color', 'black');
+        }
+        else{
+            $("#confirmpasstext").text("The passwords don't match.");
+            $('#confirmpasstext').css('color', 'red');
+
+        }
+
+        return result;
+    }
 
     function registerButton(){      
         var succes = false;
-        var pass = $("#password").val();
-        var confirmpass = $("#confirmpassword").val();
-        var emailcheck = isValidEmail(true); var usernamecheck = isValidUsername(true); var passwordcheck = isValidPassword(true); var postalcheck = isValidPostal(true); var numbercheck = isValidHouseNumber(true); var confirmpasswordcheck = isValidConfirmPassword(true);
-        if (emailcheck && usernamecheck && passwordcheck && postalcheck && numbercheck && confirmpasswordcheck && (pass == confirmpass)){
+        var emailcheck = isValidEmail(true); var usernamecheck = isValidUsername(true); var passwordcheck = isValidPassword(true); var postalcheck = isValidPostal(true); var numbercheck = isValidHouseNumber(true); var confirmpasswordcheck = isValidConfirmPassword(true); 
+        result = passwordCheck(); 
+        if (emailcheck && usernamecheck && passwordcheck && postalcheck && numbercheck && confirmpasswordcheck && result){
             succes = true;
         }
         return succes;
@@ -179,7 +196,7 @@ $(document).ready(function(){
                     // Response is False --> show fail message 
                 }
             });
-            window.location.href = "/index";
+            window.location.href = "/";
         }else
         {
             $("#submittext").text("Make sure to fill in all fields correctly.");
