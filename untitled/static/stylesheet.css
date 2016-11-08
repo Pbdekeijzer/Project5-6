@@ -61,7 +61,7 @@ body {
 }
 
 .sidenav {
-  background-color: gray;
+  background-color: #DBDDE3;
   flex-basis: 20%;
   border: 1px solid black;
   flex-shrink: 0;
@@ -80,7 +80,7 @@ body {
 }
 
 .partshit{
-  background:BFFA51;
+  background: #DAF7A6;
 }
 
 article{
@@ -103,15 +103,25 @@ article h2{
 }
 
 .container1{
-  margin:15px;
+  padding-top: 15px;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  justify-content: space-around;
+  /*background-color: #FFAB52;*/
+  background-color: white;
+}
+
+.container2{
+  width:100%;
   flex-wrap: wrap;
   flex-direction:row;
   justify-content: space-around;
 }
 
-.container2{
-  width:100%;
+.container3{
+  padding-top: 15px;
+  display: flex;
   flex-wrap: wrap;
   flex-direction:row;
   justify-content: space-around;
@@ -200,4 +210,13 @@ article h2{
 #confirmpassword{
   width: 40%; 
   height: 20px; 
+}
+
+#UserLoggedInNotification{
+  align-content: center;
+}
+
+.navbardiv{
+  border-bottom: 1px solid black;
+  width: 100%;
 }
