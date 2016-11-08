@@ -12,6 +12,51 @@ $(document).ready(function(){
         filterItems();
     });
 
+
+
+	// function LogSlider(options) {
+	// 	options = options || {};
+	// 	this.minpos = options.minpos || 0;
+	// 	this.maxpos = options.maxpos || 100;
+	// 	this.minlval = Math.log(options.minval || 1);
+	// 	this.maxlval = Math.log(options.maxval || 100000);
+
+	// 	this.scale = (this.maxlval - this.minlval) / (this.maxpos - this.minpos);
+	// }
+
+	// LogSlider.prototype = {
+	// 	// Calculate value from a slider position
+	// 	value: function(position) {
+	// 		return Math.exp((position - this.minpos) * this.scale + this.minlval);
+	// 	},
+	// 	// Calculate slider position from a value
+	// 	position: function(value) {
+	// 		return this.minpos + (Math.log(value) - this.minlval) / this.scale;
+	// 	}
+	// };
+
+
+	// // Usage:
+
+	// var logsl = new LogSlider({maxpos: 30, minval: 0, maxval: 100000000});
+
+	// $('#slider').mousemove(function() {
+	// 	var val = logsl.value(+$(this).val());
+	// 	$('#value').val(val.toFixed(0));
+	// });
+
+	// $('#value').on('input', function() {
+	// 	var pos = logsl.position(+$(this).val());
+	// 	$('#slider').val(pos);
+	// });
+
+	// $('#value').val("1000").trigger("keyup");
+
+
+
+
+
+
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
     function InsertProduct(json){
@@ -171,7 +216,8 @@ $(document).ready(function(){
 		
 		//reads cookie and shows if user is logged in or not
 		if (window.document.cookie){
-			$("#UserLoggedInNotification").text(window.document.cookie.toString());
+			var username = window.document.cookie.toString().split('=');
+			$("#UserLoggedInNotification").text("You are logged in as: " + username[1]);
 			$('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
 		}
 		else{
