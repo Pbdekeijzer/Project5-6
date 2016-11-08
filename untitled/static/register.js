@@ -179,7 +179,7 @@ $(document).ready(function(){
                     // Response is False --> show fail message 
                 }
             });
-            window.location.href = "/index";
+            window.location.href = "/";
         }else
         {
             $("#submittext").text("Make sure to fill in all fields correctly.");
