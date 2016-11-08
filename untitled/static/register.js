@@ -137,7 +137,7 @@ $(document).ready(function(){
                     // Response is False --> show fail message 
                 }
             });
-            window.location.href = "/login";
+            window.location.href = "/index";
         }else
         {
             $("#submittext").text("Make sure to fill in all fields correctly.");
