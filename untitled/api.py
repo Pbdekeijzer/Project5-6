@@ -29,7 +29,7 @@ def wishlist():
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
-    return render_template('index.html')
+    return render_template('login.html')
 
 @app.route('/account/wishlist')
 def getaccountwishlist():
