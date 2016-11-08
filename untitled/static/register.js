@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    var conpasstest;
+
     function isValidUsername()
     {
         var username = $("#username").val()
@@ -31,6 +33,23 @@ $(document).ready(function(){
         }
         return result;
     }
+
+    function isValidConfirmPassword(confirmpassword)
+    {
+        var password = $("#confirmpassword").val();
+        var passwordRegex = new RegExp(/^[\@\#\$\%\^\&\*\(\)\_\+\!\A-Za-z0-9_-]{6,18}$/);
+        result = false;
+        if (password.match(passwordRegex))
+        {
+            $("#confirmpasstext").text("This password is allowed.");   
+            result = true;
+        }else
+        {
+            $("#confirmpasstext").text("Make sure to use the correct format.");            
+        }
+        return result;
+    }
+
 
     function isValidEmail(email)
     {
@@ -85,6 +104,7 @@ $(document).ready(function(){
     $("#email").on("input", isValidEmail);
     $("#postal_code").on("input", isValidPostal);
     $("#house_number").on("input", isValidHouseNumber);
+    $("#confirmpassword").on("input", isValidConfirmPassword);
     
     
     if (window.document.cookie){
@@ -96,11 +116,16 @@ $(document).ready(function(){
 
 
     $('button').click(function(e){
+
+        var pass = $("#password").val();
+        var confirmpass = $("#confirmpassword").val();
+
+        // var confirmpass = ("#confirmpasstext").text();
         // var name = $('#username').val();
         // var pass = $('#password').val();
         // var email = $('#email').val();
-        var emailcheck = isValidEmail(); var usernamecheck = isValidUsername(); var passwordcheck = isValidPassword(); var postalcheck = isValidPostal(); var numbercheck = isValidHouseNumber();
-        if (emailcheck && usernamecheck && passwordcheck && postalcheck && numbercheck){
+        var emailcheck = isValidEmail(); var usernamecheck = isValidUsername(); var passwordcheck = isValidPassword(); var postalcheck = isValidPostal(); var numbercheck = isValidHouseNumber(); var confirmpasswordcheck = isValidConfirmPassword();
+        if (emailcheck && usernamecheck && passwordcheck && postalcheck && numbercheck && confirmpasswordcheck && (pass == confirmpass)){
             $("#submittext").text("Your account has been created!");
             $.ajax({
                 url : "http://localhost:5000/register",
