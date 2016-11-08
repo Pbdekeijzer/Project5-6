@@ -6,7 +6,6 @@ $(document).ready(function(){
     var wishlistitems = [];
     getWishlistIDs();
     GetItemJson();
-    //CheckIfProductInWishlist();
 
     if(window.document.cookie){
         $('#wishlistButton').show();
