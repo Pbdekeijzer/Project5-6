@@ -72,6 +72,7 @@ body {
 #main-container{
   height:100%;
   padding-top:39px;
+  background-color: white;
 }
 
 .content {
@@ -83,7 +84,7 @@ body {
 }
 
 .partshit{
-  background:white;
+  background:BFFA51;
 }
 
 article{
@@ -144,3 +145,57 @@ article h2{
   width: 25%;
   height: 20px;
 }
+
+#loginbg{
+  background-color: white;
+}
+
+#regfieldset{
+  width: 30%;
+  margin:auto;  
+  padding: 10px; 
+  text-align: center; 
+}
+
+#logfieldset{
+  width: 30%;
+  margin:auto;  
+  padding: 10px; 
+  text-align: center; 
+}
+
+#loginusername{ 
+  width: 40%; 
+  height: 20px; 
+} 
+ 
+#loginpassword{ 
+  width: 40%; 
+  height: 20px; 
+}
+
+#username{
+  width: 40%; 
+  height: 20px; 
+}
+
+#password{
+  width: 40%; 
+  height: 20px; 
+}
+
+#postal_code{
+  width: 40%; 
+  height: 20px; 
+}
+
+#house_number{
+  width: 40%; 
+  height: 20px; 
+}
+
+#email{
+  width: 40%; 
+  height: 20px; 
+}
+

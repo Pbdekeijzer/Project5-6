@@ -8,7 +8,7 @@
     <script type="text/javascript" src="http://localhost:5000/static/Workframes/handlebars-v4.0.5.js"></script>
 
 </head>
-<body style="margin: 0;">
+<body style="margin: 0;" id="loginbg">
     <nav>
         <ul>
             <li><a href="http://localhost:5000">Home</a></li>
@@ -21,21 +21,16 @@
   <div class="flex-container" id="main-container">
     <div id="content" class="content"> 
         <form>
-        <input type="text" id="username" name="username" class="form-control" size="25" placeholder="Username"><br><br>
-        <input type="text" id="password" name="password" class="form-control" size="25" placeholder="Password"><br><br>
-        <button type="button" class="button">Log In</button>
+            <fieldset id="logfieldset">
+                <legend>Login information</legend> 
+                <p>  <br> </p>
+                <input type="text" id="loginusername" name="username" size="25" placeholder="Username"><br><br>
+                <input type="text" id="loginpassword" name="password" size="25" placeholder="Password"><br><br>
+                <button type="button" class="button">Log In</button>
+            </fieldset>
         </form>
 
 
-                <!--<form>
-            <fieldset>
-                <legend>Personal information</legend> 
-                <p>   </p>
-                <input type="text" id="username" name="username" class="form-control" size="25" placeholder="Username"><br><br>
-                <input type="text" id="password" name="password" class="form-control" size="25" placeholder="Password"><br><br>
-                <button type="button" class="button">Log In</button>
-            </fieldset>
-        </form>-->
     </div> 
   </div>
   </body>
