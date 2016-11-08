@@ -7,7 +7,6 @@ $(document).ready(function(){
     getWishlistIDs();
     GetItemJson();
 
-
     if(window.document.cookie){
         $('#wishlistButton').show();
         $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
@@ -15,6 +14,7 @@ $(document).ready(function(){
         $('#wishlistButton').hide();
         $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
     }
+
     
     $('#wishlistButton').click(function(){
         if (inWishlist == true){
