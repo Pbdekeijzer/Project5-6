@@ -21,7 +21,6 @@ $(document).ready(function(){
             AddToWishlist(jsonjs);
     }});
 
-
     //Uses this function twice at start for some reason
     function getWishlistIDs(){
         $.ajax({
