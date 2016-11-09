@@ -146,7 +146,7 @@ article h2{
   flex-direction:row;
   justify-content: space-around;
   /*background-color: #FFAB52;*/
-  background-color: white;
+  background-color: #EFEFEF;
 }
 
 .container2{
@@ -259,4 +259,18 @@ article h2{
 .navbardiv{
   border-bottom: 1px solid black;
   width: 100%;
+}
+
+#wishlist-redirectdiv{
+  overflow: hidden; /* will contain if #first is longer than #second */
+}
+
+#wishlist-redirection{
+  float:left; /* add this */
+}
+
+#redirect-timer{
+  overflow: hidden;
+  margin-left: 15px;
+  padding-left: 15px;
 }
