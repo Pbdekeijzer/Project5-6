@@ -226,7 +226,7 @@ $(document).ready(function(){
 		//reads cookie and shows if user is logged in or not
 		if (window.document.cookie){
 			var username = window.document.cookie.toString().split('=');
-			$("#UserLoggedInNotification").text("You are logged in as: " + username[1]);
+			$("#UserLoggedInNotification").text("Logged in as: " + username[1]);
 			$('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
 		}
 		else{
