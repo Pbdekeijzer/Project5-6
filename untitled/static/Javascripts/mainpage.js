@@ -138,6 +138,7 @@ $(document).ready(function(){
         $("input:checkbox[name=cb]").each(function(){
 			this.checked = true;
 		});
+		filterItems();
     };
 
     $("#CHECKthemALL").click(function(){
