@@ -44,6 +44,43 @@ nav a:hover{
   }
 }
 
+#search_input{
+  height: 20px;
+  width: 70%;
+}
+
+#searchbutton{
+  height: 26px;
+  width:28.6%;
+}
+
+#selectMenu{
+  margin-top: 5px;
+  margin-right: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+#checkboxtext{
+  margin-left: 33%;
+  margin-right: 20%;
+}
+
+#checkboxes{
+  border: 1px solid black;
+  background-color: white;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-left: 3px;
+  border-radius: 3px;
+}
+
+#selectPrice{
+  margin-top: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;    
+}
+
 body {
   margin: 0;
   height: 100%;
@@ -214,6 +251,9 @@ article h2{
 
 #UserLoggedInNotification{
   align-content: center;
+
+  margin-left: 10%;
+  margin-right: 10%
 }
 
 .navbardiv{

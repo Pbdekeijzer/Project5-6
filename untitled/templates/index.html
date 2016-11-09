@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Javascripts/mainpage.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Workframes/handlebars-v4.0.5.js"></script>
+    <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
 
 </head>
 <body style="margin: 0;">
@@ -27,8 +28,14 @@
             <br>
             </div>
             <br>
-            <input type="text" id="search_input" class="form-control" size="25" placeholder="Naam product">
-
+            <div class="navbardiv">
+            <input type="text" id="search_input" class="form-control" size="25" placeholder="Product name"><button id="searchbutton" type="button" id="FindTheAnimals">Search</button><br>
+                <!--<div data-role="rangeslider">
+                    <label for="price-min">Price:</label>
+                    <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+                    <label for="price-max">Price:</label>
+                    <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+                </div>-->
             <select id="selectMenu">
                 <option value="1">All</option>
                 <option value="2">Mammal</option>  
@@ -37,7 +44,7 @@
                 <option value="5">Reptile</option>  
                 <option value="6">Bird</option>
                 <option value="7">Insect</option>  
-            </select> <br>
+            </select>
 			
 			<select id="selectPrice" class="SearchDropDown">
                 <option value="1">Any Price</option>
@@ -46,21 +53,38 @@
                 <option value="4">500-2000</option>  
                 <option value="5">2000-10000</option>  
                 <option value="6">10000+</option>  
-            </select> <br>
-            <input type="checkbox" id="checkboxOnlyStock" name="cbtest" value="In stock" align="right"> Only show in stock</input><br>
-            <div class="navbardiv">
-            <input type="checkbox" id="checkboxNA" name="cb" value="North America" checked> North America</input>
-            <!-- align right doesnt work in mustbeinstockbool, also tried it in css -->
+            </select> <br><br> <p> <small>Additional filter options</small></p>
+            </div>
+
+
+            
+
+                <!--<form method="post" action="demoform.asp">-->
+
+                <!--</form>-->
+
+
+
+
+
             <br>
+            <div class="navbardiv">
+            <p id="checkboxtext"><b> Continents </b></p>
+            <div id="checkboxes">
+            <input type="checkbox" id="checkboxNA" name="cb" value="North America" checked> North America</input><br>
             <input type="checkbox" id="checkboxSA" name="cb" value="South America" checked> South America</input><br>
             <input type="checkbox" id="checkboxAUS" name="cb" value="Australia" checked> Australia</input><br>
             <input type="checkbox" id="checkboxEU" name="cb" value="Europe" checked> Europe</input><br>
             <input type="checkbox" id="checkboxASIA" name="cb" value="Asia" checked> Asia</input><br>
             <input type="checkbox" id="checkboxAFR" name="cb" value="Africa" checked> Africa</input><br>
-            <input type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked> Antarctica</input><br><br>
+            <input type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked> Antarctica</input>
+            </div>
+
+
+            <input type="checkbox" id="checkboxOnlyStock" name="cbtest" value="In stock" align="right"> Only show in stock</input><br><br>
             </div>
             <button type="button" id="CHECKthemALL">Check all boxes</button>
-            <button type="button" id="FindTheAnimals">Find the animals</button><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br>
             <!--<input id="slider" type="range" min="0" max="20" />
             <input id="value" />-->
         </form>
