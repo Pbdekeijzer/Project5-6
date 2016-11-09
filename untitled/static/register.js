@@ -185,18 +185,22 @@ $(document).ready(function(){
         var succes = registerButton();
 
         if (succes){
-            $("#submittext").text("Your account has been created!");
             $.ajax({
                 url : "http://localhost:5000/register",
                 data: $('form').serialize(),
                 type : 'POST',
-                success: function(response) {
-                    console.log(response);
-                    // Reponse is True --> show succes message
-                    // Response is False --> show fail message 
+            }).done(function(result)
+            {
+                console.log(result);
+                if (result == "Succes"){
+                $("#submittext").text("Your account has been created!");
+                    window.location.href = "/login";        
+                }
+                else{
+                    $("#usertext").text("Username is already taken.")
                 }
             });
-            window.location.href = "/login";
+
         }else
         {
             $("#submittext").text("Make sure to fill in all fields correctly.");
