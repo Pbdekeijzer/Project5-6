@@ -1,20 +1,33 @@
 $(document).ready(function(){
 
-	var vid = document.getElementById("nodontdoit");
+
+	var audioElement = document.createElement('audio');
+	audioElement.setAttribute('src', 'http://localhost:5000/static/images/nodont.mp4');
+
+	$.get();
+
+	audioElement.addEventListener("load", function() {
+		audioElement.play();
+	}, true);
+
 
 	//Catches a keypress of enter at the search box and calls the search function
 	$("#search_input").keypress(function(event){
 		if(event.which == 13){
 			event.preventDefault();
-			vid.play();
+			// vid.Play();
 			filterItems();
 		}
+	});
+
+	$("#searchbutton").click(function(){
+		filterItems();
+		audioElement.play();
 	});
 
 	$("#FindTheAnimals").click(function(){
         filterItems();
     });
-
 
 
 
