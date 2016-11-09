@@ -7,11 +7,11 @@
 
 <article id="test"> 
   <h2>{{title}}</h2><br>
-  <p>{{body}}</p><br>
+  <!--<p>{{body}}</p><br>-->
     <a href="/products/{{id}}">
         <img id="imageee" src={{image}} class="img" style="width:100%" alt="Image" align="middle">
     </a>
-
-    <p align="right"><b><u> <font size="2">Price: €{{price}},-</font></b></u></p>
-
+    <div id="productprice">
+    <p id="productprice"><b><u> <font size="2">Price: €{{price}},-</font></b></u></p>
+    </div>
 </article>

@@ -159,6 +159,14 @@ body {
   background: white;
 }
 
+#productprice{
+  text-align: right;
+}
+
+#productpricediv{
+  vertical-align: bottom;
+}
+
 article{
   background:white;
   margin-bottom: 20px;
