@@ -35,6 +35,13 @@
                     <label for="price-max">Price:</label>
                     <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
                 </div>-->
+
+            <br><br> <p style="font-size:10.5px" id="additionaloptions">Additional filter options</p>
+            </div>
+
+            <div class="options">
+
+            <p id="classdroptext"><b> Class </b></p> 
             <select id="selectMenu">
                 <option value="1">All</option>
                 <option value="2">Mammal</option>  
@@ -43,8 +50,10 @@
                 <option value="5">Reptile</option>  
                 <option value="6">Bird</option>
                 <option value="7">Insect</option>  
-            </select>
+            </select><br>
 			
+
+            <p id="searchdroptext"><b> Price </b></p>
 			<select id="selectPrice" class="SearchDropDown">
                 <option value="1">Any Price</option>
                 <option value="2">0-100</option>
@@ -52,24 +61,13 @@
                 <option value="4">500-2000</option>  
                 <option value="5">2000-10000</option>  
                 <option value="6">10000+</option>  
-            </select> <br><br> <p> <small>Additional filter options</small></p>
+            </select>
+
             </div>
 
-
-            
-
-                <!--<form method="post" action="demoform.asp">-->
-
-                <!--</form>-->
-
-
-
-
-
-            <br>
-            <div class="navbardiv">
+            <div class="navbardiv2">
             <p id="checkboxtext"><b> Continents </b></p>
-            <div id="checkboxes">
+            <div class="checkboxes">
             <input type="checkbox" id="checkboxNA" name="cb" value="North America" checked> North America</input><br>
             <input type="checkbox" id="checkboxSA" name="cb" value="South America" checked> South America</input><br>
             <input type="checkbox" id="checkboxAUS" name="cb" value="Australia" checked> Australia</input><br>
@@ -79,10 +77,18 @@
             <input type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked> Antarctica</input>
             </div>
 
-
-            <input type="checkbox" id="checkboxOnlyStock" name="cbtest" value="In stock" align="right"> Only show in stock</input><br><br>
-            </div>
             <button type="button" id="CHECKthemALL">Check all boxes</button>
+            </div>
+            
+            <div class="navbardiv">
+            <p id="stockboxtext"><b> Stock </b></p>
+            <div class="checkboxes">
+            
+            <input type="checkbox" id="checkboxOnlyStock" name="cbtest" value="In stock"> Only in stock</input>
+            
+            </div>
+            <br>
+            </div>            
             <br><br><br><br><br><br><br><br><br><br>
             <!--<input id="slider" type="range" min="0" max="20" />
             <input id="value" />-->
