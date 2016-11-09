@@ -7,7 +7,6 @@
     <script type="text/javascript" src="http://localhost:5000/static/Javascripts/mainpage.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Workframes/handlebars-v4.0.5.js"></script>
     <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
-
 </head>
 <body style="margin: 0;">
     <nav>
@@ -16,7 +15,7 @@
             <li><a href="/wishlist">Wishlist</a></li>         
         </ul>
     </nav>
-
+   
   <div class="flex-container" id="main-container">
 
     <div class="sidenav">
@@ -95,10 +94,31 @@
     
     </div>
 
-
+    
   </div>
     <br>
     <footer id="footer"><b>        Copyright © Group 2</b></footer>
+    <button type="button" id="test"> </button>
     <br>
+
+
+    <script>
+        $(document).ready(function() {
+            var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', 'http://localhost:5000/static/images/nodont.mp4');
+
+            $.get();
+
+            audioElement.addEventListener("load", function() {
+                audioElement.play();
+            }, true);
+
+            $('#searchbutton').click(function() {
+                audioElement.play();
+            });
+        });
+    </script> 
+    
+      
   </body>
 </html>

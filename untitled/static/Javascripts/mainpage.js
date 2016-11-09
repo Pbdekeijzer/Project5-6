@@ -1,9 +1,12 @@
 $(document).ready(function(){
 
+	var vid = document.getElementById("nodontdoit");
+
 	//Catches a keypress of enter at the search box and calls the search function
 	$("#search_input").keypress(function(event){
 		if(event.which == 13){
 			event.preventDefault();
+			vid.play();
 			filterItems();
 		}
 	});
@@ -11,6 +14,7 @@ $(document).ready(function(){
 	$("#FindTheAnimals").click(function(){
         filterItems();
     });
+
 
 
 
@@ -132,7 +136,6 @@ $(document).ready(function(){
         return only_instock;
     }
 
-
     function Check_all_boxes()
     {
         $("input:checkbox[name=cb]").each(function(){
@@ -144,9 +147,6 @@ $(document).ready(function(){
     $("#CHECKthemALL").click(function(){
         Check_all_boxes();
     });
-
-
-
 
 	function filterItems(){
 		var conList = checkContinent();
