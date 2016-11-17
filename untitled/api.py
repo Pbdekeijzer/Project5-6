@@ -87,6 +87,10 @@ def login():
             return response
         return "401", 401 
     return render_template('login.html')
+
+@app.route('/panda')
+def panda():
+    return render_template('404.html')
     
 # junk
 @app.route('/accounts')
