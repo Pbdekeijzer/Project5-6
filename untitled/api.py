@@ -74,6 +74,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        adminbool = request.form['Adminbool']
         result = AccountModel.checkAccount(username, password)
         if result:          
             session["username"] = username
@@ -83,7 +84,11 @@ def login():
             #return redirect(url_for('index'))
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
-            response.set_cookie('user', username)
+
+
+            response.set_cookie('user', username, 'adminbool', adminbool)            
+            
+
             return response
         return "401", 401 
     return render_template('login.html')
