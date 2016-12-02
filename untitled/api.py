@@ -74,7 +74,6 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        adminbool = request.form['Adminbool']
         result = AccountModel.checkAccount(username, password)
         if result:          
             session["username"] = username
@@ -84,9 +83,12 @@ def login():
             #return redirect(url_for('index'))
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
+            
 
-
-            response.set_cookie('user', username, 'adminbool', adminbool)            
+            query = "select Adminbool from User_ where User_Name = '{0}'".format(str(username))
+            adminbool = MySQLdatabase.ExecuteQuery(query)
+            adminbool = adminbool[0]
+            response.set_cookie('user', username +' = '+ str(adminbool[0]))            
             
 
             return response

@@ -225,6 +225,7 @@ $(document).ready(function(){
 		
 		//reads cookie and shows if user is logged in or not
 		if (window.document.cookie){
+			var Howdoesmycookielook = window.document.cookie.toString(); //you can put a breakpoint in the browser at this line, so you can check what the cookie contains
 			var username = window.document.cookie.toString().split('=');
 			$("#UserLoggedInNotification").text("Logged in as: " + username[1]);
 			$('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
