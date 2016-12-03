@@ -78,17 +78,15 @@ def login():
         if result:          
             session["username"] = username
             session.permanent = True
-            print(session)
             print("hoi ")
             #return redirect(url_for('index'))
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
-            
-
+            #Adding data to the cookie
             query = "select Adminbool from User_ where User_Name = '{0}'".format(str(username))
             adminbool = MySQLdatabase.ExecuteQuery(query)
             adminbool = adminbool[0]
-            response.set_cookie('user', username +' = '+ str(adminbool[0]))            
+            response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
             
 
             return response
