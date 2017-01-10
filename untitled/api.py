@@ -74,7 +74,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        adminbool = request.form['Adminbool']
+        #adminbool = request.form['Adminbool']
         result = AccountModel.checkAccount(username, password)
         if result:          
             session["username"] = username
@@ -86,7 +86,8 @@ def login():
             response = app.make_response(redirect_to_index)
 
 
-            response.set_cookie('user', username, 'adminbool', adminbool)            
+            #response.set_cookie('user', username, 'adminbool', adminbool)
+            response.set_cookie('user', username)
             
 
             return response
