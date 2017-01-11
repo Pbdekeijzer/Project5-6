@@ -5,8 +5,22 @@
   margin: 0;
 }
 
+#NavbarAtTop{
+  display: flex; 
+}
+
+#NavbarAtTop .filler{
+  flex: 1 0 0;
+}
+
+nav li{
+  flex: 0 1 auto;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 nav{
-  background: #333;
+  background: #f1f3f5;
   position: fixed;
   width: 100%;
 }
@@ -19,8 +33,11 @@ nav ul{
 nav a{
   text-decoration: none;
   text-align: center;
-  color: white;
+  color: #171717;
+  font-size: 16px;
+  font-weight: 500;
   display: block;
+  text-transform: uppercase;
   padding: 10px;
 }
 
@@ -32,28 +49,23 @@ nav a{
 /*TODO: the box doesnt align yet*/
 
 nav a:hover{
-  background-color: lightgray;
+    color: #FE980F;
+    font-size: 600;
 }
 
 @media screen and (min-width: 800px){
   nav ul{
     display:flex;
-    justify-content: flex-start;
-  }
-
-  nav li{
-    flex: 1 1 0;
+    justify-content: flex-end;
   }
 }
+
 
 #search_input{
-  height: 20px;
-  width: 70%;
 }
 
-#searchbutton{
-  height: 26px;
-  width:28.6%;
+.check-form{
+
 }
 
 #additionaloptions{
@@ -74,31 +86,33 @@ nav a:hover{
 }
 
 #searchdroptext{
-  margin-top: 10px;
-  margin-left: 33%;
-  margin-right: 20%;
+  margin-bottom: 5px;
+  color: #B2B2B2;
+  text-transform: uppercase;
+  text-align: left;
+  font-family: 'roboto';
+  font-size: 12px;
+  font-weight: 300;
 }
 
 #classdroptext{
-  margin-top: 10px;
-  margin-left: 33%;
-  margin-right: 20%;
+  margin-bottom: 5px;
+  color: #B2B2B2;
+  text-transform: uppercase;
+  text-align: left;
+  font-family: 'roboto';
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .options{
-  margin-left: 20%;
-  margin-right: 20%;
-  padding-left: 3px;
+  padding-left: 10px;
   border-radius: 3px;
+  padding-right: 10px;
 }
 
 .checkboxes{
-  border: 1px solid black;
-  background-color: white;
-  margin-left: 20%;
-  margin-right: 20%;
-  padding-left: 3px;
-  border-radius: 3px;
+  padding-left: 10px;
 }
 
 #stockboxtext{
@@ -126,6 +140,7 @@ body {
   margin: 0;
   height: 100%;
 }
+
 body {
   height: 100%;
   background-color:lightgray;
@@ -139,9 +154,9 @@ body {
 }
 
 .sidenav {
-  background-color: #DBDDE3;
+  background-color: white;
   flex-basis: 20%;
-  border: 1px solid black;
+  border-right: 1px solid rgba(0,0,0,0.4);
   flex-shrink: 0;
   position: fixed;
   height:100%;
@@ -191,11 +206,18 @@ body {
   cursor: pointer;
   line-height: 36px;
   vertical-align: middle;
+  transition: background 0.3s ease;
+}
+
+.button:hover{
+  color: white;
+  background: #FE980F;
 }
 
 .favourite-button{
   float: left;
   width: 50%;
+  font-size: 30px;
 }
 
 .wishlist-button{
@@ -241,7 +263,7 @@ article img {
   flex-wrap: wrap;
   flex-direction:row;
   justify-content: space-around;
-  background-color: #EFEFEF;
+  background-color: white;
 }
 
 .container2{
@@ -352,7 +374,6 @@ article img {
 }
 
 .navbardiv{
-  border-bottom: 1px solid black;
   width: 100%;
 }
 
@@ -372,4 +393,22 @@ article img {
   overflow: hidden;
   margin-left: 15px;
   padding-left: 15px;
+}
+
+.form-control{
+    background: white;
+    border: medium none;
+    color: #B2B2B2;
+    font-family: 'roboto';
+    font-size: 12px;
+    font-weight: 300;
+    height: 35px;
+    outline: medium none;
+    padding-left: 10px;
+    width: 155px;
+    background-image: url(../static/images/icon.png);
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 130px;
+    text-transform: uppercase;
 }
