@@ -1,4 +1,7 @@
-__author__ = 'Stef'
+import json
+from flask import jsonify
+from MySQLdatabase import *
+import os
 from ItemModel import *
 
 
@@ -42,7 +45,7 @@ class FavouritesModel():
 
 	@staticmethod
 	def getFavouritesProductIDs(user_id):
-		query = "SELECT Product_ID FROM User_Favvourites_ WHERE User_ID = '{0}'".format(int(user_id))
+		query = "SELECT Product_ID FROM User_Favourites_ WHERE User_ID = '{0}'".format(int(user_id))
 		result = MySQLdatabase.ExecuteQuery(query)
 		print("in getFavourites")
 		FavouritesModel.favouritespids = []

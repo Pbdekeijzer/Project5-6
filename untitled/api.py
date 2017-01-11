@@ -46,7 +46,7 @@ def getaccountwishlist():
             return jsonify(data)
     return [], 400
 
-@app.route('/favourites', methods =['GET', 'POST'])
+@app.route('/favourites', methods=['GET', 'POST'])
 def favourites():
     print(session)
     if request.method == 'POST':
@@ -57,6 +57,7 @@ def favourites():
         data.insertintoFavourites()
         return "Succes", 200
     if "username" in session:
+        pass
         if AccountModel.checkifExists(session["username"]):
             return render_template('favourites.html')
     return render_template('favourites.html')
