@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5057a84-6f55-4f5b-8c01-a206723d7913" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/untitled/templates/favourites.html" afterPath="$PROJECT_DIR$/untitled/templates/favourites.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/untitled/templates/index.html" afterPath="$PROJECT_DIR$/untitled/templates/index.html" />
-    </list>
+    <list default="true" id="e5057a84-6f55-4f5b-8c01-a206723d7913" name="Default" comment="" />
     <ignored path="Project5-6.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
