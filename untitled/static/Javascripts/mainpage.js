@@ -232,12 +232,13 @@ $(document).ready(function(){
 			adminbool = parseInt(Thecookiedivided[2]);								//The adminbool is an integer, with 0 or 1 as the bool value
 			
 			if (adminbool == 1){ 													//notify user he is an admin
-				$("#UserLoggedInNotification").text(  $("#UserLoggedInNotification").text()+"              You are an admin!"  );
+				$("#UserLoggedInNotification").text(  $("#UserLoggedInNotification").text()+" <br> You are an admin!"  );
+				$('#NavbarAtTop').append('<li><a href= "/adminpage" id="AdminNavbar">AdminFeatures</a></li>');
 				//TODO: append an admin link in the navbar
 			}
 
 
-			$('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
+			$('#NavbarAtTop').append('<li><a href= "/logout" id="LogoutNavbar">Log Out</a></li>');
 		}
 		else{
 			$("#UserLoggedInNotification").text("You are not logged in");

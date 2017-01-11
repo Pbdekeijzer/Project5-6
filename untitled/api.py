@@ -155,5 +155,9 @@ def items():
     items = list(items)
     return jsonify(items)
 
+@app.route('/adminpage')
+def adminpage():
+    return render_template('404.html')
+
 if __name__ == '__main__':
     app.run(threaded=True, host="localhost")
