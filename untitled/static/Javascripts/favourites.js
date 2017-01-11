@@ -39,8 +39,8 @@ $(document).ready(function(){
         var timer = 4;
         $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
         $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');
-        $('#wishlist-redirect').text('You must be logged in to see the wishlist.');
-        $('#wishlist-redirection').text('Redirecting in ')
+        $('#favourites-redirect').text('You must be logged in to see the favourites.');
+        $('#favourites-redirection').text('Redirecting in ')
         $('#redirect-timer').text(timer);
 
 

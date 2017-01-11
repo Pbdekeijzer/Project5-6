@@ -58,8 +58,8 @@ def favourites():
         return "Succes", 200
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            return render_template('wishlist.html')
-    return render_template('wishlist.html')
+            return render_template('favourites.html')
+    return render_template('favourites.html')
 
 @app.route('/account/favourites')
 def getAccountFavourites():
@@ -110,14 +110,14 @@ def login():
             session.permanent = True
             print(session)
             print("hoi ")
-            return redirect(url_for('index'))
+            #return redirect(url_for('index'))
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
 
 
             #response.set_cookie('user', username, 'adminbool', adminbool)
             response.set_cookie('user', username)
-            
+
 
             return response
         return "401", 401 
