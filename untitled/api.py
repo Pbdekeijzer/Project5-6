@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
 from WishlistModel import *
+from FavouritesModel import *
 import json
 
 
@@ -38,6 +39,34 @@ def getaccountwishlist():
         if AccountModel.checkifExists(session["username"]):
             uid = WishlistModel.getUID(session["username"])
             items = WishlistModel.getWishListProductIDs(uid)
+            data = ItemModel.get_all_items()
+            data = filter(lambda x: x.id in items, data)
+            data = map(lambda x: x.toDict(), data)
+            data = list(data)
+            return jsonify(data)
+    return [], 400
+
+@app.route('/favourites', methods =['GET', 'POST'])
+def favourites():
+    print(session)
+    if request.method == 'POST':
+        username = session["username"]
+        userid = FavouritesModel.getUID(username)
+        itemid = request.get_json()['id']
+        data = FavouritesModel(userid, itemid)
+        data.insertintoFavourites()
+        return "Succes", 200
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            return render_template('wishlist.html')
+    return render_template('wishlist.html')
+
+@app.route('/account/favourites')
+def getAccountFavourites():
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            uid = FavouritesModel.getUID(session["username"])
+            items = FavouritesModel.getFavouritesProductIDs(uid)
             data = ItemModel.get_all_items()
             data = filter(lambda x: x.id in items, data)
             data = map(lambda x: x.toDict(), data)
@@ -81,7 +110,7 @@ def login():
             session.permanent = True
             print(session)
             print("hoi ")
-            #return redirect(url_for('index'))
+            return redirect(url_for('index'))
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
 
