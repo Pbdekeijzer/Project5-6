@@ -143,6 +143,7 @@ body {
   flex-shrink: 0;
   position: fixed;
   height:100%;
+  max-width: 35%
 }
 
 #main-container{
@@ -324,4 +325,20 @@ article h2{
   overflow: hidden;
   margin-left: 15px;
   padding-left: 15px;
+}
+
+#table{
+  max-width: 65%;
+  width: fit-content;
+  padding: 15px;
+  display: block;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+td{
+  text-align: left;
 }

@@ -7,12 +7,14 @@ class AccountModel():
 
     accountlst = []
 
-    def __init__(self, username, password, email, postal_code, house_number):
+    def __init__(self, username, password, email, postal_code, house_number, adminbool, privacywishlist):
         self.username = username
         self.password = password
         self.email = email
         self.postal_code = postal_code
         self.house_number = house_number
+        self.adminbool = adminbool
+        self.privacywishlist = privacywishlist
 
     def toDict(self):
         return {
@@ -28,7 +30,7 @@ class AccountModel():
         query = "SELECT * FROM User_"
         result = MySQLdatabase.ExecuteQuery(query)
         for i in result:
-            AccountModel.accountlst.append(AccountModel(i[0], i[1], i[2], i[3], i[4]))
+            AccountModel.accountlst.append(AccountModel(i[3], i[4], i[5], i[6], i[7], i[2], i[3]))
         return AccountModel.accountlst
 
     @staticmethod
