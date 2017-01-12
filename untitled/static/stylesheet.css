@@ -23,6 +23,7 @@ nav{
   background: #f1f3f5;
   position: fixed;
   width: 100%;
+  z-index: 5;
 }
 
 nav ul{
@@ -80,9 +81,13 @@ nav a:hover{
 }
 
 #checkboxtext{
-  margin-top: 10px;
-  margin-left: 33%;
-  margin-right: 20%;
+  margin-bottom: 5px;
+  color: #B2B2B2;
+  text-transform: uppercase;
+  text-align: left;
+  font-family: 'roboto';
+  font-size: 12px;
+  font-weight: 600;
 }
 
 #searchdroptext{
@@ -92,7 +97,7 @@ nav a:hover{
   text-align: left;
   font-family: 'roboto';
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 #classdroptext{
@@ -102,7 +107,7 @@ nav a:hover{
   text-align: left;
   font-family: 'roboto';
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .options{
@@ -112,8 +117,16 @@ nav a:hover{
 }
 
 .checkboxes{
-  padding-left: 10px;
+  margin-bottom: 5px;
+  color: #b2b2b2;
+  text-transform: uppercase;
+  text-align: left;
+  font-family: 'roboto';
+  font-size: 12px;
+  font-weight: 500;
 }
+
+
 
 #stockboxtext{
   margin-top: 10px;
@@ -160,6 +173,7 @@ body {
   flex-shrink: 0;
   position: fixed;
   height:100%;
+  width: 300px;
 }
 
 #main-container{
@@ -217,7 +231,7 @@ body {
 .favourite-button{
   float: left;
   width: 50%;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .wishlist-button{
@@ -235,7 +249,7 @@ article{
   background:white;
   margin-bottom: 20px;
   box-sizing: border-box;
-  flex-basis: 30%;
+  flex-basis: 22%;
   flex-grow: 0;
   flex-shrink: 0;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12)
@@ -247,11 +261,57 @@ article h2{
   margin:10px 0;
 }
 
-article img {
+article .product-image {
+  position: relative;
   display: inline-block;
   width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
+article .product-buttons{
+
+  position: absolute;
+  top: 10px;
+  right: 5px;
+}
+
+article .product-buttons img{
+  filter: invert(100%);
+  opacity: 0.4;
+}
+
+article .product-buttons img:hover{
+  filter: invert(100%);
+  opacity: 1.0;
+}
+
+article .product-buttons button{
+  border-radius: 1000px;
+  width: 36px;
+  height: 36px;
+  min-width: 0px;
+  min-height: 0px;
+  padding: 5px;
+  margin-right: 5px;
+  background-color: rgba(254, 152, 15, 0.67)
+}
+ 
+article .product-image p {
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  padding-left: 10px;
+  font-size: 24px;
+  color: white;
+  font-weight: 300;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+
+article img{
+  width: 100%;
+  /*visibility: hidden;*/
+}
 
 .offset-left-330{
   padding-left: 330px;
@@ -264,6 +324,7 @@ article img {
   flex-direction:row;
   justify-content: space-around;
   background-color: white;
+  width: 100%;
 }
 
 .container2{
@@ -374,11 +435,15 @@ article img {
 }
 
 .navbardiv{
-  width: 100%;
+  padding-left: 10px;
+  border-radius: 3px;
+  padding-right: 10px;
 }
 
 .navbardiv2{
-  width: 100%;
+  padding-left: 10px;
+  border-radius: 3px;
+  padding-right: 10px;
 }
 
 #wishlist-redirectdiv{
@@ -404,11 +469,10 @@ article img {
     font-weight: 300;
     height: 35px;
     outline: medium none;
-    padding-left: 10px;
-    width: 155px;
+    width: 290px;
     background-image: url(../static/images/icon.png);
     background-size: 15px;
     background-repeat: no-repeat;
-    background-position: 130px;
+    background-position: 250px;
     text-transform: uppercase;
 }

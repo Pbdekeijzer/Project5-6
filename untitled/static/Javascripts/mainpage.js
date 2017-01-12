@@ -30,7 +30,6 @@ $(document).ready(function(){
     });
 
 
-
 	// function LogSlider(options) {
 	// 	options = options || {};
 	// 	this.minpos = options.minpos || 0;
