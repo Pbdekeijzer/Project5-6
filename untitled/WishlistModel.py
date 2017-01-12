@@ -22,15 +22,6 @@ class WishlistModel():
 		}
 
 
-	@staticmethod
-	def getUID(username):
-		query = "SELECT User_ID FROM User_ WHERE User_Name = '{0}'".format(str(username))
-		print("in uid")
-		result =  MySQLdatabase.ExecuteQuery(query)
-		userid = result[0]
-		userid = userid[0]
-		return userid
-
 	def insertintoWistlist(self):
 		query = "SELECT User_ID FROM User_Wishlist_ WHERE User_ID = {0} AND Product_ID = {1}".format(int(self.user_id), int(self.product_id))
 		checkexisting = MySQLdatabase.ExecuteQuery(query)

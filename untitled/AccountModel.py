@@ -7,8 +7,11 @@ class AccountModel():
 
     accountlst = []
 
-    def __init__(self, username, password, email, postal_code, house_number):
+    def __init__(self, uid = 0, private_wishlist = 1, admin = 0, username = None, password = None, email = None, postal_code = None, house_number = None):
         self.username = username
+        self.private_wishlist = private_wishlist
+        self.uid = uid
+        self.admin = admin
         self.password = password
         self.email = email
         self.postal_code = postal_code
@@ -16,19 +19,31 @@ class AccountModel():
 
     def toDict(self):
         return {
+            "uid" : self.uid,
+            "private_wishlist" : self.private_wishlist,
+            "admin" : self.admin,
             "username" : self.username,
             "password" : self.password,
             "email" : self.email,
             "postal_code" : self.postal_code,
             "house_number" : self.house_number
         }     
+    
+    @staticmethod
+    def getUID(username):
+		query = "SELECT User_ID FROM User_ WHERE User_Name = '{0}'".format(str(username))
+		print("in uid")
+		result =  MySQLdatabase.ExecuteQuery(query)
+		userid = result[0]
+		userid = userid[0]
+		return userid
 
     @staticmethod
     def getAllUsers():
         query = "SELECT * FROM User_"
         result = MySQLdatabase.ExecuteQuery(query)
         for i in result:
-            AccountModel.accountlst.append(AccountModel(i[0], i[1], i[2], i[3], i[4]))
+            AccountModel.accountlst.append(AccountModel(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
         return AccountModel.accountlst
 
     @staticmethod
@@ -47,20 +62,12 @@ class AccountModel():
             return True
         return False    
 
-    @staticmethod
-    def insertAccount(AccountModel):
-            username = AccountModel.username
-            password = AccountModel.password
-            email = AccountModel.email
-            postal_code = AccountModel.postal_code
-            house_number = AccountModel.house_number
-
-            query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(username))
+    def insertAccount(self):
+            query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(self.username))
             hasResult = MySQLdatabase.ExecuteQuery(query)
-            print(hasResult)
 
             if not hasResult:
-                query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address, Postal_code, House_number) VALUES (True, False, '"+username+"', '"+password+"', '"+email+"', '"+postal_code+"','"+house_number+"');"
+                query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address, Postal_code, House_number) VALUES (True, False, '{username}', '{password}', '{email}', '{postal_code}','{house_number}');".format(username = self.username, password = self.password, email = self.email, postal_code = self.postal_code, house_number = self.house_number)
                 print(query)
                 MySQLdatabase.ExecuteInsertQuery(query)
                 return True

@@ -1,11 +1,12 @@
 <article id="test"> 
   <!--<p>{{body}}</p><br>-->
-    <a href="/products/{{id}}">
     <div class="product-image" style="background-image: url('{{image}}')">
+        <a href="/products/{{id}}">
         <img src="{{image}}">
+        </a>
         <p>{{title}}</p>
         <div class="product-buttons">
-            <button type="button" class="favourite-button button"> 
+            <button type="button" class="favourite-button button" onclick="wishlist_onClick({{id}})"> 
             <img src="../static/images/star.png"></img>
             </button>
             <button type="button" class="wishlist-button button"> 
@@ -13,7 +14,6 @@
             </button>
         </div>
     </div>
-    </a>
     <div id="productprice">
         <p id="product-price">
             €{{price}},-<br>

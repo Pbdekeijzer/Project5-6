@@ -31,7 +31,6 @@ $(document).ready(function(){
                 url: "http://localhost:5000/account/wishlist"
             }).done(function(json){
                 json = JSON.stringify(json);
-                console.log("lol");
                 $.each(JSON.parse(json), function(idx, obj) {
                     wishlistitems.push(obj.id); });
                     
