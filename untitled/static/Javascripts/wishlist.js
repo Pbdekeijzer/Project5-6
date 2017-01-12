@@ -33,12 +33,9 @@ $(document).ready(function(){
     };
 
     if (window.document.cookie){
-        $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
     }
     else{  
         var timer = 4;     
-        $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
-        $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');   
         $('#wishlist-redirect').text('You must be logged in to see the wishlist.'); 
         $('#wishlist-redirection').text('Redirecting in ')
         $('#redirect-timer').text(timer);
