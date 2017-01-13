@@ -1,17 +1,29 @@
 $(document).ready(function(){
     var pathname = $(location).attr('pathname');
     var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
-    var inWishlist = false; 
+    var inWishlist = false;
+
+    var inFavourites = false;
+
     var jsonjs;
+
     var wishlistitems = [];
+
+    var favouriteitems = [];
+
     getWishlistIDs();
+
+    getFavouriteIDs();
+
     GetItemJson();
 
     if(window.document.cookie){
         $('#wishlistButton').show();
+        $('#favouriteButton').show();
         $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
     } else{
         $('#wishlistButton').hide();
+        $('#favouriteButton').hide();
         $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
         $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');        
     }
@@ -23,6 +35,13 @@ $(document).ready(function(){
         }
         else if (inWishlist == false){
             AddToWishlist(jsonjs);
+
+    $('#favouriteButton').click(function(){
+        if (inWishlist == true){
+            RemoveFromFavourites(jsonjs);
+        }
+        else if (inWishlist == false){
+            AddToFavourites(jsonjs);
     }});
 
     //Uses this function twice at start for some reason
@@ -43,6 +62,25 @@ $(document).ready(function(){
                 });        
             }); 
     }
+
+        function getFavouriteIDs(){
+        $.ajax({
+                url: "http://localhost:5000/account/favourites"
+            }).done(function(json){
+                json = JSON.stringify(json);
+                console.log("lol2");
+                $.each(JSON.parse(json), function(idx, obj) {
+                    favouriteitems.push(obj.id); });
+
+                favouriteitems.forEach(function(element){
+                    if (element == suburl){
+                        $("#favouriteButton").text("Remove from favourites");
+                        inFavourites = true;
+                    }
+                });
+            });
+    }
+
 
     function GetItemJson(){
         $.ajax({
@@ -74,6 +112,30 @@ $(document).ready(function(){
         }).done(function(){
             $('#wishlistButton').text("Remove from wishlist");
             inWishlist = true;
+        });
+    };
+
+        function RemoveFromFavourites(json){
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/favourites",
+            data: json,
+            contentType: "application/json"
+        }).done(function(){
+            $('#favouriteButton').text("Add to favourites");
+            inFavourites = false;
+        });
+    };
+
+    function AddToFavourites(json){
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:5000/favourites",
+            data: json,
+            contentType: "application/json"
+        }).done(function(){
+            $('#wishlistButton').text("Remove from favourites");
+            inFavourites = true;
         });
     };
 });
