@@ -57,7 +57,6 @@ def favourites():
         data.insertintoFavourites()
         return "Succes", 200
     if "username" in session:
-        pass
         if AccountModel.checkifExists(session["username"]):
             return render_template('favourites.html')
     return render_template('favourites.html')
