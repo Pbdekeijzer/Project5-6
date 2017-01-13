@@ -21,6 +21,17 @@
   box-shadow: 0px 0px 0px rgba(0,0,0,0.24);
 }
 
+#favouriteButton{
+  /*border-radius: 8px;*/
+  background-color: solid #555555;
+  font-size: 20px;
+  padding: 8px 16px;
+  transition-duration: 0.01s;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  box-shadow: 0px 0px 0px rgba(0,0,0,0.24);
+}
+
+
 #wishlistButton:hover {
     cursor:pointer;
     box-shadow: 0 2px 12px 0 rgba(0,0,0,0.24);
@@ -30,6 +41,18 @@
 }
 
 #wishlistButton:active {
+  transform: translateY(2px);
+}
+
+#favouriteButton:hover {
+    cursor:pointer;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.24);
+    background-color: solid #555555;
+    color: solid #555555;
+    transform: scale(1.1,1.1);
+}
+
+#favouriteButton:active {
   transform: translateY(2px);
 }
 

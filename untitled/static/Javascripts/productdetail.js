@@ -35,12 +35,13 @@ $(document).ready(function(){
         }
         else if (inWishlist == false){
             AddToWishlist(jsonjs);
+    }});
 
     $('#favouriteButton').click(function(){
-        if (inWishlist == true){
+        if (inFavourites == true){
             RemoveFromFavourites(jsonjs);
         }
-        else if (inWishlist == false){
+        else if (inFavourites == false){
             AddToFavourites(jsonjs);
     }});
 
@@ -134,7 +135,7 @@ $(document).ready(function(){
             data: json,
             contentType: "application/json"
         }).done(function(){
-            $('#wishlistButton').text("Remove from favourites");
+            $('#favouriteButton').text("Remove from favourites");
             inFavourites = true;
         });
     };
