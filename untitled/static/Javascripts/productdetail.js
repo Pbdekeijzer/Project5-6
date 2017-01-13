@@ -2,19 +2,13 @@ $(document).ready(function(){
     var pathname = $(location).attr('pathname');
     var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
     var inWishlist = false;
-
     var inFavourites = false;
-
     var jsonjs;
-
     var wishlistitems = [];
-
     var favouriteitems = [];
 
     getWishlistIDs();
-
     getFavouriteIDs();
-
     GetItemJson();
 
     if(window.document.cookie){
@@ -51,7 +45,6 @@ $(document).ready(function(){
                 url: "http://localhost:5000/account/wishlist"
             }).done(function(json){
                 json = JSON.stringify(json);
-                console.log("lol");
                 $.each(JSON.parse(json), function(idx, obj) {
                     wishlistitems.push(obj.id); });
                     
@@ -69,7 +62,6 @@ $(document).ready(function(){
                 url: "http://localhost:5000/account/favourites"
             }).done(function(json){
                 json = JSON.stringify(json);
-                console.log("lol2");
                 $.each(JSON.parse(json), function(idx, obj) {
                     favouriteitems.push(obj.id); });
 
