@@ -1,0 +1,35 @@
+.GraphBar{
+  width: 40px;
+  height: 100%;
+  background: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  float: left;
+  text-align: center;
+}
+
+.NoColour{
+  background-color: none;
+  width: 100%;
+}
+
+#Graph{
+  display: inline-block;
+  height: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ColoredGraphBar{
+  background-color: red;
+  width: 100%;
+}
+
+.BarItself{
+  height: 90%;
+  width: 100%;
+}
+
+#content{
+  text-align: center;
+}

@@ -96,7 +96,11 @@ def login():
 @app.route('/panda')
 def panda():
     return render_template('404.html')
-    
+
+@app.route('/graph')
+def graph():
+    return render_template("graph.html")
+
 # junk
 @app.route('/accounts')
 def accounts():
