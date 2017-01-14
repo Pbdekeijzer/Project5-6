@@ -1,11 +1,12 @@
 $(document).ready(function()
 {
+    //Dynamic css
     var sidenavwidth = $("#sidenav").width();
     $('#table').css("margin-left", sidenavwidth+20+"px");
-    
-    //get all users.
-    //be able to filter users
-    //be able to change users attributes
+    var tableHeight = $("#table").height();
+    $('.inputAtAdminpage').css("margin-top", tableHeight+20+"px");
+
+    //be able to filter users?
 
 
     $.ajax({       
@@ -22,5 +23,19 @@ $(document).ready(function()
 				//container.append(html);
             }
         });
+
+        $('#DeleteUser').click(function(){
+
+        });
+
+        $('#UpdateUser').click(function(){
+            
+        });
+
+        $('#FindUser').click(function(){
+            
+        });
+
+
 
 });

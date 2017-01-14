@@ -333,6 +333,9 @@ article h2{
   padding-left: 15px;
 }
 
+
+/*all the adminpage css*/
+
 #table{
   width: fit-content;
   padding: 15px;
@@ -350,4 +353,16 @@ table, th, td {
 
 td{
   text-align: left;
+}
+
+.inputAtAdminpage{
+  /*float: right;*/
+  max-height: fit-content;
+  padding: 2px;
+  text-anchor: start;
+}
+
+.buttonAtAdminpage{
+  height: fit-content;
+  padding: 5px;
 }
