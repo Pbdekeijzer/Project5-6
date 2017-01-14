@@ -19,7 +19,7 @@ def wishlist():
     print(session)
     if request.method == 'POST':
         username = session["username"]
-        userid = WishlistModel.getUID(username)
+        userid = AccountModel.getUID(username)
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
         data.insertintoWistlist()
@@ -35,7 +35,7 @@ def accountpanel(username):
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
             uid = AccountModel.getUID(session["username"])
-            return "Welcome " + username
+            return render_template('user.html')
         return "Account doesn't exist!"
     return "You need to log in to view your settings!"
 
