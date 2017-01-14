@@ -1,26 +1,37 @@
 <article id="test"> 
   <!--<p>{{body}}</p><br>-->
-    <a class="product-image" href="/products/{{id}}">
-        <img src={{image}} class="img" alt="Image" align="middle">
-    </a>
+    <div class="product-image" style="background-image: url('{{image}}')">
+        <a href="/products/{{id}}">
+        <img src="{{image}}">
+        </a>
+        <p>{{title}}</p>
+        <div class="product-buttons">
+            <button type="button" class="favourite-button button" onclick="wishlist_onClick({{id}})"> 
+            <img src="../static/images/star.png"></img>
+            </button>
+            <button type="button" class="wishlist-button button"> 
+            <img src="../static/images/hearth.png"></img>
+            </button>
+        </div>
+    </div>
     <div id="productprice">
         <p id="product-price">
             €{{price}},-<br>
         </p>
     </div>
-    <div id="product-title">
+    <!--<div id="product-title">
         <p>
             {{title}}<br>
         </p>
-    </div>
-    <div style="text-align: center; padding: 5px 0px 25px 0px;">
+    </div>-->
+    <div style="text-align: center; padding: 15px 0px 25px 0px;">
         <button type="button" class="cart-button button">Add to cart</button><br>
     </div>
-    <div>
-        <button type="button" class="favourite-button button"> &lt;3 </button>
+    <!--<div>
+        <button type="button" class="favourite-button button"> &#10084</button>
         <button type="button" class="wishlist-button button">Add to wishlist</button>
         <div style="clear: both;">
         </div>
-    </div>
+    </div>-->
     
 </article>

@@ -1,5 +1,41 @@
+
+
+// remove this to different file
+function GetItemJson(id){
+    $.ajax({
+        url: "http://localhost:5000/items?id=" + String(id)
+    }).done(function(json){
+        json = JSON.stringify(json[0]);
+		AddToWishlist(json);
+    });
+};
+
+function RemoveFromWishlist(json){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/wishlist",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function AddToWishlist(json){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/wishlist",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function wishlist_onClick(id){
+	GetItemJson(id);
+}
+
+
 $(document).ready(function(){
 
+	console.log($(".wishlist-button"));
 
 	var audioElement = document.createElement('audio');
 	audioElement.setAttribute('src', 'http://localhost:5000/static/images/nodont.mp4');
@@ -28,7 +64,6 @@ $(document).ready(function(){
 	$("#FindTheAnimals").click(function(){
         filterItems();
     });
-
 
 
 	// function LogSlider(options) {
@@ -157,10 +192,6 @@ $(document).ready(function(){
 		filterItems();
     };
 
-    $("#CHECKthemALL").click(function(){
-        Check_all_boxes();
-    });
-
 	function filterItems(){
 		var conList = checkContinent();
 		var classification = checkClass();
@@ -226,7 +257,9 @@ $(document).ready(function(){
 		//reads cookie and shows if user is logged in or not
 		if (window.document.cookie){
 			var username = window.document.cookie.toString().split('=');
+			account_url = "http://localhost:5000/account/"  + username[1];
 			$("#UserLoggedInNotification").text("Logged in as: " + username[1]);
+			$('#NavbarAtTop').append('<li><a href= ' + account_url +  ' id="Account">' + username[1] + '</a></li>');
 			$('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
 		}
 		else{

@@ -12,7 +12,6 @@ app.secret_key = 'coconuts'
 CORS(app)
 
 @app.route('/')
-
 def index():
     return render_template('index.html')
 
@@ -21,7 +20,7 @@ def wishlist():
     print(session)
     if request.method == 'POST':
         username = session["username"]
-        userid = WishlistModel.getUID(username)
+        userid = AccountModel.getUID(username)
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
         data.insertintoWistlist()
@@ -31,13 +30,21 @@ def wishlist():
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
     return render_template('wishlist.html')
-    # return render_template('login.html')
+
+@app.route('/account/<username>', methods=['GET', 'POST'])
+def accountpanel(username):
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            uid = AccountModel.getUID(session["username"])
+            return render_template('user.html')
+        return "Account doesn't exist!"
+    return "You need to log in to view your settings!"
 
 @app.route('/account/wishlist')
 def getaccountwishlist():
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = WishlistModel.getUID(session["username"])
+            uid = AccountModel.getUID(session["username"])
             items = WishlistModel.getWishListProductIDs(uid)
             data = ItemModel.get_all_items()
             data = filter(lambda x: x.id in items, data)
@@ -80,17 +87,15 @@ def productsdetail(id):
 
 
 @app.route('/register', methods=['GET', 'POST'])
-def register():
-    
-    print('shit: ' + request.method)
+def register():  
     if request.method == 'POST':
         username = request.form['username'] 
         password = request.form['password']
         email = request.form['email']
         postal_code = request.form['postal_code']
         house_number = request.form['house_number']
-        account = AccountModel(username, password, email, postal_code, house_number)
-        result = AccountModel.insertAccount(account)
+        account = AccountModel(username = username, password = password, email = email, postal_code = postal_code, house_number = house_number)
+        result = account.insertAccount()
         if result:
             return "Succes"
         return "Failed"
@@ -98,27 +103,16 @@ def register():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-    print(request.method)
-
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        #adminbool = request.form['Adminbool']
         result = AccountModel.checkAccount(username, password)
         if result:          
             session["username"] = username
             session.permanent = True
-            print(session)
-            print("hoi ")
-            #return redirect(url_for('index'))
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
-
-
-            #response.set_cookie('user', username, 'adminbool', adminbool)
-            response.set_cookie('user', username)
-
-
+            response.set_cookie('user', username)            
             return response
         return "401", 401 
     return render_template('login.html')
@@ -127,7 +121,6 @@ def login():
 def panda():
     return render_template('404.html')
     
-# junk
 @app.route('/accounts')
 def accounts():
     username = request.args.get('username')
@@ -138,7 +131,7 @@ def accounts():
     accounts = map(lambda x: x.toDict(), accounts)
     accounts = list(accounts)
     return jsonify(accounts)
-# end junk
+
 
 @app.route('/logout')
 def logout():
@@ -151,10 +144,7 @@ def logout():
 @app.route('/items')
 
 def items():
-
     items = ItemModel.get_all_items()
-    # items = WishlistModel.get_allWishlistItems()
-
     id = request.args.get("id")
     name = request.args.get("name")
     min = request.args.get("min")
