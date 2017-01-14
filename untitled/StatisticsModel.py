@@ -4,7 +4,30 @@ import os
 from MySQLdatabase import *
 from calendar import monthrange
 
+class WishlistStats():
+    def __init__(self, id, name, amount):
+        self.id = id
+        self.name = name
+        self.amount = amount
 
+    @staticmethod
+    def getMostWishedItems(maxAmount):
+        query = r"""SELECT count(W.Product_ID) as Total, Title, W.Product_ID
+         FROM `User_Wishlist_` as W left join Buyable_item_ as B 
+         on W.Product_ID=B.Product_ID group by Title order by Total desc limit {0}"""
+        query = query.format(maxAmount)
+        result = MySQLdatabase.ExecuteQuery(query)
+        lst = []
+        for i in result:
+            lst.append(WishlistStats(int(i[2]), i[1], int(i[0])))
+        return lst
+
+    def toDict(self):
+        return {
+            "id":self.id,
+            "xAxis":self.name,
+            "amount":self.amount
+        }
 
 class StatisticsModel():
 
@@ -62,6 +85,6 @@ class StatisticsModel():
     def toDict(self):
         return {
             "amount":self.amount,
-            "date":self.date
+            "xAxis":self.date
         }
     

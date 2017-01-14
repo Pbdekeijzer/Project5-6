@@ -75,20 +75,17 @@ $(document).ready(function()
     }
 
   })
-  $("#TotalTransactions").click(function(e){
-    var Data = [[12, 1], [ 8, 2], [ 9, 3], [ 7, 4], [ 2, 5], [ 40, 6], [ 38, 7], [ 15, 8], [ 87, 9], [ 70, 10], [ 12, 11], [40, 12]];  //[134, 12, 16, 18, 19, 100, 50, 99, 87, 150, 130, 114];
-    var month = $("#MonthMenu option:selected").text();
-    var title = "Total transactions per day in month " + month;
-    BuildGraph(title ,Data, true);
-  })
-  $("#UserRegistration").click(function(e){
-    var Data = [[1, 1], [ 0, 2], [ 2, 3], [5, 4], [ 3, 5], [ 4, 6], [ 6, 7], [ 7, 8], [ 5, 9], [ 4, 10], [ 1, 11], [3, 12]];  //[134, 12, 16, 18, 19, 100, 50, 99, 87, 150, 130, 114];
-    var month = $("#MonthMenu option:selected").text();
-    var title = "Users registered in month " + month;
-    BuildGraph(title ,Data, true);
+  $("#WishlistButton").click(function(e){
+    var maxItems = 10;
+    $.ajax({
+      url: "http://localhost:5000/stats?MaxWishlistItems=" + maxItems
+    }).done(function(data){
+      BuildGraph("Most wished for items", data, true, 60, 20);
+    })
+
   })
 
-  function BuildGraph(Title, Data, DoYear){
+  function BuildGraph(Title, Data, DoBig, width, margins){
     var highest = 0;
     Data.forEach(function(element) {
       var num = element.amount;
@@ -103,20 +100,25 @@ $(document).ready(function()
     var titlecontainer = $("#GraphTitle");
     titlecontainer.html(String(Title));
     Container.empty();
-    if(DoYear){
-      Container.append("<style>.GraphBar{  width: 40px;  margin-left: 10px;  margin-right: 10px;}</style>")
+    if(width !== undefined & margins !== undefined){
+      Container.append("<style>.GraphBar{  width: " + width + "px;  margin-left: " + margins + "px;  margin-right: " + margins + "px;}</style>")
     }
     else{
-      Container.append("<style>.GraphBar{  width: 20px;  margin-left: 5px;  margin-right: 5px;}</style>")
+      if(DoBig){
+        Container.append("<style>.GraphBar{  width: 40px;  margin-left: 10px;  margin-right: 10px;}</style>")
+      }
+      else{
+        Container.append("<style>.GraphBar{  width: 20px;  margin-left: 5px;  margin-right: 5px;}</style>")
+      }
     }
 
     Data.forEach(function(element) {
-      var bar = BuildBar(element.amount, highest, element.date);
+      var bar = BuildBar(element.amount, highest, element.xAxis);
       Container.append(bar);
     }, this);
   }
 
-  function BuildBar(NumericValue, MaxValue, Date){
+  function BuildBar(NumericValue, MaxValue, xAxis){
     if(MaxValue == 0){
       height = 0;
     }
@@ -124,8 +126,8 @@ $(document).ready(function()
     var height = Math.round( NumericValue/MaxValue * 100);
     }
     var inverseHeight = 100-height;
-    var numValue = String(Date) + " : " + String(NumericValue);
-    var context = {NumericValue: numValue, InverseHeight: inverseHeight, Height: height, Date: Date};
+    var numValue = String(xAxis) + " : " + String(NumericValue);
+    var context = {NumericValue: numValue, InverseHeight: inverseHeight, Height: height, Date: xAxis};
     return BarTemplate(context);
     };
 

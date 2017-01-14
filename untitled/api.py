@@ -106,19 +106,23 @@ def graph():
 def stats():
     year = request.args.get("year")
     month = request.args.get("month")
-
     itemid = request.args.get("id")
-    if itemid == None:
-        return "401", 401
+    MaxWishlist = request.args.get("MaxWishlistItems")
 
-    if month == None and year != None:
+    if month == None and year != None and itemid != None:
         results = StatisticsModel.get_sales_per_month(itemid, year)
         items = map(lambda x: x.toDict(), results)
         items = list(items)
         return jsonify(items)
 
-    if month != None and year != None:
+    if month != None and year != None and itemid != None:
         results = StatisticsModel.get_sales_per_day(itemid, month, year)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
+    
+    if MaxWishlist != None:
+        results = WishlistStats.getMostWishedItems(MaxWishlist)
         items = map(lambda x: x.toDict(), results)
         items = list(items)
         return jsonify(items)
