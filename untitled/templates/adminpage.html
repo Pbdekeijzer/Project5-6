@@ -10,7 +10,7 @@
 
     <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
 </head>
-<body style="margin: 0;">
+<body style="height: 100%">
     <nav>
         <ul id="NavbarAtTop">
             <li><a href="http://localhost:5000">Home</a></li>
@@ -18,9 +18,9 @@
         </ul>
     </nav>
    
-  <div class="flex-container" id="main-container">
+  <div class="flex-container" id="main-container" style="overflow: auto; width: 100%;">
 
-    <div class="sidenav" id="sidenav">
+    <div class="sidenav" id="sidenav" style="float: left">
         <div class="SearchBar text-center">        
         <form class="form-inline">
             <div class="navbardiv">
@@ -31,8 +31,7 @@
             <br>
         </div>
     </div>
-  </div>
-
+    
     <div id="table" class="container1">
         <table id="userTable">
             <tr>
@@ -48,7 +47,7 @@
         </table>
     </div>
 
-
+</div>
     <br>
     <footer id="footer"><b>        Copyright © Group 2</b></footer>
     <button type="button" id="test"> </button>

@@ -3,6 +3,12 @@
   margin: 0;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
 nav{
   background: #333;
   position: fixed;
@@ -301,7 +307,7 @@ article h2{
   align-content: center;
 
   margin-left: 10%;
-  margin-right: 10%
+  margin-right: 10%;
 }
 
 .navbardiv{
@@ -328,15 +334,18 @@ article h2{
 }
 
 #table{
-  max-width: 65%;
   width: fit-content;
   padding: 15px;
   display: block;
+  overflow-y: auto;
+  max-width: 65%;
+  max-height: 50%;
+  float: right;
 }
 
 table, th, td {
-    border-collapse: collapse;
-    border: 1px solid black;
+  border-collapse: collapse;
+  border: 1px solid black;
 }
 
 td{

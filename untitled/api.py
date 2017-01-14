@@ -159,5 +159,13 @@ def items():
 def adminpage():
     return render_template('adminpage.html')
 
+@app.route('/AdminPageGetUsers', methods = ['GET', 'POST'])
+def AdminPageGetUsers():
+    if request.method == 'GET':
+        allUsers = AccountModel.getAllUsers()
+        allUsers = map(lambda x: x.toDict(), allUsers)
+        allUsers = list(allUsers)
+        return jsonify(allUsers)
+
 if __name__ == '__main__':
     app.run(threaded=True, host="localhost")

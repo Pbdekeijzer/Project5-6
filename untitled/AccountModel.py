@@ -5,8 +5,6 @@ import os
 
 class AccountModel():
 
-    accountlst = []
-
     def __init__(self, username, password, email, postal_code, house_number, adminbool, privacywishlist):
         self.username = username
         self.password = password
@@ -22,16 +20,19 @@ class AccountModel():
             "password" : self.password,
             "email" : self.email,
             "postal_code" : self.postal_code,
-            "house_number" : self.house_number
+            "house_number" : self.house_number,
+            "adminbool" : self.adminbool,
+            "privacywishlist" : self.privacywishlist
         }     
 
     @staticmethod
     def getAllUsers():
         query = "SELECT * FROM User_"
         result = MySQLdatabase.ExecuteQuery(query)
+        accountlst = []
         for i in result:
-            AccountModel.accountlst.append(AccountModel(i[3], i[4], i[5], i[6], i[7], i[2], i[3]))
-        return AccountModel.accountlst
+            accountlst.append(AccountModel(i[3], i[4], i[5], i[6], i[7], i[2], i[3]))
+        return accountlst
 
     @staticmethod
     def checkifExists(username):
