@@ -4,6 +4,7 @@ from ItemModel import *
 from AccountModel import *
 from WishlistModel import *
 from FavouritesModel import *
+from HistoryModel import *
 import json
 
 
@@ -39,6 +40,18 @@ def accountpanel(username):
             return render_template('user.html')
         return "Account doesn't exist!"
     return "You need to log in to view your settings!"
+
+@app.route('/account/<username>/history')
+def purchase_history(username):
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            user_id = AccountModel.getUID(session["username"])
+            historyModel = HistoryModel(user_id)
+            data = historyModel.get_order_history()
+            [item.get_all_ordered_items() for item in data]
+            data = [x.to_order_dict() for x in data]
+            return jsonify(data)
+
 
 @app.route('/account/wishlist')
 def getaccountwishlist():

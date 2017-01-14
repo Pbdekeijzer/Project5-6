@@ -5,7 +5,7 @@ import os
 from ItemModel import *
 
 
-class FavouritesModel():
+class FavouritesModel:
 
 	favouritesitems = []
 	favouriteslst = []
