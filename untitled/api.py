@@ -175,7 +175,7 @@ def GetOneUser():
     if type(TheUser) is AccountModel:
         return jsonify(TheUser.toDict())
     else:
-        return jsonify({"Username is not found"})
+        return jsonify({"username" : "Username is not found"})
 
 
 if __name__ == '__main__':

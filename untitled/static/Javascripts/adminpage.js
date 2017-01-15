@@ -4,6 +4,7 @@ $(document).ready(function() {
     $('#table').css("margin-left", sidenavwidth + 20 + "px");
     var tableHeight = $("#table").height();
     $('.inputAtAdminpage').css("margin-top", tableHeight + 20 + "px");
+    $('#NotFoundAlert').hide();
 
     //Fill the table
     $.ajax({
@@ -33,8 +34,9 @@ $(document).ready(function() {
             data: UsernameAjax,
             datatype: 'json'
         }).done(function (data) {
-            if (data == "Username is not found"){
-
+            if (data.username == "Username is not found"){
+                $('#NotFoundAlert').show();
+                $('#NotFoundAlert').delay(3500).hide(1000);
             }
             else{
                 $("#Username").val(data.username);
