@@ -48,8 +48,9 @@ def purchase_history(username):
             user_id = AccountModel.getUID(session["username"])
             historyModel = HistoryModel(user_id)
             data = historyModel.get_order_history()
-            [item.get_all_ordered_items() for item in data]
-            data = [x.to_order_dict() for x in data]
+            print(data)
+            data = [item.get_all_ordered_items() for item in data]
+            print (data)
             return jsonify(data)
 
 
