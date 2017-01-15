@@ -40,14 +40,21 @@ $(document).ready(function(){
 
 		    for(var i in json)
 		    {
-		        //console.log(i)
+		        var html = "<div class='container1' height='500px' style='color:#0000FF' offset-left-330>"
 		        for (var j in json[i])
 		        {
-		            console.log(json[i][j])
-		            var context = {title: json[i][j].name, body: json[i][j].description, image: json[i][j].image, id: json[i][j].id, continent: json[i][j].continent, classification: json[i][j].class, price: json[i][j].price};
-			        var html = template(context);
-			        container.append(html);
+			        for (var x in json[i][j])
+			        {
+			            var context = {title: json[i][j][x].name, body: json[i][j][x].description,
+			                           image: json[i][j][x].image, id: json[i][j][x].id,
+			                           continent: json[i][j][x].continent, classification: json[i][j][x].class,
+			                           price: json[i][j][x].price
+			                          };
+			            html += template(context);
+			        }
                 }
+                html += "</div>";
+                container.append(html);
             }
         });
     };
