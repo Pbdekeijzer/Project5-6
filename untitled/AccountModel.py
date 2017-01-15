@@ -62,6 +62,23 @@ class AccountModel():
             return True
         return False    
 
+    @staticmethod
+    def checkPrivacy(username):
+        query = "SELECT Privacy_wishlist FROM User_ WHERE '{0}' = User_Name".format(str(username))
+        result = MySQLdatabase.ExecuteQuery(query)
+        print(result[0][0])
+        if 1 == int(result[0][0]):
+            return True
+        return False
+    
+    @staticmethod
+    def updatePrivacy(username):
+        val = 0
+        if not AccountModel.checkPrivacy(username):
+            val = 1
+        query = "UPDATE User_ SET Privacy_wishlist = '{value}' WHERE '{name}' = User_Name".format(value = val, name = username)
+        MySQLdatabase.UpdateQuery(query)
+
     def insertAccount(self):
             query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(self.username))
             hasResult = MySQLdatabase.ExecuteQuery(query)

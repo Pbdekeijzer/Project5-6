@@ -53,6 +53,23 @@ def purchase_history(username):
             return jsonify(data)
 
 
+@app.route('/<username>/wishlist')
+def userwishlist(username):
+    if "username" in session or not AccountModel.checkPrivacy(username):
+        uid = AccountModel.getUID(username)
+        items = WishlistModel.getWishListProductIDs(uid)
+        data = ItemModel.get_all_items()
+        data = filter(lambda x: x.id in items, data)
+        data = map(lambda x: x.toDict(), data)
+        data = list(data)
+        return jsonify(data)
+    return "no........"
+
+@app.route('/wishlist/<username>')
+def uwl(username):
+    if AccountModel.checkifExists(session["username"]):
+        return render_template('wishlist.html')
+
 @app.route('/account/wishlist')
 def getaccountwishlist():
     if "username" in session:
@@ -144,6 +161,14 @@ def accounts():
     accounts = map(lambda x: x.toDict(), accounts)
     accounts = list(accounts)
     return jsonify(accounts)
+
+@app.route('/change_settings', methods = ['GET', 'POST'])
+def change_settings():
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            if request.method == 'POST':
+                AccountModel.updatePrivacy(session["username"])
+            return str(AccountModel.checkPrivacy(session["username"]))
 
 
 @app.route('/logout')
