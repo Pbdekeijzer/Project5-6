@@ -328,6 +328,11 @@ article img{
   height: 20%;
 }
 
+#order_header{
+  position: absolute;
+  top: 50px;
+}
+
 .container2{
   width:100%;
   flex-wrap: wrap;
