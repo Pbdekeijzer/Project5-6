@@ -39,16 +39,6 @@ $(document).ready(function(){
     var wishlistitems = [];
     getWishlistIDs();
     GetItemJson();
-
-    if(window.document.cookie){
-        $('#wishlistButton').show();
-        $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
-    } else{
-        $('#wishlistButton').hide();
-        $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
-        $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');        
-    }
-
     
     $('#wishlistButton').click(function(){
         if (inWishlist == true){
@@ -74,7 +64,5 @@ $(document).ready(function(){
                     }
                 });        
             }); 
-    }
-
-    
+    }   
 });
