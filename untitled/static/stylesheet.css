@@ -342,7 +342,7 @@ article h2{
   display: block;
   overflow-y: auto;
   max-width: 65%;
-  max-height: 50%;
+  max-height: 55%;
   float: right;
 }
 
@@ -356,13 +356,17 @@ td{
 }
 
 .inputAtAdminpage{
-  /*float: right;*/
   max-height: fit-content;
+  min-height: 12px;
+  max-width: 50%;
   padding: 2px;
   text-anchor: start;
+  margin-top: 10px !important;
 }
 
 .buttonAtAdminpage{
   height: fit-content;
+  min-height: 30px;
   padding: 5px;
+  margin: 5px;
 }
