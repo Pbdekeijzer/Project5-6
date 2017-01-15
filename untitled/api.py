@@ -73,6 +73,9 @@ def getaccountwishlist():
 def productsdetail(id):
     return render_template('products.html')
 
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():  

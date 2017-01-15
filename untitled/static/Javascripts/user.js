@@ -6,11 +6,12 @@ function updatePrivacy(username){
 
 function privacy_OnClick(){
     var username = window.document.cookie.toString().split('=')[1];
-    updatePrivacy(username)
+    updatePrivacy(username);
+    console.log(localStorage.getItem('cart'));
 }
 
-
 $(document).ready(function(){
+
     $.get({
         url: "http://localhost:5000/change_settings"
     }).done(function(res){
@@ -21,4 +22,5 @@ $(document).ready(function(){
             $("#privacy-checkbox").prop("checked", false);
         }
     });
+
 });
