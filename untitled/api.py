@@ -167,5 +167,16 @@ def AdminPageGetUsers():
         allUsers = list(allUsers)
         return jsonify(allUsers)
 
+@app.route('/GetOneUser')
+def GetOneUser():
+    TheUser = request.args.get("username")
+    print("\n\n\n"+TheUser+"\n\n\n\n")
+    TheUser = AccountModel.getOneUser(TheUser)
+    if type(TheUser) is AccountModel:
+        return jsonify(TheUser.toDict())
+    else:
+        return jsonify({"Username is not found"})
+
+
 if __name__ == '__main__':
     app.run(threaded=True, host="localhost")

@@ -15,7 +15,7 @@ class MySQLdatabase:
         MySQLdatabase.DatabaseConnection._open_connection()
         cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("INSERT INTO "+INSERT_INTO+"VALUES "+VALUES))
+        cursor.execute(("INSERT INTO "+INSERT_INTO+" VALUES "+VALUES))
         #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
         MySQLdatabase.DatabaseConnection.commit()
         cursor.close()
@@ -37,7 +37,7 @@ class MySQLdatabase:
         MySQLdatabase.DatabaseConnection._open_connection()
         cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("UPDATE "+UPDATE+"SET "+SET+"WHERE "+WHERE))
+        cursor.execute(("UPDATE "+UPDATE+" SET "+SET+" WHERE "+WHERE))
         #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
         MySQLdatabase.DatabaseConnection.commit()
         cursor.close()
@@ -49,7 +49,7 @@ class MySQLdatabase:
         DatabaseConnection._open_connection()
         cursor = DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("SELECT "+SELECT+"FROM "+FROM+"WHERE "+WHERE))
+        cursor.execute(("SELECT "+SELECT+" FROM "+FROM+" WHERE "+WHERE))
         resultquery = cursor.fetchall()  
 
         DatabaseConnection.commit()
@@ -86,7 +86,7 @@ class MySQLdatabase:
         DatabaseConnection._open_connection()
         cursor = DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("SELECT "+SELECT+"FROM "+FROM))
+        cursor.execute(("SELECT "+SELECT+" FROM "+FROM))
         resultquery = cursor.fetchall()  
 
         DatabaseConnection.commit()

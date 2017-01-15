@@ -26,12 +26,22 @@ class AccountModel():
         }     
 
     @staticmethod
+    def getOneUser(UserItsName):
+        Result = MySQLdatabase.SelectQuery('*','User_','User_Name = "'+ UserItsName + '"')
+        try:
+            return AccountModel(Result[0][3], Result[0][4], Result[0][5], Result[0][6], Result[0][7], Result[0][2], Result[0][1])
+        except IndexError:
+            return "Name is not found"
+
+
+
+    @staticmethod
     def getAllUsers():
-        query = "SELECT * FROM User_"
+        query = "SELECT * FROM User_ ORDER BY User_Name"
         result = MySQLdatabase.ExecuteQuery(query)
         accountlst = []
         for i in result:
-            accountlst.append(AccountModel(i[3], i[4], i[5], i[6], i[7], i[2], i[3]))
+            accountlst.append(AccountModel(i[3], i[4], i[5], i[6], i[7], i[2], i[1]))
         return accountlst
 
     @staticmethod
