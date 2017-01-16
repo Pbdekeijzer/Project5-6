@@ -378,3 +378,7 @@ td{
     display: inline-block;
     padding: 3px
 }
+
+.tableRow {
+    cursor: pointer
+}

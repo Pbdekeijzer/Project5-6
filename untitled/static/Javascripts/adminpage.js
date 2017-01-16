@@ -1,20 +1,13 @@
 $(document).ready(function() {
+    //Run this on starting the page ---
     //Dynamic css
     var sidenavwidth = $("#sidenav").width();
     $('#table').css("margin-left", sidenavwidth + 20 + "px");
     $('#NotFoundAlert').hide();
 
-    //Fill the table
-    $.ajax({
-        url: "/AdminPageGetUsers",
-        type: 'GET'
-    }).done(function (data) {
+    FillTheTable();
 
-        var container = $("#userTable");
-        for (var i in data) {
-            container.append("<tr><td>" + data[i].username + "</td><td>" + data[i].password + "</td><td>" + data[i].email + "</td><td>" + data[i].postal_code + "</td><td>" + data[i].house_number + "</td><td>" + data[i].adminbool + "</td><td>" + data[i].privacywishlist + "</td></tr>");
-        }
-    });
+    //Here it ends, from now only event handlers ---
 
     $('#DeleteUser').click(function () {
 
@@ -25,8 +18,53 @@ $(document).ready(function() {
     });
 
     $('#FindUser').click(function () {
-        var UsernameAjax = {username: $('#Username').val()};
+        FindUser($('#Username').val());
 
+    });
+
+    $('#userTable').on('click','.tableRow',function(){
+        var usernameViaTable = $(this).find('.usernameInTable').text();
+        FindUser(usernameViaTable);
+    });
+
+
+
+    //pops up a div with a text and color background
+    function ShowAlert(text, color){
+        $('#NotFoundAlert').empty();
+        $('#NotFoundAlert').text(text);
+        $('#NotFoundAlert').css('background-color', color);
+        $('#NotFoundAlert').show();
+        $('#NotFoundAlert').delay(3500).hide(1000);
+    }
+
+    function FillTheTable(){
+        $.ajax({
+            url: "/AdminPageGetUsers",
+            type: 'GET'
+        }).done(function (data) {
+
+            var container = $("#userTable");
+            container.empty();
+            container.append("<tr>"+
+                    "<th>Username</th>"+
+                    "<th>Password</th>"+
+                    "<th>Email</th>"+
+                    "<th>Postal Code</th>"+
+                    "<th>Housenumber</th>"+
+                    "<th>Adminbool</th>"+
+                    "<th>Privacy Wishlist</th>"+
+                +"</tr>")
+            for (var i in data) {
+                container.append("<tr class='tableRow'><td class='usernameInTable'>" + data[i].username + "</td><td>" + data[i].password + "</td><td>" + data[i].email + "</td><td>" + data[i].postal_code + "</td><td>" + data[i].house_number + "</td><td>" + data[i].adminbool + "</td><td>" + data[i].privacywishlist + "</td></tr>");
+            }
+        });
+
+    }
+
+    function FindUser(UsernameAjax){
+
+        UsernameAjax = {username: UsernameAjax};
         $.ajax({
             url: "/GetOneUser",
             data: UsernameAjax,
@@ -47,17 +85,6 @@ $(document).ready(function() {
             }
         });
 
-
-    });
-
-
-    //pops up a div with a text and color background
-    function ShowAlert(text, color){
-        $('#NotFoundAlert').empty();
-        $('#NotFoundAlert').text(text);
-        $('#NotFoundAlert').css('background-color', color);
-        $('#NotFoundAlert').show();
-        $('#NotFoundAlert').delay(3500).hide(1000);
     }
 
 
