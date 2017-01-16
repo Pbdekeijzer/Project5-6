@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
 from WishlistModel import *
+from StatisticsModel import *
 import json
 
 
@@ -96,7 +97,38 @@ def login():
 @app.route('/panda')
 def panda():
     return render_template('404.html')
+
+@app.route('/graph')
+def graph():
+    return render_template("graph.html")
+
+@app.route('/stats')
+def stats():
+    year = request.args.get("year")
+    month = request.args.get("month")
+    itemid = request.args.get("id")
+    MaxWishlist = request.args.get("MaxWishlistItems")
+
+    if month == None and year != None and itemid != None:
+        results = StatisticsModel.get_sales_per_month(itemid, year)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
+
+    if month != None and year != None and itemid != None:
+        results = StatisticsModel.get_sales_per_day(itemid, month, year)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
     
+    if MaxWishlist != None:
+        results = WishlistStats.getMostWishedItems(MaxWishlist)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
+
+    return "401", 401
+
 # junk
 @app.route('/accounts')
 def accounts():
