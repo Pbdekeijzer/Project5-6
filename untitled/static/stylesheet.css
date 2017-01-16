@@ -57,7 +57,7 @@ nav a{
 
 nav a:hover{
     color: #FE980F;
-    font-size: 600;
+    /*font-size: 600;*/
 }
 
 @media screen and (min-width: 800px){
@@ -179,7 +179,7 @@ body {
   flex-shrink: 0;
   position: fixed;
   height:100%;
-  max-width: 35%
+  max-width: 35%;
   width: 300px;
 }
 

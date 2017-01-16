@@ -5,11 +5,9 @@ import os
 
 class AccountModel():
 
-    def __init__(self, username, password, email, postal_code, house_number, adminbool, privacywishlist):
-        self.username = username
-        self.private_wishlist = private_wishlist
+    def __init__(self, uid = 0, username = None, password = None, email = None, postal_code = None, house_number = None, adminbool = 0, privacywishlist = 1):
         self.uid = uid
-        self.admin = admin
+        self.username = username
         self.password = password
         self.email = email
         self.postal_code = postal_code
@@ -20,8 +18,6 @@ class AccountModel():
     def toDict(self):
         return {
             "uid" : self.uid,
-            "private_wishlist" : self.private_wishlist,
-            "admin" : self.admin,
             "username" : self.username,
             "password" : self.password,
             "email" : self.email,
@@ -33,18 +29,18 @@ class AccountModel():
     
     @staticmethod
     def getUID(username):
-		query = "SELECT User_ID FROM User_ WHERE User_Name = '{0}'".format(str(username))
-		print("in uid")
-		result =  MySQLdatabase.ExecuteQuery(query)
-		userid = result[0]
-		userid = userid[0]
-		return userid
+        query = "SELECT User_ID FROM User_ WHERE User_Name = '{0}'".format(str(username))
+        print("in uid")
+        result =  MySQLdatabase.ExecuteQuery(query)
+        userid = result[0]
+        userid = userid[0]
+        return userid
 
     @staticmethod
     def getOneUser(UserItsName):
         Result = MySQLdatabase.SelectQuery('*','User_','User_Name = "'+ UserItsName + '"')
         try:
-            return AccountModel(Result[0][3], Result[0][4], Result[0][5], Result[0][6], Result[0][7], Result[0][2], Result[0][1])
+            return AccountModel(Result[0][0], Result[0][3], Result[0][4], Result[0][5], Result[0][6], Result[0][7], Result[0][2], Result[0][1])
         except IndexError:
             return "Name is not found"
 
@@ -56,7 +52,7 @@ class AccountModel():
         result = MySQLdatabase.ExecuteQuery(query)
         accountlst = []
         for i in result:
-            accountlst.append(AccountModel(i[3], i[4], i[5], i[6], i[7], i[2], i[1]))
+            accountlst.append(AccountModel(i[0], i[3], i[4], i[5], i[6], i[7], i[2], i[1]))
         return accountlst
 
     @staticmethod
@@ -79,8 +75,8 @@ class AccountModel():
     def checkPrivacy(username):
         query = "SELECT Privacy_wishlist FROM User_ WHERE '{0}' = User_Name".format(str(username))
         result = MySQLdatabase.ExecuteQuery(query)
-        print(result[0][0])
-        if 1 == int(result[0][0]):
+        print(result[0][1])
+        if 1 == int(result[0][1]):
             return True
         return False
     
