@@ -37,7 +37,7 @@ def wishlist():
 def accountpanel(username):
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"][1:])
+            uid = AccountModel.getUID(session["username"])
             return render_template('user.html')
         return "Account doesn't exist!"
     return "You need to log in to view your settings!"
@@ -46,7 +46,7 @@ def accountpanel(username):
 def purchase_history(username):
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            user_id = AccountModel.getUID(session["username"][1:])
+            user_id = AccountModel.getUID(session["username"])
             historyModel = HistoryModel(user_id)
             data = historyModel.get_order_history()
             print(data)
@@ -79,7 +79,7 @@ def uwl(username):
 def getaccountwishlist():
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"][1:])
+            uid = AccountModel.getUID(session["username"])
             items = WishlistModel.getWishListProductIDs(uid)
             data = ItemModel.get_all_items()
             data = filter(lambda x: x.id in items, data)
@@ -124,7 +124,7 @@ def productsdetail(id):
 def cart():
     if request.method == 'POST':
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"][1:])
+            uid = AccountModel.getUID(session["username"])
             
 
 
