@@ -3,6 +3,8 @@ from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
 from WishlistModel import *
+from FavouritesModel import *
+from HistoryModel import *
 import json
 
 
@@ -39,6 +41,19 @@ def accountpanel(username):
         return "Account doesn't exist!"
     return "You need to log in to view your settings!"
 
+@app.route('/account/<username>/history')
+def purchase_history(username):
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            user_id = AccountModel.getUID(session["username"])
+            historyModel = HistoryModel(user_id)
+            data = historyModel.get_order_history()
+            print(data)
+            data = [item.get_all_ordered_items() for item in data]
+            print (data)
+            return jsonify(data)
+
+
 @app.route('/<username>/wishlist')
 def userwishlist(username):
     if "username" in session or not AccountModel.checkPrivacy(username):
@@ -65,6 +80,34 @@ def getaccountwishlist():
         if AccountModel.checkifExists(session["username"]):
             uid = AccountModel.getUID(session["username"])
             items = WishlistModel.getWishListProductIDs(uid)
+            data = ItemModel.get_all_items()
+            data = filter(lambda x: x.id in items, data)
+            data = map(lambda x: x.toDict(), data)
+            data = list(data)
+            return jsonify(data)
+    return [], 400
+
+@app.route('/favourites', methods=['GET', 'POST'])
+def favourites():
+    print(session)
+    if request.method == 'POST':
+        username = session["username"]
+        userid = FavouritesModel.getUID(username)
+        itemid = request.get_json()['id']
+        data = FavouritesModel(userid, itemid)
+        data.insertintoFavourites()
+        return "Succes", 200
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            return render_template('favourites.html')
+    return render_template('favourites.html')
+
+@app.route('/account/favourites')
+def getAccountFavourites():
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            uid = FavouritesModel.getUID(session["username"])
+            items = FavouritesModel.getFavouritesProductIDs(uid)
             data = ItemModel.get_all_items()
             data = filter(lambda x: x.id in items, data)
             data = map(lambda x: x.toDict(), data)
@@ -116,6 +159,10 @@ def login():
             return response
         return "401", 401 
     return render_template('login.html')
+
+@app.route('/panda')
+def panda():
+    return render_template('404.html')
     
 @app.route('/accounts')
 def accounts():
