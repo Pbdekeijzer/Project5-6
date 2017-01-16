@@ -73,8 +73,14 @@ def getaccountwishlist():
 def productsdetail(id):
     return render_template('products.html')
 
-@app.route('/cart')
+@app.route('/cart', methods=['GET', 'POST'])
 def cart():
+    if request.method == 'POST':
+        if AccountModel.checkifExists(session["username"]):
+            uid = AccountModel.getUID(session["username"])
+            
+
+
     return render_template('cart.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -127,7 +133,6 @@ def change_settings():
                 AccountModel.updatePrivacy(session["username"])
             return str(AccountModel.checkPrivacy(session["username"]))
 
-
 @app.route('/logout')
 def logout():
     session.clear()
@@ -137,7 +142,6 @@ def logout():
     return response
 
 @app.route('/items')
-
 def items():
     items = ItemModel.get_all_items()
     id = request.args.get("id")
