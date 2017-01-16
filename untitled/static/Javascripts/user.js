@@ -10,7 +10,6 @@ function privacy_OnClick(){
     console.log(localStorage.getItem('cart'));
 }
 
-$(document).ready(function(){
 
 $(document).ready(function(){
     GetOrderedItemJson();

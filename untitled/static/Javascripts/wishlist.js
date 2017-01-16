@@ -1,3 +1,36 @@
+// remove this to different file
+function GetItemJson(id){
+    $.ajax({
+        url: "http://localhost:5000/items?id=" + String(id)
+    }).done(function(json){
+        json = JSON.stringify(json[0]);
+		AddToWishlist(json);
+    });
+};
+
+function RemoveFromWishlist(json){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/wishlist",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function AddToWishlist(json){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/wishlist",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function wishlist_onClick(id){
+	GetItemJson(id);
+}
+
+
 $(document).ready(function(){
  
     GetJSONFromUrl();

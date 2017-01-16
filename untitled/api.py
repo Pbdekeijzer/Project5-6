@@ -22,7 +22,7 @@ def wishlist():
     print(session)
     if request.method == 'POST':
         username = session["username"]
-        userid = AccountModel.getUID(username[1:])
+        userid = AccountModel.getUID(username)
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
         data.insertintoWistlist()
@@ -37,7 +37,6 @@ def wishlist():
 def accountpanel(username):
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"])
             return render_template('user.html')
         return "Account doesn't exist!"
     return "You need to log in to view your settings!"
@@ -49,9 +48,7 @@ def purchase_history(username):
             user_id = AccountModel.getUID(session["username"])
             historyModel = HistoryModel(user_id)
             data = historyModel.get_order_history()
-            print(data)
             data = [item.get_all_ordered_items() for item in data]
-            print (data)
             return jsonify(data)
 
 
@@ -93,7 +90,7 @@ def favourites():
     print(session)
     if request.method == 'POST':
         username = session["username"]
-        userid = FavouritesModel.getUID(username)
+        userid = FavouritesModel.getUID(username[1:])
         itemid = request.get_json()['id']
         data = FavouritesModel(userid, itemid)
         data.insertintoFavourites()
