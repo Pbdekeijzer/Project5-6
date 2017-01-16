@@ -53,8 +53,11 @@ def userwishlist(username):
 
 @app.route('/wishlist/<username>')
 def uwl(username):
-    if AccountModel.checkifExists(session["username"]):
+    if "username" in session and session["username"] == username:
         return render_template('wishlist.html')
+    elif AccountModel.checkPrivacy(username):
+        return render_template('wishlist.html')
+    return ".."
 
 @app.route('/account/wishlist')
 def getaccountwishlist():
