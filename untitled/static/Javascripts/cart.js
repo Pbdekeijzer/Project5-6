@@ -85,6 +85,17 @@ function deleteItem(index){
 
 }
 
+function Order(){
+    if (window.document.cookie){
+        var cart = [];
+        saveCart(cart);
+        showCart();
+     }
+    else{
+        window.alert("Please log in or create a new account to complete your order.");
+    }
+}
+
 //Show cart in HTML
 function showCart() {
     // if (cart.length == 0) {
@@ -108,7 +119,7 @@ function showCart() {
                 + "<button onclick='deleteItem(" + i + ")'>Delete</button></td></tr>";
         $("#cartBody").append(row);
     }
-    var row = "<tr><td></td><td></td><td></td><td>" + "€" + totalPrice + ",-" + "</td><td></td></tr>";
+    var row = "<tr><td></td><td></td><td></td><td>" + "€" + totalPrice + ",-" + "</td><td>" + "<button onclick='Order(" + i + ")'>Order</button> </td></tr>";
     $("#cartBody").append(row);
 }
 
