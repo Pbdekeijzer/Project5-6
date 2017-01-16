@@ -22,7 +22,7 @@ def wishlist():
     print(session)
     if request.method == 'POST':
         username = session["username"]
-        userid = AccountModel.getUID(username)
+        userid = AccountModel.getUID(username[1:])
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
         data.insertintoWistlist()
@@ -37,7 +37,7 @@ def wishlist():
 def accountpanel(username):
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"])
+            uid = AccountModel.getUID(session["username"][1:])
             return render_template('user.html')
         return "Account doesn't exist!"
     return "You need to log in to view your settings!"
@@ -46,7 +46,7 @@ def accountpanel(username):
 def purchase_history(username):
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            user_id = AccountModel.getUID(session["username"])
+            user_id = AccountModel.getUID(session["username"][1:])
             historyModel = HistoryModel(user_id)
             data = historyModel.get_order_history()
             print(data)
@@ -58,7 +58,7 @@ def purchase_history(username):
 @app.route('/<username>/wishlist')
 def userwishlist(username):
     if "username" in session or not AccountModel.checkPrivacy(username):
-        uid = AccountModel.getUID(username)
+        uid = AccountModel.getUID(username[1:])
         items = WishlistModel.getWishListProductIDs(uid)
         data = ItemModel.get_all_items()
         data = filter(lambda x: x.id in items, data)
@@ -79,7 +79,7 @@ def uwl(username):
 def getaccountwishlist():
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"])
+            uid = AccountModel.getUID(session["username"][1:])
             items = WishlistModel.getWishListProductIDs(uid)
             data = ItemModel.get_all_items()
             data = filter(lambda x: x.id in items, data)
@@ -124,7 +124,7 @@ def productsdetail(id):
 def cart():
     if request.method == 'POST':
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"])
+            uid = AccountModel.getUID(session["username"][1:])
             
 
 
