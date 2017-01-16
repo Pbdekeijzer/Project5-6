@@ -11,7 +11,7 @@ $(document).ready(function(){
 			if (adminbool == 1){ 													//notify user he is an admin
 				$("#UserLoggedInNotification").append(" <br> You are an admin!"  );
 				$('#NavbarAtTop').append('<li><a href= "/adminpage" id="AdminNavbar">AdminFeatures</a></li>');
-				//TODO: append an admin link in the navbar
+
 			}
 
 
