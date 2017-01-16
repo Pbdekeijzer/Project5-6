@@ -33,7 +33,7 @@ $(document).ready(function(){
 
     function InsertProduct(json){
         $.ajax({
-            url: "http://localhost:5000/static/ProductPanel.html"
+            url: "http://localhost:5000/static/OrderedProductPanel.html"
         }).done(function(data){
             var container = $("#ordered_product");
             var template = Handlebars.compile(data);
