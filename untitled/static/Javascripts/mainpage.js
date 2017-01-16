@@ -1,5 +1,38 @@
+// remove this to different file
+function GetItemJson(id){
+    $.ajax({
+        url: "http://localhost:5000/items?id=" + String(id)
+    }).done(function(json){
+        json = JSON.stringify(json[0]);
+		AddToWishlist(json);
+    });
+};
+
+function RemoveFromWishlist(json){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/wishlist",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function AddToWishlist(json){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/wishlist",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function wishlist_onClick(id){
+	GetItemJson(id);
+}
+
 $(document).ready(function(){
 
+	console.log($(".wishlist-button"));
 
 	var audioElement = document.createElement('audio');
 	audioElement.setAttribute('src', 'http://localhost:5000/static/images/nodont.mp4');
@@ -28,7 +61,6 @@ $(document).ready(function(){
 	$("#FindTheAnimals").click(function(){
         filterItems();
     });
-
 
 
 	// function LogSlider(options) {
@@ -156,10 +188,6 @@ $(document).ready(function(){
 		});
 		filterItems();
     };
-
-    $("#CHECKthemALL").click(function(){
-        Check_all_boxes();
-    });
 
 	function filterItems(){
 		var conList = checkContinent();

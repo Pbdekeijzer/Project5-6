@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <link rel="stylesheet" type="text/css" href="http://localhost:5000/static/stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Javascripts/mainpage.js"></script>
+    <script type="text/javascript" src="http://localhost:5000/static/Javascripts/navbar.js"></script>
+    <script type="text/javascript" src="http://localhost:5000/static/Javascripts/cart.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Workframes/handlebars-v4.0.5.js"></script>
     <script type="text/javascript" src="http://localhost:5000/static/Javascripts/navbarattop.js"></script>
 
@@ -13,8 +14,10 @@
 <body style="margin: 0;">
     <nav>
         <ul id="NavbarAtTop">
+            <li class="filler"></li>
             <li><a href="http://localhost:5000">Home</a></li>
-            <li><a href="/wishlist">Wishlist</a></li>         
+            <li><a href="/wishlist">Wishlist</a></li>
+            <li><a href="/cart">Cart</a></li>        
         </ul>
     </nav>
    
@@ -24,26 +27,14 @@
         <div class="SearchBar text-center">        
         <form class="form-inline">
             <div class="navbardiv">
-            <br>
-            <b><h3><div id="UserLoggedInNotification"></div></h3></b>
-            <br>
+                <input type="text" id="search_input" class="form-control" size="25" placeholder="Product name"><!--<button id="searchbutton" type="button" id="FindTheAnimals">Search</button><br>-->
             </div>
-            <br>
-            <div class="navbardiv">
-            <input type="text" id="search_input" class="form-control" size="25" placeholder="Product name"><button id="searchbutton" type="button" id="FindTheAnimals">Search</button><br>
-                <!--<div data-role="rangeslider">
-                    <label for="price-min">Price:</label>
-                    <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
-                    <label for="price-max">Price:</label>
-                    <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
-                </div>-->
 
-            <br><br> <p style="font-size:10.5px" id="additionaloptions">Additional filter options</p>
-            </div>
+
 
             <div class="options">
-
-            <p id="classdroptext"><b> Class </b></p> 
+            <br><br>
+            <p id="classdroptext"> Class</p> 
             <select id="selectMenu">
                 <option value="1">All</option>
                 <option value="2">Mammal</option>  
@@ -52,10 +43,11 @@
                 <option value="5">Reptile</option>  
                 <option value="6">Bird</option>
                 <option value="7">Insect</option>  
-            </select><br>
+            </select>
 			
-
-            <p id="searchdroptext"><b> Price </b></p>
+                <br>
+                <br>
+            <p id="searchdroptext"> Price </p>
 			<select id="selectPrice" class="SearchDropDown">
                 <option value="1">Any Price</option>
                 <option value="2">0-100</option>
@@ -66,24 +58,23 @@
             </select>
 
             </div>
-
+            <br>
             <div class="navbardiv2">
-            <p id="checkboxtext"><b> Continents </b></p>
+            <p id="checkboxtext"> Continents </p>
             <div class="checkboxes">
-            <input type="checkbox" id="checkboxNA" name="cb" value="North America" checked> North America</input><br>
-            <input type="checkbox" id="checkboxSA" name="cb" value="South America" checked> South America</input><br>
-            <input type="checkbox" id="checkboxAUS" name="cb" value="Australia" checked> Australia</input><br>
-            <input type="checkbox" id="checkboxEU" name="cb" value="Europe" checked> Europe</input><br>
-            <input type="checkbox" id="checkboxASIA" name="cb" value="Asia" checked> Asia</input><br>
-            <input type="checkbox" id="checkboxAFR" name="cb" value="Africa" checked> Africa</input><br>
-            <input type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked> Antarctica</input>
+            <input class="check-form" type="checkbox" id="checkboxNA" name="cb" value="North America" checked> North America</input><br>
+            <input class="check-form" type="checkbox" id="checkboxSA" name="cb" value="South America" checked> South America</input><br>
+            <input class="check-form" type="checkbox" id="checkboxAUS" name="cb" value="Australia" checked> Australia</input><br>
+            <input class="check-form" type="checkbox" id="checkboxEU" name="cb" value="Europe" checked> Europe</input><br>
+            <input class="check-form" type="checkbox" id="checkboxASIA" name="cb" value="Asia" checked> Asia</input><br>
+            <input class="check-form" type="checkbox" id="checkboxAFR" name="cb" value="Africa" checked> Africa</input><br>
+            <input class="check-form" type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked> Antarctica</input>
             </div>
-
-            <button type="button" id="CHECKthemALL">Check all boxes</button>
             </div>
             
+            <br>
             <div class="navbardiv">
-            <p id="stockboxtext"><b> Stock </b></p>
+            <p id="checkboxtext">Stock </p>
             <div class="checkboxes">
             
             <input type="checkbox" id="checkboxOnlyStock" name="cbtest" value="In stock"> Only in stock</input>
@@ -104,10 +95,10 @@
 
     
   </div>
-    <br>
+    <!--<br>
     <footer id="footer"><b>        Copyright © Group 2</b></footer>
     <button type="button" id="test"> </button>
-    <br>
+    <br>-->
 
 
     <!--<script>

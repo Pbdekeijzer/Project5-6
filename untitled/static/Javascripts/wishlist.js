@@ -24,37 +24,15 @@ $(document).ready(function(){
 	
     // GET JSON from URL, call insert product.
     function GetJSONFromUrl(){
-        $.ajax({       
-            url: "http://localhost:5000/account/wishlist"   
+        var account = window.document.cookie.toString().split('=')[1];       
+        $.ajax({
+            url: "http://localhost:5000/" + account + "/wishlist"   
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);
         });     
-    };
-
-    if (window.document.cookie){
-    }
-    else{  
-        var timer = 4;     
-        $('#wishlist-redirect').text('You must be logged in to see the wishlist.'); 
-        $('#wishlist-redirection').text('Redirecting in ')
-        $('#redirect-timer').text(timer);
-
-
-        setInterval(function(){
-            timer -= 1;
-            $('#redirect-timer').text(timer);
-
-            if (timer == 0){
-                window.location.href = "/login";
-            }
-        }, 1000); 
-       
-     
+    }; 
         // setTimeout(function(){
         //     window.location.href = "/login";
         // }, 4000);          
-    }
-
-
 });

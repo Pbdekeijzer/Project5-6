@@ -4,6 +4,8 @@ from ItemModel import *
 from AccountModel import *
 from WishlistModel import *
 from StatisticsModel import *
+from FavouritesModel import *
+from HistoryModel import *
 import json
 
 
@@ -12,7 +14,6 @@ app.secret_key = 'coconuts'
 CORS(app)
 
 @app.route('/')
-
 def index():
     return render_template('index.html')
 
@@ -21,7 +22,7 @@ def wishlist():
     print(session)
     if request.method == 'POST':
         username = session["username"]
-        userid = WishlistModel.getUID(username)
+        userid = AccountModel.getUID(username)
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
         data.insertintoWistlist()
@@ -31,14 +32,83 @@ def wishlist():
         if AccountModel.checkifExists(session["username"]):
             return render_template('wishlist.html')
     return render_template('wishlist.html')
-    # return render_template('login.html')
+
+@app.route('/account/<username>', methods=['GET', 'POST'])
+def accountpanel(username):
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            uid = AccountModel.getUID(session["username"])
+            return render_template('user.html')
+        return "Account doesn't exist!"
+    return "You need to log in to view your settings!"
+
+@app.route('/account/<username>/history')
+def purchase_history(username):
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            user_id = AccountModel.getUID(session["username"])
+            historyModel = HistoryModel(user_id)
+            data = historyModel.get_order_history()
+            print(data)
+            data = [item.get_all_ordered_items() for item in data]
+            print (data)
+            return jsonify(data)
+
+
+@app.route('/<username>/wishlist')
+def userwishlist(username):
+    if "username" in session or not AccountModel.checkPrivacy(username):
+        uid = AccountModel.getUID(username)
+        items = WishlistModel.getWishListProductIDs(uid)
+        data = ItemModel.get_all_items()
+        data = filter(lambda x: x.id in items, data)
+        data = map(lambda x: x.toDict(), data)
+        data = list(data)
+        return jsonify(data)
+    return "no........"
+
+@app.route('/wishlist/<username>')
+def uwl(username):
+    if "username" in session and session["username"] == username:
+        return render_template('wishlist.html')
+    elif AccountModel.checkPrivacy(username):
+        return render_template('wishlist.html')
+    return ".."
 
 @app.route('/account/wishlist')
 def getaccountwishlist():
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = WishlistModel.getUID(session["username"])
+            uid = AccountModel.getUID(session["username"])
             items = WishlistModel.getWishListProductIDs(uid)
+            data = ItemModel.get_all_items()
+            data = filter(lambda x: x.id in items, data)
+            data = map(lambda x: x.toDict(), data)
+            data = list(data)
+            return jsonify(data)
+    return [], 400
+
+@app.route('/favourites', methods=['GET', 'POST'])
+def favourites():
+    print(session)
+    if request.method == 'POST':
+        username = session["username"]
+        userid = FavouritesModel.getUID(username)
+        itemid = request.get_json()['id']
+        data = FavouritesModel(userid, itemid)
+        data.insertintoFavourites()
+        return "Succes", 200
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            return render_template('favourites.html')
+    return render_template('favourites.html')
+
+@app.route('/account/favourites')
+def getAccountFavourites():
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            uid = FavouritesModel.getUID(session["username"])
+            items = FavouritesModel.getFavouritesProductIDs(uid)
             data = ItemModel.get_all_items()
             data = filter(lambda x: x.id in items, data)
             data = map(lambda x: x.toDict(), data)
@@ -50,19 +120,26 @@ def getaccountwishlist():
 def productsdetail(id):
     return render_template('products.html')
 
+@app.route('/cart', methods=['GET', 'POST'])
+def cart():
+    if request.method == 'POST':
+        if AccountModel.checkifExists(session["username"]):
+            uid = AccountModel.getUID(session["username"])
+            
+
+
+    return render_template('cart.html')
 
 @app.route('/register', methods=['GET', 'POST'])
-def register():
-    
-    print('shit: ' + request.method)
+def register():  
     if request.method == 'POST':
         username = request.form['username'] 
         password = request.form['password']
         email = request.form['email']
         postal_code = request.form['postal_code']
         house_number = request.form['house_number']
-        account = AccountModel(username, password, email, postal_code, house_number)
-        result = AccountModel.insertAccount(account)
+        account = AccountModel(username = username, password = password, email = email, postal_code = postal_code, house_number = house_number)
+        result = account.insertAccount()
         if result:
             return "Succes"
         return "Failed"
@@ -70,8 +147,6 @@ def register():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-    print(request.method)
-
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -79,8 +154,6 @@ def login():
         if result:          
             session["username"] = username
             session.permanent = True
-            print("hoi ")
-            #return redirect(url_for('index'))
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
             #Adding data to the cookie
@@ -129,7 +202,6 @@ def stats():
 
     return "401", 401
 
-# junk
 @app.route('/accounts')
 def accounts():
     username = request.args.get('username')
@@ -140,7 +212,14 @@ def accounts():
     accounts = map(lambda x: x.toDict(), accounts)
     accounts = list(accounts)
     return jsonify(accounts)
-# end junk
+
+@app.route('/change_settings', methods = ['GET', 'POST'])
+def change_settings():
+    if "username" in session:
+        if AccountModel.checkifExists(session["username"]):
+            if request.method == 'POST':
+                AccountModel.updatePrivacy(session["username"])
+            return str(AccountModel.checkPrivacy(session["username"]))
 
 @app.route('/logout')
 def logout():
@@ -151,12 +230,8 @@ def logout():
     return response
 
 @app.route('/items')
-
 def items():
-
     items = ItemModel.get_all_items()
-    # items = WishlistModel.get_allWishlistItems()
-
     id = request.args.get("id")
     name = request.args.get("name")
     min = request.args.get("min")

@@ -33,11 +33,11 @@ class MySQLdatabase:
         MySQLdatabase.DatabaseConnection.close()
 
     @staticmethod
-    def UpdateQuery(UPDATE, SET, WHERE):
+    def UpdateQuery(query):
         MySQLdatabase.DatabaseConnection._open_connection()
         cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("UPDATE "+UPDATE+" SET "+SET+" WHERE "+WHERE))
+        cursor.execute(query)
         #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
         MySQLdatabase.DatabaseConnection.commit()
         cursor.close()
