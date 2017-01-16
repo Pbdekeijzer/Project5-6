@@ -370,3 +370,9 @@ td{
   padding: 5px;
   margin: 5px;
 }
+
+#NotFoundAlert{
+    width: auto;
+    display: inline-block;
+    padding: 3px
+}

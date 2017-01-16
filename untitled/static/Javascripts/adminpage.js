@@ -2,8 +2,6 @@ $(document).ready(function() {
     //Dynamic css
     var sidenavwidth = $("#sidenav").width();
     $('#table').css("margin-left", sidenavwidth + 20 + "px");
-    var tableHeight = $("#table").height();
-    $('.inputAtAdminpage').css("margin-top", tableHeight + 20 + "px");
     $('#NotFoundAlert').hide();
 
     //Fill the table
@@ -35,8 +33,7 @@ $(document).ready(function() {
             datatype: 'json'
         }).done(function (data) {
             if (data.username == "Username is not found"){
-                $('#NotFoundAlert').show();
-                $('#NotFoundAlert').delay(3500).hide(1000);
+                ShowAlert('Could not find this user', 'lightcoral')
             }
             else{
                 $("#Username").val(data.username);
@@ -46,11 +43,24 @@ $(document).ready(function() {
                 $("#House_Number").val(data.house_number);
                 $("#Admin_Bool").val(data.adminbool);
                 $("#Privacy_Wishlist").val(data.privacywishlist);
+                ShowAlert('Succesfully found the user', 'lightgreen')
             }
         });
 
 
     });
+
+
+    //pops up a div with a text and color background
+    function ShowAlert(text, color){
+        $('#NotFoundAlert').empty();
+        $('#NotFoundAlert').text(text);
+        $('#NotFoundAlert').css('background-color', color);
+        $('#NotFoundAlert').show();
+        $('#NotFoundAlert').delay(3500).hide(1000);
+    }
+
+
 
 });
 

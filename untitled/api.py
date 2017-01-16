@@ -170,7 +170,6 @@ def AdminPageGetUsers():
 @app.route('/GetOneUser')
 def GetOneUser():
     TheUser = request.args.get("username")
-    print("\n\n\n"+TheUser+"\n\n\n\n")
     TheUser = AccountModel.getOneUser(TheUser)
     if type(TheUser) is AccountModel:
         return jsonify(TheUser.toDict())
