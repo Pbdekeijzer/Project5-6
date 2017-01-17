@@ -17,6 +17,16 @@ $(document).ready(function()
     $.ajax({
       url: "http://localhost:5000/items"
     }).done(function(data){
+      data.sort(function(a,b){
+        if(a.name < b.name){
+          return -1;
+        }
+        if(a.name > b.name){
+          return 1;
+        }
+        return 0;
+      });
+
       for(var i in data){
         $("#Items").append("<option value='" + data[i].id + "'>" + data[i].name + "</option>");
       }
@@ -100,7 +110,7 @@ $(document).ready(function()
 
   })
 
-  
+
   $("#WishlistButton").click(function(e){
     var maxItems = 10;
     $.ajax({
