@@ -29,6 +29,8 @@ class AccountModel():
     
     @staticmethod
     def getUID(username):
+        if username[0] == '"':
+            username = username[1:]
         query = "SELECT User_ID FROM User_ WHERE User_Name = '{0}'".format(str(username))
         print("in uid")
         result =  MySQLdatabase.ExecuteQuery(query)

@@ -55,7 +55,7 @@ def purchase_history(username):
 @app.route('/<username>/wishlist')
 def userwishlist(username):
     if "username" in session or not AccountModel.checkPrivacy(username):
-        uid = AccountModel.getUID(username[1:])
+        uid = AccountModel.getUID(username)
         items = WishlistModel.getWishListProductIDs(uid)
         data = ItemModel.get_all_items()
         data = filter(lambda x: x.id in items, data)
