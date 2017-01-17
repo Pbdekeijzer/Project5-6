@@ -51,11 +51,5 @@ $(document).ready(function()
 
     $("logOutButton").click(logOut);
 
-    if (window.document.cookie){
-        $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
-    }
-    else{
-        $('#NavbarAtTop').append('<li><a href="/login" id="LoginNavbar">Login</a></li>');
-        $('#NavbarAtTop').append('<li><a id="registershit" href="/register">Register</a></li>');
-    }
+
 });

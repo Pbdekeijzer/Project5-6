@@ -1,7 +1,8 @@
 import json
-from flask import jsonify
 import os
+
 import mysql.connector
+from flask import jsonify
 
 
 class MySQLdatabase:
@@ -14,7 +15,7 @@ class MySQLdatabase:
         MySQLdatabase.DatabaseConnection._open_connection()
         cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("INSERT INTO "+INSERT_INTO+"VALUES "+VALUES))
+        cursor.execute(("INSERT INTO "+INSERT_INTO+" VALUES "+VALUES))
         #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
         MySQLdatabase.DatabaseConnection.commit()
         cursor.close()
@@ -44,15 +45,16 @@ class MySQLdatabase:
 
     @staticmethod
     def SelectQuery(SELECT, FROM, WHERE):
-        MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
+        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
+        DatabaseConnection._open_connection()
+        cursor = DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("SELECT "+SELECT+"FROM "+FROM+"WHERE "+WHERE))
+        cursor.execute(("SELECT "+SELECT+" FROM "+FROM+" WHERE "+WHERE))
         resultquery = cursor.fetchall()  
 
-        MySQLdatabase.DatabaseConnection.commit()
+        DatabaseConnection.commit()
         cursor.close()
-        MySQLdatabase.DatabaseConnection.close()
+        DatabaseConnection.close()
         
         return resultquery
 
@@ -84,7 +86,7 @@ class MySQLdatabase:
         DatabaseConnection._open_connection()
         cursor = DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute(("SELECT "+SELECT+"FROM "+FROM))
+        cursor.execute(("SELECT "+SELECT+" FROM "+FROM))
         resultquery = cursor.fetchall()  
 
         DatabaseConnection.commit()

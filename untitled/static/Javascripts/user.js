@@ -5,7 +5,9 @@ function updatePrivacy(username){
 }
 
 function privacy_OnClick(){
-    updatePrivacy(username)
+    var username = window.document.cookie.toString().split('=')[1];
+    updatePrivacy(username);
+    console.log(localStorage.getItem('cart'));
 }
 
 

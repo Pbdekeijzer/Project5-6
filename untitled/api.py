@@ -3,8 +3,10 @@ from flask_cors import CORS, cross_origin
 from ItemModel import *
 from AccountModel import *
 from WishlistModel import *
+from StatisticsModel import *
 from FavouritesModel import *
 from HistoryModel import *
+from OrderItemModel import *
 import json
 
 
@@ -36,7 +38,6 @@ def wishlist():
 def accountpanel(username):
     if "username" in session:
         if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"])
             return render_template('user.html')
         return "Account doesn't exist!"
     return "You need to log in to view your settings!"
@@ -48,9 +49,7 @@ def purchase_history(username):
             user_id = AccountModel.getUID(session["username"])
             historyModel = HistoryModel(user_id)
             data = historyModel.get_order_history()
-            print(data)
             data = [item.get_all_ordered_items() for item in data]
-            print (data)
             return jsonify(data)
 
 
@@ -68,8 +67,11 @@ def userwishlist(username):
 
 @app.route('/wishlist/<username>')
 def uwl(username):
-    if AccountModel.checkifExists(session["username"]):
+    if "username" in session and session["username"] == username:
         return render_template('wishlist.html')
+    elif AccountModel.checkPrivacy(username):
+        return render_template('wishlist.html')
+    return ".."
 
 @app.route('/account/wishlist')
 def getaccountwishlist():
@@ -116,6 +118,32 @@ def getAccountFavourites():
 def productsdetail(id):
     return render_template('products.html')
 
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
+
+@app.route('/order', methods=['GET', 'POST'])
+def order():
+    if request.method == 'POST':
+        print("lol")
+        if AccountModel.checkifExists(session["username"]):
+            uid = AccountModel.getUID(session["username"])
+            HistoryModel.insertOrder(uid)
+            order_id = HistoryModel.getlastOrder()
+            orderArray = request.json
+            for i in orderArray:
+                print(i)
+                item_id = i[0]
+                item_name = i[1]
+                item_price = i[2]
+                item_quantity = i[3]
+                print(item_id)
+                print(item_name)
+                print(item_price)
+                print(item_quantity)
+                orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
+                OrderItemModel.AddOrderItem(orderItem)       
+    return "Succes"
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():  
@@ -143,7 +171,13 @@ def login():
             session.permanent = True
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
-            response.set_cookie('user', username)            
+            #Adding data to the cookie
+            query = "select Adminbool from User_ where User_Name = '{0}'".format(str(username))
+            adminbool = MySQLdatabase.ExecuteQuery(query)
+            adminbool = adminbool[0]
+            response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
+            
+
             return response
         return "401", 401 
     return render_template('login.html')
@@ -151,7 +185,38 @@ def login():
 @app.route('/panda')
 def panda():
     return render_template('404.html')
+
+@app.route('/graph')
+def graph():
+    return render_template("graph.html")
+
+@app.route('/stats')
+def stats():
+    year = request.args.get("year")
+    month = request.args.get("month")
+    itemid = request.args.get("id")
+    MaxWishlist = request.args.get("MaxWishlistItems")
+
+    if month == None and year != None and itemid != None:
+        results = StatisticsModel.get_sales_per_month(itemid, year)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
+
+    if month != None and year != None and itemid != None:
+        results = StatisticsModel.get_sales_per_day(itemid, month, year)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
     
+    if MaxWishlist != None:
+        results = WishlistStats.getMostWishedItems(MaxWishlist)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
+
+    return "401", 401
+
 @app.route('/accounts')
 def accounts():
     username = request.args.get('username')
@@ -171,7 +236,6 @@ def change_settings():
                 AccountModel.updatePrivacy(session["username"])
             return str(AccountModel.checkPrivacy(session["username"]))
 
-
 @app.route('/logout')
 def logout():
     session.clear()
@@ -181,7 +245,6 @@ def logout():
     return response
 
 @app.route('/items')
-
 def items():
     items = ItemModel.get_all_items()
     id = request.args.get("id")
@@ -213,6 +276,28 @@ def items():
     items = map(lambda x: x.toDict(), items)
     items = list(items)
     return jsonify(items)
+
+@app.route('/adminpage')
+def adminpage():
+    return render_template('adminpage.html')
+
+@app.route('/AdminPageGetUsers', methods = ['GET', 'POST'])
+def AdminPageGetUsers():
+    if request.method == 'GET':
+        allUsers = AccountModel.getAllUsers()
+        allUsers = map(lambda x: x.toDict(), allUsers)
+        allUsers = list(allUsers)
+        return jsonify(allUsers)
+
+@app.route('/GetOneUser')
+def GetOneUser():
+    TheUser = request.args.get("username")
+    TheUser = AccountModel.getOneUser(TheUser)
+    if type(TheUser) is AccountModel:
+        return jsonify(TheUser.toDict())
+    else:
+        return jsonify({"username" : "Username is not found"})
+
 
 if __name__ == '__main__':
     app.run(threaded=True, host="localhost")
