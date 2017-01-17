@@ -569,7 +569,7 @@ input:checked + .slider:before {
   display: block;
   overflow-y: auto;
   max-width: 65%;
-  max-height: 55%;
+  max-height: 610px;
   float: right;
 }
 
@@ -589,6 +589,7 @@ td{
   padding: 2px;
   text-anchor: start;
   margin-top: 10px !important;
+  margin-left: 5px; !important;
 }
 
 .buttonAtAdminpage{
