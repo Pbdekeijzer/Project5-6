@@ -12,6 +12,8 @@ $(document).ready(function()
 				$('#NavbarAtTop').append('<li><a href= "/adminpage" id="AdminNavbar">AdminFeatures</a></li>');
 
 			}
+		$('#NavbarAtTop').append('<li><a href="/wishlist">Wishlist</a></li>');
+        $('#NavbarAtTop').append('<li><a href="/favourites">Favourites</a></li>');
         $('#NavbarAtTop').append('<li><a href= ' + account_url +  ' id="Account">' + username + '</a></li>');
         $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
         $('#LogoutNavbar').click(function(){

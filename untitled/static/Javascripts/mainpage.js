@@ -34,14 +34,14 @@ $(document).ready(function(){
 
 	console.log($(".wishlist-button"));
 
-	var audioElement = document.createElement('audio');
+	/*var audioElement = document.createElement('audio');
 	audioElement.setAttribute('src', 'http://localhost:5000/static/images/nodont.mp4');
 
 	$.get();
 
 	audioElement.addEventListener("load", function() {
 		audioElement.play();
-	}, true);
+	}, true);*/
 
 
 	//Catches a keypress of enter at the search box and calls the search function
