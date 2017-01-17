@@ -39,9 +39,9 @@ td{
 #NotFoundAlert{
     width: auto;
     display: inline-block;
-    padding: 3px
+    padding: 3px;
 }
 
 .tableRow {
-    cursor: pointer
+    cursor: pointer;
 }

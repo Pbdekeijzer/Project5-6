@@ -259,6 +259,8 @@ def items():
     items = list(items)
     return jsonify(items)
 
+
+#Admin AJAX
 @app.route('/adminpage')
 def adminpage():
     return render_template('adminpage.html')
@@ -279,6 +281,29 @@ def GetOneUser():
         return jsonify(TheUser.toDict())
     else:
         return jsonify({"username" : "Username is not found"})
+
+@app.route('/UpdateOneUser')
+def UpdateOneUser():
+    query = "UPDATE User_ SET Wachtwoord = '{w8woord}', Email_address = '{mail}', Postal_code = '{pcode}'," \
+            " House_number = {houseno}, Adminbool = {adminbool}, Privacy_wishlist = {secretwish} " \
+            "where User_Name = '{gamertag}'".format(w8woord = request.args.get("passw"
+            "ord"), mail = request.args.get("email"), pcode = request.args.get("postalcod"
+            "e"), houseno = request.args.get("housenumber"), adminbool = request.args.get("adminbo"
+            "ol") , secretwish = request.args.get("privacywishlist"), gamertag = request.args.get("username"));
+    result = MySQLdatabase.UpdateQuery(query)
+    if result == True:
+        return jsonify({"CommitSuccess":"User is successfully updated"})
+    else:
+        return jsonify({"CommitSuccess":"User not updated, are all the fields correct?"})
+
+@app.route('/DeleteOneUser')
+def DeleteOneUser():
+    query = "DELETE FROM User_ WHERE User_Name = '{username}'".format(username = request.args.get("username"))
+    result = MySQLdatabase.UpdateQuery(query)
+    if result == True:
+        return jsonify({"CommitSuccess": "User is successfully deleted"})
+    else:
+        return jsonify({"CommitSuccess": "User not deleted, is the username correct?"})
 
 
 if __name__ == '__main__':
