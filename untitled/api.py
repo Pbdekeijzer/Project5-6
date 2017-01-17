@@ -91,7 +91,7 @@ def favourites():
     print(session)
     if request.method == 'POST':
         username = session["username"]
-        userid = FavouritesModel.getUID(username[1:])
+        userid = FavouritesModel.getUID(username)
         itemid = request.get_json()['id']
         data = FavouritesModel(userid, itemid)
         data.insertintoFavourites()
