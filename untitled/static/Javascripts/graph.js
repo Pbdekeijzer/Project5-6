@@ -75,6 +75,32 @@ $(document).ready(function()
     }
 
   })
+
+  $("#Turnover").click(function(e){
+    var month = $("#MonthMenu option:selected").text();
+    var monthval = $("#MonthMenu option:selected").val();
+    var year = $("#Years option:selected").text();
+
+    if(ShowingYear){
+      $.ajax({
+        url: "http://localhost:5000/stats?turnover=true&year=" + year
+      }).done(function(data){
+        var title = "Turnover in " + year;
+        BuildGraph(title ,data, true);
+      });
+    }
+    else{
+      $.ajax({
+        url: "http://localhost:5000/stats?turnover=true&year=" + year + "&month=" + monthval
+      }).done(function(data){
+        var title = "Turnover in " + month + " of " + year;
+        BuildGraph(title ,data, false);
+      });
+    }
+
+  })
+
+  
   $("#WishlistButton").click(function(e){
     var maxItems = 10;
     $.ajax({
