@@ -6,7 +6,7 @@
 }
 
 #NavbarAtTop{
-  display: flex; 
+  display: flex;
 }
 
 #NavbarAtTop .filler{
@@ -17,12 +17,6 @@ nav li{
   flex: 0 1 auto;
   padding-left: 30px;
   padding-right: 30px;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  overflow: auto;
 }
 
 nav{
@@ -51,13 +45,13 @@ nav a{
 #checkboxMustbeinstockbool{
   float: right;
   text-align: right;
-  
+
 }
 /*TODO: the box doesnt align yet*/
 
 nav a:hover{
     color: #FE980F;
-    /*font-size: 600;*/
+    font-size: 600;
 }
 
 @media screen and (min-width: 800px){
@@ -152,7 +146,7 @@ nav a:hover{
 #selectPrice{
   width: 100%;
   padding-top: 3px;
-  padding-bottom: 3px;    
+  padding-bottom: 3px;
 }
 
 body {
@@ -306,7 +300,7 @@ article .product-buttons button{
   margin-right: 5px;
   background-color: rgba(254, 152, 15, 0.67)
 }
- 
+
 article .product-image p {
   display: block;
   position: absolute;
@@ -368,7 +362,7 @@ article img{
 }
 
 #loginstuff{
-  margin:auto; 
+  margin:auto;
   padding: 10px;
   text-align: center;
   width: 100%;
@@ -390,64 +384,64 @@ article img{
 
 #regfieldset{
   width: 30%;
-  margin:auto;  
-  padding: 10px; 
-  text-align: center; 
+  margin:auto;
+  padding: 10px;
+  text-align: center;
 }
 
 #logfieldset{
   width: 30%;
   height: 30%;
-  margin:auto;  
-  padding: 10px; 
-  text-align: center; 
+  margin:auto;
+  padding: 10px;
+  text-align: center;
 }
 
-#loginusername{ 
-  width: 40%; 
-  height: 20px; 
-} 
- 
-#loginpassword{ 
-  width: 40%; 
-  height: 20px; 
+#loginusername{
+  width: 40%;
+  height: 20px;
+}
+
+#loginpassword{
+  width: 40%;
+  height: 20px;
 }
 
 #username{
-  width: 40%; 
-  height: 20px; 
+  width: 40%;
+  height: 20px;
 }
 
 #password{
-  width: 40%; 
-  height: 20px; 
+  width: 40%;
+  height: 20px;
 }
 
 #postal_code{
-  width: 40%; 
-  height: 20px; 
+  width: 40%;
+  height: 20px;
 }
 
 #house_number{
-  width: 40%; 
-  height: 20px; 
+  width: 40%;
+  height: 20px;
 }
 
 #email{
-  width: 40%; 
-  height: 20px; 
+  width: 40%;
+  height: 20px;
 }
 
 #confirmpassword{
-  width: 40%; 
-  height: 20px; 
+  width: 40%;
+  height: 20px;
 }
 
 #UserLoggedInNotification{
   align-content: center;
 
   margin-left: 10%;
-  margin-right: 10%;
+  margin-right: 10%
 }
 
 .navbardiv{
