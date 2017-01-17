@@ -75,6 +75,8 @@ class AccountModel():
 
     @staticmethod
     def checkPrivacy(username):
+        if username[0] == '"':
+            username = username[1:]
         query = "SELECT Privacy_wishlist FROM User_ WHERE '{0}' = User_Name".format(str(username))
         result = MySQLdatabase.ExecuteQuery(query)
         print(result[0][1])
