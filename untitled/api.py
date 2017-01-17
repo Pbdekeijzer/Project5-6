@@ -6,6 +6,7 @@ from WishlistModel import *
 from StatisticsModel import *
 from FavouritesModel import *
 from HistoryModel import *
+from OrderItemModel import *
 import json
 
 
@@ -117,15 +118,32 @@ def getAccountFavourites():
 def productsdetail(id):
     return render_template('products.html')
 
-@app.route('/cart', methods=['GET', 'POST'])
+@app.route('/cart')
 def cart():
+    return render_template('cart.html')
+
+@app.route('/order', methods=['GET', 'POST'])
+def order():
     if request.method == 'POST':
+        print("lol")
         if AccountModel.checkifExists(session["username"]):
             uid = AccountModel.getUID(session["username"])
-            
-
-
-    return render_template('cart.html')
+            HistoryModel.insertOrder(uid)
+            order_id = HistoryModel.getlastOrder()
+            orderArray = request.json
+            for i in orderArray:
+                print(i)
+                item_id = i[0]
+                item_name = i[1]
+                item_price = i[2]
+                item_quantity = i[3]
+                print(item_id)
+                print(item_name)
+                print(item_price)
+                print(item_quantity)
+                orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
+                OrderItemModel.AddOrderItem(orderItem)       
+    return "Succes"
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():  

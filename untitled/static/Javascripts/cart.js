@@ -1,5 +1,3 @@
-////////////////////////////////////////////////////////////////
-
 var cart = [];
 
 //not used
@@ -82,13 +80,53 @@ function deleteItem(index){
    
     saveCart(cart);
     showCart();
+}
 
+function OrderAjax(){
+    var cart = [];
+    var orderItems = [];
+    cart = JSON.parse(localStorage.cart);
+
+    for (var i in cart) {
+        var item = cart[i];
+        var itemDetails = [item.ID, item.Name, item.Price, item.Quantity]; //item.ID, item.Name, item.Price, item.Quantity
+        // itemDetails.push(item.ID, item.N);
+        console.log(item.ID);
+        orderItems.push(itemDetails);
+    }
+
+    console.log(JSON.stringify({lol : orderItems}));
+    
+    $.ajax({
+        url: "http://localhost:5000/order", // the endpoint
+        type: "POST", // http method
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(orderItems), // data sent with the post request
+        // handle a successful response
+        success: function (json) {
+            $('#post-text').val(''); // remove the value from the input
+            console.log(json); // log the returned json to the console
+            console.log("success"); // another sanity check
+        },
+
+        // handle a non-successful response
+        error: function (xhr, errmsg, err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
 }
 
 function Order(){
     if (window.document.cookie){
-        var cart = [];
-        saveCart(cart);
+        if (window.localStorage)
+	    {
+            OrderAjax();
+            var cart = [];
+		    localStorage.setItem('cart', JSON.stringify(cart));
+	    }
         showCart();
      }
     else{
@@ -125,7 +163,7 @@ function showCart() {
 
 $(document).ready(function()
 {
-    showCart();
+    if (document.location.pathname.indexOf("/cart/")) {
+        showCart();
+    } 
 });
-
-

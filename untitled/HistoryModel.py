@@ -23,6 +23,20 @@ class HistoryModel:
                         item.add(i[2])
         return orders
 
+    @staticmethod
+    def insertOrder(uid):
+        query = "INSERT INTO Order_(Related_to_person) VALUES ('{0}')".format(int(uid))
+        MySQLdatabase.ExecuteInsertQuery(query)
+        return True
+
+    @staticmethod
+    def getlastOrder():
+        query = "SELECT * FROM Order_ order by Order_ID desc limit 1"
+        result = MySQLdatabase.ExecuteQuery(query)
+        print (result[0][0])
+        return result[0][0]
+
+
 # example
 
 # n = [(1,1), (1,2), (2,3)]
