@@ -4,6 +4,61 @@ import os
 from MySQLdatabase import *
 from calendar import monthrange
 
+class TurnoverStats():
+    def __init__(self, amount, date):
+        self.amount = amount
+        self.date = date
+
+    @staticmethod
+    def getTurnover(year, month):
+        query = ""
+        maxDate = 0
+        if month != None:
+            query = r"""select sum(Z.Total), day(Z.Date) as NewDate from
+            (select X.Date, X.amount * X.Price as Total from 
+            (Select O.Date, O.Amount, BI.Price from 
+            (select O.Order_ID, O.Related_to_person, Date(O.Time_of_order_placed) as Date, OBI.Amount, OBI.Product_ID from Order_ as O join Order_Buyable_item_ as OBI on O.Order_ID = OBI.Order_ID) as O join
+            Buyable_item_ as BI on O.Product_ID=BI.Product_ID) as X
+            group by X.Date, X.Price) as Z
+            where Year(Z.Date) = {0} and month(Z.Date) = {1}
+            group by NewDate order by NewDate"""
+            query = query.format(year, month)
+            maxDate = monthrange(int(year), int(month))[1]
+        
+        else:            
+            query = r"""select sum(Z.Total), month(Z.Date) as NewDate from
+            (select X.Date, X.amount * X.Price as Total from 
+            (Select O.Date, O.Amount, BI.Price from 
+            (select O.Order_ID, O.Related_to_person, Date(O.Time_of_order_placed) as Date, OBI.Amount, OBI.Product_ID from Order_ as O join Order_Buyable_item_ as OBI on O.Order_ID = OBI.Order_ID) as O join
+            Buyable_item_ as BI on O.Product_ID=BI.Product_ID) as X
+            group by X.Date, X.Price) as Z
+            where Year(Z.Date) = {0}
+            group by NewDate order by NewDate"""
+            query = query.format(year)
+            maxDate = 12
+        
+        result = MySQLdatabase.ExecuteQuery(query)
+        lst = []
+        lastdate = 0
+        for i in result:
+            while(int(i[1]) > lastdate + 1):
+                lst.append(TurnoverStats(0, lastdate + 1))
+                lastdate += 1
+            lst.append(TurnoverStats(int(i[0]), int(i[1])))
+            lastdate = int(i[1])
+        
+        while lastdate < maxDate:
+            lst.append(TurnoverStats(0, lastdate + 1))
+            lastdate += 1
+
+        return lst
+
+    def toDict(self):
+        return {
+            "xAxis":self.date,
+            "amount":self.amount
+        }
+
 class WishlistStats():
     def __init__(self, id, name, amount):
         self.id = id
