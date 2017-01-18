@@ -42,15 +42,22 @@ $(document).ready(function(){
 
 		    for(var i in json)
 		    {
-		        var html = "<div class='container1' height='500px' style='color:#0000FF' offset-left-330>"
+		        var html = "<div class='OrderHistoryContainers' height='500px' style='background-color:#FCFCFC; offset-left-330; border:1px solid black; border-radius:50px; padding-left:20%;'>"
 		        for (var j in json[i])
 		        {
 			        for (var x in json[i][j])
 			        {
-			            var context = {title: json[i][j][x].name, body: json[i][j][x].description,
-			                           image: json[i][j][x].image, id: json[i][j][x].id,
-			                           continent: json[i][j][x].continent, classification: json[i][j][x].class,
-			                           price: json[i][j][x].price
+//			            var context = {title: json[i][j][x].name, body: json[i][j][x].description,
+//			                           image: json[i][j][x].image, id: json[i][j][x].id,
+//			                           continent: json[i][j][x].continent, classification: json[i][j][x].class,
+//			                           price: json[i][j][x].price
+//			                          };
+
+			            var context = {title: json[i][j][x].title,
+			                           image: json[i][j][x].image_route,
+			                           id: json[i][j][x].product_id,
+			                           price: json[i][j][x].price,
+			                           amount: json[i][j][x].amount
 			                          };
 			            html += template(context);
 			        }
