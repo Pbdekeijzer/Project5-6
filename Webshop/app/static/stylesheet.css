@@ -639,8 +639,6 @@ td{
     -webkit-animation-duration: 0.6s; 
     animation-name: slideIn; 
     animation-duration: 0.6s; 
-    overflow: visible; 
-    z-index:-1 
  
 } 
  
@@ -663,9 +661,7 @@ td{
     padding: 2px 16px; 
     background-color: white; 
     color: black; 
-    border: 2px solid #a1a1a1; 
-    overflow: visible; 
-    z-index:-1 
+    border: 2px solid #a1a1a1;  
 } 
  
 /* Add Animation */ 
