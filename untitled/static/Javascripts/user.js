@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 		    for(var i in json)
 		    {
-		        var html = "<div class='container1' height='500px' style='background-color:#FCFCFC; offset-left-330; border:1px solid black; border-radius:50px; padding-left:20%;'>"
+		        var html = "<div class='OrderHistoryContainers' height='500px' style='background-color:#FCFCFC; offset-left-330; border:1px solid black; border-radius:50px; padding-left:20%;'>"
 		        for (var j in json[i])
 		        {
 			        for (var x in json[i][j])
