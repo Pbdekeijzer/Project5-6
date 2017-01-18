@@ -4,23 +4,18 @@ import os
 from MySQLdatabase import *
 
 class OrderItemModel():
-    #product_id, title, price, image_route, amount
-    def __init__(self, product_id, title, price, image_route, amount, order_id = None, favourited = 0):
-        self.product_id = product_id
-        self.title = title
-        self.price = price
-        self.image_route = image_route
-        self.amount = amount
+    def __init__(self, order_id, product_id, amount = 0, favourited = 0):
         self.order_id = order_id
+        self.product_id = product_id
+        self.amount = amount
         self.favourited = favourited
 
     def toDict(self):
         return {
+            "order_id" : self.order_id,
             "product_id" : self.product_id,
-            "title" : self.title,
-            "price" : self.price,
-            "image_route" : self.image_route,
-            "amount" : self.amount
+            "amount" : self.amount,
+            "favourited" : self.favourited
         }
 
     def AddOrderItem(self):
