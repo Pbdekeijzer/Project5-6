@@ -2,7 +2,9 @@ from flask import Blueprint, request, make_response, jsonify, render_template, s
 from app.auth.authenticate import *
 from app.models.AccountModel import *
 from app.MySQLdatabase import *
+from flask import current_app as app
 import json
+
 
 auth = Blueprint('Auth', __name__, template_folder="templates", static_folder="static")
 
@@ -15,7 +17,7 @@ def login():
         if result:          
             session["username"] = username
             session.permanent = True
-            redirect_to_index = redirect(url_for('index'))
+            redirect_to_index = redirect(url_for('Requests.index'))
             response = app.make_response(redirect_to_index)
             """TODO: Refactor this."""
             query = "select Adminbool from User_ where User_Name = '{0}'".format(str(username))
@@ -29,7 +31,7 @@ def login():
 @auth.route('/logout')
 def logout():
     session.clear()
-    redirect_to_index = redirect(url_for('index'))
+    redirect_to_index = redirect(url_for('Requests.index'))
     response = app.make_response(redirect_to_index)
     response.set_cookie('user', '', expires=0)
     return response
