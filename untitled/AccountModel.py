@@ -46,7 +46,13 @@ class AccountModel():
         except IndexError:
             return "Name is not found"
 
-
+    @staticmethod
+    def isAdmin(username):
+        query = "SELECT Adminbool FROM User_ WHERE '{username}' = User_Name".format(username = str(username))
+        print(query)
+        result = MySQLdatabase.ExecuteQuery(query)
+        print(result)
+        return result[0][0] == 1
 
     @staticmethod
     def getAllUsers():

@@ -9,7 +9,7 @@ $(document).ready(function()
         $("#UserLoggedInNotification").text("Logged in as: " + username);
         if (adminbool == 1){ 													//notify user he is an admin
 				$("#UserLoggedInNotification").append(" <br> You are an admin!"  );
-				$('#NavbarAtTop').append('<li><a href= "/adminpage" id="AdminNavbar">AdminFeatures</a></li>');
+				$('#NavbarAtTop').append('<li><a href= "/adminpage" id="AdminNavbar">Admin</a></li>');
 
 			}
 		$('#NavbarAtTop').append('<li><a href="/wishlist">Wishlist</a></li>');

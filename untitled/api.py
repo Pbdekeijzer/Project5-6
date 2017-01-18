@@ -7,6 +7,7 @@ from StatisticsModel import *
 from FavouritesModel import *
 from HistoryModel import *
 from OrderItemModel import *
+from functools import wraps
 import json
 
 
@@ -14,56 +15,70 @@ app = Flask(__name__)
 app.secret_key = 'coconuts'
 CORS(app)
 
+def authenticate_user(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if "username" in session and AccountModel.checkifExists(session["username"]):
+            user_name = session["username"]
+            user_id = AccountModel.getUID(user_name)
+            return func(user_id, *args, **kwargs)
+        """TODO: If an user is blocked we should render a blocked page."""
+        return render_template('login.html')
+    return wrapper
+
+def authenticate_admin(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if "username" in session:
+            user_name = session["username"]
+            if AccountModel.checkifExists(user_name) and AccountModel.isAdmin(user_name):
+                return func(*args, **kwargs)
+            return "Account has no admin rights", 200
+        return render_template('login.html')
+    return wrapper
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/wishlist', methods=['GET', 'POST'])
-def wishlist():
+@authenticate_user
+def wishlist(userid):
     print(session)
     if request.method == 'POST':
-        username = session["username"]
-        userid = AccountModel.getUID(username)
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
         data.insertintoWistlist()
-
         return "Succes", 200
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            return render_template('wishlist.html')
     return render_template('wishlist.html')
 
 @app.route('/account/<username>', methods=['GET', 'POST'])
-def accountpanel(username):
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            return render_template('user.html')
-        return "Account doesn't exist!"
-    return "You need to log in to view your settings!"
-
+@authenticate_user
+def accountpanel(userid, username):
+    return render_template('user.html')
+        
 @app.route('/account/<username>/history')
-def purchase_history(username):
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            user_id = AccountModel.getUID(session["username"])
-            historyModel = HistoryModel(user_id)
-            data = historyModel.get_order_history()
-            data = [item.get_all_ordered_items() for item in data]
-            return jsonify(data)
+@authenticate_user
+def purchase_history(userid, username):
+    if AccountModel.checkifExists(session["username"]):
+        historyModel = HistoryModel(userid)
+        data = historyModel.get_order_history()
+        data = [item.get_all_ordered_items() for item in data]
+        return jsonify(data)
 
 
 @app.route('/<username>/wishlist')
-def userwishlist(username):
-    if "username" in session or not AccountModel.checkPrivacy(username):
-        uid = AccountModel.getUID(username)
-        items = WishlistModel.getWishListProductIDs(uid)
+@authenticate_user
+def userwishlist(userid, username):
+    if not AccountModel.checkPrivacy(username):
+        items = WishlistModel.getWishListProductIDs(userid)
         data = ItemModel.get_all_items()
         data = filter(lambda x: x.id in items, data)
         data = map(lambda x: x.toDict(), data)
         data = list(data)
         return jsonify(data)
-    return "no........"
+    return "Access denied, user has private wishlist."
 
 @app.route('/wishlist/<username>')
 def uwl(username):
@@ -71,48 +86,39 @@ def uwl(username):
         return render_template('wishlist.html')
     elif AccountModel.checkPrivacy(username):
         return render_template('wishlist.html')
-    return ".."
+    return "Access denied, user wishlist is private."
 
 @app.route('/account/wishlist')
-def getaccountwishlist():
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"])
-            items = WishlistModel.getWishListProductIDs(uid)
-            data = ItemModel.get_all_items()
-            data = filter(lambda x: x.id in items, data)
-            data = map(lambda x: x.toDict(), data)
-            data = list(data)
-            return jsonify(data)
-    return [], 400
+@authenticate_user
+def getaccountwishlist(userid):
+    items = WishlistModel.getWishListProductIDs(uid)
+    data = ItemModel.get_all_items()
+    data = filter(lambda x: x.id in items, data)
+    data = map(lambda x: x.toDict(), data)
+    data = list(data)
+    return jsonify(data)
+
 
 @app.route('/favourites', methods=['GET', 'POST'])
-def favourites():
-    print(session)
+@authenticate_user
+def favourites(userid):
     if request.method == 'POST':
-        username = session["username"]
-        userid = FavouritesModel.getUID(username)
         itemid = request.get_json()['id']
         data = FavouritesModel(userid, itemid)
         data.insertintoFavourites()
         return "Succes", 200
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            return render_template('favourites.html')
     return render_template('favourites.html')
 
 @app.route('/account/favourites')
-def getAccountFavourites():
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            uid = FavouritesModel.getUID(session["username"])
-            items = FavouritesModel.getFavouritesProductIDs(uid)
-            data = ItemModel.get_all_items()
-            data = filter(lambda x: x.id in items, data)
-            data = map(lambda x: x.toDict(), data)
-            data = list(data)
-            return jsonify(data)
-    return [], 400
+@authenticate_user
+def getAccountFavourites(userid):
+    items = FavouritesModel.getFavouritesProductIDs(userid)
+    data = ItemModel.get_all_items()
+    data = filter(lambda x: x.id in items, data)
+    data = map(lambda x: x.toDict(), data)
+    data = list(data)
+    return jsonify(data)
+
 
 @app.route('/products/<id>')
 def productsdetail(id):
@@ -123,26 +129,18 @@ def cart():
     return render_template('cart.html')
 
 @app.route('/order', methods=['GET', 'POST'])
-def order():
+@authenticate_user
+def order(userid):
+    """TODO: Add history to this route [GET]."""  
     if request.method == 'POST':
-        print("lol")
-        if AccountModel.checkifExists(session["username"]):
-            uid = AccountModel.getUID(session["username"])
-            HistoryModel.insertOrder(uid)
-            order_id = HistoryModel.getlastOrder()
-            orderArray = request.json
-            for i in orderArray:
-                print(i)
-                item_id = i[0]
-                item_name = i[1]
-                item_price = i[2]
-                item_quantity = i[3]
-                print(item_id)
-                print(item_name)
-                print(item_price)
-                print(item_quantity)
-                orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
-                OrderItemModel.AddOrderItem(orderItem)       
+        HistoryModel.insertOrder(userid)
+        order_id = HistoryModel.getlastOrder()
+        orderArray = request.json
+        for i in orderArray:
+            item_id = i[0]
+            item_quantity = i[3]
+            orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
+            OrderItemModel.AddOrderItem(orderItem)       
     return "Succes"
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -171,13 +169,11 @@ def login():
             session.permanent = True
             redirect_to_index = redirect(url_for('index'))
             response = app.make_response(redirect_to_index)
-            #Adding data to the cookie
+            """TODO: Refactor this."""
             query = "select Adminbool from User_ where User_Name = '{0}'".format(str(username))
             adminbool = MySQLdatabase.ExecuteQuery(query)
             adminbool = adminbool[0]
             response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
-            
-
             return response
         return "401", 401 
     return render_template('login.html')
@@ -191,6 +187,7 @@ def graph():
     return render_template("graph.html")
 
 @app.route('/stats')
+@authenticate_admin
 def stats():
     year = request.args.get("year")
     month = request.args.get("month")
@@ -229,12 +226,11 @@ def accounts():
     return jsonify(accounts)
 
 @app.route('/change_settings', methods = ['GET', 'POST'])
+@authenticate_user
 def change_settings():
-    if "username" in session:
-        if AccountModel.checkifExists(session["username"]):
-            if request.method == 'POST':
-                AccountModel.updatePrivacy(session["username"])
-            return str(AccountModel.checkPrivacy(session["username"]))
+    if request.method == 'POST':
+        AccountModel.updatePrivacy(session["username"])
+    return str(AccountModel.checkPrivacy(session["username"]))
 
 @app.route('/logout')
 def logout():
@@ -278,6 +274,7 @@ def items():
     return jsonify(items)
 
 @app.route('/adminpage')
+@authenticate_admin
 def adminpage():
     return render_template('adminpage.html')
 
