@@ -139,6 +139,7 @@ def order(userid):
         for i in orderArray:
             item_id = i[0]
             item_quantity = i[3]
+            ItemModel.lowerstock(item_quantity, item_id)
             orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
             OrderItemModel.AddOrderItem(orderItem)       
     return "Succes"

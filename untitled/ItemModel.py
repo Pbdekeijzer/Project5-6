@@ -20,6 +20,12 @@ class ItemModel():
         self.class_ = class_
 
     @staticmethod
+    def lowerstock(amount, product_id): 
+        query = "UPDATE Buyable_item_ SET in_stock = (in_stock - '{0}')  WHERE Product_ID = '{1}'".format(int(amount), str(product_id)) 
+        MySQLdatabase.UpdateQuery(query) 
+        return True
+
+    @staticmethod
     def get_all_items():
         query = "SELECT * FROM Buyable_item_"
         result = MySQLdatabase.ExecuteQuery(query)
