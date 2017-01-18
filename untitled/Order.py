@@ -8,7 +8,7 @@ class Order:
         self.id = id
         self.item = [item]
         self.item_models = []
-        self.item_amount = []
+        self.item_amount = 0
 
     def add(self, item):
         self.item.append(item)
@@ -21,14 +21,11 @@ class Order:
             result2 = MySQLdatabase.ExecuteQuery(query2)
             for i in result:
                 #Product_ID, Title, Price, Image_route
-                self.item_models.append(OrderHistoryModel(i[0], i[1], i[4], i[7]).toDict())
-                self.item_amount.append(result2[0])
-                print(result2[0])
+                self.item_models.append(OrderHistoryModel(i[0], i[1], i[4], i[7], result2[0][0]).toDict())
         return self.to_order_dict()
 
     def to_order_dict(self):
         return{
                 "order": self.id,
-                "items": self.item_models,
-                "amount": self.item_amount
+                "items": self.item_models
         }

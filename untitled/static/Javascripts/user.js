@@ -47,9 +47,15 @@ $(document).ready(function(){
 		        {
 			        for (var x in json[i][j])
 			        {
-			            var context = {title: json[i][j][x].name, body: json[i][j][x].description,
-			                           image: json[i][j][x].image, id: json[i][j][x].id,
-			                           continent: json[i][j][x].continent, classification: json[i][j][x].class,
+//			            var context = {title: json[i][j][x].name, body: json[i][j][x].description,
+//			                           image: json[i][j][x].image, id: json[i][j][x].id,
+//			                           continent: json[i][j][x].continent, classification: json[i][j][x].class,
+//			                           price: json[i][j][x].price
+//			                          };
+
+			            var context = {title: json[i][j][x].title,
+			                           image: json[i][j][x].image_route,
+			                           id: json[i][j][x].product_id,
 			                           price: json[i][j][x].price
 			                          };
 			            html += template(context);
