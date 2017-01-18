@@ -559,3 +559,19 @@ input:checked + .slider:before {
   margin-right: 10px;
 }
 
+.PrettyTable , .PrettyTable td , .PrettyTable tr, .PrettyTable th, .PrettyTable tbody {
+  border-left: 0px solid black;
+  border-right: 0px solid black;
+  border-top: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  border-collapse: collapse;
+}
+
+.PrettyTable th, .PrettyTable td{
+  padding: 10px;
+  text-align: left;
+}
+
+.PrettyTable tr:hover{
+  background-color: rgba(0,0,0,.08);
+}
