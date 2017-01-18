@@ -13,7 +13,7 @@ var modal = document.getElementById('myModal');
 function cart_onClick(id, name, price){ 
   AddToCart(id, name, price); 
   
-    document.getElementById("modal-text").innerHTML = name + " is added to your cart!" 
+    document.getElementById("modal-text").innerHTML = name.toUpperCase() + " HAS BEEN ADDED TO YOUR CART" 
      
     document.getElementById("myModal").style.display = "block"; 
     setTimeout(test, 2000); 
@@ -118,40 +118,48 @@ function OrderAjax(){
     var cart = [];
     var orderItems = [];
     cart = JSON.parse(localStorage.cart);
+    console.log('test');
+    if (JSON.parse(localStorage.cart) != 0){
+        for (var i in cart) {
+                var item = cart[i];
+                var itemDetails = [item.ID, item.Name, item.Price, item.Quantity]; //item.ID, item.Name, item.Price, item.Quantity
+                // itemDetails.push(item.ID, item.N);
+                console.log(item.ID);
+                orderItems.push(itemDetails);
+        }
 
-    for (var i in cart) {
-        var item = cart[i];
-        var itemDetails = [item.ID, item.Name, item.Price, item.Quantity]; //item.ID, item.Name, item.Price, item.Quantity
-        // itemDetails.push(item.ID, item.N);
-        console.log(item.ID);
-        orderItems.push(itemDetails);
+        console.log(JSON.stringify({lol : orderItems}));
+        
+        $.ajax({
+            url: "http://localhost:5000/order", // the endpoint
+            type: "POST", // http method
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(orderItems), // data sent with the post request
+            // handle a successful response
+            success: function (json) {
+                $('#post-text').val(''); // remove the value from the input
+                console.log(json); // log the returned json to the console
+                console.log("success"); // another sanity check
+            },
+
+            // handle a non-successful response
+            error: function (xhr, errmsg, err) {
+                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
+                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+    }
+    
+    else{
+        document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order."
     }
 
-    console.log(JSON.stringify({lol : orderItems}));
-    
-    $.ajax({
-        url: "http://localhost:5000/order", // the endpoint
-        type: "POST", // http method
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(orderItems), // data sent with the post request
-        // handle a successful response
-        success: function (json) {
-            $('#post-text').val(''); // remove the value from the input
-            console.log(json); // log the returned json to the console
-            console.log("success"); // another sanity check
-        },
-
-        // handle a non-successful response
-        error: function (xhr, errmsg, err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
-                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-    });
 }
 
 function Order(){
+    console.log("lol");
     if (window.document.cookie){
         if (window.localStorage)
 	    {
@@ -161,9 +169,15 @@ function Order(){
 	    }
         showCart();
      }
-    else{
-        document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order."
-    }
+     else{
+        if (JSON.parse(localStorage.cart) == 0){
+            document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order."
+        }
+        else{
+            document.getElementById("cart-text").innerHTML = "Please log in to complete your order."
+        }
+         
+     }
 }
 
 //Show cart in HTML
@@ -186,10 +200,10 @@ function showCart() {
         var row = "<tr><td>" + item.Name + "</td><td>" +
                 "€" + item.Price + ",-" + "</td><td>" + item.Quantity + "</td><td>"
                 + "€" + item.Quantity * item.Price + ",-" + "</td><td>"
-                + "<button onclick='deleteItem(" + i + ")'>Delete</button></td></tr>";
+                + "<button class='button' onclick='deleteItem(" + i + ")'>Delete</button></td></tr>";
         $("#cartBody").append(row);
     }
-    var row = "<tr><td></td><td></td><td></td><td>" + "€" + totalPrice + ",-" + "</td><td>" + "<button onclick='Order(" + i + ")'>Order</button> </td></tr>";
+    var row = "<tr><td></td><td></td><td></td><td>" + "€" + totalPrice + ",-" + "</td><td>" + "<button class='button' onclick='Order(" + i + ")'>Order</button> </td></tr>";
     $("#cartBody").append(row);
 }
 

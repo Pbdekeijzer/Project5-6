@@ -17,8 +17,6 @@ requests = Blueprint('Requests', __name__, template_folder="templates", static_f
 def index():
     return render_template('index.html')
 
-
-        
 @requests.route('/account/<username>/history')
 @authenticate_user
 def purchase_history(userid, username):
