@@ -56,7 +56,8 @@ $(document).ready(function(){
 			            var context = {title: json[i][j][x].title,
 			                           image: json[i][j][x].image_route,
 			                           id: json[i][j][x].product_id,
-			                           price: json[i][j][x].price
+			                           price: json[i][j][x].price,
+			                           amount: json[i][j][x].amount
 			                          };
 			            html += template(context);
 			        }

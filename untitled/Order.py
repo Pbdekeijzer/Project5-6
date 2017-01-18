@@ -2,6 +2,7 @@ __author__ = 'Stef'
 from MySQLdatabase import *
 from ItemModel import *
 from OrderHistoryModel import *
+from OrderItemModel import *
 
 class Order:
     def __init__(self, id, item):
@@ -21,7 +22,7 @@ class Order:
             result2 = MySQLdatabase.ExecuteQuery(query2)
             for i in result:
                 #Product_ID, Title, Price, Image_route
-                self.item_models.append(OrderHistoryModel(i[0], i[1], i[4], i[7], result2[0][0]).toDict())
+                self.item_models.append(OrderItemModel(i[0], i[1], i[4], i[7], result2[0][0]).toDict())
         return self.to_order_dict()
 
     def to_order_dict(self):
