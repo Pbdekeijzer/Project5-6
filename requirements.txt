@@ -1,3 +1,4 @@
+mysql-connector
 aniso8601==1.2.0
 bcrypt==3.1.1
 cffi==1.9.1
@@ -23,4 +24,4 @@ six==1.10.0
 SQLAlchemy==1.1.4
 virtualenv==15.1.0
 Werkzeug==0.11.11
-mysql-connector
+

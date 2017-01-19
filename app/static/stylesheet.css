@@ -456,11 +456,8 @@ article img{
 }
 
 .navbardiv{
-  padding-left: 10px;
-  border-radius: 3px;
-  padding-right: 10px;
+ 
 }
-
 .navbardiv2{
   padding-left: 10px;
   border-radius: 3px;
@@ -490,7 +487,9 @@ article img{
     font-weight: 300;
     height: 35px;
     outline: medium none;
-    width: 290px;
+    width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
     background-image: url(../static/images/icon.png);
     background-size: 15px;
     background-repeat: no-repeat;
