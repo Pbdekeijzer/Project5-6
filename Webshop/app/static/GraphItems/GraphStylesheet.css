@@ -20,6 +20,8 @@
 .ColoredGraphBar{
   background-color: red;
   width: 100%;
+  box-shadow: 3px 1px 8px grey;
+  border-radius: 5px;
 }
 
 .BarItself{
