@@ -39,8 +39,7 @@ class FavouritesModel:
 			MySQLdatabase.ExecuteInsertQuery(query)
 			return True
 
-		query = "DELETE FROM User_Favourites_ WHERE User_ID = '{0}' AND Product_ID = '{1}'".format(int(self.user_id), int(self.product_id))
-		checkexisting = MySQLdatabase.DeleteQuery(query)
+		checkexisting = MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s", self.user_id, self.product_id)
 		return False
 
 	@staticmethod

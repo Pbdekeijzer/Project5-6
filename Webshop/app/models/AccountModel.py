@@ -34,7 +34,7 @@ class AccountModel():
     def getUID(username):
         if username[0] == '"':
             username = username[1:]
-        result = MySQLdatabase.ExcecuteSafeQuery("SELECT * FROM User_ WHERE User_Name = %s",username)
+        result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s",username)
         userid = result[0]
         userid = userid[0]
         return userid
@@ -42,7 +42,7 @@ class AccountModel():
     @staticmethod
     def getOneUser(UserItsName):
         #Result = MySQLdatabase.SelectWhereUsernameQuery(UserItsName)
-        Result = MySQLdatabase.ExcecuteSafeQuery("SELECT * FROM User_ WHERE User_Name = %s", UserItsName)
+        Result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s", UserItsName)
         try:
             return AccountModel(Result[0][0], Result[0][3], Result[0][4], Result[0][5], Result[0][6], Result[0][7],
                                 Result[0][2], Result[0][1], Result[0][8])
@@ -68,14 +68,14 @@ class AccountModel():
 
     @staticmethod
     def checkifExists(username):
-        result = MySQLdatabase.ExcecuteSafeQuery("SELECT * FROM User_ WHERE User_Name = %s", username)
+        result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s", username)
         if result:
             return True
         return False
 
     @staticmethod
     def checkAccount(username, password):
-        result = MySQLdatabase.ExcecuteSafeQuery("SELECT User_Name FROM User_ WHERE User_Name = %s and Wachtwoord = %s" ,username, password)
+        result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT User_Name FROM User_ WHERE User_Name = %s and Wachtwoord = %s" ,username, password)
         if result:
             return True
         return False

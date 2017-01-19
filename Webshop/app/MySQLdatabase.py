@@ -11,7 +11,7 @@ class MySQLdatabase:
     DatabaseConnection.close()
 
     @staticmethod
-    def ExcecuteSafeQuery(Query, *args):
+    def ExcecuteSafeSelectQuery(Query, *args):
         DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b',
                                                      host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
         DatabaseConnection._open_connection()
@@ -26,61 +26,39 @@ class MySQLdatabase:
 
         return resultquery
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @staticmethod
-    def InsertQuery(INSERT_INTO, VALUES):
-        MySQLdatabase.DatabaseConnection._open_connection()
-        cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
-
-        cursor.execute(("INSERT INTO "+INSERT_INTO+" VALUES "+VALUES))
-        #emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
-        MySQLdatabase.DatabaseConnection.commit()
-        cursor.close()
-        MySQLdatabase.DatabaseConnection.close()
-
-    @staticmethod
-    def DeleteQuery(query):
+    def ExecuteSafeInsertQuery(query, *args):
         try:
-            MySQLdatabase.DatabaseConnection._open_connection()
-            cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
-
-            cursor.execute(query)
-            # emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
-            MySQLdatabase.DatabaseConnection.commit()
+            DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b',
+                                                     host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
+            DatabaseConnection._open_connection()
+            cursor = DatabaseConnection.cursor(buffered=True)
+            cursor.execute(query, args)
+            DatabaseConnection.commit()
             cursor.close()
-            MySQLdatabase.DatabaseConnection.close()
+            DatabaseConnection.close()
             return True
         except:
             return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @staticmethod
@@ -121,21 +99,5 @@ class MySQLdatabase:
         cursor.close()
         DatabaseConnection.close()
         return resultquery
-
-    @staticmethod
-    def SelectAllQuery(SELECT, FROM):
-        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
-        DatabaseConnection._open_connection()
-        cursor = DatabaseConnection.cursor(buffered=True)
-
-        cursor.execute(("SELECT "+SELECT+" FROM "+FROM))
-        resultquery = cursor.fetchall()  
-
-        DatabaseConnection.commit()
-        cursor.close()
-        DatabaseConnection.close()
-
-        return resultquery
-
 
 a = MySQLdatabase()
