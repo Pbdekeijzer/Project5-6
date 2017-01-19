@@ -25,86 +25,90 @@ $(document).ready(function() {
 
 
     $('#DeleteUser').click(function () {
-        FindUser($("#Username").val());
-        if (DataFromDB.username != "Username is not found") {
-            var DataToAPI = {username: $("#Username").val()}
-            $.ajax({
-                url: "/DeleteOneUser",
-                data: DataToAPI,
-                datatype: 'json'
-            }).done(function (data) {
-                if (data.CommitSuccess == "User is successfully deleted") {
-                    ShowAlert(data.CommitSuccess, 'lightgreen');
-                    FillTheTable();
-                }
-                else {
-                    ShowAlert(data.CommitSuccess, 'lightcoral');
-                }
-            });
-        }
+        $.when(FindUser($("#Username").val())).done(function(){
+            if (DataFromDB.username != "Username is not found") {
+                var DataToAPI = {username: $("#Username").val()}
+                $.ajax({
+                    url: "/DeleteOneUser",
+                    data: DataToAPI,
+                    datatype: 'json'
+                }).done(function (data) {
+                    if (data.CommitSuccess == "User is successfully deleted") {
+                        ShowAlert(data.CommitSuccess, 'lightgreen');
+                        FillTheTable();
+                    }
+                    else {
+                        ShowAlert(data.CommitSuccess, 'lightcoral');
+                    }
+                });
+            }
+
+        });
+
     });
 
     $('#UpdateUser').click(function () {
 
-        FindUser($("#Username").val());
-        if (DataFromDB.username != "Username is not found") {
-            var DataToAPI = {
-                username: $("#Username").val(),
-                password: $("#Password").val(),
-                email: $("#Email").val(),
-                postalcode: $("#Postal_Code").val(),
-                housenumber: $("#House_Number").val(),
-                adminbool: $("#Admin_Bool").val(),
-                privacywishlist: $("#Privacy_Wishlist").val()
-            };
+        $.when(FindUser($("#Username").val())).done(function() {
+            if (DataFromDB.username != "Username is not found") {
+                var DataToAPI = {
+                    username: $("#Username").val(),
+                    password: $("#Password").val(),
+                    email: $("#Email").val(),
+                    postalcode: $("#Postal_Code").val(),
+                    housenumber: $("#House_Number").val(),
+                    adminbool: $("#Admin_Bool").val(),
+                    privacywishlist: $("#Privacy_Wishlist").val()
+                };
 
-            $.ajax({
-                url: "/UpdateOneUser",
-                data: DataToAPI,
-                datatype: 'json'
-            }).done(function (data) {
-                if (data.CommitSuccess == "User is successfully updated") {
-                    ShowAlert(data.CommitSuccess, 'lightgreen');
-                    FillTheTable();
-                }
-                else {
-                    ShowAlert(data.CommitSuccess, 'lightcoral');
-                }
-            });
+                $.ajax({
+                    url: "/UpdateOneUser",
+                    data: DataToAPI,
+                    datatype: 'json'
+                }).done(function (data) {
+                    if (data.CommitSuccess == "User is successfully updated") {
+                        ShowAlert(data.CommitSuccess, 'lightgreen');
+                        FillTheTable();
+                    }
+                    else {
+                        ShowAlert(data.CommitSuccess, 'lightcoral');
+                    }
+                });
 
-        }
-
+            }
+        });
     });
 
     $('#FindUser').click(function () {
-        FindUser($('#Username').val());
-        if (DataFromDB.username != "Username is not found") {
-            $("#Username").val(DataFromDB.username);
-            $("#Password").val(DataFromDB.password);
-            $("#Email").val(DataFromDB.email);
-            $("#Postal_Code").val(DataFromDB.postal_code);
-            $("#House_Number").val(DataFromDB.house_number);
-            $("#Admin_Bool").val(DataFromDB.adminbool);
-            $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
-            ShowAlert('Succesfully found the user', 'lightgreen')
-        }
-
+        $.when(FindUser($("#Username").val())).done(function() {
+            if (DataFromDB.username != "Username is not found") {
+                $("#Username").val(DataFromDB.username);
+                $("#Password").val(DataFromDB.password);
+                $("#Email").val(DataFromDB.email);
+                $("#Postal_Code").val(DataFromDB.postal_code);
+                $("#House_Number").val(DataFromDB.house_number);
+                $("#Admin_Bool").val(DataFromDB.adminbool);
+                $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
+                ShowAlert('Succesfully found the user', 'lightgreen')
+            }
+        });
     });
 
     //Also the table is clickable, and finds this user
     $('#userTable').on('click','.tableRow',function(){
         var usernameViaTable = $(this).find('.usernameInTable').text();
-        FindUser(usernameViaTable);
-        if (DataFromDB.username != "Username is not found"){
-            $("#Username").val(DataFromDB.username);
-            $("#Password").val(DataFromDB.password);
-            $("#Email").val(DataFromDB.email);
-            $("#Postal_Code").val(DataFromDB.postal_code);
-            $("#House_Number").val(DataFromDB.house_number);
-            $("#Admin_Bool").val(DataFromDB.adminbool);
-            $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
-            ShowAlert('Succesfully found the user', 'lightgreen')
-        }
+        $.when(FindUser(usernameViaTable)).done(function() {
+            if (DataFromDB.username != "Username is not found") {
+                $("#Username").val(DataFromDB.username);
+                $("#Password").val(DataFromDB.password);
+                $("#Email").val(DataFromDB.email);
+                $("#Postal_Code").val(DataFromDB.postal_code);
+                $("#House_Number").val(DataFromDB.house_number);
+                $("#Admin_Bool").val(DataFromDB.adminbool);
+                $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
+                ShowAlert('Succesfully found the user', 'lightgreen')
+            }
+        });
     });
 
 
@@ -144,9 +148,8 @@ $(document).ready(function() {
     }
 
     function FindUser(UsernameAjax){
-        var AjaxRequestDone = False;
         UsernameAjax = {username: UsernameAjax};
-        $.ajax({
+        return $.ajax({
             url: "/GetOneUser",
             data: UsernameAjax,
             datatype: 'json'
@@ -158,11 +161,9 @@ $(document).ready(function() {
             else{
                 DataFromDB = data;
             }
-            AjaxRequestDone = True;
-        });
-        while (AjaxRequestDone == False){
 
-        }
+        });
+
     }
 
 
