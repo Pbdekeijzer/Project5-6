@@ -30,7 +30,7 @@ def purchase_history(userid, username):
 @requests.route('/<username>/wishlist')
 @authenticate_user
 def userwishlist(userid, username):
-    if not AccountModel.checkPrivacy(username):
+    if not AccountModel.checkPrivacy(username) or session["username"] == username:
         items = WishlistModel.getWishListProductIDs(userid)
         data = ItemModel.get_all_items()
         data = filter(lambda x: x.id in items, data)

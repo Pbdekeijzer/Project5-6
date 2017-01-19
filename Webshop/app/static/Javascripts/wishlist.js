@@ -57,9 +57,11 @@ $(document).ready(function(){
 	
     // GET JSON from URL, call insert product.
     function GetJSONFromUrl(){
-        var account = window.document.cookie.toString().split('=')[1];       
+        var account = window.document.cookie.toString().split('=')[1].slice(1);
+        console.log("/" + account + "/wishlist")
         $.ajax({
-            url: "/" + account + "/wishlist"   
+            url: "/" + account + "/wishlist"
+               
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);
