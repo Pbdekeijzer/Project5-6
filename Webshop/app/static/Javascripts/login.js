@@ -29,7 +29,7 @@ $(document).ready(function()
             xhrFields : {
                 withCredentials: true
             },
-            url : "http://localhost:5000/login",
+            url : "/login",
             data: $('form').serialize(),
             type : 'POST',
             success: function(response) {
@@ -44,7 +44,7 @@ $(document).ready(function()
     {
         $.ajax(
             {
-                url : "http://localhost:5000/logout"
+                url : "/logout"
             }
         )
     }

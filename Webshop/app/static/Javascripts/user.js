@@ -1,6 +1,6 @@
 function updatePrivacy(username){
     $.post({
-        url: "http://localhost:5000/change_settings"
+        url: "/change_settings"
     });
 }
 
@@ -14,7 +14,7 @@ function privacy_OnClick(){
 $(document).ready(function(){
     GetOrderedItemJson();
     $.get({
-        url: "http://localhost:5000/change_settings"
+        url: "/change_settings"
     }).done(function(res){
         console.log(res)
         if (res == "True"){       
@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     function InsertProduct(json){
         $.ajax({
-            url: "http://localhost:5000/static/OrderedProductPanel.html"
+            url: "/static/OrderedProductPanel.html"
         }).done(function(data){
             var container = $("#ordered_product");
             var template = Handlebars.compile(data);

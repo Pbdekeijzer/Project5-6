@@ -17,14 +17,14 @@ $(document).ready(function(){
         xhrFields : {
                 withCredentials: true
         },       
-        url: "http://localhost:5000/items?id=" + suburl
+        url: "/items?id=" + suburl
     }).done(function(json){
         GetTemplate(json);
     });
 
     function GetTemplate(json){
         $.ajax({
-            url: "http://localhost:5000/static/ProductDetail.html"
+            url: "/static/ProductDetail.html"
         }).done(function(data){
             InsertHTML(json, data);
         });

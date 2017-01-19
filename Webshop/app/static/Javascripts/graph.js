@@ -15,7 +15,7 @@ $(document).ready(function()
 
   function LoadItems(){
     $.ajax({
-      url: "http://localhost:5000/items"
+      url: "/items"
     }).done(function(data){
       data.sort(function(a,b){
         if(a.name < b.name){
@@ -55,7 +55,7 @@ $(document).ready(function()
   var BarTemplate;
   function LoadBarTemplate(){
     $.ajax({
-              url: "http://localhost:5000/static/GraphItems/Graphbar.html"
+              url: "/static/GraphItems/Graphbar.html"
           }).done(function(data){
               BarTemplate = Handlebars.compile(data);
           });
@@ -69,7 +69,7 @@ $(document).ready(function()
 
     if(ShowingYear){
       $.ajax({
-        url: "http://localhost:5000/stats?id=" + item + "&year=" + year
+        url: "/stats?id=" + item + "&year=" + year
       }).done(function(data){
         var title = "Sales of " + $("#Items option:selected").text() + " in " + year;
         BuildGraph(title ,data, true);
@@ -77,7 +77,7 @@ $(document).ready(function()
     }
     else{
       $.ajax({
-        url: "http://localhost:5000/stats?id=" + item + "&year=" + year + "&month=" + monthval
+        url: "/stats?id=" + item + "&year=" + year + "&month=" + monthval
       }).done(function(data){
         var title = "Sales of " + $("#Items option:selected").text() + " in " + month + " of " + year;
         BuildGraph(title ,data, false);
@@ -93,7 +93,7 @@ $(document).ready(function()
 
     if(ShowingYear){
       $.ajax({
-        url: "http://localhost:5000/stats?turnover=true&year=" + year
+        url: "/stats?turnover=true&year=" + year
       }).done(function(data){
         var title = "Turnover in " + year;
         BuildGraph(title ,data, true);
@@ -101,7 +101,7 @@ $(document).ready(function()
     }
     else{
       $.ajax({
-        url: "http://localhost:5000/stats?turnover=true&year=" + year + "&month=" + monthval
+        url: "/stats?turnover=true&year=" + year + "&month=" + monthval
       }).done(function(data){
         var title = "Turnover in " + month + " of " + year;
         BuildGraph(title ,data, false);
@@ -114,7 +114,7 @@ $(document).ready(function()
   $("#WishlistButton").click(function(e){
     var maxItems = 10;
     $.ajax({
-      url: "http://localhost:5000/stats?MaxWishlistItems=" + maxItems
+      url: "/stats?MaxWishlistItems=" + maxItems
     }).done(function(data){
       BuildGraph("Most wished for items", data, true, 60, 20);
     })
