@@ -131,7 +131,7 @@ function OrderAjax(){
         console.log(JSON.stringify({lol : orderItems}));
         
         $.ajax({
-            url: "http://localhost:5000/order", // the endpoint
+            url: "/order", // the endpoint
             type: "POST", // http method
             contentType: "application/json; charset=utf-8",
             dataType: "json",

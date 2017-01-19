@@ -5,7 +5,7 @@ $(document).ready(function()
         username = Thecookiedivided[1].slice(1);                                //Slice because first element is a "
         adminbool = parseInt(Thecookiedivided[2]);                              //The adminbool is an integer, with 0 or 1 as the bool value
 
-        account_url = "http://localhost:5000/account/"  + username;
+        account_url = "/account/"  + username;
         $("#UserLoggedInNotification").text("Logged in as: " + username);
         if (adminbool == 1){ 													//notify user he is an admin
 				$("#UserLoggedInNotification").append(" <br> You are an admin!"  );
@@ -15,7 +15,7 @@ $(document).ready(function()
 		$('#NavbarAtTop').append('<li><a href="/wishlist">Wishlist</a></li>');
         $('#NavbarAtTop').append('<li><a href="/favourites">Favourites</a></li>');
         $('#NavbarAtTop').append('<li><a href= ' + account_url +  ' id="Account">' + username + '</a></li>');
-        $('#NavbarAtTop').append('<li><a href= "http://localhost:5000/logout" id="LogoutNavbar">Log Out</a></li>');
+        $('#NavbarAtTop').append('<li><a href= "/logout" id="LogoutNavbar">Log Out</a></li>');
         $('#LogoutNavbar').click(function(){
             localStorage.clear();
         });

@@ -1,7 +1,7 @@
 // remove this to different file
 function GetItemJson(id){
     $.ajax({
-        url: "http://localhost:5000/items?id=" + String(id)
+        url: "/items?id=" + String(id)
     }).done(function(json){
         json = JSON.stringify(json[0]);
 		AddToWishlist(json);
@@ -11,7 +11,7 @@ function GetItemJson(id){
 function RemoveFromWishlist(json){
     $.ajax({
         type: "POST",
-        url: "http://localhost:5000/wishlist",
+        url: "/wishlist",
         data: json,
         contentType: "application/json"
     });
@@ -20,7 +20,7 @@ function RemoveFromWishlist(json){
 function AddToWishlist(json){
     $.ajax({
         type: "POST",
-        url: "http://localhost:5000/wishlist",
+        url: "/wishlist",
         data: json,
         contentType: "application/json"
     });
@@ -38,7 +38,7 @@ $(document).ready(function(){
     // param = json
     function InsertProduct(json){
         $.ajax({       
-            url: "http://localhost:5000/static/ProductPanel.html"
+            url: "/static/ProductPanel.html"
         }).done(function(data){
             var container = $("#wishlistcontent");
             var template = Handlebars.compile(data);
@@ -59,7 +59,7 @@ $(document).ready(function(){
     function GetJSONFromUrl(){
         var account = window.document.cookie.toString().split('=')[1];       
         $.ajax({
-            url: "http://localhost:5000/" + account + "/wishlist"   
+            url: "/" + account + "/wishlist"   
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);

@@ -5,7 +5,7 @@ $(document).ready(function(){
     // param = json
     function InsertProduct(json){
         $.ajax({
-            url: "http://localhost:5000/static/ProductPanel.html"
+            url: "/static/ProductPanel.html"
         }).done(function(data){
             var container = $("#favouritescontent");
             var template = Handlebars.compile(data);
@@ -25,7 +25,7 @@ $(document).ready(function(){
     // GET JSON from URL, call insert product.
     function GetJSONFromUrl(){
         $.ajax({
-            url: "http://localhost:5000/account/favourites"
+            url: "/account/favourites"
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);

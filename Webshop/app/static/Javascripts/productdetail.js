@@ -39,7 +39,7 @@ $(document).ready(function(){
     //Uses this function twice at start for some reason
     function getWishlistIDs(){
         $.ajax({
-                url: "http://localhost:5000/account/wishlist"
+                url: "/account/wishlist"
             }).done(function(json){
                 json = JSON.stringify(json);
                 $.each(JSON.parse(json), function(idx, obj) {

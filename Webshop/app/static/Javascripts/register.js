@@ -178,7 +178,7 @@ $(document).ready(function(){
 
         if (succes){
             $.ajax({
-                url : "http://localhost:5000/register",
+                url : "/register",
                 data: $('form').serialize(),
                 type : 'POST',
             }).done(function(result)
