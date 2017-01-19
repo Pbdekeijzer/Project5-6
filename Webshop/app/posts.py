@@ -15,7 +15,6 @@ posts = Blueprint('Posts', __name__, template_folder="templates", static_folder=
 @posts.route('/wishlist', methods=['GET', 'POST'])
 @authenticate_user
 def wishlist(userid):
-    print(session)
     if request.method == 'POST':
         itemid = request.get_json()['id']
         data = WishlistModel(userid, itemid)
@@ -55,7 +54,7 @@ def order(userid):
 
 @posts.route('/change_settings', methods = ['GET', 'POST'])
 @authenticate_user
-def change_settings():
+def change_settings(userid):
     if request.method == 'POST':
         AccountModel.updatePrivacy(session["username"])
     return str(AccountModel.checkPrivacy(session["username"]))
