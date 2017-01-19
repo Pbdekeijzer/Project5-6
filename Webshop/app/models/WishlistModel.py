@@ -2,7 +2,7 @@ import json
 from flask import jsonify
 from app.MySQLdatabase import *
 import os
-from ItemModel import *
+from app.models.ItemModel import *
 
 
 class WishlistModel():

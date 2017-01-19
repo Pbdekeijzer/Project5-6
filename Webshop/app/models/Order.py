@@ -1,6 +1,6 @@
 __author__ = 'Stef'
 from app.MySQLdatabase import *
-from OrderHistoryModel import *
+from app.models.OrderHistoryModel import *
 
 class Order:
     def __init__(self, id, item):
