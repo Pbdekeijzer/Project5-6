@@ -167,8 +167,8 @@ def adminpage():
 def GetOneUser():
     TheUser = request.args.get("username")
     TheUser = AccountModel.getOneUser(TheUser)
-    if type(TheUser) is AccountModel:
-        return jsonify(TheUser.toDict())
+    if isinstance(TheUser, str):  
+        return jsonify({"username" : "Username is not found"})     
     else:
-        return jsonify({"username" : "Username is not found"})
+        return jsonify(TheUser.toDict())
 
