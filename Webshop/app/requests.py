@@ -1,7 +1,7 @@
 from flask import Blueprint, request, make_response, jsonify, render_template, session, redirect, url_for
 from app.models.AccountModel import *
 from app.models.FavouritesModel import *
-from app.models.HistoryModel import *
+from app.models.HistoryModel2 import *
 from app.models.ItemModel import *
 from app.models.Order import *
 from app.models.OrderItemModel import *
@@ -23,7 +23,6 @@ def purchase_history(userid, username):
     if AccountModel.checkifExists(session["username"]):
         historyModel = HistoryModel(userid)
         data = historyModel.get_order_history()
-        data = [item.get_all_ordered_items() for item in data]
         return jsonify(data)
 
 
