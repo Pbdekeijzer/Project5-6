@@ -11,13 +11,13 @@ class MySQLdatabase:
     DatabaseConnection.close()
 
     @staticmethod
-    def SelectWhereUsernameQuery(WHEREUSERNAME):
+    def ExcecuteSafeQuery(Query, *args):
         DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b',
                                                      host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
         DatabaseConnection._open_connection()
         cursor = DatabaseConnection.cursor(buffered=True)
 
-        cursor.execute("SELECT * FROM User_ WHERE User_Name = %s", (WHEREUSERNAME,))
+        cursor.execute(Query, args)
         resultquery = cursor.fetchall()
 
         DatabaseConnection.commit()
@@ -25,23 +25,6 @@ class MySQLdatabase:
         DatabaseConnection.close()
 
         return resultquery
-
-    @staticmethod
-    def SelectWhereUsernameAndPasswordQuery(WHEREUSERNAME, WHEREPASSWORD):
-        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b',
-                                                     host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
-        DatabaseConnection._open_connection()
-        cursor = DatabaseConnection.cursor(buffered=True)
-
-        cursor.execute("SELECT User_Name FROM User_ WHERE User_Name = %s and Wachtwoord = %s", (WHEREUSERNAME, WHEREPASSWORD,))
-        resultquery = cursor.fetchall()
-
-        DatabaseConnection.commit()
-        cursor.close()
-        DatabaseConnection.close()
-
-        return resultquery
-
 
 
 
