@@ -144,6 +144,7 @@ $(document).ready(function() {
     }
 
     function FindUser(UsernameAjax){
+        var AjaxRequestDone = False;
         UsernameAjax = {username: UsernameAjax};
         $.ajax({
             url: "/GetOneUser",
@@ -157,8 +158,11 @@ $(document).ready(function() {
             else{
                 DataFromDB = data;
             }
+            AjaxRequestDone = True;
         });
+        while (AjaxRequestDone == False){
 
+        }
     }
 
 
