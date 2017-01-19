@@ -496,6 +496,7 @@ article img{
     background-repeat: no-repeat;
     background-position: 250px;
     text-transform: uppercase;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
 .switch {
@@ -570,53 +571,21 @@ input:checked + .slider:before {
 }
 
 
-/*all the adminpage css*/
-
-#table{
-  width: fit-content;
-  padding: 15px;
-  padding-top: 12px;
-  margin-top: 3px;
-  display: block;
-  overflow-y: auto;
-  max-width: 65%;
-  max-height: 55%;
-  float: right;
-}
-
-table, th, td {
+.PrettyTable , .PrettyTable td , .PrettyTable tr, .PrettyTable th, .PrettyTable tbody {
+  border-left: 0px solid black;
+  border-right: 0px solid black;
+  border-top: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid rgba(0,0,0,.12);
   border-collapse: collapse;
-  border: 1px solid black;
 }
 
-td{
+.PrettyTable th, .PrettyTable td{
+  padding: 10px;
   text-align: left;
 }
 
-.inputAtAdminpage{
-  max-height: fit-content;
-  min-height: 12px;
-  max-width: 50%;
-  padding: 2px;
-  text-anchor: start;
-  margin-top: 10px !important;
-}
-
-.buttonAtAdminpage{
-  height: fit-content;
-  min-height: 30px;
-  padding: 5px;
-  margin: 5px;
-}
-
-#NotFoundAlert{
-    width: auto;
-    display: inline-block;
-    padding: 3px
-}
-
-.tableRow {
-    cursor: pointer
+.PrettyTable tr:hover{
+  background-color: rgba(0,0,0,.08);
 }
 
 .modal {
@@ -649,8 +618,8 @@ td{
     -webkit-animation-duration: 0.6s;
     animation-name: slideIn;
     animation-duration: 0.6s;
-    border-radius: 25px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    overflow: visible;
+    z-index:-1
 
 }
 
@@ -659,6 +628,7 @@ td{
     color: white;
     float: right;
     font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
@@ -669,11 +639,13 @@ td{
 }
 
 .modal-footer {
-    padding: 10px 16px;
-    background-color: #f1f3f5;
+    padding: 2px 16px;
+    background-color: white;
     color: black;
-    border-radius: 25px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border: 2px solid #a1a1a1;
+    overflow: visible;
+    z-index:-1
+
 }
 
 /* Add Animation */
@@ -696,21 +668,3 @@ td{
     from {opacity: 0}
     to {opacity: 1}
 }*/
-
-
-.PrettyTable , .PrettyTable td , .PrettyTable tr, .PrettyTable th, .PrettyTable tbody {
-  border-left: 0px solid black;
-  border-right: 0px solid black;
-  border-top: 1px solid rgba(0,0,0,.12);
-  border-bottom: 1px solid rgba(0,0,0,.12);
-  border-collapse: collapse;
-}
-
-.PrettyTable th, .PrettyTable td{
-  padding: 10px;
-  text-align: left;
-}
-
-.PrettyTable tr:hover{
-  background-color: rgba(0,0,0,.08);
-}
