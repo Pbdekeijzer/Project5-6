@@ -67,3 +67,28 @@ def AdminPageGetUsers():
         allUsers = map(lambda x: x.toDict(), allUsers)
         allUsers = list(allUsers)
         return jsonify(allUsers)
+
+@posts.route('/UpdateOneUser')
+def UpdateOneUser():
+    query = "UPDATE User_ SET Wachtwoord = '{w8woord}', Email_address = '{mail}', Postal_code = '{pcode}'," \
+            " House_number = {houseno}, Adminbool = {adminbool}, Privacy_wishlist = {secretwish}, " \
+            "Blockedbool = {blockedbool} where User_Name = '{gamertag}'".format(w8woord = request.args.get("passw"
+            "ord"), mail = request.args.get("email"), pcode = request.args.get("postalcod"
+            "e"), houseno = request.args.get("housenumber"), adminbool = request.args.get("adminbo"
+            "ol") , secretwish = request.args.get("privacywishlist"), gamertag = request.args.get("usernam"
+            "e"), blockedbool = request.args.get("blockedbool"));
+    result = MySQLdatabase.UpdateQuery(query)
+    if result == True:
+        return jsonify({"CommitSuccess":"User is successfully updated"})
+    else:
+        return jsonify({"CommitSuccess":"User not updated, are all the fields correct?"})
+
+@posts.route('/DeleteOneUser')
+def DeleteOneUser():
+    query = "DELETE FROM User_ WHERE User_Name = '{username}'".format(username = request.args.get("username"))
+    result = MySQLdatabase.UpdateQuery(query)
+    if result == True:
+        return jsonify({"CommitSuccess": "User is successfully deleted"})
+    else:
+        return jsonify({"CommitSuccess": "User not deleted, is the username correct?"})
+
