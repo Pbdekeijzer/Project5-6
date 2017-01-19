@@ -87,6 +87,13 @@ def stats():
     month = request.args.get("month")
     itemid = request.args.get("id")
     MaxWishlist = request.args.get("MaxWishlistItems")
+    turnover = request.args.get("turnover")
+
+    if turnover != None and year != None:
+        results = TurnoverStats.getTurnover(year, month)
+        items = map(lambda x: x.toDict(), results)
+        items = list(items)
+        return jsonify(items)
 
     if month == None and year != None and itemid != None:
         results = StatisticsModel.get_sales_per_month(itemid, year)
