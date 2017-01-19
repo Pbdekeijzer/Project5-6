@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
-from posts import posts
-from requests import requests
-from auth import auth
+from app.posts import posts
+from app.requests import requests
+from app.auth import auth
 
 app = Flask(__name__)
 app.secret_key = 'coconuts'
