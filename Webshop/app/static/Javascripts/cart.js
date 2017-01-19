@@ -13,7 +13,7 @@ var modal = document.getElementById('myModal');
 function cart_onClick(id, name, price){ 
   AddToCart(id, name, price); 
   
-    document.getElementById("modal-text").innerHTML = name.toUpperCase() + " HAS BEEN ADDED TO YOUR CART" 
+    document.getElementById("modal-text").innerHTML = '<span style="color: #FE980F;">' +  name.toUpperCase() + '</span>' + " HAS BEEN ADDED TO YOUR CART" 
      
     document.getElementById("myModal").style.display = "block"; 
     setTimeout(test, 2000); 
