@@ -8,7 +8,7 @@ $(document).ready(function() {
     //Here it ends, from now only event handlers ---
 
     //If someone enters word or number in the boolinput
-    $('.booleanitmust').on('input', function() {
+    $('.booleanitmust').keyup(function() {
         if (parseInt($(this).val()) == 1 || parseInt($(this).val()) == 0 || $(this).val() == ""){}//It is accepted
 
         //It is a string that is not convertableto int, make the inputbox the same value as in the database
@@ -58,7 +58,8 @@ $(document).ready(function() {
                     postalcode: $("#Postal_Code").val(),
                     housenumber: $("#House_Number").val(),
                     adminbool: $("#Admin_Bool").val(),
-                    privacywishlist: $("#Privacy_Wishlist").val()
+                    privacywishlist: $("#Privacy_Wishlist").val(),
+                    blockedbool: $("#Blockedbool").val()
                 };
 
                 $.ajax({
@@ -89,6 +90,8 @@ $(document).ready(function() {
                 $("#House_Number").val(DataFromDB.house_number);
                 $("#Admin_Bool").val(DataFromDB.adminbool);
                 $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
+                $("#Blockedbool").val(DataFromDB.blockedbool);
+
                 ShowAlert('Succesfully found the user', 'lightgreen')
             }
         });
@@ -106,6 +109,7 @@ $(document).ready(function() {
                 $("#House_Number").val(DataFromDB.house_number);
                 $("#Admin_Bool").val(DataFromDB.adminbool);
                 $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
+                $("#Blockedbool").val(DataFromDB.blockedbool);
                 ShowAlert('Succesfully found the user', 'lightgreen')
             }
         });
