@@ -177,7 +177,6 @@ function Order(){
         else{
             document.getElementById("cart-text").innerHTML = "Please log in to complete your order."
         }
-         
      }
 }
 
@@ -207,7 +206,7 @@ function showCart() {
                 + "<button class='button' onclick='deleteItem(" + i + ")'>Delete</button></td></tr>";
         $("#cartBody").append(row);
     }
-    var row = "<tr><td></td><td></td><td></td><td>" + "€" + totalPrice + ",-" + "</td><td>" + "<button class='button' onclick='Order(" + i + ")'>Order</button> </td></tr>";
+    var row = "<tr><td></td><td></td><td></td><td>" + "€" + totalPrice + ",-" + "</td><td>" + "<button style=' width: 80.5px;' class='button' onclick='Order(" + i + ")'>Order</button> </td></tr>";
     $("#cartBody").append(row);
 }
 
