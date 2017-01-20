@@ -42,46 +42,4 @@ class MySQLdatabase:
             return False
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @staticmethod
-    def ExecuteInsertQuery(query):
-        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
-        DatabaseConnection._open_connection()
-        cursor = DatabaseConnection.cursor(buffered=True)
-        cursor.execute(query)
-        DatabaseConnection.commit()
-        cursor.close()
-        DatabaseConnection.close()
-
-    @staticmethod
-    def ExecuteQuery(query):
-        DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b', host='mysql762.cp.hostnet.nl', database='db230389_Project5_6')
-        DatabaseConnection._open_connection()
-        cursor = DatabaseConnection.cursor(buffered=True)
-        cursor.execute(query)
-        resultquery = cursor.fetchall()  
-        DatabaseConnection.commit()
-        cursor.close()
-        DatabaseConnection.close()
-        return resultquery
-
 a = MySQLdatabase()

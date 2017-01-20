@@ -20,8 +20,8 @@ def login():
             redirect_to_index = redirect(url_for('Requests.index'))
             response = app.make_response(redirect_to_index)
             """TODO: Refactor this."""
-            query = "select Adminbool from User_ where User_Name = '{0}'".format(str(username))
-            adminbool = MySQLdatabase.ExecuteQuery(query)
+            query = "select Adminbool from User_ where User_Name = %s"
+            adminbool = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
             adminbool = adminbool[0]
             response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
             return response

@@ -22,7 +22,7 @@ class ItemModel():
     @staticmethod
     def get_all_items():
         query = "SELECT * FROM Buyable_item_"
-        result = MySQLdatabase.ExecuteQuery(query)
+        result = MySQLdatabase.ExcecuteSafeSelectQuery(query)
         print(type(result))
         ItemModel.itemlst = []
         for i in result:

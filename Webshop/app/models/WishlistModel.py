@@ -23,12 +23,12 @@ class WishlistModel():
 
 
 	def insertintoWistlist(self):
-		query = "SELECT User_ID FROM User_Wishlist_ WHERE User_ID = {0} AND Product_ID = {1}".format(int(self.user_id), int(self.product_id))
-		checkexisting = MySQLdatabase.ExecuteQuery(query)
+		query = "SELECT User_ID FROM User_Wishlist_ WHERE User_ID = %s AND Product_ID = %s"
+		checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
 
 		if not checkexisting:
-			query = "INSERT INTO User_Wishlist_ VALUES('{0}', '{1}')".format(int(self.user_id), int(self.product_id))
-			MySQLdatabase.ExecuteInsertQuery(query)
+			query = "INSERT INTO User_Wishlist_ VALUES(%s, %s)"
+			MySQLdatabase.ExecuteSafeInsertQuery(query, self.user_id, self.product_id)
 			return True
 
 		checkexisting = MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_Wishlist_ WHERE User_ID = %s AND Product_ID = %s", self.user_id, self.product_id )
@@ -36,8 +36,8 @@ class WishlistModel():
 
 	@staticmethod
 	def getWishListProductIDs(user_id):
-		query = "SELECT Product_ID FROM User_Wishlist_ WHERE User_ID = '{0}'".format(int(user_id))
-		result = MySQLdatabase.ExecuteQuery(query)
+		query = "SELECT Product_ID FROM User_Wishlist_ WHERE User_ID = %s"
+		result = MySQLdatabase.ExcecuteSafeSelectQuery(query, user_id)
 		print("in getwish")
 		WishlistModel.wishlistpids = []
 		for i in result:
@@ -49,8 +49,8 @@ class WishlistModel():
 		pid_list = WishlistModel.getWishListProductIDs(user_id)
 		WishlistModel.wishlistitems = []
 		for pid in pid_list:
-			query = "SELECT Buyable_item_.* FROM Buyable_item_ WHERE Buyable_item_.Product_ID = '{0}'".format(int(pid))
-			result = MySQLdatabase.ExecuteQuery(query)
+			query = "SELECT Buyable_item_.* FROM Buyable_item_ WHERE Buyable_item_.Product_ID = %s"
+			result = MySQLdatabase.ExcecuteSafeSelectQuery(query, pid)
 			for i in result:
 				WishlistModel.wishlistitems.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
 			print("Finished")

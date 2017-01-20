@@ -19,6 +19,6 @@ class OrderItemModel():
         }
 
     def AddOrderItem(self):
-        query = "INSERT INTO Order_Buyable_item_ VALUES('{0}', '{1}', '{2}', '{3}')".format(int(self.order_id), int(self.product_id), int(self.amount), int(self.favourited))
-        MySQLdatabase.ExecuteInsertQuery(query)
+        query = "INSERT INTO Order_Buyable_item_ VALUES(%s, %s, %s, %s)"
+        MySQLdatabase.ExecuteSafeInsertQuery(query, self.order_id, self.product_id, self.amount, self.favourited)
         return True

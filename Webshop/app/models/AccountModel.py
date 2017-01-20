@@ -51,16 +51,16 @@ class AccountModel():
 
     @staticmethod
     def isAdmin(username):
-        query = "SELECT Adminbool FROM User_ WHERE '{username}' = User_Name".format(username=str(username))
+        query = "SELECT Adminbool FROM User_ WHERE %s = User_Name"
         print(query)
-        result = MySQLdatabase.ExecuteQuery(query)
+        result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
         print(result)
         return result[0][0] == 1
 
     @staticmethod
     def getAllUsers():
         query = "SELECT * FROM User_ ORDER BY User_Name"
-        result = MySQLdatabase.ExecuteQuery(query)
+        result = MySQLdatabase.ExcecuteSafeSelectQuery(query)
         accountlst = []
         for i in result:
             accountlst.append(AccountModel(i[0], i[3], i[4], i[5], i[6], i[7], i[2], i[1], i[8]))
@@ -84,8 +84,8 @@ class AccountModel():
     def checkPrivacy(username):
         if username[0] == '"':
             username = username[1:]
-        query = "SELECT Privacy_wishlist FROM User_ WHERE '{0}' = User_Name".format(str(username))
-        result = MySQLdatabase.ExecuteQuery(query)
+        query = "SELECT Privacy_wishlist FROM User_ WHERE %s = User_Name"
+        result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
         print(result[0][0])
         if 1 == int(result[0][0]):
             return True
@@ -100,19 +100,13 @@ class AccountModel():
         MySQLdatabase.ExecuteSafeInsertQuery(query, val, username)
 
     def insertAccount(self):
-        query = "SELECT User_Name FROM User_ WHERE '{0}' = User_Name".format(str(self.username))
-        hasResult = MySQLdatabase.ExecuteQuery(query)
+        query = "SELECT User_Name FROM User_ WHERE %s = User_Name"
+        hasResult = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.username)
 
         if not hasResult:
-            query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address, " \
-                    "Postal_code, House_number, Blockedbool) VALUES (True, False, '{username}', '{password}', '{" \
-                    "email}', '{postal_code}','{house_number}', FALSE);".format(username=self.username,
-                                                                                password=self.password,
-                                                                                email=self.email,
-                                                                                postal_code=self.postal_code,
-                                                                                house_number=self.house_number)
+            query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address, Postal_code, House_number, Blockedbool) VALUES (True, False, %s, %s, %s, %s,%s, FALSE)"
             print(query)
-            MySQLdatabase.ExecuteInsertQuery(query)
+            MySQLdatabase.ExecuteSafeInsertQuery(query, self.username, self.password, self.email, self.postal_code, self.house_number)
             return True
         return False
 
