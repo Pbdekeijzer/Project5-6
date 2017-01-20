@@ -1,97 +1,25 @@
 <!--Product page-->
 <script type="text/javascript" src="/static/Javascripts/productdetail.js"></script>
-<script type="text/javascript" src="/static/Javascripts/navbar.js"></script>
-<script type="text/javascript" src="/static/Workframes/jquery.cookie.js"></script>
-<script type="text/javascript" src="/static/Javascripts/navbarattop.js"></script>
 
 
-
-<style>
-.partshit {
-   float: left;
-   margin: 15px;
-   padding: 20px;
-}
-
-#wishlistButton{
-  /*border-radius: 8px;*/
-  background-color: solid #555555;
-  font-size: 20px;
-  padding: 8px 16px;
-  transition-duration: 0.01s;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-  box-shadow: 0px 0px 0px rgba(0,0,0,0.24);
-}
-
-#favouriteButton{
-  /*border-radius: 8px;*/
-  background-color: solid #555555;
-  font-size: 20px;
-  padding: 8px 16px;
-  transition-duration: 0.01s;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-  box-shadow: 0px 0px 0px rgba(0,0,0,0.24);
-}
-
-#wishlistButton:hover {
-    cursor:pointer;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.24);
-    background-color: solid #555555; 
-    color: solid #555555;
-    transform: scale(1.1,1.1);
-}
-
-#wishlistButton:active {
-  transform: translateY(2px);
-}
-
-#favouriteButton:hover {
-    cursor:pointer;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.24);
-    background-color: solid #555555;
-    color: solid #555555;
-    transform: scale(1.1,1.1);
-}
-
-#favouriteButton:active {
-  transform: translateY(2px);
-}
-
-#outline{
-  width:95%;
-  height:50%;
-  border: 2px solid black;
-  border-radius: 10px;
-}
-</style>
-
-<br>
-<h1 align="center">{{title}}</h1>
-<br>
-
-<div class="partshit" id="outline">
-
-  <div class="partshit" style="width:45%">
-    <img src={{image}} class="img" style="width:100%" alt="Image" align="left" border="3"> 
+  <div id="PP-ImgDiv">
+    <img src={{image}} alt="Image"> 
   </div>
 
-  <div>
-    <br><br>
-    <p> {{body}} </p>
-    <br>
+  <div id="PP-ProductInfo">
+    <div id="PP-InfoContainer">
+      <h1>{{title}}</h1>
+      <p> {{body}} </p>
+      <p><b> Origin: {{continent}} </b></p>
+      <p><b> Class: {{classification}} </b></p>
+      <p><b> Price: €{{price}},- </b></p>
 
-    <p><b> Origin: {{continent}} </b></p><br>
-    <p><b> Class: {{classification}} </b></p><br>
-    <p><b> Price: €{{price}},- </b></p><br>
+      <p align="bottom"><b> In stock: {{stock}} </b></p>
+      <button type="button" class= "button" id="wishlistButton">Add to wishlist</button>
+      <button type="button" class= "button" id="favouriteButton">Add to favourites</button>
 
-    <p align="bottom"><b> In stock: {{stock}} </b></p><br>
-        <button type="button" id="wishlistButton">Add to wishlist</button>
-        <button type="button" id="favouriteButton">Add to favourites</button>
-    <p style="font-size:12px" id="wishlisttext"> </p>
-
+    </div>
   </div>
-  
-</div>
 
 
 

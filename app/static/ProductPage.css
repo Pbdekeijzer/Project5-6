@@ -1,0 +1,44 @@
+#outline{
+  width:95%;
+  height:50%;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+#PP-ImgDiv{
+    float: left;
+    max-width: 40%;
+}
+
+#PP-ImgDiv img{
+    max-width: 100%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+#PP-ProductInfo{
+    float: right;
+    max-width: 55%
+}
+
+#PP-ProductTitle{
+    text-align: center;
+    float: left;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#PP-InfoContainer{
+    display: inline;
+}
+
+#product{
+    max-width: 60%;
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+	overflow: auto;
+}
+
+#PP-InfoContainer p{
+    margin-bottom: 10px;
+}
