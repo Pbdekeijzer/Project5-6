@@ -196,10 +196,11 @@ function showCart() {
 
     for (var i in cart) {
         var item = cart[i];
-        totalPrice += (item.Price * item.Quantity);
+        itemprice = item.Price / item.Quantity;
+        totalPrice += (itemprice * item.Quantity);
         var row = "<tr><td>" + item.Name + "</td><td>" +
-                "€" + item.Price + ",-" + "</td><td>" + item.Quantity + "</td><td>"
-                + "€" + item.Quantity * item.Price + ",-" + "</td><td>"
+                "€" + itemprice + ",-" + "</td><td>" + item.Quantity + "</td><td>"
+                + "€" + item.Quantity * itemprice + ",-" + "</td><td>"
                 + "<button class='button' onclick='deleteItem(" + i + ")'>Delete</button></td></tr>";
         $("#cartBody").append(row);
     }
