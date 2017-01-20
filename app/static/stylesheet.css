@@ -219,7 +219,7 @@ body {
   text-transform: uppercase;
   outline: none;
   cursor: pointer;
-  line-height: 36px;
+  line-height: 15px;
   vertical-align: middle;
   transition: background 0.3s ease;
 }

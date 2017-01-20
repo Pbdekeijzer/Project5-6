@@ -16,11 +16,16 @@ $(document).ready(function() {
             $(this).val(parseInt(DataFromDB.adminbool));
             ShowAlert('Only use the number 0 or 1', 'lightsalmon');
         }
-        else{
+        else if (this.id == 'Privacy_Wishlist'){
             $(this).val(parseInt(DataFromDB.privacywishlist));
             ShowAlert('Only use the number 0 or 1', 'lightsalmon');
         }
 
+        else{
+            $(this).val(parseInt(DataFromDB.blockedbool));
+            ShowAlert('Only use the number 0 or 1', 'lightsalmon');
+
+        }
     });
 
 
