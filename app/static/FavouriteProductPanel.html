@@ -1,12 +1,16 @@
-<article id="OrderedProductPanel" class="OrderedProducts">
+<article id="test"> 
   <!--<p>{{body}}</p><br>-->
-    <div class="product-image" style="background-image: url('{{image}}')">
+    <div class="product-image" style="background-image: url('{{image}}'">
+        <a href="/products/{{id}}">
         <img src="{{image}}">
         </a>
         <p>{{title}}</p>
         <div class="product-buttons">
-            <button type="button" class="wishlist-button button" onclick="favourites_onClick({{id}})">
+            <button type="button" class="favourite-button button" onclick="favourites_onClick({{id}})">
             <img src="../static/images/hearth.png"></img>
+            </button>
+            <button type="button" class="wishlist-button button" onclick="wishlist_onClick({{id}})"> 
+            <img src="../static/images/star.png"></img>
             </button>
         </div>
     </div>
@@ -21,7 +25,7 @@
         </p>
     </div>-->
     <div style="text-align: center; padding: 15px 0px 25px 0px;">
-        <label>Amount: {{amount}}</label>
+        <button type="button" class="cart-button button" onclick="cart_onClick({{id}}, '{{title}}', {{price}})">Add to cart</button><br>
     </div>
     <!--<div>
         <button type="button" class="favourite-button button"> &#10084</button>

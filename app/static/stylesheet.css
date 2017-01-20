@@ -229,12 +229,6 @@ body {
   background: #FE980F;
 }
 
-.favourite-button{
-  float: left;
-  width: 50%;
-  font-size: 20px;
-}
-
 .wishlist-button{
   float: right;
   width: 50%;

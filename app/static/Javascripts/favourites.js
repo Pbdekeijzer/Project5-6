@@ -1,3 +1,35 @@
+function GetItemJson(id){
+    $.ajax({
+        url: "/items?id=" + String(id)
+    }).done(function(json){
+        json = JSON.stringify(json[0]);
+        console.log(json);
+		AddToFavourites(json);
+    });
+};
+
+function AddToFavourites(json){
+    $.ajax({
+        type: "POST",
+        url: "/favourites",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function RemoveFromFavourites(json){
+    $.ajax({
+        type: "POST",
+        url: "/favourites",
+        data: json,
+        contentType: "application/json"
+    });
+};
+
+function favourites_onClick(id){
+	GetItemJson(id);
+}
+
 $(document).ready(function(){
 
     GetJSONFromUrl();
@@ -5,7 +37,7 @@ $(document).ready(function(){
     // param = json
     function InsertProduct(json){
         $.ajax({
-            url: "/static/ProductPanel.html"
+            url: "/static/FavouriteProductPanel.html"
         }).done(function(data){
             var container = $("#favouritescontent");
             var template = Handlebars.compile(data);
@@ -24,14 +56,17 @@ $(document).ready(function(){
 
     // GET JSON from URL, call insert product.
     function GetJSONFromUrl(){
+        var account = window.document.cookie.toString().split('=')[1].slice(1);
+        console.log("/" + account + "/favourites")
         $.ajax({
-            url: "/account/favourites"
+            url: "/" + account + "/favourites"
+
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);
         });
     };
-
-
-
+        // setTimeout(function(){
+        //     window.location.href = "/login";
+        // }, 4000);
 });
