@@ -61,22 +61,6 @@ class MySQLdatabase:
 
 
 
-    @staticmethod
-    def UpdateQuery(query):
-        try:
-            MySQLdatabase.DatabaseConnection._open_connection()
-            cursor = MySQLdatabase.DatabaseConnection.cursor(buffered=True)
-
-            cursor.execute(query)
-            # emp_no = cursor.lastrowid          NOT SURE IF USEFULL OR NOT, should get id of insert or something #autoincrement
-            MySQLdatabase.DatabaseConnection.commit()
-            cursor.close()
-            MySQLdatabase.DatabaseConnection.close()
-            return True;
-        except:
-            return False;
-
-
 
     @staticmethod
     def ExecuteInsertQuery(query):
