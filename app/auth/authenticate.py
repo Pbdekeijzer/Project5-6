@@ -8,8 +8,8 @@ def authenticate_user(func):
         if "username" in session and AccountModel.checkifExists(session["username"]):
             user_name = session["username"]
             user_id = AccountModel.getUID(user_name)
+            """TODO: If an user is blocked we should render a blocked page."""
             return func(user_id, *args, **kwargs)
-        """TODO: If an user is blocked we should render a blocked page."""
         return render_template('login.html')
     return wrapper
 

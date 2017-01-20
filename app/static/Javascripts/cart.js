@@ -156,19 +156,35 @@ function OrderAjax(){
     else{
         document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order."
     }
-
 }
+
+function ConfirmOrder(){
+    OrderAjax();
+    var cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    $("#AlertForOrdering").remove();
+    showCart();
+}
+
+function CancelOrder(){
+    $("#AlertForOrdering").remove();
+}
+
+
+
 
 function Order(){
     console.log("lol");
     if (window.document.cookie){
         if (window.localStorage)
 	    {
-            OrderAjax();
-            var cart = [];
-		    localStorage.setItem('cart', JSON.stringify(cart));
+	        $("#AlertForOrdering").remove();
+	        //$( "<p>Test</p>" ).insertAfter( ".inner" );
+	        $("#main-container").append("<div id='AlertForOrdering'>You are about to buy everything in your cart, <br> do you want to cont" +
+                    "inue?<br> <button onclick='ConfirmOrder()' class='button'>Yes</button> <button onclick='CancelOrder()' class='button'>N" +
+                    "o</button></div>");
 	    }
-        showCart();
+
      }
      else{
         if (JSON.parse(localStorage.cart) == 0){
