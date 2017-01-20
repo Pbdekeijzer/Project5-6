@@ -32,8 +32,6 @@ class AccountModel():
 
     @staticmethod
     def getUID(username):
-        if username[0] == '"':
-            username = username[1:]
         result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s",username)
         userid = result[0]
         userid = userid[0]
@@ -82,11 +80,9 @@ class AccountModel():
 
     @staticmethod
     def checkPrivacy(username):
-        if username[0] == '"':
-            username = username[1:]
+        print(username)
         query = "SELECT Privacy_wishlist FROM User_ WHERE %s = User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
-        print(result[0][0])
         if 1 == int(result[0][0]):
             return True
         return False
