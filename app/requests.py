@@ -27,23 +27,29 @@ def purchase_history(userid, username):
 
 
 @requests.route('/<username>/wishlist')
-@authenticate_user
-def userwishlist(userid, username):
-    if not AccountModel.checkPrivacy(username) or session["username"] == username:
+def userwishlist(username):
+    def fetchdata():
+        userid = AccountModel.getUID(username)
         items = WishlistModel.getWishListProductIDs(userid)
         data = ItemModel.get_all_items()
         data = filter(lambda x: x.id in items, data)
         data = map(lambda x: x.toDict(), data)
         data = list(data)
         return jsonify(data)
-    return "Access denied, user has private wishlist."
+    if "username" in session:
+        if session["username"] == username:
+            return fetchdata()
+        return "Username does not match"
+    if not AccountModel.checkPrivacy(username):
+        return fetchdata()
+    return render_template('404.html')
 
 @requests.route('/wishlist/<username>')
 def uwl(username):
     if "username" in session and session["username"] == username:
-        return render_template('wishlist.html')
-    elif AccountModel.checkPrivacy(username):
-        return render_template('wishlist.html')
+        return render_template('publicwishlist.html')
+    elif not AccountModel.checkPrivacy(username):
+        return render_template('publicwishlist.html')
     return "Access denied, user wishlist is private."
 
 @requests.route('/account/wishlist')

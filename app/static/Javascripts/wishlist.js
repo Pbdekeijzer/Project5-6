@@ -57,7 +57,8 @@ $(document).ready(function(){
 	
     // GET JSON from URL, call insert product.
     function GetJSONFromUrl(){
-        var account = window.document.cookie.toString().split('=')[1].slice(1);
+        var url = document.URL
+        var account = url.split('/').pop();
         console.log("/" + account + "/wishlist")
         $.ajax({
             url: "/" + account + "/wishlist"
@@ -66,8 +67,5 @@ $(document).ready(function(){
             RemoveHTMLPanels();
             InsertProduct(json);
         });     
-    }; 
-        // setTimeout(function(){
-        //     window.location.href = "/login";
-        // }, 4000);          
+    };     
 });
