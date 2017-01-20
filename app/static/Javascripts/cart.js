@@ -99,7 +99,8 @@ function deleteItem(index){
         if (i == index){
             if (cart[i].Quantity > 1){
                 //update item at index
-                cart[i].Quantity -= 1;              
+                cart[i].Price -= (cart[i].Price / cart[i].Quantity); 
+                cart[i].Quantity -= 1;                             
             }
             else{
                 //delete item at index
@@ -198,9 +199,11 @@ function showCart() {
         var item = cart[i];
         itemprice = item.Price / item.Quantity;
         totalPrice += (itemprice * item.Quantity);
+        totalItemPrice = (itemprice * item.Quantity);
+
         var row = "<tr><td>" + item.Name + "</td><td>" +
                 "€" + itemprice + ",-" + "</td><td>" + item.Quantity + "</td><td>"
-                + "€" + item.Quantity * itemprice + ",-" + "</td><td>"
+                + "€" + totalItemPrice + ",-" + "</td><td>"
                 + "<button class='button' onclick='deleteItem(" + i + ")'>Delete</button></td></tr>";
         $("#cartBody").append(row);
     }
