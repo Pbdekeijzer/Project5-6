@@ -61,13 +61,10 @@ def change_settings(userid):
 
 @posts.route('/AdminPageGetUsers', methods = ['GET', 'POST'])
 def AdminPageGetUsers():
-    if request.method == 'GET':
-        allUsers = AccountModel.getAllUsers()
-        allUsers = map(lambda x: x.toDict(), allUsers)
-        allUsers = list(allUsers)
-        return jsonify(allUsers)
+    return redirect('/accounts', 302)
 
 @posts.route('/UpdateOneUser')
+@authenticate_admin
 def UpdateOneUser():
     query = "UPDATE User_ SET Wachtwoord = %s, Email_address = %s, Postal_code = %s, House_number = %s, Adminbool = %s, Privacy_wishlist = %s, Blockedbool = %s where User_Name = %s"
     w8woord = request.args.get("password")
@@ -86,6 +83,7 @@ def UpdateOneUser():
         return jsonify({"CommitSuccess":"User not updated, are all the fields correct?"})
 
 @posts.route('/DeleteOneUser')
+@authenticate_admin
 def DeleteOneUser():
     username = request.args.get("username")
     result = MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_ WHERE User_Name = %s", username)

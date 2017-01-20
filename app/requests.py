@@ -76,6 +76,7 @@ def cart():
     return render_template('cart.html')
 
 @requests.route('/graph')
+@authenticate_admin
 def graph():
     return render_template("graph.html")
 
@@ -115,6 +116,7 @@ def stats():
     return "401", 401
 
 @requests.route('/accounts')
+@authenticate_admin
 def accounts():
     username = request.args.get('username')
     password = request.args.get('password')
@@ -164,6 +166,7 @@ def adminpage():
     return render_template('adminpage.html')
 
 @requests.route('/GetOneUser')
+@authenticate_admin
 def GetOneUser():
     TheUser = request.args.get("username")
     TheUser = AccountModel.getOneUser(TheUser)
