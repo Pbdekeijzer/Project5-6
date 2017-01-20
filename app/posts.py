@@ -69,14 +69,17 @@ def AdminPageGetUsers():
 
 @posts.route('/UpdateOneUser')
 def UpdateOneUser():
-    query = "UPDATE User_ SET Wachtwoord = '{w8woord}', Email_address = '{mail}', Postal_code = '{pcode}'," \
-            " House_number = {houseno}, Adminbool = {adminbool}, Privacy_wishlist = {secretwish}, " \
-            "Blockedbool = {blockedbool} where User_Name = '{gamertag}'".format(w8woord = request.args.get("passw"
-            "ord"), mail = request.args.get("email"), pcode = request.args.get("postalcod"
-            "e"), houseno = request.args.get("housenumber"), adminbool = request.args.get("adminbo"
-            "ol") , secretwish = request.args.get("privacywishlist"), gamertag = request.args.get("usernam"
-            "e"), blockedbool = request.args.get("blockedbool"));
-    result = MySQLdatabase.UpdateQuery(query)
+    query = "UPDATE User_ SET Wachtwoord = %s, Email_address = %s, Postal_code = %s, House_number = %s, Adminbool = %s, Privacy_wishlist = %s, Blockedbool = %s where User_Name = %s"
+    w8woord = request.args.get("password")
+    mail = request.args.get("email")
+    pcode = request.args.get("postalcode")
+    houseno = request.args.get("housenumber")
+    adminbool = request.args.get("adminbool")
+    secretwish = request.args.get("privacywishlist")
+    blockedbool = request.args.get("blockedbool")
+    gamertag = request.args.get("username")
+
+    result = MySQLdatabase.ExecuteSafeInsertQuery(query, w8woord, mail, pcode, houseno, adminbool, secretwish, blockedbool, gamertag)
     if result == True:
         return jsonify({"CommitSuccess":"User is successfully updated"})
     else:
@@ -84,8 +87,8 @@ def UpdateOneUser():
 
 @posts.route('/DeleteOneUser')
 def DeleteOneUser():
-    query = "DELETE FROM User_ WHERE User_Name = '{username}'".format(username = request.args.get("username"))
-    result = MySQLdatabase.UpdateQuery(query)
+    username = request.args.get("username")
+    result = MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_ WHERE User_Name = %s", username)
     if result == True:
         return jsonify({"CommitSuccess": "User is successfully deleted"})
     else:
