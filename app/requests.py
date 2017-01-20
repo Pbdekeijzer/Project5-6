@@ -52,24 +52,25 @@ def uwl(username):
         return render_template('publicwishlist.html')
     return "Access denied, user wishlist is private."
 
-@requests.route('/account/wishlist')
-@authenticate_user
-def getaccountwishlist(userid):
-    items = WishlistModel.getWishListProductIDs(uid)
-    data = ItemModel.get_all_items()
-    data = filter(lambda x: x.id in items, data)
-    data = map(lambda x: x.toDict(), data)
-    data = list(data)
-    return jsonify(data)
+#@requests.route('/account/wishlist')
+#@authenticate_user
+#def getaccountwishlist(userid):
+#    items = WishlistModel.getWishListProductIDs(uid)
+#    data = ItemModel.get_all_items()
+#    data = filter(lambda x: x.id in items, data)
+#    data = map(lambda x: x.toDict(), data)
+#    data = list(data)
+#    return jsonify(data)
 
-@requests.route('/account/favourites')
+@requests.route('/<username>/favourites')
 @authenticate_user
-def getAccountFavourites(userid):
-    items = FavouritesModel.getFavouritesProductIDs(userid)
-    data = ItemModel.get_all_items()
-    data = filter(lambda x: x.id in items, data)
-    data = map(lambda x: x.toDict(), data)
-    data = list(data)
+def userfavourites(userid, username):
+    if not AccountModel.checkPrivacy(username) or session["username"] == username:
+        items = FavouritesModel.getFavouritesProductIDs(userid)
+        data = ItemModel.get_all_items()
+        data = filter(lambda x: x.id in items, data)
+        data = map(lambda x: x.toDict(), data)
+        data = list(data)
     return jsonify(data)
 
 

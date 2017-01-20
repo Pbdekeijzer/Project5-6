@@ -4,6 +4,7 @@ function GetItemJson(id){
         url: "/items?id=" + String(id)
     }).done(function(json){
         json = JSON.stringify(json[0]);
+        console.log(json);
 		AddToWishlist(json);
     });
 };
