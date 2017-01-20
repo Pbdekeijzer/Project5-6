@@ -26,8 +26,9 @@ function RemoveFromFavourites(json){
     });
 };
 
-function favourites_onClick(id){
+function favourites_onClick(id, name){
 	GetItemJson(id);
+	popup(name, "favourites");
 }
 
 $(document).ready(function(){

@@ -9,38 +9,12 @@ function appendToStorage(name, data){
 
 
 var modal = document.getElementById('myModal');
- 
+
+
+
 function cart_onClick(id, name, price){ 
   AddToCart(id, name, price); 
-  
-    document.getElementById("modal-text").innerHTML = '<span style="color: #FE980F;">' +  name.toUpperCase() + '</span>' + " HAS BEEN ADDED TO YOUR CART" 
-     
-    document.getElementById("myModal").style.display = "block"; 
-    setTimeout(test, 2000); 
- 
-    function test(){ 
-        document.getElementById("myModal").style.display = "none" 
-    } 
- 
-    // Get the button that opens the modal 
-    var btn = document.getElementById("myBtn"); 
- 
-    // Get the <span> element that closes the modal 
-    var span = document.getElementsByClassName("close")[0]; 
- 
- 
- 
-    // When the user clicks the button, open the modal  
-    // btn.onclick = function() { 
-    //     modal.style.display = "block"; 
-    // } 
- 
-    // When the user clicks anywhere outside of the modal, close it 
-    window.onclick = function(event) { 
-        if (event.target == document.getElementById("myModal")) { 
-            document.getElementById("myModal").style.display = "none"; 
-        } 
-    } 
+  popup(name, "cart");
 } 
 
 function AddToCart(id, name, price) {
