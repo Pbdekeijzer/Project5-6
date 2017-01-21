@@ -2,21 +2,16 @@ $(document).ready(function(){
     var pathname = $(location).attr('pathname');
     var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
     var inWishlist = false;
-    var inFavourites = false;
     var jsonjs;
     var wishlistitems = [];
-    var favouriteitems = [];
 
     getWishlistIDs();
-    getFavouriteIDs();
     GetItemJson();
 
     if(window.document.cookie){
         $('#wishlistButton').show();
-        $('#favouriteButton').show();
     } else{
         $('#wishlistButton').hide();
-        $('#favouriteButton').hide();
     }
 
     
@@ -26,14 +21,6 @@ $(document).ready(function(){
         }
         else if (inWishlist == false){
             AddToWishlist(jsonjs);
-    }});
-
-    $('#favouriteButton').click(function(){
-        if (inFavourites == true){
-            RemoveFromFavourites(jsonjs);
-        }
-        else if (inFavourites == false){
-            AddToFavourites(jsonjs);
     }});
 
     //Uses this function twice at start for some reason

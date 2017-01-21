@@ -4,7 +4,9 @@
     <link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="/static/Javascripts/navbar.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/popup.js"></script>
     <script type="text/javascript" src="/static/Javascripts/user.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/favourites.js"></script>
     <script type="text/javascript" src="/static/Workframes/handlebars-v4.0.5.js"></script>
 </head>
 <body style="margin: 0;">
@@ -17,7 +19,7 @@
     </nav>
     <div class="sidenav">
        <div class="sliderdiv">
-        <label id="wishlist-label"> Wishlist public </label>
+        <label id="wishlist-label"> Wishlist private </label>
         <label class="switch">
             <input type="checkbox" id="privacy-checkbox" onclick="privacy_OnClick()">
             <div class="slider round">
@@ -31,6 +33,13 @@
     <h1 id="order_header"align="center" top="20px">ORDER HISTORY</h1>
 
     </div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-footer">
+                    <h3 id="modal-text">Modal Footer</h3>
+                </div>
+            </div>
         </div>
 </body>
 </html>
