@@ -30,6 +30,21 @@ class ItemModel():
 
         return ItemModel.itemlst
     
+    @staticmethod
+    def check_Stock(id, amount):
+        query = "SELECT In_stock FROM Buyable_item_ WHERE Product_ID = %s"
+        result = MySQLdatabase.ExcecuteSafeSelectQuery(query, id)
+        if ((result[0][0] - amount) < 0):
+           return False
+        return True
+
+    @staticmethod
+    def update_Stock(id, amount):
+        query = "UPDATE Buyable_item_ SET In_stock = (In_stock - %s) WHERE Product_ID = %s"
+        MySQLdatabase.ExecuteSafeInsertQuery(query, amount, id) #fix this
+        return True
+
+
     def hasId(self, string):
         return string == str(self.id)
 

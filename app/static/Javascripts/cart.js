@@ -1,11 +1,14 @@
 var cart = [];
 
+var cart_pass = true;
+
 //not used
 function appendToStorage(name, data){
     var old = localStorage.getItem(name);
     if(old === null) old = "";
     localStorage.setItem(name, old + data);
 }
+
 
 
 var modal = document.getElementById('myModal');
@@ -22,19 +25,6 @@ function cart_onClick(id, name, price){
         document.getElementById("myModal").style.display = "none" 
     } 
  
-    // Get the button that opens the modal 
-    var btn = document.getElementById("myBtn"); 
- 
-    // Get the <span> element that closes the modal 
-    var span = document.getElementsByClassName("close")[0]; 
- 
- 
- 
-    // When the user clicks the button, open the modal  
-    // btn.onclick = function() { 
-    //     modal.style.display = "block"; 
-    // } 
- 
     // When the user clicks anywhere outside of the modal, close it 
     window.onclick = function(event) { 
         if (event.target == document.getElementById("myModal")) { 
@@ -42,6 +32,14 @@ function cart_onClick(id, name, price){
         } 
     } 
 } 
+
+
+function getStock(item_id){
+
+
+    
+}
+
 
 function AddToCart(id, name, price) {
 
@@ -117,9 +115,9 @@ function deleteItem(index){
 
 function OrderAjax(){
     var cart = [];
+    cart_pass = true;
     var orderItems = [];
     cart = JSON.parse(localStorage.cart);
-    console.log('test');
     if (JSON.parse(localStorage.cart) != 0){
         for (var i in cart) {
                 var item = cart[i];
@@ -131,24 +129,27 @@ function OrderAjax(){
 
         console.log(JSON.stringify({lol : orderItems}));
         
+        // !!SPEEDUP CART PROCESS TREMENDOUSLY -> REMOVE async: false !!
         $.ajax({
             url: "/order", // the endpoint
             type: "POST", // http method
+            async: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(orderItems), // data sent with the post request
-            // handle a successful response
+            // handle a successful response -- does nothing, because of wrong return format
             success: function (json) {
-                $('#post-text').val(''); // remove the value from the input
-                console.log(json); // log the returned json to the console
-                console.log("success"); // another sanity check
             },
 
-            // handle a non-successful response
+            // handle a non-successful response -- actually handles the succesful response
             error: function (xhr, errmsg, err) {
                 $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
                     " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
                 console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                if (xhr.responseText != "Succes"){ 
+                    document.getElementById("cart-text").innerHTML = xhr.responseText;
+                    cart_pass = false;
+                }             
             }
         });
     }
@@ -164,9 +165,12 @@ function Order(){
     if (window.document.cookie){
         if (window.localStorage)
 	    {
-            OrderAjax();
-            var cart = [];
-		    localStorage.setItem('cart', JSON.stringify(cart));
+            $.when(OrderAjax()).done(function(){
+                if (cart_pass){
+                    var cart = [];
+                    localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            });
 	    }
         showCart();
      }

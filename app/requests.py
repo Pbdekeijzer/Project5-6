@@ -66,7 +66,6 @@ def getAccountFavourites(userid):
     data = list(data)
     return jsonify(data)
 
-
 @requests.route('/products/<id>')
 def productsdetail(id):
     return render_template('products.html')

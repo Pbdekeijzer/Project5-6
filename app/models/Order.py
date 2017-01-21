@@ -21,7 +21,6 @@ class Order:
                     "AND obi.Product_ID= %s " \
                     "AND obi.Order_ID = %s"
 
-
             #query = "SELECT Buyable_item_.* FROM Buyable_item_ WHERE Buyable_item_.Product_ID = '{0}'".format(int(product_id))
             #query2 = "SELECT Amount FROM Order_Buyable_item_ WHERE Order_ID = '{0}' AND Product_ID = '{1}'".format(int(self.id), int(product_id))
             result = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.id, product_id)
