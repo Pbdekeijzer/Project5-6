@@ -42,18 +42,13 @@ def favourites(userid):
 def order(userid):
     """TODO: Add history to this route [GET]."""  
     if request.method == 'POST':
-        orderArray = request.json
-        for i in orderArray:
-            suff_stock = ItemModel.check_Stock(i[0], i[3]) #whole if new
-            if suff_stock == False:
-                return str(i[1]) + " has insufficient stock"
-
         HistoryModel.insertOrder(userid)
         order_id = HistoryModel.getlastOrder()
+        orderArray = request.json
         for i in orderArray:
             item_id = i[0]
             item_quantity = i[3]
-            ItemModel.update_Stock(item_id, item_quantity) #new
+            ItemModel.update_Stock(item_id, item_quantity)
             orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
             OrderItemModel.AddOrderItem(orderItem)       
     return "Succes"

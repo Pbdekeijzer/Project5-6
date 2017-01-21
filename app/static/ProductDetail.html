@@ -1,5 +1,7 @@
 <!--Product page-->
 <script type="text/javascript" src="/static/Javascripts/productdetail.js"></script>
+<script type="text/javascript" src="/static/Javascripts/popup.js"></script>
+<script type="text/javascript" src="/static/Javascripts/cart.js"></script>
 
   <someHiddenProductInfo id={{id}} hidden></someHiddenProductInfo>
 
@@ -16,10 +18,18 @@
       <p><b> Price: €{{price}},- </b></p>
 
       <p align="bottom"><b> In stock: {{stock}} </b></p>
-      <button type="button" class= "button" id="wishlistButton">Add to cart</button>
+      <button type="button" class="cart-button button" onclick="cart_onClick({{id}}, '{{title}}', {{price}}, '{{stock}}')">Add to cart</button>
 
     </div>
   </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-footer">
+            <h3 id="modal-text">Modal Footer</h3>
+        </div>
+    </div>
+</div>
 
 
 

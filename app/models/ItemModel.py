@@ -30,6 +30,7 @@ class ItemModel():
 
         return ItemModel.itemlst
     
+    #never used, because we check the stock in front end
     @staticmethod
     def check_Stock(id, amount):
         query = "SELECT In_stock FROM Buyable_item_ WHERE Product_ID = %s"
