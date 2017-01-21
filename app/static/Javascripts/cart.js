@@ -1,50 +1,28 @@
 var cart = [];
 
-var cart_pass = true;
-
-//not used
-function appendToStorage(name, data){
-    var old = localStorage.getItem(name);
-    if(old === null) old = "";
-    localStorage.setItem(name, old + data);
-}
-
-
-
-var modal = document.getElementById('myModal');
-
-
-
-function cart_onClick(id, name, price){ 
-  AddToCart(id, name, price); 
+//first function call when the 'Add to Cart' button is clicked
+function cart_onClick(id, name, price, stock){ 
+  AddToCart(id, name, price, stock); 
   popup(name, "cart");
 } 
 
+function AddToCart(id, name, price, stock) {
 
-function getStock(item_id){
-
-
-    
-}
-
-
-function AddToCart(id, name, price) {
-
-	// load cart data from local storage
-	if (localStorage.cart)
-	{
+	//load cart data from local storage
+	if (localStorage.cart){
 		cart = JSON.parse(localStorage.cart);  
 	}
 
-	// Retrieve the cart object from local storage
+	//store the items to the cart in the local storage item 'cart'
 	if (localStorage){
 		var pid = id;
 		var pname = name;
 		var pprice_string = price;
 		var pprice = parseInt(pprice_string);
 		var pquantity = 1; //can change this to dropdown value?
+        var pstock = stock;
 
-		var product = { ID : pid, Name: pname, Price: pprice, Quantity: pquantity };
+		var product = { ID : pid, Name: pname, Price: pprice, Quantity: pquantity , Stock: pstock };///
 		console.log(product);
 		//didnt work without the if statement on cart.length for some reason
 		if (cart.length > 0){
@@ -53,19 +31,19 @@ function AddToCart(id, name, price) {
 					cart[i].Quantity += 1;
 					cart[i].Price += pprice;
 					saveCart(cart);
-					console.log("Item already exists");
+					console.log("Item already exists"); //sanity check -canremove
 					console.log(cart[i].Price);
                     console.log(cart[i].Quantity);
 					return;
-				}             
+				}            
 			}  
 		}    
 
-		console.log("Item not yet in cart");
+		console.log("Item not yet in cart"); //sanity check -canremove
 		cart.push(product);
 		saveCart(cart);
 		return;
-	} 
+	}
 }
 
 //Save cart
@@ -93,11 +71,23 @@ function deleteItem(index){
             }
         }      
     }
-    //try without first
-    // newcart = JSON.stringify(cart);
    
     saveCart(cart);
     showCart();
+}
+
+//Check the stock for every item in the cart and return a string with every item with insufficient stock for the order.
+function checkStock(cart){
+    return_string = "";
+     for (var i in cart){
+         console.log(cart[i].Stock + " = current stock");
+         console.log(cart[i].Quantity);
+
+         if (cart[i].Stock < cart[i].Quantity){
+            return_string += cart[i].Name + "  "; 
+         }
+     }
+     return return_string;
 }
 
 function OrderAjax(){
@@ -105,22 +95,20 @@ function OrderAjax(){
     cart_pass = true;
     var orderItems = [];
     cart = JSON.parse(localStorage.cart);
-    if (JSON.parse(localStorage.cart) != 0){
+    var enough_stock = checkStock(cart);
+
+    if (JSON.parse(localStorage.cart) != 0 && enough_stock == ""){
         for (var i in cart) {
                 var item = cart[i];
-                var itemDetails = [item.ID, item.Name, item.Price, item.Quantity]; //item.ID, item.Name, item.Price, item.Quantity
-                // itemDetails.push(item.ID, item.N);
-                console.log(item.ID);
+                var itemDetails = [item.ID, item.Name, item.Price, item.Quantity];      
                 orderItems.push(itemDetails);
         }
 
-        console.log(JSON.stringify({lol : orderItems}));
+        console.log(JSON.stringify({lol : orderItems})); //sanity test -canremove
         
-        // !!SPEEDUP CART PROCESS TREMENDOUSLY -> REMOVE async: false !!
         $.ajax({
             url: "/order", // the endpoint
             type: "POST", // http method
-            async: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(orderItems), // data sent with the post request
@@ -132,51 +120,50 @@ function OrderAjax(){
             error: function (xhr, errmsg, err) {
                 $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
                     " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                if (xhr.responseText != "Succes"){ 
-                    document.getElementById("cart-text").innerHTML = xhr.responseText;
-                    cart_pass = false;
-                }             
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console         
             }
         });
+
+        return true;
     }
     
+    else if(enough_stock != ""){
+        document.getElementById("cart-text").innerHTML = "The following items don't have enough in stock: " + enough_stock;
+        return false;
+    }
+
     else{
         document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order."
+        return false;
     }
 
 }
 
 function Order(){
-    console.log("lol");
     if (window.document.cookie){
         if (window.localStorage)
 	    {
-            $.when(OrderAjax()).done(function(){
-                if (cart_pass){
-                    var cart = [];
-                    localStorage.setItem('cart', JSON.stringify(cart));
-            }
-            });
+            var empty_cart = OrderAjax();
+            if (empty_cart){
+                var cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                document.getElementById("cart-text").innerHTML = "Your order has been completed!";
+            }         
 	    }
         showCart();
      }
      else{
         if (JSON.parse(localStorage.cart) == 0){
-            document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order."
+            document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order.";
         }
         else{
-            document.getElementById("cart-text").innerHTML = "Please log in to complete your order."
+            document.getElementById("cart-text").innerHTML = "Please log in to complete your order.";
         }
      }
 }
 
 //Show cart in HTML
 function showCart() {
-    // if (cart.length == 0) {
-    //     $("#cart").css("visibility", "hidden"); // hide table that shows cart
-    //     return;
-    // }
     cart = [];
 
     cart = JSON.parse(localStorage.cart);

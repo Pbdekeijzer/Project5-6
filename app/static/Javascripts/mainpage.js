@@ -111,7 +111,7 @@ $(document).ready(function(){
             var container = $("#product");
             var template = Handlebars.compile(data);
             for(var i in json){
-				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price};
+				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price, stock: json[i].in_stock};
 				var html = template(context);
 				container.append(html);
             }
