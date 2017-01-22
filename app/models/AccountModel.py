@@ -2,6 +2,7 @@ import json
 from flask import jsonify
 from app.MySQLdatabase import *
 import os
+import logging
 
 
 class AccountModel():
@@ -50,9 +51,7 @@ class AccountModel():
     @staticmethod
     def isAdmin(username):
         query = "SELECT Adminbool FROM User_ WHERE %s = User_Name"
-        print(query)
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
-        print(result)
         return result[0][0] == 1
 
     @staticmethod
@@ -83,9 +82,8 @@ class AccountModel():
         print(username)
         query = "SELECT Privacy_wishlist FROM User_ WHERE %s = User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
-        if 1 == int(result[0][0]):
-            return True
-        return False
+        return result[0][0] == 1
+
 
     @staticmethod
     def updatePrivacy(username):
