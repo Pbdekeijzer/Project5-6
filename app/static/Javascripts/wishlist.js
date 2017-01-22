@@ -60,9 +60,17 @@ $(document).ready(function(){
     function GetJSONFromUrl(){
         var url = document.URL
         var account = url.split('/').pop();
+        var des_url = "";
+        if (window.document.cookie){
+            des_url = "/wishlist";
+        }
+        else{
+            des_url = "/" + account + "/wishlist"
+        }
+
         console.log("/" + account + "/wishlist")
         $.ajax({
-            url: "/" + account + "/wishlist"
+            url: des_url
                
         }).done(function(json){
             RemoveHTMLPanels();
