@@ -49,6 +49,12 @@ class AccountModel():
             return "Name is not found"
 
     @staticmethod
+    def isBlocked(username):
+        query = "SELECT Blockedbool FROM User_ WHERE %s = User_Name"
+        result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
+        return result[0][0] == 1
+
+    @staticmethod
     def isAdmin(username):
         query = "SELECT Adminbool FROM User_ WHERE %s = User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
