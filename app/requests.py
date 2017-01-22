@@ -25,7 +25,6 @@ def purchase_history(userid, username):
         data = historyModel.get_order_history()
         return jsonify(data)
 
-
 @requests.route('/<username>/wishlist')
 def userwishlist(username):
     def fetchdata():

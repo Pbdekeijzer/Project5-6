@@ -164,8 +164,9 @@ function Order(){
 //Show cart in HTML
 function showCart() {
     cart = [];
-
-    cart = JSON.parse(localStorage.cart);
+    if (localStorage.cart){
+        cart = JSON.parse(localStorage.cart);
+    }
 
     $("#cart").css("visibility", "visible");
     $("#cartBody").empty();  //empty the cart
@@ -189,7 +190,7 @@ function showCart() {
 
 $(document).ready(function()
 {
-    if (document.location.pathname.indexOf("/cart/")) {
+    if(window.location.href.indexOf("cart") > -1) {
         showCart();
-    } 
+    }
 });
