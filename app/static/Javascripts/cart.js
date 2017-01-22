@@ -136,7 +136,6 @@ function OrderAjax(){
         document.getElementById("cart-text").innerHTML = "Your cart is empty. Add an item to complete an order."
         return false;
     }
-
 }
 
 function Order(){
