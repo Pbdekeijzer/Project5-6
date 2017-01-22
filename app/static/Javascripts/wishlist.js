@@ -60,12 +60,9 @@ $(document).ready(function(){
     function GetJSONFromUrl(){
         var url = document.URL
         var account = url.split('/').pop();
-        var des_url = "";
+        var des_url = "/" + account + "/wishlist";
         if (window.document.cookie){
             des_url = "/wishlist";
-        }
-        else{
-            des_url = "/" + account + "/wishlist"
         }
 
         console.log("/" + account + "/wishlist")
