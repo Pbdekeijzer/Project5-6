@@ -43,34 +43,34 @@
         <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="Email" id="Email"> Email </input><br>
         <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="Postal code" id="Postal_Code"> Postal code </input><br>
         <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="House number" id="House_Number"> House no. </input><br>
-        <div class="sliderdiv">
-            <label id="admin-label" style="margin-right: 3px"> Admin bool </label>
-            <label class="switch">
+        <div class="sliderdiv" style="padding-top: 5px">
+            <label class="switch AdminSlider">
                 <input type="checkbox" id="admin-checkbox">
                 <div class="slider round">
                 </div>
             </label>
+            <label id="admin-label"> Admin bool </label>
         </div>
         <div class="sliderdiv">
-            <label id="privacy-label" style="margin-right: 3px"> Privacy wishlist </label>
-            <label class="switch">
+            <label class="switch AdminSlider">
                 <input type="checkbox" id="privacy-checkbox">
                 <div class="slider round">
                 </div>
             </label>
+            <label id="privacy-label"> Privacy wishlist </label>
         </div>
         <div class="sliderdiv">
-            <label id="blocked-label" style="margin-right: 3px"> Blocked bool </label>
-            <label class="switch">
+            <label class="switch AdminSlider">
                 <input type="checkbox" id="blocked-checkbox">
                 <div class="slider round">
                 </div>
             </label>
+            <label id="blocked-label"> Blocked bool </label>
         </div>
         <button id="FindUser" type="button" class="button buttonAtAdminpage"> Find user with username </button><br>
         <button id="UpdateUser" type="button" class="button buttonAtAdminpage"> Update user with username </button><br>
         <button id="DeleteUser" type="button" class="button buttonAtAdminpage"> Delete user with username </button><br>
-        <div id='NotFoundAlert'> nothing yet, see function showalert in js</div>
+        <div id='NotFoundAlert'"> nothing yet, see function showalert in js</div>
     </div>
     <div>
       <button id="GoToGraphs" type="button" onclick="window.location = '/graph';" class="button buttonAtAdminpage">Go to the sale graphs</button>

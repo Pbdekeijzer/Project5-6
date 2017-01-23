@@ -36,9 +36,9 @@ $(document).ready(function() {
 
         $.when(FindUser($("#Username").val())).done(function() {
             if (DataFromDB.username != "Username is not found") {
-                var AdminSwitch = $("#admin-checkbox").is(":checked").ConvertBoolToInt();
-                var PrivacySwitch = $("#privacy-checkbox").is(":checked").ConvertBoolToInt();
-                var BlockedSwitch = $("#blocked-checkbox").is(":checked").ConvertBoolToInt();
+                var AdminSwitch = ConvertBoolToInt($("#admin-checkbox").is(":checked"));
+                var PrivacySwitch = ConvertBoolToInt($("#privacy-checkbox").is(":checked"));
+                var BlockedSwitch = ConvertBoolToInt($("#blocked-checkbox").is(":checked"));
 
                 var DataToAPI = {
                     username: $("#Username").val(),
@@ -78,9 +78,9 @@ $(document).ready(function() {
                 $("#Email").val(DataFromDB.email);
                 $("#Postal_Code").val(DataFromDB.postal_code);
                 $("#House_Number").val(DataFromDB.house_number);
-                $("#admin-checkbox").prop('checked', DataFromDB.adminbool.ConvertIntToBool());
-                $("#privacy-checkbox").prop('checked', DataFromDB.privacywishlist.ConvertIntToBool());
-                $("#blocked-checkbox").prop('checked', DataFromDB.blockedbool.ConvertIntToBool());
+                $("#admin-checkbox").prop('checked', ConvertIntToBool(DataFromDB.adminbool));
+                $("#privacy-checkbox").prop('checked', ConvertIntToBool(DataFromDB.privacywishlist));
+                $("#blocked-checkbox").prop('checked', ConvertIntToBool(DataFromDB.blockedbool));
 
                 ShowAlert('Succesfully found the user', 'lightgreen')
             }
@@ -97,9 +97,9 @@ $(document).ready(function() {
                 $("#Email").val(DataFromDB.email);
                 $("#Postal_Code").val(DataFromDB.postal_code);
                 $("#House_Number").val(DataFromDB.house_number);
-                $("#admin-checkbox").prop('checked', DataFromDB.adminbool.ConvertIntToBool());
-                $("#privacy-checkbox").prop('checked', DataFromDB.privacywishlist.ConvertIntToBool());
-                $("#blocked-checkbox").prop('checked', DataFromDB.blockedbool.ConvertIntToBool());
+                $("#admin-checkbox").prop('checked', ConvertIntToBool(DataFromDB.adminbool));
+                $("#privacy-checkbox").prop('checked', ConvertIntToBool(DataFromDB.privacywishlist));
+                $("#blocked-checkbox").prop('checked', ConvertIntToBool(DataFromDB.blockedbool));
                 ShowAlert('Succesfully found the user', 'lightgreen')
             }
         });
@@ -160,15 +160,15 @@ $(document).ready(function() {
 
     }
 
-    function ConvertBoolToInt(){
-        if (this == true)
+    function ConvertBoolToInt(TheBool){
+        if (TheBool == true)
             return 1;
         else
             return 0;
     }
 
-    function ConvertIntToBool(){
-        if (this == 1)
+    function ConvertIntToBool(TheInt){
+        if (TheInt == 1)
             return true;
         else
             return false;

@@ -45,3 +45,18 @@ td{
 .tableRow {
     cursor: pointer;
 }
+
+.sliderdiv{
+  padding: 0px;
+}
+
+.AdminSlider{
+  padding: 0px;
+  width: 60px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+}
+
+#admin-label, #privacy-label, #blocked-label{
+  margin-left: 5px;
+}
