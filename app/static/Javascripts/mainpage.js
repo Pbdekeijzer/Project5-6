@@ -119,15 +119,15 @@ $(document).ready(function(){
 					$(".wishlist-button").hide();			
 				}	
 
-				var wishlistItems = getWishlistItems();
-				console.log(wishlistItems);
+				//var wishlistItems = getWishlistItems();
+				
 				$(".wishlist-button").css("opacity", 1);	
             }
         });
     };
 
 
-	function ReadCookie
+
 
 	function GetWishlistItems(){
         var url = document.URL
