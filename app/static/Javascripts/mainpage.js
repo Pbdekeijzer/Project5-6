@@ -114,9 +114,34 @@ $(document).ready(function(){
 				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price, stock: json[i].in_stock};
 				var html = template(context);
 				container.append(html);
+
+				if (!window.document.cookie){
+					$(".wishlist-button").hide();			
+				}	
+
+				// var wishlistItems = getWishlistItems();
+				// console.log(wishlistItems);
+				$(".wishlist-button").css("opacity", 1);	
             }
         });
     };
+
+
+
+
+	function GetWishlistItems(){
+        var url = document.URL
+        var account = document.window.cookie
+
+        var des_url = des_url = "/" + account + "/wishlist";
+
+        $.ajax({
+            url: des_url             
+        }).done(function(json){
+
+        });     
+    }     
+	
 
 	//Empty all
     function RemoveHTMLPanels(){
@@ -130,7 +155,7 @@ $(document).ready(function(){
             url: "/" + param,   
         }).done(function(json){
             RemoveHTMLPanels();
-            InsertProduct(json);
+            InsertProduct(json);			
         });     
     };
 

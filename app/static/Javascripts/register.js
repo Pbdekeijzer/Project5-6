@@ -28,44 +28,38 @@ $(document).ready(function(){
     function isValidPassword(border)
     {
         var password = $("#password").val();
-        var passwordRegex = new RegExp(/^[\@\#\$\%\^\&\*\(\)\_\+\!\A-Za-z0-9_-]{6,18}$/);
+        var passwordStrength = 0;
+        var regexs = [/.{6,18}/, /[a-z]+/, /[0-9]+/, /[A-Z]+/];
         result = false;
-        if (password.match(passwordRegex))
-        {
-            $("#passtext").text("This password is allowed.");   
+        jQuery.map(regexs, function(regex){
+            if (password.match(regex)){
+                passwordStrength++;
+            }
+        });
+        if(passwordStrength > 2){
             result = true;
-        }else
-        {
-            $("#passtext").text("Make sure to use the correct format."); 
-            if (border == true){
-                $('#passtext').css('color', 'red');
-            }    
-            else{
-                $('#passtext').css('color', 'black');
-            }                         
+            $("#passtext").css('color', 'green');
+            $("#passtext").text("Password allowed, current strength: " + passwordStrength.toString() + " /4");
         }
+        else
+            $("#passtext").css('color', 'red');
+            $("#passtext").text("Use a stronger password, current strength: " + passwordStrength.toString() + " /4"); 
         return result;
     }
 
     function isValidConfirmPassword(border)
     {
         var password = $("#confirmpassword").val();
-        var passwordRegex = new RegExp(/^[\@\#\$\%\^\&\*\(\)\_\+\!\A-Za-z0-9_-]{6,18}$/);
         result = false;
-        if (password.match(passwordRegex))
+        if (password == $("#password").val())
         {
-            $("#confirmpasstext").text("This password is allowed."); 
-            $('#confirmpasstext').css('color', 'black');  
+            $('#confirmpasstext').css('color', 'green');
+            $("#confirmpasstext").text("Passwords match.");   
             result = true;
         }else
         {
-            $("#confirmpasstext").text("Make sure to use the correct format."); 
-            if (border == true){
-                $('#confirmpasstext').css('color', 'red');
-            }    
-            else{
-                $('#confirmpasstext').css('color', 'black');
-            }                         
+            $("#confirmpasstext").text("Make sure the passwords match."); 
+            $('#confirmpasstext').css('color', 'red');
         }
         return result;
     }

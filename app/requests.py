@@ -113,7 +113,7 @@ def stats():
         return jsonify(items)
     
     if MaxWishlist != None:
-        results = WishlistStats.getMostWishedItems(MaxWishlist)
+        results = WishlistStats.getMostWishedItems(int(MaxWishlist))
         items = map(lambda x: x.toDict(), results)
         items = list(items)
         return jsonify(items)
