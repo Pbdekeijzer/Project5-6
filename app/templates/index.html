@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/mainpage.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/popup.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/navbar.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/cart.js"></script>
+    <script type="text/javascript" src="/static/Workframes/handlebars-v4.0.5.js"></script>
+
+    <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+</head>
+<body style="margin: 0;">
+    <nav>
+        <ul id="NavbarAtTop">
+            <li class="filler"></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/cart">Cart</a></li>        
+        </ul>
+    </nav>
+   
+  <div class="flex-container" id="main-container">
+
+    <div class="sidenav">
+        <div class="SearchBar text-center">        
+        <form class="form-inline">
+            <div class="navbardiv">
+                <input type="text" id="search_input" class="form-control" size="25" placeholder="Product name"><!--<button id="searchbutton" type="button" id="FindTheAnimals">Search</button><br>-->
+            </div>
+
+
+
+            <div class="options">
+            <br><br>
+            <p id="classdroptext"> Class</p> 
+            <select id="selectMenu">
+                <option value="1">All</option>
+                <option value="2">Mammal</option>  
+                <option value="3">Fish</option>  
+                <option value="4">Amphibian</option>  
+                <option value="5">Reptile</option>  
+                <option value="6">Bird</option>
+                <option value="7">Insect</option>  
+            </select>
+			
+                <br>
+                <br>
+            <p id="searchdroptext"> Price </p>
+			<select id="selectPrice" class="SearchDropDown">
+                <option value="1">Any Price</option>
+                <option value="2">0-100</option>
+                <option value="3">100-500</option>  
+                <option value="4">500-2000</option>  
+                <option value="5">2000-10000</option>  
+                <option value="6">10000+</option>  
+            </select>
+
+            </div>
+            <br>
+            <div class="navbardiv2">
+            <p id="checkboxtext"> Continents </p>
+            <div class="checkboxes">
+            <input class="check-form" type="checkbox" id="checkboxNA" name="cb" value="North America" checked> North America</input><br>
+            <input class="check-form" type="checkbox" id="checkboxSA" name="cb" value="South America" checked> South America</input><br>
+            <input class="check-form" type="checkbox" id="checkboxAUS" name="cb" value="Australia" checked> Australia</input><br>
+            <input class="check-form" type="checkbox" id="checkboxEU" name="cb" value="Europe" checked> Europe</input><br>
+            <input class="check-form" type="checkbox" id="checkboxASIA" name="cb" value="Asia" checked> Asia</input><br>
+            <input class="check-form" type="checkbox" id="checkboxAFR" name="cb" value="Africa" checked> Africa</input><br>
+            <input class="check-form" type="checkbox" id="checkboxANTA" name="cb" value="Antarctica" checked> Antarctica</input>
+            </div>
+            </div>
+            
+            <br>
+            <div class="navbardiv">
+            <p id="checkboxtext">Stock </p>
+            <div class="checkboxes">
+            
+            <input type="checkbox" id="checkboxOnlyStock" name="cbtest" value="In stock"> Only in stock</input>
+            
+            </div>
+            <br>
+            </div>            
+            <br><br><br><br><br><br><br><br><br><br>
+            <!--<input id="slider" type="range" min="0" max="20" />
+            <input id="value" />-->
+        </form>
+    </div>
+    </div>
+
+    <div id="product" class="container1 offset-left-330">
+    
+    </div>
+
+    
+  </div>
+    <!--<br>
+    <footer id="footer"><b>        Copyright © Group 2</b></footer>
+    <button type="button" id="test"> </button>
+    <br>-->
+
+
+    <!--<script>
+        $(document).ready(function() {
+
+        });
+    </script> -->
+
+        <!-- the add to cart modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-footer">
+                    <h3 id="modal-text">Modal Footer</h3>
+                </div>
+            </div>
+        </div>
+
+  </body>
+</html>

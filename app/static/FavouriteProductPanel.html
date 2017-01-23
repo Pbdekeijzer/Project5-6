@@ -1,0 +1,37 @@
+<article id="test"> 
+  <!--<p>{{body}}</p><br>-->
+    <div class="product-image" style="background-image: url('{{image}}'">
+        <a href="/products/{{id}}">
+        <img src="{{image}}">
+        </a>
+        <p>{{title}}</p>
+        <div class="product-buttons">
+            <button type="button" title="Remove from favourites" class="favourite-button button" onclick="favourites_onClick({{id}}, '{{title}}')">
+            <img src="../static/images/hearth.png"></img>
+            </button>
+            <button type="button" title="Add to wishlist" class="wishlist-button button" onclick="wishlist_onClick({{id}}, '{{title}}')">
+            <img src="../static/images/star.png"></img>
+            </button>
+        </div>
+    </div>
+    <div id="productprice">
+        <p id="product-price">
+            €{{price}},-<br>
+        </p>
+    </div>
+    <!--<div id="product-title">
+        <p>
+            {{title}}<br>
+        </p>
+    </div>-->
+    <div style="text-align: center; padding: 15px 0px 25px 0px;">
+        <button type="button" title="Add to cart" class="cart-button button" onclick="cart_onClick({{id}}, '{{title}}', {{price}}, '{{stock}}')">Add to cart</button><br>
+    </div>
+    <!--<div>
+        <button type="button" class="favourite-button button"> &#10084</button>
+        <button type="button" class="wishlist-button button">Add to wishlist</button>
+        <div style="clear: both;">
+        </div>
+    </div>-->
+    
+</article>

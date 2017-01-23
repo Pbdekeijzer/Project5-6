@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/static/Adminfeatures.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/Workframes/handlebars-v4.0.5.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/navbar.js"></script>
+    <script type="text/javascript" src="/static/Javascripts/adminpage.js"></script>
+
+    <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+</head>
+<body style="height: 100%">
+    <nav>
+        <ul id="NavbarAtTop">
+            <li><a href="/">Home</a></li>
+            <li><a href="/cart">Cart</a></li>
+        </ul>
+    </nav>
+   
+  <div class="flex-container" id="main-container" style="overflow: auto; width: 100%;">
+    
+    <div id="table" class="container1">
+        <table id="userTable" class="PrettyTable">
+            <tr>
+                <th>Username</th>
+                <th>Password</th> 
+                <th>Email</th>
+                <th>Postal Code</th>
+                <th>Housenumber</th>
+                <th>Adminbool</th>
+                <th>Privacy Wishlist</th>
+                <th>Blocked</th>
+            </tr>
+
+        </table>
+    </div>
+    <br>
+    <div>
+        <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="Username" id="Username"> Username </input><br>
+        <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="Password" id="Password"> Password </input><br>
+        <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="Email" id="Email"> Email </input><br>
+        <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="Postal code" id="Postal_Code"> Postal code </input><br>
+        <input type="text" class="form-control inputAtAdminpage" size="25" placeholder="House number" id="House_Number"> House no. </input><br>
+        <input type="text" class="form-control inputAtAdminpage booleanitmust" size="25" placeholder="Adminbool" id="Admin_Bool"> Adminbool </input><br>
+        <input type="text" class="form-control inputAtAdminpage booleanitmust" size="25" placeholder="Privacy wishlist" id="Privacy_Wishlist"> Privacy wishlist </input><br>
+        <input type="text" class="form-control inputAtAdminpage booleanitmust" size="25" placeholder="Blocked" id="Blockedbool"> Blocked </input><br><br>
+        <button id="FindUser" type="button" class="button buttonAtAdminpage"> Find user with username </button><br>
+        <button id="UpdateUser" type="button" class="button buttonAtAdminpage"> Update user with username </button><br>
+        <button id="DeleteUser" type="button" class="button buttonAtAdminpage"> Delete user with username </button><br>
+        <div id='NotFoundAlert'> nothing yet, see function showalert in js</div>
+    </div>
+    <div>
+      <button id="GoToGraphs" type="button" onclick="window.location = '/graph';" class="button buttonAtAdminpage">Go to the sale graphs</button>
+    </div>
+
+</div>
+    <br>
+    <footer id="footer"><b>        Copyright © Group 2</b></footer>
+    <button type="button" id="test"> </button>
+    <br>
+
+
+
+  </body>
+</html>
