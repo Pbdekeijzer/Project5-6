@@ -138,18 +138,34 @@ function OrderAjax(){
     }
 }
 
+function ConfirmOrder(){
+    OrderAjax();
+    var cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    $("#AlertForOrdering").remove();
+    showCart();
+    document.getElementById("cart-text").innerHTML = "Your order has been completed!";
+}
+
+function CancelOrder(){
+    $("#AlertForOrdering").remove();
+}
+
+
+
+
 function Order(){
     if (window.document.cookie){
         if (window.localStorage)
 	    {
-            var empty_cart = OrderAjax();
-            if (empty_cart){
-                var cart = [];
-                localStorage.setItem('cart', JSON.stringify(cart));
-                document.getElementById("cart-text").innerHTML = "Your order has been completed!";
-            }         
+	        $("#AlertForOrdering").remove();
+	        //$( "<p>Test</p>" ).insertAfter( ".inner" );
+	        $("#content").append("<div id='AlertForOrdering'>You are about to buy everything in your cart, <br> do you want to cont" +
+                    "inue?<br> <button onclick='ConfirmOrder()' class='button'>Yes</button> <button onclick='CancelOrder()' class='button'>N" +
+                    "o</button></div>");
+
 	    }
-        showCart();
+
      }
      else{
         if (JSON.parse(localStorage.cart) == 0){
@@ -164,8 +180,9 @@ function Order(){
 //Show cart in HTML
 function showCart() {
     cart = [];
-
-    cart = JSON.parse(localStorage.cart);
+    if (localStorage.cart){
+        cart = JSON.parse(localStorage.cart);
+    }
 
     $("#cart").css("visibility", "visible");
     $("#cartBody").empty();  //empty the cart
@@ -189,7 +206,7 @@ function showCart() {
 
 $(document).ready(function()
 {
-    if (document.location.pathname.indexOf("/cart/")) {
+    if(window.location.href.indexOf("cart") > -1) {
         showCart();
-    } 
+    }
 });

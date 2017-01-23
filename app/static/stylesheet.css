@@ -581,6 +581,13 @@ input:checked + .slider:before {
   background-color: rgba(0,0,0,.08);
 }
 
+#AlertForOrdering{
+  margin: 2%;
+  margin-left: 40%;
+  float: left;
+}
+
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

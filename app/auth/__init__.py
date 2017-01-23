@@ -14,17 +14,20 @@ def login():
         username = request.form['username']
         password = request.form['password']
         result = AccountModel.checkAccount(username, password)
-        if result:          
-            session["username"] = username
-            session.permanent = True
-            redirect_to_index = redirect(url_for('Requests.index'))
-            response = app.make_response(redirect_to_index)
-            """TODO: Refactor this."""
-            query = "select Adminbool from User_ where User_Name = %s"
-            adminbool = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
-            adminbool = adminbool[0]
-            response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
-            return response
+        blocked = AccountModel.isBlocked(username)
+        if result:
+            if not blocked:          
+                session["username"] = username
+                session.permanent = True
+                redirect_to_index = redirect(url_for('Requests.index'))
+                response = app.make_response(redirect_to_index)
+                """TODO: Refactor this."""
+                query = "select Adminbool from User_ where User_Name = %s"
+                adminbool = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
+                adminbool = adminbool[0]
+                response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
+                return response
+            return "Your account is blocked, access denied"
         return "401", 401 
     return render_template('login.html')
 

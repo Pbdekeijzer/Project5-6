@@ -31,7 +31,6 @@ function wishlist_onClick(id){
 	GetItemJson(id);
 }
 
-
 $(document).ready(function(){
  
     GetJSONFromUrl();
@@ -44,7 +43,7 @@ $(document).ready(function(){
             var container = $("#wishlistcontent");
             var template = Handlebars.compile(data);
             for(var i in json){
-				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price};
+				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price, stock: json[i].in_stock};
 				var html = template(context);
 				container.append(html);
             }
@@ -60,10 +59,11 @@ $(document).ready(function(){
     function GetJSONFromUrl(){
         var url = document.URL
         var account = url.split('/').pop();
-        console.log("/" + account + "/wishlist")
+
+        var des_url = des_url = "/" + account + "/wishlist";
+
         $.ajax({
-            url: "/" + account + "/wishlist"
-               
+            url: des_url             
         }).done(function(json){
             RemoveHTMLPanels();
             InsertProduct(json);

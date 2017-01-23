@@ -25,7 +25,6 @@ def purchase_history(userid, username):
         data = historyModel.get_order_history()
         return jsonify(data)
 
-
 @requests.route('/<username>/wishlist')
 def userwishlist(username):
     def fetchdata():
@@ -47,20 +46,20 @@ def userwishlist(username):
 @requests.route('/wishlist/<username>')
 def uwl(username):
     if "username" in session and session["username"] == username:
-        return render_template('publicwishlist.html')
+        return render_template('wishlist.html')
     elif not AccountModel.checkPrivacy(username):
-        return render_template('publicwishlist.html')
+        return render_template('wishlist.html')
     return "Access denied, user wishlist is private."
 
-#@requests.route('/account/wishlist')
-#@authenticate_user
-#def getaccountwishlist(userid):
-#    items = WishlistModel.getWishListProductIDs(uid)
-#    data = ItemModel.get_all_items()
-#    data = filter(lambda x: x.id in items, data)
-#    data = map(lambda x: x.toDict(), data)
-#    data = list(data)
-#    return jsonify(data)
+@requests.route('/account/wishlist')
+@authenticate_user
+def getaccountwishlist(userid):
+   items = WishlistModel.getWishListProductIDs(uid)
+   data = ItemModel.get_all_items()
+   data = filter(lambda x: x.id in items, data)
+   data = map(lambda x: x.toDict(), data)
+   data = list(data)
+   return jsonify(data)
 
 @requests.route('/<username>/favourites')
 @authenticate_user

@@ -14,7 +14,6 @@ $(document).ready(function(){
         $('#wishlistButton').hide();
     }
 
-    
     $('#wishlistButton').click(function(){
         if (inWishlist == true){
             RemoveFromWishlist(jsonjs);
