@@ -582,7 +582,9 @@ input:checked + .slider:before {
 }
 
 #AlertForOrdering{
-  margin-top: 15%;
+  margin: 2%;
+  margin-left: 40%;
+  float: left;
 }
 
 
