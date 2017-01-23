@@ -11,11 +11,10 @@ $(document).ready(function()
         if (adminbool == 1){ 													//notify user he is an admin
 				$("#UserLoggedInNotification").append(" <br> You are an admin!"  );
 				$('#NavbarAtTop').append('<li><a href= "/adminpage" id="AdminNavbar">Admin</a></li>');
-
 			}
 		$('#NavbarAtTop').append('<li><a href='+ wishlist_url +'>Wishlist</a></li>');
         $('#NavbarAtTop').append('<li><a href="/favourites">Favourites</a></li>');
-        $('#NavbarAtTop').append('<li><a href= ' + account_url +  ' id="Account">' + username + '</a></li>');
+        $('#NavbarAtTop').append('<li id="account_url"><a href= ' + account_url +  ' id="Account">' + username + '</a></li>');
         $('#NavbarAtTop').append('<li><a href= "/logout" id="LogoutNavbar">Log Out</a></li>');
         $('#LogoutNavbar').click(function(){
             localStorage.clear();

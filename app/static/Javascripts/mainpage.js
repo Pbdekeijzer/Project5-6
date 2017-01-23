@@ -119,15 +119,24 @@ $(document).ready(function(){
 					$(".wishlist-button").hide();			
 				}	
 
-				var wishlistItems = getWishlistItems();
-				console.log(wishlistItems);
+				// var wishlistItems = getWishlistItems();
+				// console.log(wishlistItems);
 				$(".wishlist-button").css("opacity", 1);	
             }
         });
     };
 
 
-	function ReadCookie
+	function ReadCookie(name){
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;	
+	}
 
 	function GetWishlistItems(){
         var url = document.URL
