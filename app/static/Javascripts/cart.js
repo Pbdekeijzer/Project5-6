@@ -138,18 +138,33 @@ function OrderAjax(){
     }
 }
 
+function ConfirmOrder(){
+    OrderAjax();
+    var cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    $("#AlertForOrdering").remove();
+    showCart();
+}
+
+function CancelOrder(){
+    $("#AlertForOrdering").remove();
+}
+
+
+
+
 function Order(){
     if (window.document.cookie){
         if (window.localStorage)
 	    {
-            var empty_cart = OrderAjax();
-            if (empty_cart){
-                var cart = [];
-                localStorage.setItem('cart', JSON.stringify(cart));
+	        $("#AlertForOrdering").remove();
+	        //$( "<p>Test</p>" ).insertAfter( ".inner" );
+	        $("#main-container").append("<div id='AlertForOrdering'>You are about to buy everything in your cart, <br> do you want to cont" +
+                    "inue?<br> <button onclick='ConfirmOrder()' class='button'>Yes</button> <button onclick='CancelOrder()' class='button'>N" +
+                    "o</button></div>");
                 document.getElementById("cart-text").innerHTML = "Your order has been completed!";
-            }         
 	    }
-        showCart();
+
      }
      else{
         if (JSON.parse(localStorage.cart) == 0){
