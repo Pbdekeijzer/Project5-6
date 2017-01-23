@@ -144,6 +144,7 @@ function ConfirmOrder(){
     localStorage.setItem('cart', JSON.stringify(cart));
     $("#AlertForOrdering").remove();
     showCart();
+    document.getElementById("cart-text").innerHTML = "Your order has been completed!";
 }
 
 function CancelOrder(){
@@ -159,10 +160,10 @@ function Order(){
 	    {
 	        $("#AlertForOrdering").remove();
 	        //$( "<p>Test</p>" ).insertAfter( ".inner" );
-	        $("#main-container").append("<div id='AlertForOrdering'>You are about to buy everything in your cart, <br> do you want to cont" +
+	        $("#content").append("<div id='AlertForOrdering'>You are about to buy everything in your cart, <br> do you want to cont" +
                     "inue?<br> <button onclick='ConfirmOrder()' class='button'>Yes</button> <button onclick='CancelOrder()' class='button'>N" +
                     "o</button></div>");
-                document.getElementById("cart-text").innerHTML = "Your order has been completed!";
+
 	    }
 
      }
