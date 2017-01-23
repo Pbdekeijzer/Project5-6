@@ -79,11 +79,13 @@ function deleteItem(index){
 //Check the stock for every item in the cart and return a string with every item with insufficient stock for the order.
 function checkStock(cart){
     return_string = "";
+    console.log("KANKER");
      for (var i in cart){
          console.log(cart[i].Stock + " = current stock");
          console.log(cart[i].Quantity);
 
          if (cart[i].Stock < cart[i].Quantity){
+             console.log(cart[i].Stock);
             return_string += cart[i].Name + "  "; 
          }
      }
@@ -96,7 +98,7 @@ function OrderAjax(){
     var orderItems = [];
     cart = JSON.parse(localStorage.cart);
     var enough_stock = checkStock(cart);
-
+    console.log(enough_stock);
     if (JSON.parse(localStorage.cart) != 0 && enough_stock == ""){
         for (var i in cart) {
                 var item = cart[i];
@@ -138,15 +140,18 @@ function OrderAjax(){
     }
 }
 
-function ConfirmOrder(){
-    OrderAjax();
-    var cart = [];
-    localStorage.setItem('cart', JSON.stringify(cart));
+function ConfirmOrder(){ 
+    var empty_cart = OrderAjax(); 
+    if (empty_cart){ 
+        var cart = []; 
+        localStorage.setItem('cart', JSON.stringify(cart)); 
+        document.getElementById("cart-text").innerHTML = "Your order has been completed!";   
+    }
     $("#AlertForOrdering").remove();
     showCart();
-    document.getElementById("cart-text").innerHTML = "Your order has been completed!";
+    
+    
 }
-
 function CancelOrder(){
     $("#AlertForOrdering").remove();
 }

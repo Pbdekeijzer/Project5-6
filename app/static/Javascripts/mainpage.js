@@ -119,8 +119,8 @@ $(document).ready(function(){
 					$(".wishlist-button").hide();			
 				}	
 
-				//var wishlistItems = getWishlistItems();
-				
+				// var wishlistItems = getWishlistItems();
+				// console.log(wishlistItems);
 				$(".wishlist-button").css("opacity", 1);	
             }
         });
