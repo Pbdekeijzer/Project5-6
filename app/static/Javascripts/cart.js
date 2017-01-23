@@ -79,7 +79,6 @@ function deleteItem(index){
 //Check the stock for every item in the cart and return a string with every item with insufficient stock for the order.
 function checkStock(cart){
     return_string = "";
-    console.log("KANKER");
      for (var i in cart){
          console.log(cart[i].Stock + " = current stock");
          console.log(cart[i].Quantity);
