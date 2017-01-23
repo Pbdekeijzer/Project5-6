@@ -55,7 +55,7 @@ $(document).ready(function()
   var BarTemplate;
   function LoadBarTemplate(){
     $.ajax({
-              url: "/static/GraphItems/Graphbar.html"
+              url: "/static/GraphItems/GraphBar.html"
           }).done(function(data){
               BarTemplate = Handlebars.compile(data);
           });
