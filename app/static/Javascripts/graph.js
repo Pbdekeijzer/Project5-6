@@ -53,11 +53,17 @@ $(document).ready(function()
   }
 
   var BarTemplate;
+  var YAxisTemplate;
   function LoadBarTemplate(){
     $.ajax({
               url: "/static/GraphItems/GraphBar.html"
           }).done(function(data){
               BarTemplate = Handlebars.compile(data);
+          });
+    $.ajax({
+              url: "/static/GraphItems/yAxisBar.html"
+          }).done(function(data){
+              YAxisTemplate = Handlebars.compile(data);
           });
   }
   
@@ -72,7 +78,7 @@ $(document).ready(function()
         url: "/stats?id=" + item + "&year=" + year
       }).done(function(data){
         var title = "Sales of " + $("#Items option:selected").text() + " in " + year;
-        BuildGraph(title ,data, true);
+        BuildGraph(title ,data, true, undefined, undefined, "Months");
       });
     }
     else{
@@ -80,7 +86,7 @@ $(document).ready(function()
         url: "/stats?id=" + item + "&year=" + year + "&month=" + monthval
       }).done(function(data){
         var title = "Sales of " + $("#Items option:selected").text() + " in " + month + " of " + year;
-        BuildGraph(title ,data, false);
+        BuildGraph(title ,data, false, undefined, undefined, "Days");
       });
     }
 
@@ -96,7 +102,7 @@ $(document).ready(function()
         url: "/stats?turnover=true&year=" + year
       }).done(function(data){
         var title = "Turnover in " + year;
-        BuildGraph(title ,data, true);
+        BuildGraph(title ,data, true, undefined, undefined, "Months");
       });
     }
     else{
@@ -104,7 +110,7 @@ $(document).ready(function()
         url: "/stats?turnover=true&year=" + year + "&month=" + monthval
       }).done(function(data){
         var title = "Turnover in " + month + " of " + year;
-        BuildGraph(title ,data, false);
+        BuildGraph(title ,data, false, undefined, undefined, "Days");
       });
     }
 
@@ -116,12 +122,12 @@ $(document).ready(function()
     $.ajax({
       url: "/stats?MaxWishlistItems=" + maxItems
     }).done(function(data){
-      BuildGraph("Most wished for items", data, true, 60, 20);
+      BuildGraph("Most wished for items", data, true, 60, 20, "Items");
     })
 
   })
 
-  function BuildGraph(Title, Data, DoBig, width, margins){
+  function BuildGraph(Title, Data, DoBig, width, margins, xAxisText){
     var highest = 0;
     Data.forEach(function(element) {
       var num = element.amount;
@@ -130,7 +136,7 @@ $(document).ready(function()
          highest = num
       }
     }, this);
-    console.log(highest);
+    
 
     var Container = $("#Graph");
     var titlecontainer = $("#GraphTitle");
@@ -148,10 +154,33 @@ $(document).ready(function()
       }
     }
 
+    //axis graph
+    $("#XAxisText").empty();
+    if(xAxisText == undefined){
+      $("#XAxisText").append("<p style='color: red'>No name found, please report to the admin</p>");
+    }
+    else{
+      $("#XAxisText").append(xAxisText);
+    }
+
+var yaxiscontext = {one: (highest/10).toFixed(1), two: (highest/10 *2).toFixed(1), three: (highest/10 *3).toFixed(1), four: (highest/10 *4).toFixed(1), five: (highest/10 *5).toFixed(1), 
+six: (highest/10 *6).toFixed(1), seven: (highest/10 *7).toFixed(1), eight: (highest/10 *8).toFixed(1), nine: (highest/10 *9).toFixed(1), ten: highest };
+
+    Container.append(YAxisTemplate(yaxiscontext));
+
+    var textwidth = $("#HighersNumberGraphAxis").width();
+
+
+
     Data.forEach(function(element) {
       var bar = BuildBar(element.amount, highest, element.xAxis);
       Container.append(bar);
     }, this);
+
+    var graphwidth = Container.width();
+    $( ".BlackStripe" ).css( "width", graphwidth );
+    
+    $("#YGraphBar").css("width", textwidth);
   }
 
   function BuildBar(NumericValue, MaxValue, xAxis){
