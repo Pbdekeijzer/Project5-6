@@ -17,22 +17,24 @@ class HistoryModel:
 
         orders = []
         items = []
-        time = []
+        time = result[0][6]
         CurrentOrder = result[0][0]
-        for i in result:
-            if(CurrentOrder != i[0]):
+        for i in range(0,len(result)):
+            print(i)
+
+            if(CurrentOrder != result[i][0]):
                 orders.append({"items": items,
-                "order": CurrentOrder,"time":i[6]})
-                CurrentOrder = i[0]
-                time = i[6]                
+                "order": CurrentOrder,"time":time})
+                CurrentOrder = result[i][0]
+                time = result[i][6]                
                 items = []
             
             ThisItem = {
-                "amount": i[1],
-                "image_route": i[2],
-                "price": i[3], 
-                "product_id": i[4], 
-                "title": i[5]
+                "amount": result[i][1],
+                "image_route": result[i][2],
+                "price": result[i][3], 
+                "product_id": result[i][4], 
+                "title": result[i][5]
                 }
             items.append(ThisItem)
         
