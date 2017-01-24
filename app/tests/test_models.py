@@ -7,6 +7,7 @@ from app.models.HistoryModel import *
 from app.models.OrderItemModel import *
 from app.models.FavouritesModel import *
 from app.models.ItemModel import *
+from app.models.StatisticsModel import *
 
 class TestAccount(unittest.TestCase):
     def setUp(self):
@@ -211,5 +212,31 @@ class TestItem(unittest.TestCase):
     #update_Stock() -todo
 
     #all filter functions -todo
+
+class TestTurnover(unittest.TestCase):
+    def setUp(self):
+        self.turnover = TurnoverStats(amount = 5000, date = 5)
+
+    def test_init(self):
+        self.assertEqual(self.turnover.amount, 5000)
+        self.assertEqual(self.turnover.date, 5)
+
+    def test_toDict(self):
+        dictionary = {
+            "xAxis" : 5,
+            "amount" : 5000
+        }
+        self.assertEqual(self.turnover.toDict(), dictionary)
+
+    @mock.patch("app.models.StatisticsModel.MySQLdatabase")
+    def test_getTurnover(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(15000, 4)])
+        turnover = TurnoverStats.getTurnover(2014, 4)
+        self.assertEqual(turnover[2].date, 3) #turnover[0] = day 1, turnover[]
+        #no idea how to test for amount
+
+
+
+
 
 
