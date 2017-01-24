@@ -1,4 +1,4 @@
-from flask import session
+from flask import session, render_template
 from app.models.AccountModel import *
 from functools import wraps
 
