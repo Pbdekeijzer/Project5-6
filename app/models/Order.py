@@ -3,8 +3,9 @@ from app.MySQLdatabase import *
 from app.models.OrderHistoryModel import *
 
 class Order:
-    def __init__(self, id, item):
+    def __init__(self, time, id, item):
         self.id = id
+        self.time = time
         self.item = [item]
         self.item_models = []
         self.item_amount = 0
@@ -33,5 +34,6 @@ class Order:
     def to_order_dict(self):
         return{
                 "order": self.id,
+                "time" : self.time,
                 "items": self.item_models
         }

@@ -77,6 +77,7 @@ def UpdateOneUser():
     blockedbool = request.args.get("blockedbool")
     gamertag = request.args.get("username")
 
+    AccountModel.uid_cache.clear()
     result = MySQLdatabase.ExecuteSafeInsertQuery(query, w8woord, mail, pcode, houseno, adminbool, secretwish, blockedbool, gamertag)
     if result == True:
         return jsonify({"CommitSuccess":"User is successfully updated"})

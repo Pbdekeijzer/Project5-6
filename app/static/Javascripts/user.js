@@ -42,19 +42,18 @@ $(document).ready(function(){
 
 		    for(var i in json)
 		    {
-		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey;'>"
-		        for (var j in json[i])
+		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey;'>"                
+                html += "<label>" + json[i]["time"] + "</label>"
+		        for (var j in json[i]["items"])
 		        {
-			        for (var x in json[i][j])
-			        {
-			            var context = {title: json[i][j][x].title,
-                                 image: json[i][j][x].image_route,
-                                 id: json[i][j][x].product_id,
-                                 price: json[i][j][x].price,
-                                 amount: json[i][j][x].amount
-                                };
-			            html += template(context);
-			        }
+                    console.log(json[i]["items"][j])
+                    var context = {title: json[i]["items"][j].title,
+                                image: json[i]["items"][j].image_route,
+                                id: json[i]["items"][j].product_id,
+                                price: json[i]["items"][j].price,
+                                amount: json[i]["items"][j].amount
+                            };
+                    html += template(context);
                 }
                 html += "</div>";
                 container.append(html);
