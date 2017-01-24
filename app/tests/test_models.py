@@ -1,12 +1,12 @@
 import unittest
 from unittest import mock
+from unittest.mock import MagicMock
 from app.models.AccountModel import *
 
 class TestAccount(unittest.TestCase):
     def setUp(self):
         self.account = AccountModel(username = "John", password = "Snow", email = "john_snow@email.com", postal_code="1111QQ", house_number=1)
         self.account.insertAccount()
-        self.uid = AccountModel.getUID(self.account.username)
 
     def test_init(self):
         self.assertEqual(self.account.username, "John")
@@ -32,17 +32,14 @@ class TestAccount(unittest.TestCase):
         }
         self.assertEqual(self.account.toDict(), dictionary)
 
-    def test_getUID(self):
-        uid = AccountModel.getUID(self.account.username)
-        self.assertEqual(type(uid), type(100))
-    
-    def testOneUser(self):
-        user = AccountModel.getOneUser(self.account.username)
-        self.assertEqual(self.uid, user.uid)
-        
-    
+    @mock.patch("app.models.AccountModel.MySQLdatabase")
+    def test_getUID(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(1,)])
+        uid = AccountModel.getUID("shit")
+        self.assertEqual(uid, 1)
 
     def tearDown(self):
+        AccountModel.uid_cache.clear()
         MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_ WHERE User_Name = %s", self.account.username)
     
 
