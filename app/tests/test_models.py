@@ -6,6 +6,7 @@ from app.models.WishlistModel import *
 from app.models.HistoryModel import *
 from app.models.OrderItemModel import *
 from app.models.FavouritesModel import *
+from app.models.ItemModel import *
 
 class TestAccount(unittest.TestCase):
     def setUp(self):
@@ -172,4 +173,43 @@ class TestFavourite(unittest.TestCase):
         favourite_list = FavouritesModel.get_allFavouritesItems("The Explorer")
         self.assertEqual(favourite_list[0].id, 1)
 
-        
+class TestItem(unittest.TestCase):
+    def setUp(self):
+        self.item = ItemModel(id = 1, name = "Brightside", description = "This is Mr. Brightside -The Killers", price = 350, image = "bright-side.jpg", continent = "Europe", in_stock = 1, class_ = "Mammal")
+
+    def test_init(self):
+        self.assertEqual(self.item.id, 1 )
+        self.assertEqual(self.item.name, "Brightside")
+        self.assertEqual(self.item.description, "This is Mr. Brightside -The Killers")
+        self.assertEqual(self.item.price, 350)
+        self.assertEqual(self.item.image, "bright-side.jpg")
+        self.assertEqual(self.item.continent, "Europe")
+        self.assertEqual(self.item.in_stock, 1)
+        self.assertEqual(self.item.class_, "Mammal")
+
+    def test_toDict(self):
+        dictionary = {
+            "id" : 1,
+            "name" : "Brightside",
+            "description": "This is Mr. Brightside -The Killers",
+            "price": 350,
+            "image": "bright-side.jpg",
+            "continent": "Europe",
+            "in_stock": 1,
+            "class": "Mammal"
+        }
+        self.assertEqual(self.item.toDict(), dictionary)
+
+    @mock.patch("app.models.ItemModel.MySQLdatabase")
+    def test_get_all_items(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(1, "testItem", "This is a test item", 240, 115, "Asia", "Fish", "random_route.jpg"),])
+        items = ItemModel.get_all_items()
+        self.assertEqual(items[0].id, 1)
+
+    #check_Stock() -todo
+
+    #update_Stock() -todo
+
+    #all filter functions -todo
+
+
