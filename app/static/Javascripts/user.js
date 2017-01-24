@@ -52,8 +52,8 @@ $(document).ready(function(){
 
 		    for(var i in json)
 		    {
-		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey;'>"                
-                html += "<label>" + json[i]["time"] + "</label>"
+		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey; align: left'>"                
+                html += "<label style='width: 100%; margin-left: 42.5%'>" + json[i]["time"] + "</label>"
 		        for (var j in json[i]["items"])
 		        {
                     console.log(json[i]["items"][j])
@@ -63,7 +63,7 @@ $(document).ready(function(){
                                 price: json[i]["items"][j].price,
                                 amount: json[i]["items"][j].amount
                             };
-                    html += template(context);
+                    html += "<div style='align: left'>" + template(context) + "</div>";
                 }
                 html += "</div>";
                 container.append(html);
