@@ -14,7 +14,7 @@ class HistoryModel:
         orders = []
         for i in result:
             if i[0] not in [item.id for item in orders]:
-                orders += [Order(i[0], i[2])]
+                orders += [Order(i[0],i[1],i[2])]
             else:
                 for item in orders:
                     if item.id == i[0]:

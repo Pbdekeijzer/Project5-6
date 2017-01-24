@@ -8,7 +8,7 @@ class HistoryModel:
         self.user_id = user_id
 
     def get_order_history(self):
-        query = r"""Select O.Order_ID, OBI.Amount, BI.Image_route, BI.Price, BI.Product_ID, BI.Title from Buyable_item_ as BI
+        query = r"""Select O.Order_ID, OBI.Amount, BI.Image_route, BI.Price, BI.Product_ID, BI.Title, O.Time_of_order_placed from Buyable_item_ as BI
          join Order_Buyable_item_ as OBI on BI.Product_ID = OBI.Product_ID 
          join Order_ as O on OBI.Order_ID=O.Order_ID
         where O.Related_to_person = %s"""
@@ -17,12 +17,14 @@ class HistoryModel:
 
         orders = []
         items = []
+        time = []
         CurrentOrder = result[0][0]
         for i in result:
             if(CurrentOrder != i[0]):
                 orders.append({"items": items,
-                "order": CurrentOrder})
+                "order": CurrentOrder,"time":i[6]})
                 CurrentOrder = i[0]
+                time = i[6]                
                 items = []
             
             ThisItem = {
@@ -35,7 +37,7 @@ class HistoryModel:
             items.append(ThisItem)
         
         orders.append({"items": items,
-        "order": CurrentOrder})
+        "order": CurrentOrder, "time": time})
         return orders
 
     @staticmethod
