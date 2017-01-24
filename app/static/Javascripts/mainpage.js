@@ -70,18 +70,22 @@ $(document).ready(function(){
 
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
+
+
     function InsertProduct(json){
         $.ajax({       
             url: "/static/ProductPanel.html"
         }).done(function(data){
             var container = $("#product");	
-			GetWishlistItems();
+			var wish_listID = []; 			
 
-			var wish_listID = []; 
-
-			//for each item in the wishlist, push the id to the wish_listID list
-			for (var i in wish_list){	
-				wish_listID.push(wish_list[i].id);
+			if (window.document.cookie){
+				GetWishlistItems();
+				
+				//for each item in the wishlist, push the id to the wish_listID list
+				for (var i in wish_list){	
+					wish_listID.push(wish_list[i].id);
+				}
 			}
 
             var template = Handlebars.compile(data);
