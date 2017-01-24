@@ -120,8 +120,6 @@ $(document).ready(function() {
         });
     });
 
-
-
     //Functions, mostly because some code is used twice or more
     function ShowAlert(text, color){
         $('#NotFoundAlert').empty();
