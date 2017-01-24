@@ -111,6 +111,7 @@ class StatisticsModel():
         while lastMonth <12:
             lst.append(StatisticsModel(0, lastMonth+1))
             lastMonth += 1
+        
         return lst
 
     @staticmethod

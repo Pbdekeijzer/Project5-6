@@ -235,8 +235,52 @@ class TestTurnover(unittest.TestCase):
         self.assertEqual(turnover[3].amount, 15000) #turnover[0] = day 1, turnover[]
         #no idea how to test for amount
 
+class TestStatisticsModel(unittest.TestCase):
+    def setUp(self):
+        self.statistics = StatisticsModel(100, 10)
+    
+    def test_init(self):
+        self.assertEqual(self.statistics.amount, 100)
+        self.assertEqual(self.statistics.date, 10)
+    
+    @mock.patch("app.models.StatisticsModel.MySQLdatabase")
+    def test_get_sales_per_month(self, mock_db):
+        mock_db.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(18, 1), (13, 2)])
+        sales = StatisticsModel.get_sales_per_month(1, 2017)
+        self.assertEqual(sales[1].amount, 13)
+
+    @mock.patch("app.models.StatisticsModel.MySQLdatabase")
+    def test_get_sales_per_day(self, mock_db):
+        mock_db.ExcecuteSafeSelectQuery.return_value = [(10,1), (20,2), (30, 3)]
+        sales = StatisticsModel.get_sales_per_day(1, 1, 2017)
+        self.assertEqual(sales[2].amount, 30)
+
+    def test_toDict(self):
+        dictionary = {
+            "amount" : 100,
+            "xAxis" : 10
+        }
+        self.assertEqual(self.statistics.toDict(), dictionary)
 
 
+class TestWishlistStats(unittest.TestCase):
+    def setUp(self):
+        self.wishliststats = WishlistStats(1, "harry", 2)
+    
+    def test_init(self):
+        self.assertEqual(self.wishliststats.id, 1)
+        self.assertEqual(self.wishliststats.name, "harry")
+        self.assertEqual(self.wishliststats.amount, 2)
 
+    @mock.patch("app.models.StatisticsModel.MySQLdatabase")
+    def test_getMostWishedItems(self, db_mock):
+        db_mock.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(10, "henk", 1)])
+        wished_item = WishlistStats.getMostWishedItems(50)
+        self.assertEqual(wished_item[0].id, 1)
 
-
+    def test_toDict(self):
+        dictoinary = {
+            "id": 10,
+            "xAxis": "henk",
+            "amount": 1
+        }
