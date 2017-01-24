@@ -62,5 +62,4 @@ class FavouritesModel:
             for i in result:
                 FavouritesModel.favouritesitems.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
             print("Finished")
-
         return FavouritesModel.favouritesitems

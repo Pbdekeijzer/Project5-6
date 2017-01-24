@@ -142,8 +142,24 @@ class TestFavourite(unittest.TestCase):
         userid = FavouritesModel.getUID("Unit")
         self.assertEqual(userid, 13)
 
-    #insertintoFavourites() -todo
+    #1 for function insertintoFavourites --else
+    @mock.patch("app.models.FavouritesModel.MySQLdatabase")
+    def test_insertintoFavouritesFalse(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(19,)])
+        product = self.favourite
+        lol = self.assertEqual(product.user_id, 19)
+        test = self.favourite.insertintoFavourites()
+        self.assertEqual(test, False)
 
+    #2 for function insertintoFavourites --if ?????
+    # @mock.patch("app.models.FavouritesModel.MySQLdatabase")
+    # def test_insertintoFavouritesSecond(self, mock_msqldb):
+    #     mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(14,)])
+    #     product = self.favourite
+    #     self.assertNotEqual(product.user_id, 13)
+    #     test = self.favourite.insertintoFavourites()
+    #     self.assertEqual(test, True)
+    
     @mock.patch("app.models.FavouritesModel.MySQLdatabase")
     def test_getFavouritesProductIDs(self, mock_msqldb):
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(77,)])
