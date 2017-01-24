@@ -62,7 +62,6 @@ class AccountModel():
 
     @staticmethod
     def getOneUser(UserItsName):
-        #Result = MySQLdatabase.SelectWhereUsernameQuery(UserItsName)
         Result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s", UserItsName)
         try:
             return AccountModel(Result[0][0], Result[0][3], Result[0][4], Result[0][5], Result[0][6], Result[0][7],
