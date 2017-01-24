@@ -28,7 +28,7 @@ def login():
                 response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
                 return response
             return "Your account is blocked, access denied"
-        return "401", 401 
+        return "401"
     return render_template('login.html')
 
 @auth.route('/logout')
