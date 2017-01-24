@@ -14,8 +14,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
         result = AccountModel.checkAccount(username, password)
-        blocked = AccountModel.isBlocked(username)
         if result:
+            blocked = AccountModel.isBlocked(username)
             if not blocked:          
                 session["username"] = username
                 session.permanent = True
