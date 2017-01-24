@@ -10,8 +10,18 @@ function privacy_OnClick(){
     console.log(localStorage.getItem('cart'));
 }
 
+    //copy text to clipboard
+function copyToClipboard(text) {
+        window.prompt("Copy this link to share!", text);
+}
 
 $(document).ready(function(){
+
+    var account = document.getElementById("account_url").innerHTML;
+    var des_url = "egois.me/wishlist" + "/" + account;
+    document.getElementById("personal-url").innerHTML = "Your personal url: " + "<b>" + des_url + "</br>";
+    document.getElementById("hidden-url").innerHTML = des_url;
+
     GetOrderedItemJson();
     $.get({
         url: "/change_settings"
