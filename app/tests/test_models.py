@@ -51,9 +51,6 @@ class TestAccount(unittest.TestCase):
 
 class TestWishlist(unittest.TestCase):
     def setUp(self):
-        # are these needed?
-        # self.dummyAccount = AccountModel(username="WillyTest", password="Wonka", email="willy_wonka@test.com", postal_code="2222TK", house_number=1)   
-        # self.dummyItem = ItemModel(id=9999, name="testBunny", description="Is a testbunny", price=200.50, image="test_path.jpg", continent="Europa", in_stock=200, class_="Choco")
         self.wishlist = WishlistModel(user_id = 5, product_id = 9999)
 
     def test_init(self):
@@ -67,7 +64,21 @@ class TestWishlist(unittest.TestCase):
         }
         self.assertEqual(self.wishlist.toDict(), dictionary)
 
-    #insertintoWistlist() -todo
+    #insertintoWistlist -else
+    @mock.patch("app.models.WishlistModel.MySQLdatabase")
+    def test_insertintoWistlistFalse(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(5,)])
+        self.assertEqual(self.wishlist.user_id, 5)
+        test = self.wishlist.insertintoWistlist()
+        self.assertEqual(test, False)    
+
+    #insertintoWistlist -if
+    @mock.patch("app.models.WishlistModel.MySQLdatabase")
+    def test_insertintoWistlistTrue(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = None)
+        self.assertNotEqual(self.wishlist.user_id, 13)
+        test = self.wishlist.insertintoWistlist()
+        self.assertEqual(test, True)
 
     @mock.patch("app.models.WishlistModel.MySQLdatabase")
     def test_getWishListProductIDs(self, mock_msqldb):
@@ -100,7 +111,7 @@ class TestOrderItem(unittest.TestCase):
         }
         self.assertEqual(self.orderItem.toDict(), dictionary)
 
-    #AddOrderItem() -todo
+    #AddOrderItem() -todo ornot
 
 class TestHistory(unittest.TestCase):
     def setUp(self):
@@ -115,7 +126,7 @@ class TestHistory(unittest.TestCase):
         history = HistoryModel.get_order_history(self.history)
         self.assertEqual(history[0].id, 12)
 
-    #insertOrder() -todo
+    #insertOrder() -todo ornot
 
     @mock.patch("app.models.HistoryModel.MySQLdatabase")
     def test_getlastOrder(self, mock_msqldb): #add stuff to the return_value
@@ -148,19 +159,17 @@ class TestFavourite(unittest.TestCase):
     @mock.patch("app.models.FavouritesModel.MySQLdatabase")
     def test_insertintoFavouritesFalse(self, mock_msqldb):
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(19,)])
-        product = self.favourite
-        lol = self.assertEqual(product.user_id, 19)
+        self.assertEqual(self.favourite.user_id, 19)
         test = self.favourite.insertintoFavourites()
         self.assertEqual(test, False)
 
-    #2 for function insertintoFavourites --if ?????
-    # @mock.patch("app.models.FavouritesModel.MySQLdatabase")
-    # def test_insertintoFavouritesSecond(self, mock_msqldb):
-    #     mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(14,)])
-    #     product = self.favourite
-    #     self.assertNotEqual(product.user_id, 13)
-    #     test = self.favourite.insertintoFavourites()
-    #     self.assertEqual(test, True)
+    # 2 for function insertintoFavourites --if ?????
+    @mock.patch("app.models.FavouritesModel.MySQLdatabase")
+    def test_insertintoFavouritesSecond(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = None)
+        self.assertNotEqual(self.favourite.user_id, 13)
+        test = self.favourite.insertintoFavourites()
+        self.assertEqual(test, True)
     
     @mock.patch("app.models.FavouritesModel.MySQLdatabase")
     def test_getFavouritesProductIDs(self, mock_msqldb):
@@ -207,7 +216,19 @@ class TestItem(unittest.TestCase):
         items = ItemModel.get_all_items()
         self.assertEqual(items[0].id, 1)
 
-    #check_Stock() -todo
+    #check_Stock --else
+    @mock.patch("app.models.ItemModel.MySQLdatabase")
+    def test_check_StockTrue(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(100,)])
+        test = ItemModel.check_Stock(5, 5)
+        self.assertEqual(test, True)
+
+    #check_Stock --if
+    @mock.patch("app.models.ItemModel.MySQLdatabase")
+    def test_check_StockTrue(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(3,)])
+        test = ItemModel.check_Stock(5, 5)
+        self.assertEqual(test, False)
 
     #update_Stock() -todo
 
@@ -232,8 +253,7 @@ class TestTurnover(unittest.TestCase):
     def test_getTurnover(self, mock_msqldb):
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(15000, 4)])
         turnover = TurnoverStats.getTurnover(2014, 4)
-        self.assertEqual(turnover[3].amount, 15000) #turnover[0] = day 1, turnover[]
-        #no idea how to test for amount
+        self.assertEqual(turnover[3].amount, 15000)
 
 
 
