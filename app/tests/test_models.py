@@ -221,18 +221,26 @@ class TestItem(unittest.TestCase):
     def test_check_StockTrue(self, mock_msqldb):
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(100,)])
         test = ItemModel.check_Stock(5, 5)
-        self.assertEqual(test, True)
-
+        self.assertTrue(test)
+    # Vraag : 1 functie of 2 funties?
     #check_Stock --if
     @mock.patch("app.models.ItemModel.MySQLdatabase")
-    def test_check_StockTrue(self, mock_msqldb):
+    def test_check_StockFalse(self, mock_msqldb):
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(3,)])
         test = ItemModel.check_Stock(5, 5)
-        self.assertEqual(test, False)
-
+        self.assertFalse(test)
     #update_Stock() -todo
 
     #all filter functions -todo
+    def test_hasId(self):
+        self.assertTrue(self.item.hasId("1"))
+
+    def test_hasName(self):
+        self.assertTrue(self.item.hasName("BrightSide"))
+    
+    def test_hasDescription(self):
+        self.assertTrue(self.item.hasDescription("This is Mr. Brightside -The Killers"))
+    
 
 
 class TestTurnover(unittest.TestCase):
@@ -300,8 +308,9 @@ class TestWishlistStats(unittest.TestCase):
         self.assertEqual(wished_item[0].id, 1)
 
     def test_toDict(self):
-        dictoinary = {
-            "id": 10,
-            "xAxis": "henk",
-            "amount": 1
+        dictionary = {
+            "id": 1,
+            "xAxis": "harry",
+            "amount": 2
         }
+        self.assertEqual(self.wishliststats.toDict(), dictionary)
