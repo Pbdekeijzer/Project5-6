@@ -3,13 +3,13 @@ from unittest import mock
 from app.models.AccountModel import *
 
 class TestMySQLdatabase(unittest.TestCase):
-    def TestExecuteSafeSelectQuery(self):
+    def test_ExecuteSafeSelectQuery(self):
         Query = 'SELECT User_Name FROM User_ WHERE User_Name = %s ORDER BY User_Name'
         arg = 'hoi'
         result = MySQLdatabase.ExcecuteSafeSelectQuery(Query, arg)
         self.assertEqual(result[0][0], 'hoi')
 
-    def TestExecuteSafeInsertQuery(self):
+    def test_ExecuteSafeInsertQuery(self):
         Query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address, Postal_code, House_number, Blockedbool) VALUES (True, False, %s, %s, %s, %s,%s, FALSE)"
         username = 'Jopie'
         password = 'imanunittest'
