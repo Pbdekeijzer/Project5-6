@@ -3,6 +3,7 @@ from flask import jsonify
 from app.MySQLdatabase import *
 import os
 import logging
+from functools import wraps
 
 
 class AccountModel():
@@ -31,7 +32,27 @@ class AccountModel():
             "blockedbool": self.blockedbool
         }
 
+    def caching(cache = None):
+        def caching_decorator(func):
+            def wrapper(*args, **kwargs):
+                key = str(args) + str(kwargs)
+                if key not in cache:
+                    print("=======================")
+                    print("{0} was not in cache!".format(key))
+                    print("adding to cache...")
+                    print("=======================")
+                    cache[key] = func(*args, **kwargs)
+                else:
+                    print("=======================")
+                    print("{0} found in cache.".format(key))
+                    print("=======================")
+                return cache[key]
+            return wrapper
+        return caching_decorator
+
+    uid_cache = {}     
     @staticmethod
+    @caching(cache = uid_cache)
     def getUID(username):
         result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s",username)
         userid = result[0]
