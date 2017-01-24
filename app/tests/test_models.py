@@ -307,8 +307,9 @@ class TestWishlistStats(unittest.TestCase):
         self.assertEqual(wished_item[0].id, 1)
 
     def test_toDict(self):
-        dictoinary = {
-            "id": 10,
-            "xAxis": "henk",
-            "amount": 1
+        dictionary = {
+            "id": 1,
+            "xAxis": "harry",
+            "amount": 2
         }
+        self.assertEqual(self.wishliststats.toDict(), dictionary)
