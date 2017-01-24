@@ -40,6 +40,3 @@ class MySQLdatabase:
             return True
         except:
             return False
-
-
-a = MySQLdatabase()

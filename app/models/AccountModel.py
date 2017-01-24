@@ -52,12 +52,13 @@ class AccountModel():
 
     uid_cache = {}     
     @staticmethod
-    @caching(cache = uid_cache)
+    @caching(cache=uid_cache)
     def getUID(username):
-        result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s",username)
-        userid = result[0]
-        userid = userid[0]
-        return userid
+        print(username)
+        print(MySQLdatabase)
+        result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT User_ID FROM User_ WHERE User_Name = %s",username)
+        print(result)
+        return result[0][0]
 
     @staticmethod
     def getOneUser(UserItsName):
