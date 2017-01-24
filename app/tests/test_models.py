@@ -5,6 +5,7 @@ from app.models.AccountModel import *
 from app.models.WishlistModel import *
 from app.models.HistoryModel import *
 from app.models.OrderItemModel import *
+from app.models.FavouritesModel import *
 
 class TestAccount(unittest.TestCase):
     def setUp(self):
@@ -120,7 +121,39 @@ class TestHistory(unittest.TestCase):
         last_order = HistoryModel.getlastOrder()
         self.assertEqual(last_order, 67)
 
+class TestFavourite(unittest.TestCase):
+    def setUp(self):
+        self.favourite = FavouritesModel(user_id = 19, product_id = 14)
 
+    def test_init(self):
+        self.assertEqual(self.favourite.user_id, 19)
+        self.assertEqual(self.favourite.product_id, 14)
+    
+    def test_toDict(self):
+        dictionary = {
+            "User_ID" : 19,
+            "Product_ID" : 14
+        }
+        self.assertEqual(self.favourite.toDict(), dictionary)
 
+    @mock.patch("app.models.FavouritesModel.MySQLdatabase")
+    def test_getUID(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(13,)])
+        userid = FavouritesModel.getUID("Unit")
+        self.assertEqual(userid, 13)
+
+    #insertintoFavourites() -todo
+
+    @mock.patch("app.models.FavouritesModel.MySQLdatabase")
+    def test_getFavouritesProductIDs(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(77,)])
+        productid = FavouritesModel.getFavouritesProductIDs("Dora")
+        self.assertEqual(productid[0], 77)
+
+    @mock.patch("app.models.FavouritesModel.MySQLdatabase")
+    def test_get_allFavouritesItems(self, mock_msqldb):
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(1, "testItem", "This is a test item", 240, 115, "Asia", "Fish", "random_route.jpg"),])
+        favourite_list = FavouritesModel.get_allFavouritesItems("The Explorer")
+        self.assertEqual(favourite_list[0].id, 1)
 
         
