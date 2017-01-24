@@ -232,7 +232,7 @@ class TestTurnover(unittest.TestCase):
     def test_getTurnover(self, mock_msqldb):
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(15000, 4)])
         turnover = TurnoverStats.getTurnover(2014, 4)
-        self.assertEqual(turnover[2].date, 3) #turnover[0] = day 1, turnover[]
+        self.assertEqual(turnover[3].amount, 15000) #turnover[0] = day 1, turnover[]
         #no idea how to test for amount
 
 
