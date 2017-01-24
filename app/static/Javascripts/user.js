@@ -29,11 +29,11 @@ $(document).ready(function(){
         $.ajax({
             url: '/account/'+ username +'/history'
         }).done(function(json){
-            InsertProduct(json);
+            InsertUserProduct(json);
         });
     };
 
-    function InsertProduct(json){
+    function InsertUserProduct(json){
         $.ajax({
             url: "/static/OrderedProductPanel.html"
         }).done(function(data){

@@ -87,8 +87,11 @@ $(document).ready(function(){
 
     var fav_list = [];
     var wish_list = [];
+    
+    if(window.location.href.indexOf("favourites") > -1) {
+        GetJSONFromUrl();
+    }
 
-    GetJSONFromUrl();
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
     function InsertProduct(json){
