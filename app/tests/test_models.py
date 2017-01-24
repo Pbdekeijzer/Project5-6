@@ -38,8 +38,10 @@ class TestAccount(unittest.TestCase):
     
     def testOneUser(self):
         user = AccountModel.getOneUser(self.account.username)
-        self.assertEqual(self.account.uid, user.uid)
+        self.assertEqual(self.uid, user.uid)
         
+    
+
     def tearDown(self):
         MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_ WHERE User_Name = %s", self.account.username)
     
