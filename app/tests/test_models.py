@@ -3,7 +3,7 @@ from unittest import mock
 from unittest.mock import MagicMock
 from app.models.AccountModel import *
 from app.models.WishlistModel import *
-from app.models.HistoryModel import *
+from app.models.HistoryModel2 import *
 from app.models.OrderItemModel import *
 from app.models.FavouritesModel import *
 from app.models.ItemModel import *
@@ -120,19 +120,19 @@ class TestHistory(unittest.TestCase):
     def test_init(self):
         self.assertEqual(self.history.user_id, 12)
 
-    @mock.patch("app.models.HistoryModel.MySQLdatabase")
+    @mock.patch("app.models.HistoryModel2.MySQLdatabase")
     def test_get_order_history(self, mock_msqldb):
-        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(5, 12, 14)])
-        history = HistoryModel.get_order_history(self.history)
-        self.assertEqual(history[0].id, 12)
+        mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(12, 200, "link", 450, 19, "string", 12)])
+        history = self.history.get_order_history()
+        self.assertEqual(history[0].get('order'), 12)
 
     #insertOrder() -todo ornot
 
-    @mock.patch("app.models.HistoryModel.MySQLdatabase")
+    @mock.patch("app.models.HistoryModel2.MySQLdatabase")
     def test_getlastOrder(self, mock_msqldb): #add stuff to the return_value
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(67, 99, 12)])
-        last_order = HistoryModel.getlastOrder()
-        self.assertEqual(last_order, 67)
+        test = HistoryModel.getlastOrder()
+        self.assertEqual(test, 67)
 
 class TestFavourite(unittest.TestCase):
     def setUp(self):
@@ -233,6 +233,7 @@ class TestItem(unittest.TestCase):
     #update_Stock() -todo
 
     #all filter functions -todo
+
 
 class TestTurnover(unittest.TestCase):
     def setUp(self):

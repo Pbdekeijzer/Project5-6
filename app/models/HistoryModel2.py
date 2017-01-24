@@ -52,4 +52,3 @@ class HistoryModel:
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query)
         print (result[0][0])
         return result[0][0]
-

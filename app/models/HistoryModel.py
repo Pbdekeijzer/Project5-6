@@ -2,7 +2,7 @@ from app.models.Order import *
 from app.MySQLdatabase import *
 __author__ = 'Stef'
 
-
+#candelete
 class HistoryModel:
     def __init__(self, user_id):
         self.user_id = user_id
@@ -21,16 +21,4 @@ class HistoryModel:
                         item.add(i[2])
         return orders
 
-    @staticmethod
-    def insertOrder(uid):
-        query = "INSERT INTO Order_(Related_to_person) VALUES (%s)"
-        MySQLdatabase.ExecuteSafeInsertQuery(query, uid)
-        return True
-
-    @staticmethod
-    def getlastOrder():
-        query = "SELECT * FROM Order_ order by Order_ID desc limit 1"
-        result = MySQLdatabase.ExcecuteSafeSelectQuery(query)
-        print (result[0][0])
-        return result[0][0]
 
