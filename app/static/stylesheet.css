@@ -665,3 +665,26 @@ input:checked + .slider:before {
     from {opacity: 0}
     to {opacity: 1}
 }*/
+
+#WishlistLinkButton{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 10%;
+    height: auto;
+    z-index: 10;
+    background-color: grey;
+    border-radius: 5px;
+    border-width: 4px;
+    text-align: center;
+}
+
+#WishlistLinkButton p{
+  color: white;
+  margin: 5px;
+}
+
+#WishlistLinkButton input{
+  margin: 5px;
+  border-radius: 5px;
+}

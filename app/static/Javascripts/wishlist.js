@@ -33,7 +33,15 @@ function wishlist_onClick(id){
 
 $(document).ready(function(){
  
+
     GetJSONFromUrl();
+    CreateShareURL();
+
+    function CreateShareURL(){
+        var currentLocation = window.location;
+        $("#WishlistShareLinkField").val(currentLocation);
+    }
+
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
     function InsertProduct(json){
