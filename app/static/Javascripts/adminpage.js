@@ -7,26 +7,6 @@ $(document).ready(function() {
 
     //Here it ends, from now only event handlers ---
 
-    //If someone enters word or number in the boolinput
-    $('.booleanitmust').keyup(function() {
-        if (parseInt($(this).val()) == 1 || parseInt($(this).val()) == 0 || $(this).val() == ""){}//It is accepted
-
-        //It is a string that is not convertableto int, make the inputbox the same value as in the database
-        else if (this.id == 'Admin_Bool'){
-            $(this).val(parseInt(DataFromDB.adminbool));
-            ShowAlert('Only use the number 0 or 1', 'lightsalmon');
-        }
-        else if (this.id == 'Privacy_Wishlist'){
-            $(this).val(parseInt(DataFromDB.privacywishlist));
-            ShowAlert('Only use the number 0 or 1', 'lightsalmon');
-        }
-
-        else{
-            $(this).val(parseInt(DataFromDB.blockedbool));
-            ShowAlert('Only use the number 0 or 1', 'lightsalmon');
-
-        }
-    });
 
 
     $('#DeleteUser').click(function () {
@@ -56,15 +36,19 @@ $(document).ready(function() {
 
         $.when(FindUser($("#Username").val())).done(function() {
             if (DataFromDB.username != "Username is not found") {
+                var AdminSwitch = ConvertBoolToInt($("#admin-checkbox").is(":checked"));
+                var PrivacySwitch = ConvertBoolToInt($("#privacy-checkbox").is(":checked"));
+                var BlockedSwitch = ConvertBoolToInt($("#blocked-checkbox").is(":checked"));
+
                 var DataToAPI = {
                     username: $("#Username").val(),
                     password: $("#Password").val(),
                     email: $("#Email").val(),
                     postalcode: $("#Postal_Code").val(),
                     housenumber: $("#House_Number").val(),
-                    adminbool: $("#Admin_Bool").val(),
-                    privacywishlist: $("#Privacy_Wishlist").val(),
-                    blockedbool: $("#Blockedbool").val()
+                    adminbool: AdminSwitch,
+                    privacywishlist: PrivacySwitch,
+                    blockedbool: BlockedSwitch
                 };
 
                 $.ajax({
@@ -88,14 +72,15 @@ $(document).ready(function() {
     $('#FindUser').click(function () {
         $.when(FindUser($("#Username").val())).done(function() {
             if (DataFromDB.username != "Username is not found") {
+
                 $("#Username").val(DataFromDB.username);
                 $("#Password").val(DataFromDB.password);
                 $("#Email").val(DataFromDB.email);
                 $("#Postal_Code").val(DataFromDB.postal_code);
                 $("#House_Number").val(DataFromDB.house_number);
-                $("#Admin_Bool").val(DataFromDB.adminbool);
-                $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
-                $("#Blockedbool").val(DataFromDB.blockedbool);
+                $("#admin-checkbox").prop('checked', ConvertIntToBool(DataFromDB.adminbool));
+                $("#privacy-checkbox").prop('checked', ConvertIntToBool(DataFromDB.privacywishlist));
+                $("#blocked-checkbox").prop('checked', ConvertIntToBool(DataFromDB.blockedbool));
 
                 ShowAlert('Succesfully found the user', 'lightgreen')
             }
@@ -112,9 +97,9 @@ $(document).ready(function() {
                 $("#Email").val(DataFromDB.email);
                 $("#Postal_Code").val(DataFromDB.postal_code);
                 $("#House_Number").val(DataFromDB.house_number);
-                $("#Admin_Bool").val(DataFromDB.adminbool);
-                $("#Privacy_Wishlist").val(DataFromDB.privacywishlist);
-                $("#Blockedbool").val(DataFromDB.blockedbool);
+                $("#admin-checkbox").prop('checked', ConvertIntToBool(DataFromDB.adminbool));
+                $("#privacy-checkbox").prop('checked', ConvertIntToBool(DataFromDB.privacywishlist));
+                $("#blocked-checkbox").prop('checked', ConvertIntToBool(DataFromDB.blockedbool));
                 ShowAlert('Succesfully found the user', 'lightgreen')
             }
         });
@@ -173,6 +158,20 @@ $(document).ready(function() {
 
         });
 
+    }
+
+    function ConvertBoolToInt(TheBool){
+        if (TheBool == true)
+            return 1;
+        else
+            return 0;
+    }
+
+    function ConvertIntToBool(TheInt){
+        if (TheInt == 1)
+            return true;
+        else
+            return false;
     }
 
 
