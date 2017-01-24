@@ -124,7 +124,7 @@ class TestHistory(unittest.TestCase):
     def test_get_order_history(self, mock_msqldb):
         mock_msqldb.ExcecuteSafeSelectQuery = mock.MagicMock(return_value = [(12, 200, "link", 450, 19, "string", 12)])
         history = self.history.get_order_history()
-        self.assertEqual(history[0].get('order'), 12)
+        self.assertEqual(history[0].get('items')[0].get('title'), 'string')
 
     #insertOrder() -todo ornot
 
