@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     var conpasstest;
 
-    function isValidUsername(border)
+    function isValidUsername(border) //Check username
     {
 
         var username = $("#username").val()
@@ -25,7 +25,7 @@ $(document).ready(function(){
         return result;
     }
 
-    function isValidPassword(border)
+    function isValidPassword(border) //Check password
     {
         var password = $("#password").val();
         var passwordStrength = 0;
@@ -47,7 +47,7 @@ $(document).ready(function(){
         return result;
     }
 
-    function isValidConfirmPassword(border)
+    function isValidConfirmPassword(border) //Check second password
     {
         var password = $("#confirmpassword").val();
         result = false;
@@ -64,7 +64,7 @@ $(document).ready(function(){
         return result;
     }
 
-    function isValidEmail(border)
+    function isValidEmail(border) //Check e-mail
     {
         var eMail = $("#email").val();
         var eMailRegex = new RegExp('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$');
@@ -86,7 +86,7 @@ $(document).ready(function(){
         return result;
     }
 
-    function isValidPostal(border)
+    function isValidPostal(border) //Check postal code
     {
         var postal_code = $("#postal_code").val();
         var postalRegex = new RegExp('^[a-zA-Z0-9]{6}$');
@@ -108,7 +108,7 @@ $(document).ready(function(){
         return result;
     }
 
-    function isValidHouseNumber(border)
+    function isValidHouseNumber(border) //Check house number 
     {
         var house_number = $("#house_number").val();
         var house_numberRegex = new RegExp('^[0-9]{1,5}$');
@@ -137,9 +137,9 @@ $(document).ready(function(){
     $("#house_number").on("input", isValidHouseNumber);
     $("#confirmpassword").on("input", isValidConfirmPassword);
     
-    
-
-    function passwordCheck(){
+    //Checks if the two password inputs are the same
+    //Return: boolean
+    function passwordCheck(){ 
         var pass = $("#password").val();
         var confirmpass = $("#confirmpassword").val();
         result = false;
@@ -157,6 +157,8 @@ $(document).ready(function(){
         return result;
     }
 
+    //Checks if all inputs are filled in correctly
+    //Return: boolean
     function registerButton(){      
         var succes = false;
         var emailcheck = isValidEmail(true); var usernamecheck = isValidUsername(true); var passwordcheck = isValidPassword(true); var postalcheck = isValidPostal(true); var numbercheck = isValidHouseNumber(true); var confirmpasswordcheck = isValidConfirmPassword(true); 
@@ -191,8 +193,6 @@ $(document).ready(function(){
         {
             $("#submittext").text("Make sure to fill in all fields correctly.");
         }
-        
-
     });
     return false;
 });

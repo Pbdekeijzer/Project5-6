@@ -15,8 +15,7 @@ $(document).ready(function()
         $('#NotFoundAlert').show();
         $('#NotFoundAlert').delay(3500).hide(1200);
     }
-
-    
+   
     function checkUserName()
     {
         username = $("#username").val();

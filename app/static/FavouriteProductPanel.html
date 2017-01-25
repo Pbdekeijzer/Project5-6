@@ -6,11 +6,11 @@
         </a>
         <p>{{title}}</p>
         <div class="product-buttons">
-            <button type="button" title="Remove from favourites" class="favourite-button button" onclick="favourites_onClick({{id}}, '{{title}}')">
-            <img src="../static/images/hearth.png"></img>
+            <button type="button" title="Remove from favourites" id="favlist-buttonID" class="favourite-button button" onclick="favourites_onClick({{id}}, '{{title}}')">
+            <img id="favlist-imgID" src="../static/images/hearth.png"></img>
             </button>
-            <button type="button" title="Add to wishlist" class="wishlist-button button" onclick="wishlist_onClick({{id}}, '{{title}}')">
-            <img src="../static/images/star.png"></img>
+            <button type="button" id="wishlist-buttonID" title="Add to wishlist" class="wishlist-button button" onclick="wishlist_onClick({{id}}, '{{title}}')">
+            <img id="wishlist-imgID" src="../static/images/star.png"></img>
             </button>
         </div>
     </div>
