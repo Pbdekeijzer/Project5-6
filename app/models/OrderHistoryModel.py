@@ -1,5 +1,7 @@
 __author__ = 'Stef'
 
+#candelete
+
 class OrderHistoryModel():
     def __init__(self, product_id, title, price, image_route, amount):
         self.product_id = product_id

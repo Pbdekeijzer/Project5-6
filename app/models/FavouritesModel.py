@@ -32,7 +32,8 @@ class FavouritesModel:
     def insertintoFavourites(self):
         query = "SELECT User_ID FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s"
         checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
-
+  
+        print(checkexisting)
         if not checkexisting:
             query = "INSERT INTO User_Favourites_ VALUES(%s, %s)"
             MySQLdatabase.ExecuteSafeInsertQuery(query, self.user_id, self.product_id)
@@ -62,5 +63,4 @@ class FavouritesModel:
             for i in result:
                 FavouritesModel.favouritesitems.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
             print("Finished")
-
         return FavouritesModel.favouritesitems
