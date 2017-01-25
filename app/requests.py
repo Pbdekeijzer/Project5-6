@@ -26,7 +26,7 @@ def purchase_history(userid, username):
         return jsonify(data)
 
 Cache_wishlist_JSON = CacheClass()     
-GlobalEvents.ItemUpdate.Register(lambda: requests.Cache_wishlist_JSON.clearCache(), "Clear_Wishlist_JSON_Cache")
+GlobalEvents.WishlistUpdate.Register(lambda: Cache_wishlist_JSON.clearCache(), "Clear_Wishlist_JSON_Cache")
 
 @requests.route('/<username>/wishlist')
 def userwishlist(username):

@@ -125,7 +125,6 @@ class AccountModel():
             val = 1
         query = "UPDATE User_ SET Privacy_wishlist = %s WHERE %s = User_Name"
         MySQLdatabase.ExecuteSafeInsertQuery(query, val, username)
-        EventSystem.GlobalEvents.WishlistUpdate.Call()
 
     def insertAccount(self):
         query = "SELECT User_Name FROM User_ WHERE %s = User_Name"
