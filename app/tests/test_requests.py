@@ -13,6 +13,12 @@ class TestRequests(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_GetOneUser(self):
+        mock_account = AccountModel
+        mock_account.getOneUser = Mock(return_value=[(87, 'Jopiejo', 'testje', 'test@test.test', '4564TR', 34, 1,1,1)])
+
+
+
     def test_index(self):
         rv = self.app.get('/')
         assert b'Only in stock' in rv.data
