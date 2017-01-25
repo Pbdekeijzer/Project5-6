@@ -90,6 +90,7 @@ $(document).ready(function(){
     
     if(window.location.href.indexOf("favourites") > -1) {
         GetJSONFromUrl();
+        GetWishlistItems();
     }
 
     // Inserts HTML into the product template and appends the HTML in the index.
@@ -134,7 +135,6 @@ $(document).ready(function(){
 				//changes the opacity of the wishlist buttons for the items in the wishlist
 				for(var y in wish_listID){	
 					if (wish_listID[y] == json[i].id){
-						console.log("should be true");
 						document.getElementById(element.id).style.backgroundColor = "rgba(254, 152, 15, 1)";
 						document.getElementById(img.id).style.opacity = 1;										
 					}
@@ -158,8 +158,7 @@ $(document).ready(function(){
         var des_url = des_url = "/" + account + "/wishlist";
         $.ajax({
             url: des_url,
-			contentType : "application/json",
-			async: false      
+			contentType : "application/json",     
         }).done(function(json){
 			wish_list = json;
         });     

@@ -15,12 +15,24 @@ function copyToClipboard(text) {
         window.prompt("Copy this link to share!", text);
 }
 
-$(document).ready(function(){
+function userfavourites_onClick(id, name){
+    var dest = "favlist"
+	var favelement = document.getElementById("favlist-buttonID" + String(id));
+	var favimg = document.getElementById("favlist-imgID" + String(id));
 
-    var account = document.getElementById("account_url").innerHTML;
-    var des_url = "egois.me/wishlist" + "/" + account;
-    document.getElementById("personal-url").innerHTML = "Your personal url: " + "<b>" + des_url + "</br>";
-    document.getElementById("hidden-url").innerHTML = des_url;
+	// if ($("#wishlist-buttonID" + id).css("background-color") == "rgb(254, 152, 15)"){
+		if (document.getElementById(favimg.id).style.opacity == 1) {
+		$("#favlist-buttonID" + id).css("background-color", "rgba(254, 152, 15, 0.670588)");		
+		document.getElementById(favimg.id).style.opacity = 0.4;
+	}
+	else{
+		$("#favlist-buttonID" + id).css("background-color", "rgba(254, 152, 15, 1)");
+		document.getElementById(favimg.id).style.opacity = 1;
+	}
+    GetItemJson(id);
+}
+
+$(document).ready(function(){
 
     GetOrderedItemJson();
     $.get({
@@ -67,6 +79,17 @@ $(document).ready(function(){
                 }
                 html += "</div>";
                 container.append(html);
+
+		        for (var j in json[i]["items"])
+		        {
+                    var favelement = document.getElementById('favlist-buttonID');
+                    favelement.id = favelement.id + String(json[i]["items"][j].product_id);
+
+                    var favimg = document.getElementById('favlist-imgID');
+                    favimg.id = favimg.id + String(json[i]["items"][j].product_id);
+                }
+                
+
             }
         });
     };
