@@ -95,9 +95,9 @@ $(document).ready(function(){
 
 				//for each item, get the wishlist button id and change that to the wishlist button id + product id
 				var element = document.getElementById("wishlist-buttonID");
-				element.id = element.id + (parseInt(i)+1);		
+				element.id = element.id + (parseInt(json[i].id));		
 				var img = document.getElementById("wishlist-imgID");
-				img.id = img.id + (parseInt(i)+1);
+				img.id = img.id + (parseInt(json[i].id));
 
 				//if not logged in, hide all wishlist buttons
 				if (!window.document.cookie){

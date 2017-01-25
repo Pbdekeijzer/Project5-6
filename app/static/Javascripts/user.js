@@ -14,23 +14,6 @@ function copyToClipboard(text) {
         window.prompt("Copy this link to share!", text);
 }
 
-function userfavourites_onClick(id, name){
-    var dest = "favlist"
-	var favelement = document.getElementById("favlist-buttonID" + String(id));
-	var favimg = document.getElementById("favlist-imgID" + String(id));
-
-	// if ($("#wishlist-buttonID" + id).css("background-color") == "rgb(254, 152, 15)"){
-		if (document.getElementById(favimg.id).style.opacity == 1) {
-		$("#favlist-buttonID" + id).css("background-color", "rgba(254, 152, 15, 0.670588)");		
-		document.getElementById(favimg.id).style.opacity = 0.4;
-	}
-	else{
-		$("#favlist-buttonID" + id).css("background-color", "rgba(254, 152, 15, 1)");
-		document.getElementById(favimg.id).style.opacity = 1;
-	}
-    GetItemJson(id);
-}
-
 $(document).ready(function(){
 
     GetOrderedItemJson();
