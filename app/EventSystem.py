@@ -15,6 +15,7 @@ class EventHandler():
 class GlobalEvents():
     UserUpdate = EventHandler("UserUpdate")
     ItemUpdate = EventHandler("ItemUpdate")
+    WishlistUpdate = EventHandler("WishlistUpdate")
 
 '''
 Demo

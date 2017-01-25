@@ -8,7 +8,7 @@ class CacheClass:
     def caching(self):
         def caching_decorator(func):
             def wrapper(*args, **kwargs):
-                key = str(args) + str(kwargs) + request.query_string
+                key = str(args) + str(kwargs) + request.path + request.query_string
                 if key not in self.TheCache:
                     print("Added {0} to cache".format(key))
                     self.TheCache[key] = func(*args, **kwargs)
