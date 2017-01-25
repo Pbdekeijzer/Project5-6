@@ -4,6 +4,8 @@ from app.MySQLdatabase import *
 import os
 import logging
 from functools import wraps
+from app.Caching import CacheClass
+from app.EventSystem import *
 
 
 class AccountModel():
@@ -32,27 +34,10 @@ class AccountModel():
             "blockedbool": self.blockedbool
         }
 
-    def caching(cache = None):
-        def caching_decorator(func):
-            def wrapper(*args, **kwargs):
-                key = str(args) + str(kwargs)
-                if key not in cache:
-                    print("=======================")
-                    print("{0} was not in cache!".format(key))
-                    print("adding to cache...")
-                    print("=======================")
-                    cache[key] = func(*args, **kwargs)
-                else:
-                    print("=======================")
-                    print("{0} found in cache.".format(key))
-                    print("=======================")
-                return cache[key]
-            return wrapper
-        return caching_decorator
-
-    uid_cache = {}     
+    Cache_UID = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_UID.clearCache(), "Clear_User_UID_Cache")     
     @staticmethod
-    @caching(cache=uid_cache)
+    @Cache_UID.caching()
     def getUID(username):
         print(username)
         print(MySQLdatabase)
@@ -60,7 +45,10 @@ class AccountModel():
         print(result)
         return result[0][0]
 
+    Cache_Users = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_Users.clearCache(), "Clear_Users_Cache") 
     @staticmethod
+    @Cache_Users.caching()
     def getOneUser(UserItsName):
         Result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s", UserItsName)
         try:
@@ -69,19 +57,28 @@ class AccountModel():
         except IndexError:
             return "Name is not found"
 
+    Cache_Blocked = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_Blocked.clearCache(), "Clear_Blocked_Cache") 
     @staticmethod
+    @Cache_Blocked.caching()
     def isBlocked(username):
         query = "SELECT Blockedbool FROM User_ WHERE %s = User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
         return result[0][0] == 1
 
+    Cache_IsAdmin = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_IsAdmin.clearCache(), "Clear_IsAdmin_Cache") 
     @staticmethod
+    @Cache_IsAdmin.caching()
     def isAdmin(username):
         query = "SELECT Adminbool FROM User_ WHERE %s = User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
         return result[0][0] == 1
 
+    Cache_AllUsers = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_AllUsers.clearCache(), "Clear_AllUsers_Cache") 
     @staticmethod
+    @Cache_AllUsers.caching()
     def getAllUsers():
         query = "SELECT * FROM User_ ORDER BY User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query)
@@ -90,21 +87,30 @@ class AccountModel():
             accountlst.append(AccountModel(i[0], i[3], i[4], i[5], i[6], i[7], i[2], i[1], i[8]))
         return accountlst
 
+    Cache_UserExists = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_UserExists.clearCache(), "Clear_UserExists_Cache") 
     @staticmethod
+    @Cache_UserExists.caching()
     def checkifExists(username):
         result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT * FROM User_ WHERE User_Name = %s", username)
         if result:
             return True
         return False
 
+    Cache_checkAccount = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_checkAccount.clearCache(), "Clear_checkAccount_Cache") 
     @staticmethod
+    @Cache_checkAccount.caching()
     def checkAccount(username, password):
         result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT User_Name FROM User_ WHERE User_Name = %s and Wachtwoord = %s" ,username, password)
         if result:
             return True
         return False
 
+    Cache_checkPrivacy = CacheClass()     
+    GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_checkPrivacy.clearCache(), "Clear_checkPrivacy_Cache") 
     @staticmethod
+    @Cache_checkPrivacy.caching()
     def checkPrivacy(username):
         print(username)
         query = "SELECT Privacy_wishlist FROM User_ WHERE %s = User_Name"

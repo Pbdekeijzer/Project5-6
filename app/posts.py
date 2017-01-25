@@ -8,6 +8,7 @@ from app.models.OrderItemModel import *
 from app.models.StatisticsModel import *
 from app.models.WishlistModel import *
 from app.auth.authenticate import *
+from app.EventSystem import *
 import json
 
 posts = Blueprint('Posts', __name__, template_folder="templates", static_folder="static")
@@ -77,7 +78,7 @@ def UpdateOneUser():
     blockedbool = request.args.get("blockedbool")
     gamertag = request.args.get("username")
 
-    AccountModel.uid_cache.clear()
+    GlobalEvents.UserUpdate.Call()
     result = MySQLdatabase.ExecuteSafeInsertQuery(query, w8woord, mail, pcode, houseno, adminbool, secretwish, blockedbool, gamertag)
     if result == True:
         return jsonify({"CommitSuccess":"User is successfully updated"})
@@ -90,6 +91,7 @@ def DeleteOneUser():
     username = request.args.get("username")
     result = MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_ WHERE User_Name = %s", username)
     if result == True:
+        GlobalEvents.UserUpdate.Call()
         return jsonify({"CommitSuccess": "User is successfully deleted"})
     else:
         return jsonify({"CommitSuccess": "User not deleted, is the username correct?"})

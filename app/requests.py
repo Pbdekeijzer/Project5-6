@@ -132,7 +132,11 @@ def accounts():
     accounts = list(accounts)
     return jsonify(accounts)
 
+
+Cache_getAllItems = CacheClass()     
+GlobalEvents.ItemUpdate.Register(lambda: requests.Cache_getAllItems.clearCache(), "Clear_requests-GetAllItems_Cache")
 @requests.route('/items')
+@Cache_getAllItems.caching()
 def items():
     items = ItemModel.get_all_items()
     id = request.args.get("id")

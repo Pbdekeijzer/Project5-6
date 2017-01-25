@@ -3,6 +3,7 @@ from app.auth.authenticate import *
 from app.models.AccountModel import *
 from app.MySQLdatabase import *
 from flask import current_app as app
+from app.EventSystem import *
 import json
 
 
@@ -50,6 +51,7 @@ def register():
         account = AccountModel(username = username, password = password, email = email, postal_code = postal_code, house_number = house_number)
         result = account.insertAccount()
         if result:
+            GlobalEvents.UserUpdate.Call()
             return "Succes"
         return "Failed"
     return render_template('register.html')

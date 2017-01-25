@@ -37,14 +37,10 @@ class WishlistModel():
     def getWishListProductIDs(user_id):
         query = "SELECT Product_ID FROM User_Wishlist_ WHERE User_ID = %s"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, user_id)
-        print("in getwish")
         WishlistModel.wishlistpids = []
         for i in result:
-            print(i)
-            print(i[0])
             WishlistModel.wishlistpids.append(i[0])
 
-        print(WishlistModel.wishlistpids)
         return WishlistModel.wishlistpids
 
     @staticmethod
@@ -56,6 +52,4 @@ class WishlistModel():
             result = MySQLdatabase.ExcecuteSafeSelectQuery(query, pid)
             for i in result:
                 WishlistModel.wishlistitems.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
-            print("Finished")
-        print(WishlistModel.wishlistitems[0])
         return WishlistModel.wishlistitems
