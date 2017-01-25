@@ -4,7 +4,6 @@ function GetItemJson(id){
         url: "/items?id=" + String(id)
     }).done(function(json){
         json = JSON.stringify(json[0]);
-        console.log(json);
 		AddToWishlist(json);
     });
 };
@@ -96,8 +95,7 @@ $(document).ready(function(){
 
 				//for each item, get the wishlist button id and change that to the wishlist button id + product id
 				var element = document.getElementById("wishlist-buttonID");
-				element.id = element.id + (parseInt(i)+1);
-				console.log(element.id);			
+				element.id = element.id + (parseInt(i)+1);		
 				var img = document.getElementById("wishlist-imgID");
 				img.id = img.id + (parseInt(i)+1);
 
@@ -109,7 +107,6 @@ $(document).ready(function(){
 				//changes the opacity of the wishlist buttons for the items in the wishlist
 				for(var y in wish_listID){	
 					if (wish_listID[y] == json[i].id){
-						console.log("should be true");
 						document.getElementById(element.id).style.backgroundColor = "rgba(254, 152, 15, 1)";
 						document.getElementById(img.id).style.opacity = 1;										
 					}

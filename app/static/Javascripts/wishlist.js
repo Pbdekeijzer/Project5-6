@@ -4,7 +4,6 @@ function GetItemJson(id){
         url: "/items?id=" + String(id)
     }).done(function(json){
         json = JSON.stringify(json[0]);
-        console.log(json);
 		AddToWishlist(json);
     });
 };
@@ -30,9 +29,6 @@ function AddToWishlist(json){
 function wishlist_onClick(id){
     var element = document.getElementById("wishlist-buttonID" + String(id));
 	var img = document.getElementById("wishlist-imgID" + String(id));
-
-    console.log(img.id);
-    console.log(element.id);
 
 	// if ($("#wishlist-buttonID" + id).css("background-color") == "rgb(254, 152, 15)"){
 		if (document.getElementById(img.id).style.opacity == 1) {

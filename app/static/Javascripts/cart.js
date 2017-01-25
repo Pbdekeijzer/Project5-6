@@ -24,23 +24,18 @@ function AddToCart(id, name, price, stock) {
         var pstock = stock;
 
 		var product = { ID : pid, Name: pname, Price: pprice, Quantity: pquantity , Stock: pstock };///
-		console.log(product);
-		//didnt work without the if statement on cart.length for some reason
+		//Item already in cart
 		if (cart.length > 0){
 			for(var i in cart){
 				if (cart[i].Name == pname){
 					cart[i].Quantity += 1;
 					cart[i].Price += pprice;
 					saveCart(cart);
-					console.log("Item already exists"); //sanity check -canremove
-					console.log(cart[i].Price);
-                    console.log(cart[i].Quantity);
 					return;
 				}            
 			}  
 		}    
-
-		console.log("Item not yet in cart"); //sanity check -canremove
+        //Item not in cart
 		cart.push(product);
 		saveCart(cart);
 		return;
@@ -81,11 +76,7 @@ function deleteItem(index){
 function checkStock(cart){
     return_string = "";
      for (var i in cart){
-         console.log(cart[i].Stock + " = current stock");
-         console.log(cart[i].Quantity);
-
          if (cart[i].Stock < cart[i].Quantity){
-             console.log(cart[i].Stock);
             return_string += cart[i].Name + "  "; 
          }
      }
@@ -118,7 +109,7 @@ function OrderAjax(){
             error: function (xhr, errmsg, err) {
                 $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
                     " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console         
+                //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console         
             }
         });
 

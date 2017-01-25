@@ -5,7 +5,6 @@ function GetItemJson(id){
         url: "/items?id=" + String(id)
     }).done(function(json){
         json = JSON.stringify(json[0]);
-        console.log(json);
         if (dest == "wishlist"){
             AddToWishlist(json);
         }
@@ -37,8 +36,6 @@ function AddToWishlist(json){
 function wishlist_onClick(id){
 	var element = document.getElementById("wishlist-buttonID" + String(id));
 	var img = document.getElementById("wishlist-imgID" + String(id));
-    console.log(img.id);
-    console.log(element.id);
 
 	// if ($("#wishlist-buttonID" + id).css("background-color") == "rgb(254, 152, 15)"){
 		if (document.getElementById(img.id).style.opacity == 1) {
@@ -172,7 +169,6 @@ $(document).ready(function(){
     // GET JSON from URL, call insert product.
     function GetJSONFromUrl(){
         var account = window.document.cookie.toString().split('=')[1].slice(1);
-        console.log("/" + account + "/favourites")
         $.ajax({
             url: "/" + account + "/favourites"
 

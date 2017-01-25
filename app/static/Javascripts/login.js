@@ -19,17 +19,12 @@ $(document).ready(function()
     function checkUserName()
     {
         username = $("#username").val();
-        // $.ajax(function() 
-        // {
-        //     url: ""
-        // });
-        console.log(username);
+
     }
 
     function checkPassword()
     {
         password = $("#password").val();
-        console.log(password);
     }
 
     $("#username").on("input", checkUserName);
@@ -52,7 +47,6 @@ $(document).ready(function()
                     ShowAlert("Username, Password combination is not correct", "lightcoral");
                 else
                     window.location.href = "/";
-            console.log(response);
             }
 
         });

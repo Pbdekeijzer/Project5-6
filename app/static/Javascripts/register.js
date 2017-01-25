@@ -179,7 +179,6 @@ $(document).ready(function(){
                 type : 'POST',
             }).done(function(result)
             {
-                console.log(result);
                 if (result == "Succes"){
                 $("#submittext").text("Your account has been created!");
                     window.location.href = "/login";        

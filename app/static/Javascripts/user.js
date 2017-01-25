@@ -7,7 +7,6 @@ function updatePrivacy(username){
 function privacy_OnClick(){
     var username = window.document.cookie.toString().split('=')[1];
     updatePrivacy(username);
-    console.log(localStorage.getItem('cart'));
 }
 
     //copy text to clipboard
@@ -38,7 +37,6 @@ $(document).ready(function(){
     $.get({
         url: "/change_settings"
     }).done(function(res){
-        console.log(res)
         if (res == "True"){       
             $("#privacy-checkbox").prop("checked", true);
         } else {
@@ -68,7 +66,6 @@ $(document).ready(function(){
                 html += "<label style='width: 100%; margin-left: 42.5%'>" + json[i]["time"] + "</label>"
 		        for (var j in json[i]["items"])
 		        {
-                    console.log(json[i]["items"][j])
                     var context = {title: json[i]["items"][j].title,
                                 image: json[i]["items"][j].image_route,
                                 id: json[i]["items"][j].product_id,
