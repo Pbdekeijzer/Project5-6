@@ -32,19 +32,26 @@ class TestRequests(unittest.TestCase):
         rv = self.app.get('/')
         assert b'Only in stock' in rv.data
 
-
     def test_purchase_history(self):
-        patch('app.requests.authenticate_user', lambda x: x).start()
-
         mock_account = AccountModel
-        mock_account.checkifExists = Mock(return_value=True)
+        mock_account.checkifExists = mock.MagicMock(return_value=True)
 
         mock_history = HistoryModel
         mock_history.get_order_history = Mock(return_value="Something")
         
-        rv = self.app.get('/account/hoi/history')
-        print(rv.data)
+        rv = self.app.get('/account/testuser/history')
+
         assert b'Something' in rv.data
+
+    def login(self, username, password):
+        return self.app.post('/login', data=dict(
+            username=username,
+            password=password
+        ), follow_redirects=True)
+
+    def logout(self):
+        return self.app.get('/logout', follow_redirects=True)
+
 
 
     
