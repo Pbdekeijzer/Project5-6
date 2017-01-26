@@ -37,7 +37,6 @@ class TurnoverStats():
             group by NewDate order by NewDate"""
             maxDate = 12
             result = MySQLdatabase.ExcecuteSafeSelectQuery(query, year)
-        print(result)
         lst = []
         lastdate = 0
         for i in result:
@@ -50,7 +49,6 @@ class TurnoverStats():
         while lastdate < maxDate:
             lst.append(TurnoverStats(0, lastdate + 1))
             lastdate += 1
-        print(lst)
         return lst
 
     def toDict(self):
@@ -71,11 +69,9 @@ class WishlistStats():
          FROM `User_Wishlist_` as W left join Buyable_item_ as B 
          on W.Product_ID=B.Product_ID group by Title order by Total desc limit %s"""
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, maxAmount)
-        print(result)
         lst = []
         for i in result:
             lst.append(WishlistStats(int(i[2]), i[1], int(i[0])))
-        print(lst)
         return lst
 
     def toDict(self):
@@ -99,7 +95,6 @@ class StatisticsModel():
          Product_ID = %s) as Old where YEAR(Time)=%s group by month(Time) order by month(Time)"""
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, itemID, year)
         lst = []
-        print(result)
         lastMonth = 0
         for i in result:
             while lastMonth + 1 < i[1]:
@@ -121,7 +116,6 @@ class StatisticsModel():
          Product_ID = %s) as Old where YEAR(Time)=%s and month(Time) = %s group by day(Time) order by day(Time)"""
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, itemID, year, month)
         lst = []
-        print(result)
         lastday = 0
         for i in result:
             while lastday + 1 < i[1]:
@@ -135,7 +129,6 @@ class StatisticsModel():
             lst.append(StatisticsModel(0, lastday+1))
             lastday += 1
 
-        print(lst)
         return lst
 
 

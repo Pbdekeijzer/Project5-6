@@ -3,6 +3,7 @@ from flask import jsonify
 from app.MySQLdatabase import *
 import os
 from app.models.ItemModel import *
+from app.EventSystem import *
 
 
 class WishlistModel():
@@ -21,6 +22,7 @@ class WishlistModel():
         }
 
     def insertintoWistlist(self):
+        GlobalEvents.WishlistUpdate.Call()
         query = "SELECT User_ID FROM User_Wishlist_ WHERE User_ID = %s AND Product_ID = %s"
         checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
 

@@ -3,7 +3,7 @@ from app.models.AccountModel import *
 from app.models.FavouritesModel import *
 from app.models.HistoryModel2 import *
 from app.models.ItemModel import *
-from app.models.Order import *
+#from app.models.Order import *
 from app.models.OrderItemModel import *
 from app.models.StatisticsModel import *
 from app.models.WishlistModel import *
@@ -52,6 +52,7 @@ def order(userid):
             ItemModel.update_Stock(item_id, item_quantity)
             orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
             OrderItemModel.AddOrderItem(orderItem)       
+        GlobalEvents.OrderHistoryUpdate.Call()
     return "Succes"
 
 @posts.route('/change_settings', methods = ['GET', 'POST'])
