@@ -28,7 +28,6 @@ class ItemModel():
     def get_all_items():
         query = "SELECT * FROM Buyable_item_"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query)
-        print(type(result))
         ItemModel.itemlst = []
         for i in result:
             ItemModel.itemlst.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))

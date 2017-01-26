@@ -39,10 +39,7 @@ class AccountModel():
     @staticmethod
     @Cache_UID.caching()
     def getUID(username):
-        print(username)
-        print(MySQLdatabase)
         result = MySQLdatabase.ExcecuteSafeSelectQuery("SELECT User_ID FROM User_ WHERE User_Name = %s",username)
-        print(result)
         return result[0][0]
 
     Cache_Users = CacheClass()     
@@ -112,7 +109,6 @@ class AccountModel():
     @staticmethod
     @Cache_checkPrivacy.caching()
     def checkPrivacy(username):
-        print(username)
         query = "SELECT Privacy_wishlist FROM User_ WHERE %s = User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
         return result[0][0] == 1
@@ -132,7 +128,6 @@ class AccountModel():
 
         if not hasResult:
             query = "INSERT INTO User_(Privacy_wishlist, Adminbool, User_Name, Wachtwoord, Email_address, Postal_code, House_number, Blockedbool) VALUES (True, False, %s, %s, %s, %s,%s, FALSE)"
-            print(query)
             MySQLdatabase.ExecuteSafeInsertQuery(query, self.username, self.password, self.email, self.postal_code, self.house_number)
             EventSystem.GlobalEvents.UserUpdate.Call()
             return True

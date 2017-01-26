@@ -128,8 +128,9 @@ def accounts():
 
 
 Cache_getAllItems = CacheClass()     
-GlobalEvents.ItemUpdate.Register(lambda: requests.Cache_getAllItems.clearCache(), "Clear_requests-GetAllItems_Cache")
+GlobalEvents.ItemUpdate.Register(lambda: Cache_getAllItems.clearCache(), "Clear_requests-GetAllItems_Cache")
 @requests.route('/items')
+@Cache_getAllItems.caching(True)
 def items():
     items = ItemModel.get_all_items()
     id = request.args.get("id")

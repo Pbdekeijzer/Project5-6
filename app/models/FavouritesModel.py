@@ -23,7 +23,6 @@ class FavouritesModel:
     @staticmethod
     def getUID(username):
         query = "SELECT User_ID FROM User_ WHERE User_Name = %s"
-        print("in uid")
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
         userid = result[0]
         userid = userid[0]
@@ -32,8 +31,7 @@ class FavouritesModel:
     def insertintoFavourites(self):
         query = "SELECT User_ID FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s"
         checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
-  
-        print(checkexisting)
+
         if not checkexisting:
             query = "INSERT INTO User_Favourites_ VALUES(%s, %s)"
             MySQLdatabase.ExecuteSafeInsertQuery(query, self.user_id, self.product_id)
@@ -47,7 +45,6 @@ class FavouritesModel:
     def getFavouritesProductIDs(user_id):
         query = "SELECT Product_ID FROM User_Favourites_ WHERE User_ID = %s"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, user_id)
-        print("in getFavourites")
         FavouritesModel.favouritespids = []
         for i in result:
             FavouritesModel.favouritespids.append(i[0])
@@ -62,5 +59,4 @@ class FavouritesModel:
             result = MySQLdatabase.ExcecuteSafeSelectQuery(query, pid)
             for i in result:
                 FavouritesModel.favouritesitems.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
-            print("Finished")
         return FavouritesModel.favouritesitems

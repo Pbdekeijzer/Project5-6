@@ -16,6 +16,7 @@ class GlobalEvents():
     UserUpdate = EventHandler("UserUpdate")
     ItemUpdate = EventHandler("ItemUpdate")
     WishlistUpdate = EventHandler("WishlistUpdate")
+    OrderHistoryUpdate = EventHandler("OrderHistoryUpdate")
     ItemUpdate.Register(lambda: GlobalEvents.WishlistUpdate.Call(), "WishlistUpdate.Call (Item change that triggers a wishlist change)")
     UserUpdate.Register(lambda: GlobalEvents.WishlistUpdate.Call(), "WishlistUpdate.Call (Cascading user changes)")
 
