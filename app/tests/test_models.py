@@ -241,7 +241,17 @@ class TestItem(unittest.TestCase):
     def test_hasDescription(self):
         self.assertTrue(self.item.hasDescription("This is Mr. Brightside -The Killers"))
     
+    def test_inPriceRange(self):
+        self.assertTrue(self.item.inPriceRange(0, 500))
+    
+    def test_hasContinent(self):
+        self.assertTrue(self.item.hasContinent("Europe"))
 
+    def test_inStock(self):
+        self.assertTrue(self.item.inStock(1))
+    
+    def test_hasClassification(self):
+        self.assertTrue(self.item.hasClassification("Mammal"))
 
 class TestTurnover(unittest.TestCase):
     def setUp(self):
