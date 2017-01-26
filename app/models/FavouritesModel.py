@@ -20,7 +20,10 @@ class FavouritesModel:
             "Product_ID": self.product_id
         }
 
+    Cache_getUID = CacheClass()     
+    GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_getUID.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
+    @Cache_getUID.caching()
     def getUID(username):
         query = "SELECT User_ID FROM User_ WHERE User_Name = %s"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
@@ -29,6 +32,7 @@ class FavouritesModel:
         return userid
 
     def insertintoFavourites(self):
+        GlobalEvents.FavouritesUpdate.Call()
         query = "SELECT User_ID FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s"
         checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
 
@@ -41,7 +45,10 @@ class FavouritesModel:
             "DELETE FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s", self.user_id, self.product_id)
         return False
 
+    Cache_FavouritesProductIDS = CacheClass()     
+    GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_FavouritesProductIDS.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
+    @Cache_FavouritesProductIDS.caching()
     def getFavouritesProductIDs(user_id):
         query = "SELECT Product_ID FROM User_Favourites_ WHERE User_ID = %s"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, user_id)
@@ -50,7 +57,10 @@ class FavouritesModel:
             FavouritesModel.favouritespids.append(i[0])
         return FavouritesModel.favouritespids
 
+    Cache_FavouritesItems = CacheClass()     
+    GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_FavouritesItems.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
+    @Cache_FavouritesItems.caching()
     def get_allFavouritesItems(user_id):
         pid_list = FavouritesModel.getFavouritesProductIDs(user_id)
         FavouritesModel.favouritesitems = []

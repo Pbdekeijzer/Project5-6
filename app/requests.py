@@ -30,7 +30,7 @@ GlobalEvents.WishlistUpdate.Register(lambda: Cache_wishlist_JSON.clearCache(), "
 
 @requests.route('/<username>/wishlist')
 def userwishlist(username):
-    @Cache_wishlist_JSON.caching()
+    @Cache_wishlist_JSON.caching(True)
     def fetchdata():
         userid = AccountModel.getUID(username)
         items = WishlistModel.getWishListProductIDs(userid)
@@ -59,9 +59,7 @@ def uwl(username):
 @authenticate_user
 def userfavourites(userid, username):
     if not AccountModel.checkPrivacy(username) or session["username"] == username:
-        items = FavouritesModel.getFavouritesProductIDs(userid)
-        data = ItemModel.get_all_items()
-        data = filter(lambda x: x.id in items, data)
+        data = FavouritesModel.get_allFavouritesItems(userid)
         data = map(lambda x: x.toDict(), data)
         data = list(data)
     return jsonify(data)
