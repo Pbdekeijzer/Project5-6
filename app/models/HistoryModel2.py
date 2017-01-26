@@ -19,7 +19,7 @@ class HistoryModel:
 
 
     Cache_getOrderHistory = CacheClass()     
-    GlobalEvents.OrderHistoryUpdate.Register(lambda: HistoryModel2.Cache_getOrderHistory.clearCache(), "Clear_OrderHistory_Cache")
+    GlobalEvents.OrderHistoryUpdate.Register(lambda: HistoryModel.Cache_getOrderHistory.clearCache(), "Clear_OrderHistory_Cache")
     @Cache_getOrderHistory.caching()
     def get_order_history(self):
         query = r"""Select O.Order_ID, OBI.Amount, BI.Image_route, BI.Price, BI.Product_ID, BI.Title, O.Time_of_order_placed from Buyable_item_ as BI
