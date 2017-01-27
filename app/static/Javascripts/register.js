@@ -14,7 +14,11 @@ $(document).ready(function(){
             result = true;
         }else
         {
-            $("#usertext").text("Make sure to use the correct format."); 
+            if (username.length > 10)
+                $("#usertext").text("Make sure to use less than 10 characters.");
+            else
+                $("#usertext").text("Make sure to use the correct format.");
+
             if (border == true){
                 $('#usertext').css('color', 'red');
             }    
