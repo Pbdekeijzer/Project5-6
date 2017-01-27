@@ -22,7 +22,6 @@ class TestRequests(unittest.TestCase):
         assert b'Copyright' in rv.data
 
     def test_cart(self):
-        self.login('hoi', 'hoi')
         rv = self.app.get('/cart')
         assert b'Total Price' in rv.data
 
