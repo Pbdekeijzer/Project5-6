@@ -9,7 +9,7 @@ class CacheClass:
         def caching_decorator(func):
             def wrapper(*args, **kwargs):
                 if(doPathAndQuery):
-                    key = CacheClass.TupleString(args) + CacheClass.TupleString(kwargs) + request.path + request.query_string
+                    key = CacheClass.TupleString(args) + CacheClass.TupleString(kwargs) + request.path + str(request.query_string)
                 else:
                     key = CacheClass.TupleString(args) + CacheClass.TupleString(kwargs)
                 if key not in self.TheCache:
