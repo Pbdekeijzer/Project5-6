@@ -13,21 +13,6 @@ class TestRequests(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_GetOneUserOptionOne(self):
-        mock_account = AccountModel
-        mock_account.getOneUser = Mock(return_value=[("Name is not found")])
-        rv = self.app.get('/GetOneUser')
-        print(rv.data)
-        assert b'Username is not found' in rv.data
-
-    def test_GetOneUserOptionTwo(self):
-        mock_account = AccountModel
-        mock_account.getOneUser = Mock(return_value=[(87, 'Jopiejo', 'testje', 'test@test.test', '4564TR', 34, 1,1,1)])
-        rv = self.app.get('/GetOneUser')
-        print(rv.data)
-        assert b'Jopiejo' in rv.data
-
-
     def test_index(self):
         rv = self.app.get('/')
         assert b'Only in stock' in rv.data
@@ -37,7 +22,7 @@ class TestRequests(unittest.TestCase):
         mock_account.checkifExists = mock.MagicMock(return_value=True)
 
         mock_history = HistoryModel
-        mock_history.get_order_history = Mock(return_value="Something")
+        mock_history.get_order_history = mock.MagicMock(return_value="Something")
         
         rv = self.app.get('/account/testuser/history')
 
@@ -51,6 +36,14 @@ class TestRequests(unittest.TestCase):
 
     def logout(self):
         return self.app.get('/logout', follow_redirects=True)
+
+    def test_login_logout(self):
+        rv = self.login('hoi', 'hoi')
+        assert b'You were logged in' in rv.data
+        rv = self.logout()
+        assert b'You were logged out' in rv.data
+        rv = self.login('adminx', 'default')
+
 
 
 
