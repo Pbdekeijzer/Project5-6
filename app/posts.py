@@ -97,3 +97,14 @@ def DeleteOneUser():
     else:
         return jsonify({"CommitSuccess": "User not deleted, is the username correct?"})
 
+@posts.route('/UpdateUsername')
+@authenticate_admin
+def UpdateUsername():
+    oldUsername = request.args.get("oldusername")
+    newUsername = request.args.get("newusername")
+    resultBool = MySQLdatabase.ExecuteSafeInsertQuery("UPDATE User_ SET User_Name = %s WHERE User_Name = %s", newUsername, oldUsername)
+    if resultBool == True:
+        GlobalEvents.UserUpdate.Call()
+        return jsonify({"CommitSuccess":"Username is successfully updated from "+oldUsername+" to "+newUsername})
+    else:
+        return jsonify({"CommitSuccess": "User not deleted, is the original username correct?"})

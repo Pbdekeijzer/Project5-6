@@ -32,6 +32,29 @@ $(document).ready(function() {
 
     });
 
+    $('#UpdateUsername').click(function () {
+        var DataToAPI = {
+            oldusername: DataFromDB.username,
+            newusername: $("#Username").val()
+
+        }
+        $.ajax({
+                    url: "/UpdateUsername",
+                    data: DataToAPI,
+                    datatype: 'json'
+                }).done(function (data) {
+                    if (data.CommitSuccess == "User not deleted, is the original username correct?") {
+                        ShowAlert(data.CommitSuccess, 'lightcoral');
+
+                    }
+                    else {
+                        ShowAlert(data.CommitSuccess, 'lightgreen');
+                        FillTheTable();
+                    }
+                });
+
+    });
+
     $('#UpdateUser').click(function () {
 
         $.when(FindUser($("#Username").val())).done(function() {
