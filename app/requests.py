@@ -3,7 +3,7 @@ from app.models.AccountModel import *
 from app.models.FavouritesModel import *
 from app.models.HistoryModel2 import *
 from app.models.ItemModel import *
-from app.models.Order import *
+#from app.models.Order import *
 from app.models.OrderItemModel import *
 from app.models.StatisticsModel import *
 from app.models.WishlistModel import *
@@ -25,8 +25,12 @@ def purchase_history(userid, username):
         data = historyModel.get_order_history()
         return jsonify(data)
 
+Cache_wishlist_JSON = CacheClass()     
+GlobalEvents.WishlistUpdate.Register(lambda: Cache_wishlist_JSON.clearCache(), "Clear_Wishlist_JSON_Cache")
+
 @requests.route('/<username>/wishlist')
 def userwishlist(username):
+    @Cache_wishlist_JSON.caching(True)
     def fetchdata():
         userid = AccountModel.getUID(username)
         items = WishlistModel.getWishListProductIDs(userid)
@@ -51,23 +55,11 @@ def uwl(username):
         return render_template('wishlist.html')
     return "Access denied, user wishlist is private."
 
-@requests.route('/account/wishlist')
-@authenticate_user
-def getaccountwishlist(userid):
-   items = WishlistModel.getWishListProductIDs(uid)
-   data = ItemModel.get_all_items()
-   data = filter(lambda x: x.id in items, data)
-   data = map(lambda x: x.toDict(), data)
-   data = list(data)
-   return jsonify(data)
-
 @requests.route('/<username>/favourites')
 @authenticate_user
 def userfavourites(userid, username):
     if not AccountModel.checkPrivacy(username) or session["username"] == username:
-        items = FavouritesModel.getFavouritesProductIDs(userid)
-        data = ItemModel.get_all_items()
-        data = filter(lambda x: x.id in items, data)
+        data = FavouritesModel.get_allFavouritesItems(userid)
         data = map(lambda x: x.toDict(), data)
         data = list(data)
     return jsonify(data)
@@ -132,7 +124,11 @@ def accounts():
     accounts = list(accounts)
     return jsonify(accounts)
 
+
+Cache_getAllItems = CacheClass()     
+GlobalEvents.ItemUpdate.Register(lambda: Cache_getAllItems.clearCache(), "Clear_requests-GetAllItems_Cache")
 @requests.route('/items')
+@Cache_getAllItems.caching(True)
 def items():
     items = ItemModel.get_all_items()
     id = request.args.get("id")

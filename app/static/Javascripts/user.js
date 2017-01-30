@@ -7,16 +7,19 @@ function updatePrivacy(username){
 function privacy_OnClick(){
     var username = window.document.cookie.toString().split('=')[1];
     updatePrivacy(username);
-    console.log(localStorage.getItem('cart'));
 }
 
+    //copy text to clipboard
+function copyToClipboard(text) {
+        window.prompt("Copy this link to share!", text);
+}
 
 $(document).ready(function(){
+
     GetOrderedItemJson();
     $.get({
         url: "/change_settings"
     }).done(function(res){
-        console.log(res)
         if (res == "True"){       
             $("#privacy-checkbox").prop("checked", true);
         } else {
@@ -29,11 +32,11 @@ $(document).ready(function(){
         $.ajax({
             url: '/account/'+ username +'/history'
         }).done(function(json){
-            InsertProduct(json);
+            InsertUserProduct(json);
         });
     };
 
-    function InsertProduct(json){
+    function InsertUserProduct(json){
         $.ajax({
             url: "/static/OrderedProductPanel.html"
         }).done(function(data){
@@ -42,22 +45,31 @@ $(document).ready(function(){
 
 		    for(var i in json)
 		    {
-		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey;'>"
-		        for (var j in json[i])
+		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey; align: left'>"                
+                html += "<label style='width: 100%; margin-left: 42.5%'>" + json[i]["time"] + "</label>"
+		        for (var j in json[i]["items"])
 		        {
-			        for (var x in json[i][j])
-			        {
-			            var context = {title: json[i][j][x].title,
-                                 image: json[i][j][x].image_route,
-                                 id: json[i][j][x].product_id,
-                                 price: json[i][j][x].price,
-                                 amount: json[i][j][x].amount
-                                };
-			            html += template(context);
-			        }
+                    var context = {title: json[i]["items"][j].title,
+                                image: json[i]["items"][j].image_route,
+                                id: json[i]["items"][j].product_id,
+                                price: json[i]["items"][j].price,
+                                amount: json[i]["items"][j].amount
+                            };
+                    html += "<div style='align: left'>" + template(context) + "</div>";
                 }
                 html += "</div>";
                 container.append(html);
+
+		        for (var j in json[i]["items"])
+		        {
+                    var favelement = document.getElementById('favlist-buttonID');
+                    favelement.id = favelement.id + String(json[i]["items"][j].product_id);
+
+                    var favimg = document.getElementById('favlist-imgID');
+                    favimg.id = favimg.id + String(json[i]["items"][j].product_id);
+                }
+                
+
             }
         });
     };

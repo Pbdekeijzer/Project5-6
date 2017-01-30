@@ -20,16 +20,19 @@ class FavouritesModel:
             "Product_ID": self.product_id
         }
 
+    Cache_getUID = CacheClass()     
+    GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_getUID.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
+    @Cache_getUID.caching()
     def getUID(username):
         query = "SELECT User_ID FROM User_ WHERE User_Name = %s"
-        print("in uid")
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
         userid = result[0]
         userid = userid[0]
         return userid
 
     def insertintoFavourites(self):
+        GlobalEvents.FavouritesUpdate.Call()
         query = "SELECT User_ID FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s"
         checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
 
@@ -42,17 +45,22 @@ class FavouritesModel:
             "DELETE FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s", self.user_id, self.product_id)
         return False
 
+    Cache_FavouritesProductIDS = CacheClass()     
+    GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_FavouritesProductIDS.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
+    @Cache_FavouritesProductIDS.caching()
     def getFavouritesProductIDs(user_id):
         query = "SELECT Product_ID FROM User_Favourites_ WHERE User_ID = %s"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, user_id)
-        print("in getFavourites")
         FavouritesModel.favouritespids = []
         for i in result:
             FavouritesModel.favouritespids.append(i[0])
         return FavouritesModel.favouritespids
 
+    Cache_FavouritesItems = CacheClass()     
+    GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_FavouritesItems.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
+    @Cache_FavouritesItems.caching()
     def get_allFavouritesItems(user_id):
         pid_list = FavouritesModel.getFavouritesProductIDs(user_id)
         FavouritesModel.favouritesitems = []
@@ -61,6 +69,4 @@ class FavouritesModel:
             result = MySQLdatabase.ExcecuteSafeSelectQuery(query, pid)
             for i in result:
                 FavouritesModel.favouritesitems.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
-            print("Finished")
-
         return FavouritesModel.favouritesitems

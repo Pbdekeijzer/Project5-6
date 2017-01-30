@@ -37,7 +37,6 @@ class TurnoverStats():
             group by NewDate order by NewDate"""
             maxDate = 12
             result = MySQLdatabase.ExcecuteSafeSelectQuery(query, year)
-
         lst = []
         lastdate = 0
         for i in result:
@@ -50,7 +49,6 @@ class TurnoverStats():
         while lastdate < maxDate:
             lst.append(TurnoverStats(0, lastdate + 1))
             lastdate += 1
-
         return lst
 
     def toDict(self):
@@ -108,7 +106,7 @@ class StatisticsModel():
         while lastMonth <12:
             lst.append(StatisticsModel(0, lastMonth+1))
             lastMonth += 1
-
+        
         return lst
 
     @staticmethod

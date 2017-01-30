@@ -1,4 +1,4 @@
-var cart = [];
+var cart = []; //global variable used to store the cart items in
 
 //first function call when the 'Add to Cart' button is clicked
 function cart_onClick(id, name, price, stock){ 
@@ -6,6 +6,7 @@ function cart_onClick(id, name, price, stock){
   popup(name, "cart");
 } 
 
+//Adding an item to the cart
 function AddToCart(id, name, price, stock) {
 
 	//load cart data from local storage
@@ -23,23 +24,18 @@ function AddToCart(id, name, price, stock) {
         var pstock = stock;
 
 		var product = { ID : pid, Name: pname, Price: pprice, Quantity: pquantity , Stock: pstock };///
-		console.log(product);
-		//didnt work without the if statement on cart.length for some reason
+		//Item already in cart
 		if (cart.length > 0){
 			for(var i in cart){
 				if (cart[i].Name == pname){
 					cart[i].Quantity += 1;
 					cart[i].Price += pprice;
 					saveCart(cart);
-					console.log("Item already exists"); //sanity check -canremove
-					console.log(cart[i].Price);
-                    console.log(cart[i].Quantity);
 					return;
 				}            
 			}  
 		}    
-
-		console.log("Item not yet in cart"); //sanity check -canremove
+        //Item not in cart
 		cart.push(product);
 		saveCart(cart);
 		return;
@@ -54,7 +50,7 @@ function saveCart(cart){
 	}
 }
 
-//Delete from cart
+//Delete item from cart and refresh the cart
 function deleteItem(index){
     cart = JSON.parse(localStorage.cart);
 
@@ -80,11 +76,7 @@ function deleteItem(index){
 function checkStock(cart){
     return_string = "";
      for (var i in cart){
-         console.log(cart[i].Stock + " = current stock");
-         console.log(cart[i].Quantity);
-
          if (cart[i].Stock < cart[i].Quantity){
-             console.log(cart[i].Stock);
             return_string += cart[i].Name + "  "; 
          }
      }
@@ -93,19 +85,15 @@ function checkStock(cart){
 
 function OrderAjax(){
     var cart = [];
-    cart_pass = true;
     var orderItems = [];
     cart = JSON.parse(localStorage.cart);
     var enough_stock = checkStock(cart);
-    console.log(enough_stock);
     if (JSON.parse(localStorage.cart) != 0 && enough_stock == ""){
         for (var i in cart) {
                 var item = cart[i];
                 var itemDetails = [item.ID, item.Name, item.Price, item.Quantity];      
                 orderItems.push(itemDetails);
         }
-
-        console.log(JSON.stringify({lol : orderItems})); //sanity test -canremove
         
         $.ajax({
             url: "/order", // the endpoint
@@ -117,11 +105,11 @@ function OrderAjax(){
             success: function (json) {
             },
 
-            // handle a non-successful response -- actually handles the succesful response
+            // handle a non-successful response -- actually handles the succesful response, because of a wrong type return in posts.py
             error: function (xhr, errmsg, err) {
                 $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " + errmsg +
                     " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console         
+                //console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console         
             }
         });
 
@@ -148,15 +136,11 @@ function ConfirmOrder(){
     }
     $("#AlertForOrdering").remove();
     showCart();
-    
-    
 }
+
 function CancelOrder(){
     $("#AlertForOrdering").remove();
 }
-
-
-
 
 function Order(){
     if (window.document.cookie){
@@ -167,9 +151,7 @@ function Order(){
 	        $("#content").append("<div id='AlertForOrdering'>You are about to buy everything in your cart, <br> do you want to cont" +
                     "inue?<br> <button onclick='ConfirmOrder()' class='button'>Yes</button> <button onclick='CancelOrder()' class='button'>N" +
                     "o</button></div>");
-
 	    }
-
      }
      else{
         if (JSON.parse(localStorage.cart) == 0){
@@ -208,6 +190,7 @@ function showCart() {
     $("#cartBody").append(row);
 }
 
+//The document ready shows the cart when the url contains 'cart'
 $(document).ready(function()
 {
     if(window.location.href.indexOf("cart") > -1) {

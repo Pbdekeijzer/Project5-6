@@ -1,13 +1,14 @@
 from flask import Blueprint, request, make_response, jsonify, render_template, session, redirect, url_for
 from app.models.AccountModel import *
 from app.models.FavouritesModel import *
-from app.models.HistoryModel import *
+from app.models.HistoryModel2 import *
 from app.models.ItemModel import *
-from app.models.Order import *
+#from app.models.Order import *
 from app.models.OrderItemModel import *
 from app.models.StatisticsModel import *
 from app.models.WishlistModel import *
 from app.auth.authenticate import *
+from app.EventSystem import *
 import json
 
 posts = Blueprint('Posts', __name__, template_folder="templates", static_folder="static")
@@ -51,6 +52,7 @@ def order(userid):
             ItemModel.update_Stock(item_id, item_quantity)
             orderItem = OrderItemModel(order_id, item_id, item_quantity, 0)
             OrderItemModel.AddOrderItem(orderItem)       
+        GlobalEvents.OrderHistoryUpdate.Call()
     return "Succes"
 
 @posts.route('/change_settings', methods = ['GET', 'POST'])
@@ -77,6 +79,7 @@ def UpdateOneUser():
     blockedbool = request.args.get("blockedbool")
     gamertag = request.args.get("username")
 
+    GlobalEvents.UserUpdate.Call()
     result = MySQLdatabase.ExecuteSafeInsertQuery(query, w8woord, mail, pcode, houseno, adminbool, secretwish, blockedbool, gamertag)
     if result == True:
         return jsonify({"CommitSuccess":"User is successfully updated"})
@@ -89,7 +92,19 @@ def DeleteOneUser():
     username = request.args.get("username")
     result = MySQLdatabase.ExecuteSafeInsertQuery("DELETE FROM User_ WHERE User_Name = %s", username)
     if result == True:
+        GlobalEvents.UserUpdate.Call()
         return jsonify({"CommitSuccess": "User is successfully deleted"})
     else:
         return jsonify({"CommitSuccess": "User not deleted, is the username correct?"})
 
+@posts.route('/UpdateUsername')
+@authenticate_admin
+def UpdateUsername():
+    oldUsername = request.args.get("oldusername")
+    newUsername = request.args.get("newusername")
+    resultBool = MySQLdatabase.ExecuteSafeInsertQuery("UPDATE User_ SET User_Name = %s WHERE User_Name = %s", newUsername, oldUsername)
+    if resultBool == True:
+        GlobalEvents.UserUpdate.Call()
+        return jsonify({"CommitSuccess":"Username is successfully updated from "+oldUsername+" to "+newUsername})
+    else:
+        return jsonify({"CommitSuccess": "User not deleted, is the original username correct?"})

@@ -3,6 +3,7 @@ from app.auth.authenticate import *
 from app.models.AccountModel import *
 from app.MySQLdatabase import *
 from flask import current_app as app
+from app.EventSystem import *
 import json
 
 
@@ -14,8 +15,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
         result = AccountModel.checkAccount(username, password)
-        blocked = AccountModel.isBlocked(username)
         if result:
+            blocked = AccountModel.isBlocked(username)
             if not blocked:          
                 session["username"] = username
                 session.permanent = True
@@ -28,7 +29,7 @@ def login():
                 response.set_cookie('user', username +'='+ str(adminbool[0])+'=')            
                 return response
             return "Your account is blocked, access denied"
-        return "401", 401 
+        return "401"
     return render_template('login.html')
 
 @auth.route('/logout')
@@ -50,6 +51,7 @@ def register():
         account = AccountModel(username = username, password = password, email = email, postal_code = postal_code, house_number = house_number)
         result = account.insertAccount()
         if result:
+            GlobalEvents.UserUpdate.Call()
             return "Succes"
         return "Failed"
     return render_template('register.html')

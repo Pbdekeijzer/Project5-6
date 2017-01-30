@@ -37,11 +37,4 @@ $(document).ready(function(){
             InsertHTML(json, data);
         });
     };
-
-    
-    //EXAMPLE OF INPUT CHANGE EVENT
-    /*$('#AmountOfAnimalsToBuy').on('input', function() { 
-        var InputText = $(this).val() // get the current value of the input field.
-    });*/
-
 });

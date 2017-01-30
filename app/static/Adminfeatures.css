@@ -1,47 +1,65 @@
 #table{
-  width: fit-content;
-  padding: 15px;
-  padding-top: 12px;
-  margin-top: 3px;
-  margin-left: 15px;
-  display: block;
-  overflow-y: auto;
-  max-width: 65%;
-  max-height: 610px;
-  float: right;
+    width: fit-content;
+    padding: 15px;
+    padding-top: 12px;
+    margin-top: 3px;
+    margin-left: 15px;
+    display: block;
+    overflow-y: auto;
+    max-width: 65%;
+    max-height: 540px;
+    float: right;
 }
 
 table, th, td {
-  border-collapse: collapse;
-  border: 1px solid black;
+    border-collapse: collapse;
+    border: 1px solid black;
 }
 
 td{
-  text-align: left;
+    text-align: left;
 }
 
 .inputAtAdminpage{
-  max-height: fit-content;
-  min-height: 12px;
-  max-width: 50%;
-  padding: 2px;
-  text-anchor: start;
-  margin-top: 10px !important;
-  margin-left: 5px; !important;
+    max-height: fit-content;
+    min-height: 12px;
+    max-width: 50%;
+    padding: 2px;
+    text-anchor: start;
+    margin-top: 10px !important;
+    margin-left: 5px; !important;
+    text-transform: none;
 }
 
 .buttonAtAdminpage{
-  min-height: 30px;
-  padding: 5px;
-  margin: 5px;
+    min-height: 30px;
+    padding: 5px;
+    margin: 5px;
 }
 
 #NotFoundAlert{
     width: auto;
     display: inline-block;
     padding: 3px;
+    position: absolute;
+    border-radius: 3px;
 }
 
 .tableRow {
     cursor: pointer;
+}
+
+.sliderdiv{
+    padding: 0px;
+}
+
+.AdminSlider{
+    padding: 0px;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+}
+
+#admin-label, #privacy-label, #blocked-label{
+    margin-left: 5px;
 }

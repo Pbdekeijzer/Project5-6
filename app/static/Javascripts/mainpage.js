@@ -4,7 +4,6 @@ function GetItemJson(id){
         url: "/items?id=" + String(id)
     }).done(function(json){
         json = JSON.stringify(json[0]);
-        console.log(json);
 		AddToWishlist(json);
     });
 };
@@ -27,23 +26,26 @@ function AddToWishlist(json){
     });
 };
 
+//Function called when the wishlist button is pressed.
 function wishlist_onClick(id){
+
+	var element = document.getElementById("wishlist-buttonID" + String(id));
+	var img = document.getElementById("wishlist-imgID" + String(id));
+
+	// if ($("#wishlist-buttonID" + id).css("background-color") == "rgb(254, 152, 15)"){
+		if (document.getElementById(img.id).style.opacity == 1) {
+		$("#wishlist-buttonID" + id).css("background-color", "rgba(254, 152, 15, 0.670588)");		
+		document.getElementById(img.id).style.opacity = 0.4;
+	}
+	else{
+		$("#wishlist-buttonID" + id).css("background-color", "rgba(254, 152, 15, 1)");
+		document.getElementById(img.id).style.opacity = 1;
+	}
+	
 	GetItemJson(id);
 }
 
 $(document).ready(function(){
-
-	console.log($(".wishlist-button"));
-
-	/*var audioElement = document.createElement('audio');
-	audioElement.setAttribute('src', 'http://localhost:5000/static/images/nodont.mp4');
-
-	$.get();
-
-	audioElement.addEventListener("load", function() {
-		audioElement.play();
-	}, true);*/
-
 
 	//Catches a keypress of enter at the search box and calls the search function
 	$("#search_input").keypress(function(event){
@@ -63,86 +65,71 @@ $(document).ready(function(){
         filterItems();
     });
 
-
-	// function LogSlider(options) {
-	// 	options = options || {};
-	// 	this.minpos = options.minpos || 0;
-	// 	this.maxpos = options.maxpos || 100;
-	// 	this.minlval = Math.log(options.minval || 1);
-	// 	this.maxlval = Math.log(options.maxval || 100000);
-
-	// 	this.scale = (this.maxlval - this.minlval) / (this.maxpos - this.minpos);
-	// }
-
-	// LogSlider.prototype = {
-	// 	// Calculate value from a slider position
-	// 	value: function(position) {
-	// 		return Math.exp((position - this.minpos) * this.scale + this.minlval);
-	// 	},
-	// 	// Calculate slider position from a value
-	// 	position: function(value) {
-	// 		return this.minpos + (Math.log(value) - this.minlval) / this.scale;
-	// 	}
-	// };
-
-
-	// // Usage:
-
-	// var logsl = new LogSlider({maxpos: 30, minval: 0, maxval: 100000000});
-
-	// $('#slider').mousemove(function() {
-	// 	var val = logsl.value(+$(this).val());
-	// 	$('#value').val(val.toFixed(0));
-	// });
-
-	// $('#value').on('input', function() {
-	// 	var pos = logsl.position(+$(this).val());
-	// 	$('#slider').val(pos);
-	// });
-
-	// $('#value').val("1000").trigger("keyup");
+	var wish_list = []; //global variable used to store the items from the wishlist in
 
     // Inserts HTML into the product template and appends the HTML in the index.
     // param = json
+
+
     function InsertProduct(json){
         $.ajax({       
             url: "/static/ProductPanel.html"
         }).done(function(data){
-            var container = $("#product");
+            var container = $("#product");	
+			var wish_listID = []; 			
+
+			if (window.document.cookie){
+				GetWishlistItems();
+				
+				//for each item in the wishlist, push the id to the wish_listID list
+				for (var i in wish_list){	
+					wish_listID.push(wish_list[i].id);
+				}
+			}
+
             var template = Handlebars.compile(data);
             for(var i in json){
 				var context = {title: json[i].name, body: json[i].description, image: json[i].image, id: json[i].id, continent: json[i].continent, classification: json[i].class, price: json[i].price, stock: json[i].in_stock};
 				var html = template(context);
 				container.append(html);
 
+				//for each item, get the wishlist button id and change that to the wishlist button id + product id
+				var element = document.getElementById("wishlist-buttonID");
+				element.id = element.id + (parseInt(json[i].id));		
+				var img = document.getElementById("wishlist-imgID");
+				img.id = img.id + (parseInt(json[i].id));
+
+				//if not logged in, hide all wishlist buttons
 				if (!window.document.cookie){
 					$(".wishlist-button").hide();			
-				}	
-
-				// var wishlistItems = getWishlistItems();
-				// console.log(wishlistItems);
-				$(".wishlist-button").css("opacity", 1);	
+				}
+				
+				//changes the opacity of the wishlist buttons for the items in the wishlist
+				for(var y in wish_listID){	
+					if (wish_listID[y] == json[i].id){
+						document.getElementById(element.id).style.backgroundColor = "rgba(254, 152, 15, 1)";
+						document.getElementById(img.id).style.opacity = 1;										
+					}
+				}				
             }
         });
     };
 
-
-
-
+	//get all items from the wishlist
+	//Return: json
 	function GetWishlistItems(){
         var url = document.URL
-        var account = document.window.cookie
-
+        var account = document.getElementById("account_url").innerHTML;
         var des_url = des_url = "/" + account + "/wishlist";
-
         $.ajax({
-            url: des_url             
+            url: des_url,
+			contentType : "application/json",
+			async: false      
         }).done(function(json){
-
+			wish_list = json;
         });     
     }     
 	
-
 	//Empty all
     function RemoveHTMLPanels(){
         $(".container1").empty();
@@ -165,7 +152,7 @@ $(document).ready(function(){
 		var continentList = [];
 		$("input:checkbox[name=cb]:checked").each(function(){
 			continentList.push($(this).val());
-		})
+		});
 		return continentList;
 	}
 
@@ -198,7 +185,7 @@ $(document).ready(function(){
 		return returnPrices;
 	}
 
-    function checkStock(){
+    function checkStock(){	
         var only_instock = "";
 
         if ($("#checkboxOnlyStock").is(':checked')){
@@ -272,13 +259,7 @@ $(document).ready(function(){
 		address.replace(" ", "%20");
 		GetJSONFromUrl(address);
 	}
-		
-		
+				
 		ReadyItemArguments("", "", [], "", "", "");
-		
-		
-
-
-
 
 	});

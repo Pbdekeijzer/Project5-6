@@ -3,6 +3,7 @@ from flask import jsonify
 from app.MySQLdatabase import *
 import os
 from app.models.ItemModel import *
+from app.EventSystem import *
 
 
 class WishlistModel():
@@ -21,6 +22,7 @@ class WishlistModel():
         }
 
     def insertintoWistlist(self):
+        GlobalEvents.WishlistUpdate.Call()
         query = "SELECT User_ID FROM User_Wishlist_ WHERE User_ID = %s AND Product_ID = %s"
         checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
 
@@ -37,10 +39,10 @@ class WishlistModel():
     def getWishListProductIDs(user_id):
         query = "SELECT Product_ID FROM User_Wishlist_ WHERE User_ID = %s"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, user_id)
-        print("in getwish")
         WishlistModel.wishlistpids = []
         for i in result:
             WishlistModel.wishlistpids.append(i[0])
+
         return WishlistModel.wishlistpids
 
     @staticmethod
@@ -52,6 +54,4 @@ class WishlistModel():
             result = MySQLdatabase.ExcecuteSafeSelectQuery(query, pid)
             for i in result:
                 WishlistModel.wishlistitems.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
-            print("Finished")
-
         return WishlistModel.wishlistitems

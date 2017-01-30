@@ -1,6 +1,8 @@
 import json
 from flask import jsonify
 import os
+from app.EventSystem import *
+from app.Caching import *
 from app.MySQLdatabase import *
 
 
@@ -19,11 +21,13 @@ class ItemModel():
         self.in_stock = in_stock
         self.class_ = class_
 
+    Cache_getAllItems = CacheClass()     
+    GlobalEvents.ItemUpdate.Register(lambda: ItemModel.Cache_getAllItems.clearCache(), "Clear_GetAllItems_Cache") 
     @staticmethod
+    @Cache_getAllItems.caching()
     def get_all_items():
         query = "SELECT * FROM Buyable_item_"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query)
-        print(type(result))
         ItemModel.itemlst = []
         for i in result:
             ItemModel.itemlst.append(ItemModel(i[0], i[1], i[2], i[4], i[7], i[5], i[3], i[6]))
@@ -41,6 +45,7 @@ class ItemModel():
 
     @staticmethod
     def update_Stock(id, amount):
+        GlobalEvents.ItemUpdate.Call()
         query = "UPDATE Buyable_item_ SET In_stock = (In_stock - %s) WHERE Product_ID = %s"
         MySQLdatabase.ExecuteSafeInsertQuery(query, amount, id) #fix this
         return True
