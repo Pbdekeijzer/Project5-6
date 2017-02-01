@@ -4,6 +4,8 @@ $(document).ready(function(){
    var suburl = pathname.substring(pathname.lastIndexOf('/') + 1);
    var in_stock = null;
 
+
+   //insert product in HTML
    function InsertHTML(json, data){
         var container = $("#product");
         $(".wishlist-button").hide();

@@ -4,10 +4,7 @@ $(document).ready(function()
     var username;
     var password;
 
-
-    //Put the following div in the html and copy this js's line 3 in your js, and now you can also use this alert :D
-    //<div id='NotFoundAlert'> nothing yet, see function showalert in js</div>
-    //For style copy this: <link rel="stylesheet" type="text/css" href="/static/Adminfeatures.css">
+    //Alert
     function ShowAlert(text, color){
         $('#NotFoundAlert').empty();
         $('#NotFoundAlert').text(text);
@@ -30,9 +27,10 @@ $(document).ready(function()
     $("#username").on("input", checkUserName);
     $("#password").on("input", checkPassword);
 
+
     $("button").click(function(e)
     {
-        
+        //check if user exists
         $.ajax({
             xhrFields : {
                 withCredentials: true

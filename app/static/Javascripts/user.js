@@ -1,15 +1,17 @@
+//update privacy of the personal wishlist
 function updatePrivacy(username){
     $.post({
         url: "/change_settings"
     });
 }
 
+//called when privacy button clicked
 function privacy_OnClick(){
     var username = window.document.cookie.toString().split('=')[1];
     updatePrivacy(username);
 }
 
-    //copy text to clipboard
+//copy text to clipboard
 function copyToClipboard(text) {
         window.prompt("Copy this link to share!", text);
 }
@@ -17,6 +19,8 @@ function copyToClipboard(text) {
 $(document).ready(function(){
 
     GetOrderedItemJson();
+
+    //check is privacy is on or off
     $.get({
         url: "/change_settings"
     }).done(function(res){
@@ -36,6 +40,7 @@ $(document).ready(function(){
         });
     };
 
+    //get orders and insert the items with the orders in the HTML
     function InsertUserProduct(json){
         $.ajax({
             url: "/static/OrderedProductPanel.html"
@@ -47,7 +52,7 @@ $(document).ready(function(){
 		    {
                 var totalPrice = 0;
 		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey; align: left'>"                
-                html += "<label id='OrderStats' style='width: 100%; margin-left: 42.5%'>" + json[i]["time"] + "<br>TotalPrice: {{Totalprice}}" + "</label>"
+                html += "<label id='OrderStats' style='width: 100%; margin-left: 42.5%'>" + json[i]["time"] + "<br>TotalPrice: € {{Totalprice}},-" + "</label>"
 		        for (var j in json[i]["items"])
 		        {
                     var context = {title: json[i]["items"][j].title,
@@ -63,8 +68,6 @@ $(document).ready(function(){
 		        testo = Handlebars.compile(html);
 		        html = testo({Totalprice: totalPrice});
                 container.append(html);
-                //var allContainers = $(".OrderHistoryContainers").map(function() {return this.innerHTML;}).get();
-                //allContainers[i].find('#OrderStats').append(", Total price: "+ totalPrice.toString());
 
 		        for (var j in json[i]["items"])
 		        {

@@ -18,6 +18,7 @@ class OrderItemModel():
             "favourited" : self.favourited
         }
 
+    #add item to ordered items, return bool
     def AddOrderItem(self):
         query = "INSERT INTO Order_Buyable_item_ VALUES(%s, %s, %s, %s)"
         MySQLdatabase.ExecuteSafeInsertQuery(query, self.order_id, self.product_id, self.amount, self.favourited)

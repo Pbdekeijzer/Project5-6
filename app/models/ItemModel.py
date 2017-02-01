@@ -21,6 +21,7 @@ class ItemModel():
         self.in_stock = in_stock
         self.class_ = class_
 
+    #get all the items, return ItemModel[]
     Cache_getAllItems = CacheClass()     
     GlobalEvents.ItemUpdate.Register(lambda: ItemModel.Cache_getAllItems.clearCache(), "Clear_GetAllItems_Cache") 
     @staticmethod
@@ -34,7 +35,7 @@ class ItemModel():
 
         return ItemModel.itemlst
     
-    #never used, because we check the stock in front end
+    #check the stock of an item, return bool
     @staticmethod
     def check_Stock(id, amount):
         query = "SELECT In_stock FROM Buyable_item_ WHERE Product_ID = %s"
@@ -43,6 +44,7 @@ class ItemModel():
            return False
         return True
 
+    #update the stock of an item, return bool
     @staticmethod
     def update_Stock(id, amount):
         GlobalEvents.ItemUpdate.Call()
@@ -50,7 +52,7 @@ class ItemModel():
         MySQLdatabase.ExecuteSafeInsertQuery(query, amount, id) #fix this
         return True
 
-
+    #check if every value is accepted
     def hasId(self, string):
         return string == str(self.id)
 

@@ -20,6 +20,7 @@ class FavouritesModel:
             "Product_ID": self.product_id
         }
 
+    #Get user_id and return int (user_id)
     Cache_getUID = CacheClass()     
     GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_getUID.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
@@ -31,20 +32,25 @@ class FavouritesModel:
         userid = userid[0]
         return userid
 
+    #Insert in or deletes from favourites, return bool
     def insertintoFavourites(self):
         GlobalEvents.FavouritesUpdate.Call()
+        #Check if the favourite already exists
         query = "SELECT User_ID FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s"
         checkexisting = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id, self.product_id)
 
+        #if it doesn't exist yet, insert into favourites
         if not checkexisting:
             query = "INSERT INTO User_Favourites_ VALUES(%s, %s)"
             MySQLdatabase.ExecuteSafeInsertQuery(query, self.user_id, self.product_id)
             return True
 
+        #else, delete item from favourites
         checkexisting = MySQLdatabase.ExecuteSafeInsertQuery(
             "DELETE FROM User_Favourites_ WHERE User_ID = %s AND Product_ID = %s", self.user_id, self.product_id)
         return False
 
+    #Get all productids from the favourite list, return int[]
     Cache_FavouritesProductIDS = CacheClass()     
     GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_FavouritesProductIDS.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod
@@ -57,6 +63,7 @@ class FavouritesModel:
             FavouritesModel.favouritespids.append(i[0])
         return FavouritesModel.favouritespids
 
+    #Get all items from favourites, return ItemModel[]
     Cache_FavouritesItems = CacheClass()     
     GlobalEvents.FavouritesUpdate.Register(lambda: FavouritesModel.Cache_FavouritesItems.clearCache(), "Clear_FavouritesProductIDS_Cache") 
     @staticmethod

@@ -17,7 +17,7 @@ class HistoryModel:
     def __unicode__(self):
         return str(self.user_id)
 
-
+    #Get the order history, return array with a dictionary containing every order with the items ordered in that order
     Cache_getOrderHistory = CacheClass()     
     GlobalEvents.OrderHistoryUpdate.Register(lambda: HistoryModel.Cache_getOrderHistory.clearCache(), "Clear_OrderHistory_Cache")
     @Cache_getOrderHistory.caching()
@@ -27,7 +27,6 @@ class HistoryModel:
          join Order_ as O on OBI.Order_ID=O.Order_ID
         where O.Related_to_person = %s"""
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, self.user_id)
-
 
         orders = []
         items = []
@@ -55,12 +54,14 @@ class HistoryModel:
         "order": CurrentOrder, "time": time})
         return orders
 
+    #insert new order, return bool
     @staticmethod
     def insertOrder(uid):
         query = "INSERT INTO Order_(Related_to_person) VALUES (%s)"
         MySQLdatabase.ExecuteSafeInsertQuery(query, uid)
         return True
-
+    
+    #get the last order, return int
     @staticmethod
     def getlastOrder():
         query = "SELECT * FROM Order_ order by Order_ID desc limit 1"

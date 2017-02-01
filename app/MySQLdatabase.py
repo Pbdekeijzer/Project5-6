@@ -7,6 +7,7 @@ from flask import jsonify
 
 class MySQLdatabase:
 
+    #for select queries, return List<Tuple>
     @staticmethod
     def ExcecuteSafeSelectQuery(Query, *args):
         DatabaseConnection = mysql.connector.connect(user='u230389_0898958', password='00f1de2b',
@@ -23,6 +24,7 @@ class MySQLdatabase:
 
         return resultquery
 
+    #for insert, delete and update queries, return bool
     @staticmethod
     def ExecuteSafeInsertQuery(query, *args):
         try:

@@ -9,6 +9,7 @@ class TurnoverStats():
         self.amount = amount
         self.date = date
 
+    #get the turnover, return TurnoverStats[]
     @staticmethod
     def getTurnover(year, month):
         query = ""
@@ -63,6 +64,7 @@ class WishlistStats():
         self.name = name
         self.amount = amount
 
+    #get the most wished for items, return WishlistStats[]
     @staticmethod
     def getMostWishedItems(maxAmount):
         query = r"""SELECT count(W.Product_ID) as Total, Title, W.Product_ID
@@ -87,7 +89,7 @@ class StatisticsModel():
         self.amount = amount
         self.date = date
     
-
+    #get the sales for a year(per month), return StatisticsModel[]
     @staticmethod
     def get_sales_per_month(itemID, year):
         query = r"""select sum(Amount), month(Time) from (SELECT OB.Order_ID, Product_ID, Amount, Date(Time_of_order_placed)
@@ -109,6 +111,7 @@ class StatisticsModel():
         
         return lst
 
+    #get the sales for a month(per day), return StatisticsModel[]
     @staticmethod
     def get_sales_per_day(itemID, month, year):
         query = r"""select sum(Amount), day(Time) from (SELECT OB.Order_ID, Product_ID, Amount, Date(Time_of_order_placed)
