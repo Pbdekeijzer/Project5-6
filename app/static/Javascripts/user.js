@@ -45,8 +45,9 @@ $(document).ready(function(){
 
 		    for(var i in json)
 		    {
+                var totalPrice = 0;
 		        var html = "<div class='OrderHistoryContainers' height='500px' style='offset-left-330; border-top:1px solid grey; align: left'>"                
-                html += "<label style='width: 100%; margin-left: 42.5%'>" + json[i]["time"] + "</label>"
+                html += "<label id='OrderStats' style='width: 100%; margin-left: 42.5%'>" + json[i]["time"] + "<br>TotalPrice: {{Totalprice}}" + "</label>"
 		        for (var j in json[i]["items"])
 		        {
                     var context = {title: json[i]["items"][j].title,
@@ -56,9 +57,14 @@ $(document).ready(function(){
                                 amount: json[i]["items"][j].amount
                             };
                     html += "<div style='align: left'>" + template(context) + "</div>";
+                    totalPrice = totalPrice + (parseInt(json[i]["items"][j].price) * parseInt(json[i]["items"][j].amount));
                 }
                 html += "</div>";
+		        testo = Handlebars.compile(html);
+		        html = testo({Totalprice: totalPrice});
                 container.append(html);
+                //var allContainers = $(".OrderHistoryContainers").map(function() {return this.innerHTML;}).get();
+                //allContainers[i].find('#OrderStats').append(", Total price: "+ totalPrice.toString());
 
 		        for (var j in json[i]["items"])
 		        {
