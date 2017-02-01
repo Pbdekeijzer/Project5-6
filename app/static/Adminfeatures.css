@@ -19,7 +19,7 @@ table, th, td {
 td{
     text-align: left;
 }
-
+/*jenkins*/
 .inputAtAdminpage{
     max-height: fit-content;
     min-height: 12px;
