@@ -30,7 +30,6 @@ GlobalEvents.WishlistUpdate.Register(lambda: Cache_wishlist_JSON.clearCache(), "
 
 @requests.route('/<username>/wishlist')
 def userwishlist(username):
-    @Cache_wishlist_JSON.caching(True)
     def fetchdata():
         userid = AccountModel.getUID(username)
         items = WishlistModel.getWishListProductIDs(userid)

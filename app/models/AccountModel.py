@@ -115,7 +115,6 @@ class AccountModel():
     Cache_checkPrivacy = CacheClass()     
     GlobalEvents.UserUpdate.Register(lambda: AccountModel.Cache_checkPrivacy.clearCache(), "Clear_checkPrivacy_Cache") 
     @staticmethod
-    @Cache_checkPrivacy.caching()
     def checkPrivacy(username):
         query = "SELECT Privacy_wishlist FROM User_ WHERE %s = User_Name"
         result = MySQLdatabase.ExcecuteSafeSelectQuery(query, username)
